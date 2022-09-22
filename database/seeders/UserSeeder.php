@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             $user->email = 'fraz.shabbir54@gmail.com';
             $user->email_verified_at = now();
             // $user->ar_user = true;
-            $user->assignRole('Admin','Super Admin');
+            $user->assignRole('Super Admin');
             $user->save();
          }
 

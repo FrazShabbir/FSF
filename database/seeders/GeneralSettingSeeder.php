@@ -16,11 +16,11 @@ class GeneralSettingSeeder extends Seeder
     {
         GeneralSetting::create([
             'key'=>'site_title',
-            'value'=>'By Fraz Shabbir'
+            'value'=>'Funeral Service Fund'
         ]);
         GeneralSetting::create([
             'key'=>'short_title',
-            'value'=>'FDD'
+            'value'=>'FSF'
         ]);
         GeneralSetting::create([
             'key'=>'copyrights',

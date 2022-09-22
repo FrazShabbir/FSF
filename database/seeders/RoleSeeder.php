@@ -32,11 +32,16 @@ class RoleSeeder extends Seeder
                 'guard_name' => 'web',
                 'role_for' => 'Admin',
             ],
+            [
+                'name' => 'user',
+                'guard_name' => 'web',
+                'role_for' => 'Admin',
+            ],
            
         ];
         foreach($roles as $role){
             $role =  Role::create($role);
-            if($role->name == 'Super Admin'){
+            if($role->name == 'Super Admin' or $role->name == 'Admin' or $role->name == 'Manager'){
                 $role->syncPermissions(Permission::all());
             }
         }

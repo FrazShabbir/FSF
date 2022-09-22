@@ -13,8 +13,8 @@ use App\Models\User;
 
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Password;
-use App\Models\Designation;
 use Illuminate\Support\Str;
+
 class UserController extends Controller
 {
     /**
@@ -38,16 +38,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
+    {
         if (! auth()->user()->hasPermissionTo('Create Users')) {
             abort(403);
         }
-        $roles = Role::where('role_for','Admin')->get();
-        $designations = Designation::all();
+        $roles = Role::where('role_for', 'Admin')->get();
         return view('backend.users.create')
-        ->withRoles($roles)
-        ->withDesignations($designations);
-
+        ->withRoles($roles);
     }
 
     /**
@@ -82,15 +79,14 @@ class UserController extends Controller
             'username' => $username,
             'status' => $request->status,
             'email' => $request->email,
-            'designation_id' => $request->designation_id,
             'password' => Hash::make($request->password),
         ]);
 
-        if(isset($request->roles)){
-            foreach ($request->roles as $assignRole) {
-                $user->assignRole($assignRole);
-            }
+        if (isset($request->roles)) {
+            $user->assignRole($request->roles);
+           
         }
+        
         $user->save();
         Password::sendResetLink($request->only(['email']));
         alert()->success('New User Added');
@@ -113,13 +109,9 @@ class UserController extends Controller
         // return redirect()->route('user.edit', $id);
 
         $user = User::findOrFail($id);
-        $roles = Role::where('role_for','ar')->get();
 
         return view('backend.users.show')
-        ->withUser($user)
-        ->withRoles($roles);
-
-
+        ->withUser($user);
     }
 
     /**
@@ -135,12 +127,10 @@ class UserController extends Controller
         }
 
         $user = User::findOrFail($id);
-        $roles = Role::where('role_for','Admin')->get();
-        $designations = Designation::all();
+        $roles = Role::where('role_for', 'Admin')->get();
         return view('backend.users.edit')
         ->withUser($user)
-        ->withRoles($roles)
-        ->withDesignations($designations);
+        ->withRoles($roles);
     }
 
     /**
@@ -170,14 +160,13 @@ class UserController extends Controller
         // $user->username = $request->username;
         $user->email = $request->email;
         $user->status = $request->status;
-        $user->designation_id = $request->designation_id;
         // $user->password = Hash::make($request->password);
-        if(isset($request->roles)){
+
+        if (isset($request->roles)) {
             $user->roles()->detach();
-            foreach ($request->roles as $assignRole) {
-                $user->assignRole($assignRole);
-            }
+            $user->assignRole($$request->roles);
         }
+
         $user->save();
 
         alert()->success('User Details Updated');
@@ -192,27 +181,25 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {if (! auth()->user()->hasPermissionTo('Delete Users')) {
-        abort(403);
-    }
+    {
+        if (! auth()->user()->hasPermissionTo('Delete Users')) {
+            abort(403);
+        }
 
         $user = User::findOrFail($id);
-        if($user->id==Auth::user()->id){
+        if ($user->id==Auth::user()->id) {
             Alert::error('Sorry', 'You Cannot Delete Yourself');
             alert()->error('Cannot Delete this user');
-
-
-        }else{
+        } else {
             $user->delete();
         }
         alert()->info('User Deleted');
         return redirect()->back();
-
     }
-    function reset_password(User $user){
+    public function reset_password(User $user)
+    {
         Password::sendResetLink(['email' => $user->email]);
         alert()->info('Password Reset Link Sent', ['email' => $user->email]);
         return redirect()->route('users.index');
     }
-    
 }

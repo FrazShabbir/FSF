@@ -139,3 +139,10 @@ if (! function_exists('getStatus')) {
         }
     }
 }
+
+if (! function_exists('loadCountries')) {
+    function loadCountries()
+    {
+        return  config('countries.countries');
+    }
+}
