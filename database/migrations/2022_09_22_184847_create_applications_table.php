@@ -67,7 +67,7 @@ return new class () extends Migration {
             $table->boolean('rep_confirmed')->default(true);
 
             //Supplementary Information
-            $table->string('buried_location', 50);
+            $table->string('buried_location');
             $table->string('registered_relatives', 50);
             $table->string('registered_relative_passport_no', 20);
             $table->string('annually_fund_amount');
