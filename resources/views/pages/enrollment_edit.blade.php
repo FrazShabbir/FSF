@@ -243,7 +243,7 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="gender">Gender</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="gender" id="gender">
+                                                            <select class="form-control" name="gender" id="gender" disabled>
                                                                 <option selected="" disabled="">Select Gender</option>
                                                                 <option>Male</option>
                                                                 <option>Female</option>
@@ -257,7 +257,7 @@
                                                             for="dob">Date of Birth</label>
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" name="dob"
-                                                                id="dob" placeholder="Enter Your Date of Birth">
+                                                                id="dob" placeholder="Enter Your Date of Birth"  disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -268,18 +268,18 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control"
                                                                 name="passport_number" id="passport_number"
-                                                                placeholder="Enter Your Passport No.">
+                                                                placeholder="Enter Your Passport No."  disabled>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
-                                                            for="nie">Spenish Residence Card No.</label>
+                                                            for="nie">European Residence Card No.</label>
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" name="nie"
                                                                 id="nie"
-                                                                placeholder="Enter Your Spenish Residence Card No.">
+                                                                placeholder="Enter Your European Residence Card No."  disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -290,7 +290,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control"
                                                                 name="native_country" id="native_country"
-                                                                placeholder="Enter Your Native Country">
+                                                                placeholder="Enter Your Native Country" disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -301,7 +301,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" name="native_id"
                                                                 id="native_id"
-                                                                placeholder="Enter Your ID Card No. (Native Country)">
+                                                                placeholder="Enter Your ID Card No. (Native Country)"  disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -636,7 +636,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="rep_name"
                                                                 name="rep_name"
-                                                                placeholder="Enter Representative Full Name">
+                                                                placeholder="Enter Representative Full Name" disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -647,7 +647,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="rep_sername"
                                                                 name="rep_sername"
-                                                                placeholder="Enter Representative Sur Name">
+                                                                placeholder="Enter Representative Sur Name"  disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -658,7 +658,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control"
                                                                 id="rep_passport_no" name="rep_passport_no"
-                                                                placeholder="Enter Representative Passport No.">
+                                                                placeholder="Enter Representative Passport No."  disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -669,7 +669,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="rep_phone"
                                                                 name="rep_phone"
-                                                                placeholder="Enter Representative Cell No.">
+                                                                placeholder="Enter Representative Cell No."  disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -679,7 +679,7 @@
                                                             for="rep_address">Complete Address</label>
                                                         <div class="col-sm-12">
                                                             <textarea class="form-control" name="rep_address" id="rep_address"
-                                                                placeholder="Enter Representative Complete Address">
+                                                                placeholder="Enter Representative Complete Address"  disabled>
                                                             </textarea>
                                                         </div>
                                                     </div>
@@ -688,7 +688,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                                     <div class="custom-control custom-checkbox custom-control-inline">
                                                         <input type="checkbox" class="custom-control-input"
-                                                            id="rep_confirmed" name="rep_confirmed">
+                                                            id="rep_confirmed" name="rep_confirmed"  disabled>
                                                         <label class="custom-control-label" for="rep_confirmed">Have you
                                                             informed him that you are appointing this person as your
                                                             Representative in FSF and this person will be authorized to
