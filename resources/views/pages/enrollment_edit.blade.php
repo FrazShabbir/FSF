@@ -237,7 +237,7 @@
                                                                     Looks good!
                                                                   </div>
                                                                   <div class="invalid-feedback">
-                                                                    Please provide first name.
+                                                                    Please enter your full name.
                                                                   </div>
                                                         </div>
                                                     </div>
@@ -250,6 +250,12 @@
                                                             <input type="text" class="form-control" id="father_name"
                                                                 name="father_name" placeholder="Enter Your Father's Name"
                                                                 required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your complete father's name.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -260,6 +266,12 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="surname"
                                                                 name="surname" placeholder="Enter Your Sur Name" required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your sur-name.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -276,6 +288,12 @@
                                                                 <option>Male</option>
                                                                 <option>Female</option>
                                                             </select>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                              </div>
+                                                              <div class="invalid-feedback">
+                                                                Please select your gender.
+                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -287,6 +305,12 @@
                                                             <input type="text" class="form-control" name="dob"
                                                                 id="dob" placeholder="Enter Your Date of Birth"
                                                                 disabled>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your correct date of birth.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -298,6 +322,12 @@
                                                             <input type="text" class="form-control"
                                                                 name="passport_number" id="passport_number"
                                                                 placeholder="Enter Your Passport No." disabled>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your correct passport no.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -310,6 +340,12 @@
                                                                 id="nie"
                                                                 placeholder="Enter Your European Residence Card No."
                                                                 disabled>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your Residence Card No.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -321,6 +357,12 @@
                                                             <input type="text" class="form-control"
                                                                 name="native_country" id="native_country"
                                                                 placeholder="Enter Your Native Country" disabled>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your native country.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -333,6 +375,12 @@
                                                                 id="native_id"
                                                                 placeholder="Enter Your ID Card No. (Native Country)"
                                                                 disabled>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your Native countery Id card no.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -343,6 +391,12 @@
                                                         <div class="col-sm-12">
                                                             <textarea class="form-control" name="native_country_address" id="native_country_address"
                                                                 placeholder="Enter Your Address (Native Country)" required></textarea>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your native country address.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -353,6 +407,12 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" name="phone"
                                                                 id="phone" placeholder="Enter Your Cell No.">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your cell No.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -363,6 +423,12 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" name="user_email"
                                                                 id="user_email" placeholder="Enter Your Email" required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your REmail.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -384,6 +450,12 @@
                                                                 <option></option>
                                                                 <option></option>
                                                             </select>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                              </div>
+                                                              <div class="invalid-feedback">
+                                                                Please enter your residential country
+                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -399,6 +471,13 @@
                                                                 <option></option>
                                                                 <option></option>
                                                             </select>
+
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                              </div>
+                                                              <div class="invalid-feedback">
+                                                                Please enter your community
+                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -415,6 +494,12 @@
                                                                 <option></option>
                                                                 <option></option>
                                                             </select>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                              </div>
+                                                              <div class="invalid-feedback">
+                                                                Please enter your Province.
+                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -431,6 +516,12 @@
                                                                 <option></option>
                                                                 <option></option>
                                                             </select>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                              </div>
+                                                              <div class="invalid-feedback">
+                                                                Please enter your City.
+                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -442,6 +533,12 @@
                                                             <textarea class="form-control" name="area" id="area" placeholder="Enter Your  Area / Street / House No."
                                                                 required>
                                                             </textarea>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                              </div>
+                                                              <div class="invalid-feedback">
+                                                                Please enter your complete Residence Card No.
+                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -471,6 +568,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_1_name" name="s_relative_1_name"
                                                                 placeholder="Enter Relative Full Name" required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter reletives full name.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -482,6 +585,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_1_relation" name="s_relative_1_relation"
                                                                 placeholder="Enter Your Realtion">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your realation.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -493,6 +602,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_1_phone" name="s_relative_1_phone"
                                                                 placeholder="Enter Relative Cell No.">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your Cell no.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -504,6 +619,12 @@
                                                             <textarea class="form-control" name="s_relative_1_address" id="s_relative_1_address"
                                                                 placeholder="Enter Relative Complete Address">
                                                             </textarea>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                              </div>
+                                                              <div class="invalid-feedback">
+                                                                Please enter your complete Residence.
+                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -520,6 +641,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_2_name" name="s_relative_2_name"
                                                                 placeholder="Enter Relative Full Name">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter reletives full name.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -531,6 +658,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_2_relation" name="s_relative_2_relation"
                                                                 placeholder="Enter Your Realtion">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your realation.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -542,6 +675,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_2_phone" name="s_relative_2_phone"
                                                                 placeholder="Enter Relative Cell No.">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your Cell no.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -553,6 +692,12 @@
                                                             <textarea class="form-control" name="s_relative_2_address" id="s_relative_2_address"
                                                                 placeholder="Enter Relative Complete Address">
                                                             </textarea>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                              </div>
+                                                              <div class="invalid-feedback">
+                                                                Please enter your complete Residence.
+                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -581,6 +726,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_1_name" name="n_relative_1_name"
                                                                 placeholder="Enter Relative Full Name">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter reletives full name.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -592,6 +743,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_1_relation" name="n_relative_1_relation"
                                                                 placeholder="Enter Your Realtion">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your realation.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -603,6 +760,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_1_phone" name="n_relative_1_phone"
                                                                 placeholder="Enter Relative Cell No.">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your Cell no.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -614,6 +777,12 @@
                                                             <textarea class="form-control" name="n_relative_1_address" id="n_relative_1_address"
                                                                 placeholder="Enter Relative Complete Address">
                                                             </textarea>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                              </div>
+                                                              <div class="invalid-feedback">
+                                                                Please enter your complete Residence.
+                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -630,6 +799,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_2_name" name="n_relative_2_name"
                                                                 placeholder="Enter Relative Full Name">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter reletives full name.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -641,6 +816,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_2_relation" name="n_relative_2_relation"
                                                                 placeholder="Enter Your Realtion">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your realation.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -652,6 +833,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_2_phone" name="n_relative_2_phone"
                                                                 placeholder="Enter Relative Cell No.">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your cell No..
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -663,6 +850,12 @@
                                                             <textarea class="form-control" name="n_relative_2_address" id="n_relative_2_address"
                                                                 placeholder="Enter Relative Complete Address">
                                                             </textarea>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                              </div>
+                                                              <div class="invalid-feedback">
+                                                                Please enter your complete Residence.
+                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -686,6 +879,12 @@
                                                             <input type="text" class="form-control" id="rep_name"
                                                                 name="rep_name"
                                                                 placeholder="Enter Representative Full Name" disabled>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your full name.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -697,6 +896,12 @@
                                                             <input type="text" class="form-control" id="rep_sername"
                                                                 name="rep_sername"
                                                                 placeholder="Enter Representative Sur Name" disabled>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your sur name
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -708,6 +913,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="rep_passport_no" name="rep_passport_no"
                                                                 placeholder="Enter Representative Passport No." disabled>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your passport no.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -719,6 +930,12 @@
                                                             <input type="text" class="form-control" id="rep_phone"
                                                                 name="rep_phone"
                                                                 placeholder="Enter Representative Cell No." disabled>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your cell no.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -729,6 +946,12 @@
                                                         <div class="col-sm-12">
                                                             <textarea class="form-control" name="rep_address" id="rep_address"
                                                                 placeholder="Enter Representative Complete Address" disabled>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your Complete Addrtess.
+                                                                  </div>
                                                             </textarea>
                                                         </div>
                                                     </div>
@@ -763,6 +986,7 @@
                                                         class="custom-control-input">
                                                     <label class="custom-control-label" for="residential"> Spain
                                                     </label>
+
                                                 </div>
                                                 <div class="custom-control custom-radio custom-control-inline">
                                                     <input type="radio" id="native" name="buried_location"
@@ -770,6 +994,12 @@
                                                     <label class="custom-control-label" for="native"> Native Country
                                                     </label>
                                                 </div>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                  </div>
+                                                  <div class="invalid-feedback">
+                                                    Please select any one of these
+                                                  </div>
                                             </div>
                                             <div class="col-12 mb-4">
                                                 <p>Do you have any relatives registered in this fund?</p>
@@ -785,6 +1015,12 @@
                                                     <label class="custom-control-label"
                                                         for="registed_relative_no">No</label>
                                                 </div>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                  </div>
+                                                  <div class="invalid-feedback">
+                                                    Please select anr one of these
+                                                  </div>
                                             </div>
                                             <div id="reg_relative_passport_no" class="d-none w-100">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -797,6 +1033,12 @@
                                                                 id="registered_relative_passport_no"
                                                                 name="registered_relative_passport_no"
                                                                 placeholder="Enter Registered Relative Passport No.">
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please enter your relative Passport no
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -845,6 +1087,9 @@
                                                     <label class="custom-control-label" for="amount_anual_other">
                                                         Other </label>
                                                 </div>
+
+
+
                                             </div>
                                             <div id="other_amount" class="d-none w-100">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -860,6 +1105,12 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                              </div>
+                                              <div class="invalid-feedback">
+                                                Please enter select anual fund
+                                              </div>
                                         </div>
                                         </form>
                                     </div>
@@ -1262,7 +1513,7 @@
                 //           <button class="btn btn-danger" id="btnCancel" onclick="onCancel()">Cancel</button>`
             },
             anchor: {
-                enableNavigation: true, // Enable/Disable anchor navigation 
+                enableNavigation: true, // Enable/Disable anchor navigation
                 enableNavigationAlways: false, // Activates all anchors clickable always
                 enableDoneState: true, // Add done state on visited steps
                 markPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
@@ -1308,7 +1559,7 @@
             // Leave step event is used for validating the forms
             $("#smartwizard").on("leaveStep", function(e, anchorObject, currentStepIdx, nextStepIdx,
                 stepDirection) {
-                // Validate only on forward movement  
+                // Validate only on forward movement
                 if (stepDirection == 'forward') {
                     let form = document.getElementById('form-' + (currentStepIdx + 1));
                     if (form) {
