@@ -23,64 +23,70 @@
 
         /* Avatar */
         .avatar-upload {
-  position: relative;
-  max-width: 205px;
-  margin: 50px auto;
-}
-.avatar-upload .avatar-edit {
-  position: absolute;
-  right: 12px;
-  z-index: 1;
-  top: 10px;
-}
-.avatar-upload .avatar-edit input {
-  display: none;
-}
-.avatar-upload .avatar-edit input + label {
-  display: inline-block;
-  width: 34px;
-  height: 34px;
-  margin-bottom: 0;
-  border-radius: 100%;
-  background: #FFFFFF;
-  border: 1px solid transparent;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
-  font-weight: normal;
-  transition: all 0.2s ease-in-out;
-}
-.avatar-upload .avatar-edit input + label:hover {
-  background: #f1f1f1;
-  border-color: #d6d6d6;
-}
-.avatar-upload .avatar-edit input + label:after {
-  content: "\f040";
-  font-family: 'FontAwesome';
-  color: #757575;
-  position: absolute;
-  top: 4px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  margin: auto;
-}
-.avatar-upload .avatar-preview {
-  width: 192px;
-  height: 192px;
-  position: relative;
-  border-radius: 100%;
-  border: 6px solid #F8F8F8;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
-}
-.avatar-upload .avatar-preview > div {
-  width: 100%;
-  height: 100%;
-  border-radius: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+            position: relative;
+            max-width: 205px;
+            margin: 50px auto;
+        }
 
+        .avatar-upload .avatar-edit {
+            position: absolute;
+            right: 12px;
+            z-index: 1;
+            top: 10px;
+        }
+
+        .avatar-upload .avatar-edit input {
+            display: none;
+        }
+
+        .avatar-upload .avatar-edit input+label {
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+            margin-bottom: 0;
+            border-radius: 100%;
+            background: #FFFFFF;
+            border: 1px solid transparent;
+            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            font-weight: normal;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .avatar-upload .avatar-edit input+label:hover {
+            background: #f1f1f1;
+            border-color: #d6d6d6;
+        }
+
+        .avatar-upload .avatar-edit input+label:after {
+            content: "\f040";
+            font-family: 'FontAwesome';
+            color: #757575;
+            position: absolute;
+            top: 4px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            margin: auto;
+        }
+
+        .avatar-upload .avatar-preview {
+            width: 192px;
+            height: 192px;
+            position: relative;
+            border-radius: 100%;
+            border: 6px solid #F8F8F8;
+            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar-upload .avatar-preview>div {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
     </style>
 @endpush
 
@@ -88,26 +94,32 @@
 
 @section('content')
     <style>
-        .num{
+        .num {
             margin-top: 1px;
         }
-        .sw-theme-dots>.nav .nav-link.active::after  {
-            background: #1e3d73!important;
+
+        .sw-theme-dots>.nav .nav-link.active::after {
+            background: #1e3d73 !important;
         }
+
         .sw-theme-dots>.nav .nav-link.done::after {
-            background: #1e3d73cc!important;
+            background: #1e3d73cc !important;
         }
+
         .sw-theme-dots>.nav .nav-link.done {
-            color: #1e3d73!important;
+            color: #1e3d73 !important;
         }
+
         .sw-theme-dots>.nav .nav-link.active {
-            color: #1e3d73!important;
+            color: #1e3d73 !important;
         }
+
         .sw .toolbar>.sw-btn {
             background: #1e3d73;
             background-color: #1e3d73;
             border: 1px solid #1e3d73;
         }
+
         .sw>.progress>.progress-bar {
             background: #1e3d73;
             background-color: #1e3d73;
@@ -146,50 +158,53 @@
                             </div>
                         </div>
                         <div class="iq-card-body p-5">
-                            <form action="">
-                                <!-- SmartWizard html -->
-                                <div id="smartwizard">
-                                    <ul class="nav">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#step-1">
-                                                <div class="num">1</div>
-                                                Personal Info
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#step-2">
-                                                <span class="num">2</span>
-                                                Relative Info (spain)
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#step-3">
-                                                <span class="num">3</span>
-                                                Relative Info (Native)
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link " href="#step-4">
-                                                <span class="num">4</span>
-                                                Representative
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#step-5">
-                                                <span class="num">5</span>
-                                                Suplementary
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link " href="#step-6">
-                                                <span class="num">6</span>
-                                                Sign page
-                                            </a>
-                                        </li>
-                                    </ul>
+                            {{-- <form action="" > --}}
+                            <!-- SmartWizard html -->
+                            <div id="smartwizard">
 
-                                    <div class="tab-content">
-                                        <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#step-1">
+                                            <div class="num">1</div>
+                                            Personal Info
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#step-2">
+                                            <span class="num">2</span>
+                                            Relative Info (spain)
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#step-3">
+                                            <span class="num">3</span>
+                                            Relative Info (Native)
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="#step-4">
+                                            <span class="num">4</span>
+                                            Representative
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#step-5">
+                                            <span class="num">5</span>
+                                            Suplementary
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="#step-6">
+                                            <span class="num">6</span>
+                                            Sign page
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+
+                                    <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+                                        <form id="form-1" class="needs-validation" novalidate>
                                             <div class="row mb-5">
                                                 <div class="col-12">
                                                     <h4 class="mb-4">
@@ -199,11 +214,13 @@
                                                 <div class="col-12">
                                                     <div class="avatar-upload">
                                                         <div class="avatar-edit">
-                                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                            <input type='file' id="imageUpload"
+                                                                accept=".png, .jpg, .jpeg" />
                                                             <label for="imageUpload"></label>
                                                         </div>
                                                         <div class="avatar-preview">
-                                                            <div id="imagePreview" style="background-image: url('http://i.pravatar.cc/500?img=7');">
+                                                            <div id="imagePreview"
+                                                                style="background-image: url('http://i.pravatar.cc/500?img=7');">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -214,7 +231,14 @@
                                                             for="full_name">Full Name:</label>
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="full_name"
-                                                                name="full_name" placeholder="Enter Your Full Name" required>
+                                                                name="full_name" placeholder="Enter Your Full Name"
+                                                                required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                  </div>
+                                                                  <div class="invalid-feedback">
+                                                                    Please provide first name.
+                                                                  </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,7 +248,8 @@
                                                             for="father_name">Father's Name</label>
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="father_name"
-                                                                name="father_name" placeholder="Enter Your Father's Name">
+                                                                name="father_name" placeholder="Enter Your Father's Name"
+                                                                required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -234,7 +259,7 @@
                                                             for="surname">Sur Name</label>
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="surname"
-                                                                name="surname" placeholder="Enter Your Sur Name">
+                                                                name="surname" placeholder="Enter Your Sur Name" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -243,8 +268,11 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="gender">Gender</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="gender" id="gender" disabled>
-                                                                <option selected="" disabled="">Select Gender</option>
+                                                            <select class="form-control" name="gender" id="gender"
+                                                                disabled required>
+                                                                <option selected value="" disabled="">Select
+                                                                    Gender
+                                                                </option>
                                                                 <option>Male</option>
                                                                 <option>Female</option>
                                                             </select>
@@ -257,7 +285,8 @@
                                                             for="dob">Date of Birth</label>
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" name="dob"
-                                                                id="dob" placeholder="Enter Your Date of Birth"  disabled>
+                                                                id="dob" placeholder="Enter Your Date of Birth"
+                                                                disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -268,7 +297,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control"
                                                                 name="passport_number" id="passport_number"
-                                                                placeholder="Enter Your Passport No."  disabled>
+                                                                placeholder="Enter Your Passport No." disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -279,7 +308,8 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" name="nie"
                                                                 id="nie"
-                                                                placeholder="Enter Your European Residence Card No."  disabled>
+                                                                placeholder="Enter Your European Residence Card No."
+                                                                disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -301,7 +331,8 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" name="native_id"
                                                                 id="native_id"
-                                                                placeholder="Enter Your ID Card No. (Native Country)"  disabled>
+                                                                placeholder="Enter Your ID Card No. (Native Country)"
+                                                                disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -311,7 +342,7 @@
                                                             for="native_country_address">Address (Native Country)</label>
                                                         <div class="col-sm-12">
                                                             <textarea class="form-control" name="native_country_address" id="native_country_address"
-                                                                placeholder="Enter Your Address (Native Country)"></textarea>
+                                                                placeholder="Enter Your Address (Native Country)" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -331,7 +362,7 @@
                                                             for="user_email">Email</label>
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" name="user_email"
-                                                                id="user_email" placeholder="Enter Your Email">
+                                                                id="user_email" placeholder="Enter Your Email" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -345,8 +376,10 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="country">Country</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="country" id="country">
-                                                                <option selected="" disabled="">Select Your Country
+                                                            <select class="form-control" name="country" id="country"
+                                                                required>
+                                                                <option selected value="" disabled="">Select Your
+                                                                    Country
                                                                 </option>
                                                                 <option></option>
                                                                 <option></option>
@@ -359,8 +392,9 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="community">Community</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="community" id="community">
-                                                                <option selected="" disabled="">Select Your
+                                                            <select class="form-control" name="community" id="community"
+                                                                required>
+                                                                <option selected value="" disabled="">Select Your
                                                                     Community</option>
                                                                 <option></option>
                                                                 <option></option>
@@ -373,8 +407,10 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="province">Province</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="province" id="province">
-                                                                <option selected="" disabled="">Select Your Province
+                                                            <select class="form-control" name="province" id="province"
+                                                                required>
+                                                                <option selected value="" disabled="">Select Your
+                                                                    Province
                                                                 </option>
                                                                 <option></option>
                                                                 <option></option>
@@ -387,8 +423,10 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="city">City</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="city" id="city">
-                                                                <option selected="" disabled="">Select Your City
+                                                            <select class="form-control" name="city" id="city"
+                                                                required>
+                                                                <option selected value="" disabled="">Select Your
+                                                                    City
                                                                 </option>
                                                                 <option></option>
                                                                 <option></option>
@@ -401,14 +439,19 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="area">Area / Street / House No.</label>
                                                         <div class="col-sm-12">
-                                                            <textarea class="form-control" name="area" id="area" placeholder="Enter Your  Area / Street / House No.">
+                                                            <textarea class="form-control" name="area" id="area" placeholder="Enter Your  Area / Street / House No."
+                                                                required>
                                                             </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+                                        </form>
+                                    </div>
+
+                                    <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+                                        <form id="form-2" class="needs-validation" novalidate>
+
                                             <div class="row mb-5">
                                                 <div class="col-12">
                                                     <h4 class="mb-4">
@@ -427,7 +470,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_1_name" name="s_relative_1_name"
-                                                                placeholder="Enter Relative Full Name">
+                                                                placeholder="Enter Relative Full Name" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -514,8 +557,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
+                                        </form>
+                                    </div>
+                                    <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
+                                        <form id="form-3" class="needs-validation" novalidate>
+
                                             <div class="row mb-5">
                                                 <div class="col-12">
                                                     <h4 class="mb-4">
@@ -621,8 +667,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
+                                        </form>
+                                    </div>
+                                    <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
+                                        <form id="form-4" class="needs-validation" novalidate>
+
                                             <div class="row mb-5">
                                                 <div class="col-12">
                                                     <h4 class="mb-4">
@@ -647,7 +696,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="rep_sername"
                                                                 name="rep_sername"
-                                                                placeholder="Enter Representative Sur Name"  disabled>
+                                                                placeholder="Enter Representative Sur Name" disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -658,7 +707,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control"
                                                                 id="rep_passport_no" name="rep_passport_no"
-                                                                placeholder="Enter Representative Passport No."  disabled>
+                                                                placeholder="Enter Representative Passport No." disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -669,7 +718,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="rep_phone"
                                                                 name="rep_phone"
-                                                                placeholder="Enter Representative Cell No."  disabled>
+                                                                placeholder="Enter Representative Cell No." disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -679,7 +728,7 @@
                                                             for="rep_address">Complete Address</label>
                                                         <div class="col-sm-12">
                                                             <textarea class="form-control" name="rep_address" id="rep_address"
-                                                                placeholder="Enter Representative Complete Address"  disabled>
+                                                                placeholder="Enter Representative Complete Address" disabled>
                                                             </textarea>
                                                         </div>
                                                     </div>
@@ -688,7 +737,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                                     <div class="custom-control custom-checkbox custom-control-inline">
                                                         <input type="checkbox" class="custom-control-input"
-                                                            id="rep_confirmed" name="rep_confirmed"  disabled>
+                                                            id="rep_confirmed" name="rep_confirmed" disabled>
                                                         <label class="custom-control-label" for="rep_confirmed">Have you
                                                             informed him that you are appointing this person as your
                                                             Representative in FSF and this person will be authorized to
@@ -696,158 +745,164 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="step-5" class="tab-pane" role="tabpanel" aria-labelledby="step-5">
-                                            <div class="row mb-5">
-                                                <div class="col-12">
-                                                    <h4 class="mb-4">
-                                                        Supplementary Information
-                                                    </h4>
-                                                </div>
-                                                <div class="col-12 mb-4">
-                                                    <p>Where do you want to be buried?</p>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="residential" name="buried_location"
-                                                            class="custom-control-input">
-                                                        <label class="custom-control-label" for="residential"> Spain
-                                                        </label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="native" name="buried_location"
-                                                            class="custom-control-input">
-                                                        <label class="custom-control-label" for="native"> Native Country
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mb-4">
-                                                    <p>Do you have any relatives registered in this fund?</p>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="registed_relative_yes" value="Yes"
-                                                            name="registered_relatives" class="custom-control-input">
-                                                        <label class="custom-control-label"
-                                                            for="registed_relative_yes">Yes</label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="registed_relative_no" value="No"
-                                                            name="registered_relatives" class="custom-control-input">
-                                                        <label class="custom-control-label"
-                                                            for="registed_relative_no">No</label>
-                                                    </div>
-                                                </div>
-                                                <div id="reg_relative_passport_no" class="d-none w-100">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="form-group row mb-4">
-                                                            <label class="control-label col-sm-12 align-self-center mb-0"
-                                                                for="registered_relative_passport_no">Relative Passport
-                                                                No.</label>
-                                                            <div class="col-sm-12">
-                                                                <input type="text" class="form-control"
-                                                                    id="registered_relative_passport_no"
-                                                                    name="registered_relative_passport_no"
-                                                                    placeholder="Enter Registered Relative Passport No.">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mb-4">
-                                                    <p>How much will you pay annually into this fund?</p>
-                                                    <div class="custom-control custom-radio mb-3">
-                                                        <input type="radio" id="no_amount_anual"
-                                                            name="annually_fund_amount" class="custom-control-input">
-                                                        <label class="custom-control-label" for="no_amount_anual"> I will
-                                                            not give any amount annually </label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio mb-3">
-                                                        <input type="radio" id="amount_anual_30"
-                                                            name="annually_fund_amount" class="custom-control-input">
-                                                        <label class="custom-control-label" for="amount_anual_30"> € 30
-                                                        </label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio mb-3">
-                                                        <input type="radio" id="amount_anual_50"
-                                                            name="annually_fund_amount" class="custom-control-input">
-                                                        <label class="custom-control-label" for="amount_anual_50"> € 50
-                                                        </label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio mb-3">
-                                                        <input type="radio" id="amount_anual_70"
-                                                            name="annually_fund_amount" class="custom-control-input">
-                                                        <label class="custom-control-label" for="amount_anual_70"> € 70
-                                                        </label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio mb-3">
-                                                        <input type="radio" id="amount_anual_90"
-                                                            name="annually_fund_amount" class="custom-control-input">
-                                                        <label class="custom-control-label" for="amount_anual_90"> € 90
-                                                        </label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio mb-3">
-                                                        <input type="radio" id="amount_anual_100"
-                                                            name="annually_fund_amount" class="custom-control-input">
-                                                        <label class="custom-control-label" for="amount_anual_100"> € 100
-                                                        </label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio mb-3">
-                                                        <input type="radio" id="amount_anual_other" value="other"
-                                                            name="annually_fund_amount" class="custom-control-input">
-                                                        <label class="custom-control-label" for="amount_anual_other">
-                                                            Other </label>
-                                                    </div>
-                                                </div>
-                                                <div id="other_amount" class="d-none w-100">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="form-group row mb-4">
-                                                            <label class="control-label col-sm-12 align-self-center mb-0"
-                                                                for="other_annually_fund_amount">Enter Other Amount</label>
-                                                            <div class="col-sm-12">
-                                                                <input type="text" class="form-control"
-                                                                    id="other_annually_fund_amount"
-                                                                    name="other_annually_fund_amount"
-                                                                    placeholder="Enter Anually Fund Amount">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="step-6" class="tab-pane" role="tabpanel" aria-labelledby="step-6">
-                                            <div class="row mb-5">
-                                                <div class="col-12">
-                                                    <h4 class="mb-4">
-                                                        Sign Your Form
-                                                    </h4>
-                                                </div>
-                                                <div class="col-12 mb-4">
-                                                    <div id="signature">
-                                                        <canvas width="500" height="200"></canvas>
-                                                        <div class="controls">
-                                                            {{-- <a class="btn-green" href="#"
-                                                                id="download">Download</a> --}}
-                                                            <a class="btn btn-primary" href="#" id="clearSig">Clear
-                                                                Signature</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="rep_confirmed" name="rep_confirmed">
-                                                        <label class="custom-control-label" for="rep_confirmed">Have you
-                                                            read carefully to all the conditions and regulations of this
-                                                            funeral service fund?</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </form>
                                     </div>
+                                    <div id="step-5" class="tab-pane" role="tabpanel" aria-labelledby="step-5">
+                                        <form id="form-5" class="needs-validation" novalidate>
 
-                                    <!-- Include optional progressbar HTML -->
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="row mb-5">
+                                            <div class="col-12">
+                                                <h4 class="mb-4">
+                                                    Supplementary Information
+                                                </h4>
+                                            </div>
+                                            <div class="col-12 mb-4">
+                                                <p>Where do you want to be buried?</p>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="residential" name="buried_location"
+                                                        class="custom-control-input">
+                                                    <label class="custom-control-label" for="residential"> Spain
+                                                    </label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="native" name="buried_location"
+                                                        class="custom-control-input">
+                                                    <label class="custom-control-label" for="native"> Native Country
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-4">
+                                                <p>Do you have any relatives registered in this fund?</p>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="registed_relative_yes" value="Yes"
+                                                        name="registered_relatives" class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                        for="registed_relative_yes">Yes</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="registed_relative_no" value="No"
+                                                        name="registered_relatives" class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                        for="registed_relative_no">No</label>
+                                                </div>
+                                            </div>
+                                            <div id="reg_relative_passport_no" class="d-none w-100">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group row mb-4">
+                                                        <label class="control-label col-sm-12 align-self-center mb-0"
+                                                            for="registered_relative_passport_no">Relative Passport
+                                                            No.</label>
+                                                        <div class="col-sm-12">
+                                                            <input type="text" class="form-control"
+                                                                id="registered_relative_passport_no"
+                                                                name="registered_relative_passport_no"
+                                                                placeholder="Enter Registered Relative Passport No.">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-4">
+                                                <p>How much will you pay annually into this fund?</p>
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input type="radio" id="no_amount_anual"
+                                                        name="annually_fund_amount" class="custom-control-input">
+                                                    <label class="custom-control-label" for="no_amount_anual"> I will
+                                                        not give any amount annually </label>
+                                                </div>
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input type="radio" id="amount_anual_30"
+                                                        name="annually_fund_amount" class="custom-control-input">
+                                                    <label class="custom-control-label" for="amount_anual_30"> € 30
+                                                    </label>
+                                                </div>
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input type="radio" id="amount_anual_50"
+                                                        name="annually_fund_amount" class="custom-control-input">
+                                                    <label class="custom-control-label" for="amount_anual_50"> € 50
+                                                    </label>
+                                                </div>
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input type="radio" id="amount_anual_70"
+                                                        name="annually_fund_amount" class="custom-control-input">
+                                                    <label class="custom-control-label" for="amount_anual_70"> € 70
+                                                    </label>
+                                                </div>
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input type="radio" id="amount_anual_90"
+                                                        name="annually_fund_amount" class="custom-control-input">
+                                                    <label class="custom-control-label" for="amount_anual_90"> € 90
+                                                    </label>
+                                                </div>
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input type="radio" id="amount_anual_100"
+                                                        name="annually_fund_amount" class="custom-control-input">
+                                                    <label class="custom-control-label" for="amount_anual_100"> € 100
+                                                    </label>
+                                                </div>
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input type="radio" id="amount_anual_other" value="other"
+                                                        name="annually_fund_amount" class="custom-control-input">
+                                                    <label class="custom-control-label" for="amount_anual_other">
+                                                        Other </label>
+                                                </div>
+                                            </div>
+                                            <div id="other_amount" class="d-none w-100">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group row mb-4">
+                                                        <label class="control-label col-sm-12 align-self-center mb-0"
+                                                            for="other_annually_fund_amount">Enter Other Amount</label>
+                                                        <div class="col-sm-12">
+                                                            <input type="text" class="form-control"
+                                                                id="other_annually_fund_amount"
+                                                                name="other_annually_fund_amount"
+                                                                placeholder="Enter Anually Fund Amount">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    <div id="step-6" class="tab-pane" role="tabpanel" aria-labelledby="step-6">
+                                        <form id="form-6" class="needs-validation" novalidate>
+
+                                        <div class="row mb-5">
+                                            <div class="col-12">
+                                                <h4 class="mb-4">
+                                                    Sign Your Form
+                                                </h4>
+                                            </div>
+                                            <div class="col-12 mb-4">
+                                                <div id="signature">
+                                                    <canvas width="500" height="200"></canvas>
+                                                    <div class="controls">
+                                                        {{-- <a class="btn-green" href="#"
+                                                                id="download">Download</a> --}}
+                                                        <a class="btn btn-primary" href="#" id="clearSig">Clear
+                                                            Signature</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-12">
+                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="rep_confirmed" name="rep_confirmed">
+                                                    <label class="custom-control-label" for="rep_confirmed">Have you
+                                                        read carefully to all the conditions and regulations of this
+                                                        funeral service fund?</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </form>
                                     </div>
                                 </div>
 
+                                <!-- Include optional progressbar HTML -->
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
 
 
 
@@ -858,7 +913,8 @@
 
 
 
-                                {{-- <div class="row mb-5">
+
+                            {{-- <div class="row mb-5">
                                     <div class="col-12">
                                         <h4 class="mb-4">
                                             Donor Details:
@@ -890,7 +946,7 @@
                                                 for="resposibility">Resposibility</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="resposibility" id="resposibility">
-                                                    <option selected="" disabled="">Select Resposibility</option>
+                                                    <option selected value="" disabled="">Select Resposibility</option>
                                                     <option>0-18</option>
                                                     <option>18-26</option>
                                                 </select>
@@ -951,7 +1007,7 @@
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="donation_purpose"
                                                     id="donation_purpose">
-                                                    <option selected="" disabled="">Select Donation Purpose</option>
+                                                    <option selected value="" disabled="">Select Donation Purpose</option>
                                                     <option>0-18</option>
                                                     <option>18-26</option>
                                                 </select>
@@ -971,7 +1027,7 @@
                                                 for="donation_head">Donation Head:</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="donation_head" id="donation_head">
-                                                    <option selected="" disabled="">Select Donation Head</option>
+                                                    <option selected value="" disabled="">Select Donation Head</option>
                                                     <option>0-18</option>
                                                     <option>18-26</option>
                                                 </select>
@@ -984,7 +1040,7 @@
                                                 for="project">Project:</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="project" id="project">
-                                                    <option selected="" disabled="">Select Project</option>
+                                                    <option selected value="" disabled="">Select Project</option>
                                                     <option>0-18</option>
                                                     <option>18-26</option>
                                                 </select>
@@ -997,7 +1053,7 @@
                                                 for="department">Department:</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="department" id="department">
-                                                    <option selected="" disabled="">Select Department</option>
+                                                    <option selected value="" disabled="">Select Department</option>
                                                     <option>0-18</option>
                                                     <option>18-26</option>
                                                 </select>
@@ -1010,7 +1066,7 @@
                                                 for="center">Center:</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="center" id="center">
-                                                    <option selected="" disabled="">Select Center</option>
+                                                    <option selected value="" disabled="">Select Center</option>
                                                     <option>0-18</option>
                                                     <option>18-26</option>
                                                 </select>
@@ -1023,7 +1079,7 @@
                                                 for="location">Location:</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="location" id="location">
-                                                    <option selected="" disabled="">Select Location</option>
+                                                    <option selected value="" disabled="">Select Location</option>
                                                     <option>0-18</option>
                                                     <option>18-26</option>
                                                 </select>
@@ -1069,7 +1125,7 @@
                                         <button type="submit" class="btn btn-danger">Cancle</button>
                                     </div>
                                 </div> --}}
-                            </form>
+                            {{-- </form> --}}
                         </div>
                     </div>
                 </div>
@@ -1085,14 +1141,15 @@
 @endsection
 
 @push('js')
-    <script>
+    {{-- <script>
         $(function() {
             // SmartWizard initialize
             $('#smartwizard').smartWizard({
                 theme: 'dots',
             });
         });
-    </script>
+    </script> --}}
+
     {{-- Relative Registration Check --}}
     <script>
         $(document).ready(function() {
@@ -1168,18 +1225,140 @@
     {{-- Upload Avatar --}}
     <script>
         function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-            $('#imagePreview').hide();
-            $('#imagePreview').fadeIn(650);
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-$("#imageUpload").change(function() {
-    readURL(this);
-});
+        $("#imageUpload").change(function() {
+            readURL(this);
+        });
+    </script>
+
+
+
+
+    <script type="text/javascript">
+        // const myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+
+        // Smart Wizard
+        $('#smartwizard').smartWizard({
+            selected: 0,
+            //autoAdjustHeight: false,
+            theme: 'dots', // basic, arrows, square, round, dots
+            transition: {
+                animation: 'none'
+            },
+            toolbar: {
+                showNextButton: true, // show/hide a Next button
+                showPreviousButton: true, // show/hide a Previous button
+                position: 'bottom', // none/ top/ both bottom
+                // extraHtml: `<button class="btn btn-success" id="btnFinish" disabled onclick="onConfirm()">Complete Order</button>
+                //           <button class="btn btn-danger" id="btnCancel" onclick="onCancel()">Cancel</button>`
+            },
+            anchor: {
+                enableNavigation: true, // Enable/Disable anchor navigation 
+                enableNavigationAlways: false, // Activates all anchors clickable always
+                enableDoneState: true, // Add done state on visited steps
+                markPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
+                unDoneOnBackNavigation: true, // While navigate back, done state will be cleared
+                enableDoneStateNavigation: true // Enable/Disable the done state navigation
+            },
+        });
+
+
+        function onCancel() {
+            // Reset wizard
+            $('#smartwizard').smartWizard("reset");
+
+            // Reset form
+            document.getElementById("form-1").reset();
+            document.getElementById("form-2").reset();
+            document.getElementById("form-3").reset();
+            document.getElementById("form-4").reset();
+            document.getElementById("form-5").reset();
+            document.getElementById("form-6").reset();
+        }
+
+
+
+        function closeModal() {
+            // Reset wizard
+            $('#smartwizard').smartWizard("reset");
+
+            // Reset form
+            document.getElementById("form-1").reset();
+            document.getElementById("form-2").reset();
+            document.getElementById("form-3").reset();
+            document.getElementById("form-4").reset();
+            document.getElementById("form-5").reset();
+            document.getElementById("form-6").reset();
+
+            myModal.hide();
+        }
+
+
+
+        $(function() {
+            // Leave step event is used for validating the forms
+            $("#smartwizard").on("leaveStep", function(e, anchorObject, currentStepIdx, nextStepIdx,
+                stepDirection) {
+                // Validate only on forward movement  
+                if (stepDirection == 'forward') {
+                    let form = document.getElementById('form-' + (currentStepIdx + 1));
+                    if (form) {
+                        if (!form.checkValidity()) {
+                            form.classList.add('was-validated');
+                            $('#smartwizard').smartWizard("setState", [currentStepIdx], 'error');
+                            $("#smartwizard").smartWizard('fixHeight');
+                            return false;
+                        }
+                        $('#smartwizard').smartWizard("unsetState", [currentStepIdx], 'error');
+                    }
+                }
+            });
+
+            // Step show event
+            $("#smartwizard").on("showStep", function(e, anchorObject, stepIndex, stepDirection, stepPosition) {
+                $("#prev-btn").removeClass('disabled').prop('disabled', false);
+                $("#next-btn").removeClass('disabled').prop('disabled', false);
+                if (stepPosition === 'first') {
+                    $("#prev-btn").addClass('disabled').prop('disabled', true);
+                } else if (stepPosition === 'last') {
+                    $("#next-btn").addClass('disabled').prop('disabled', true);
+                } else {
+                    $("#prev-btn").removeClass('disabled').prop('disabled', false);
+                    $("#next-btn").removeClass('disabled').prop('disabled', false);
+                }
+
+                // Get step info from Smart Wizard
+                let stepInfo = $('#smartwizard').smartWizard("getStepInfo");
+                $("#sw-current-step").text(stepInfo.currentStep + 1);
+                $("#sw-total-step").text(stepInfo.totalSteps);
+
+                if (stepPosition == 'last') {
+                    showConfirm();
+                    $("#btnFinish").prop('disabled', false);
+                } else {
+                    $("#btnFinish").prop('disabled', true);
+                }
+
+                // Focus first name
+                if (stepIndex == 1) {
+                    setTimeout(() => {
+                        $('#first_name').focus();
+                    }, 0);
+                }
+            });
+
+
+
+
+        });
     </script>
 @endpush
