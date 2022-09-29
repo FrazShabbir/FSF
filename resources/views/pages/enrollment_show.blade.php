@@ -8,6 +8,11 @@
 
 @push('css')
     <style>
+        .heading-bottom-line{
+            width: 150px;
+            height: 2px;
+            background: #1f3d73;
+        }
     </style>
 @endpush
 
@@ -55,33 +60,461 @@
                                                 <img class="rounded-circle" width="160px" src="http://i.pravatar.cc/500?img=7" alt="">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="row mb-4">
-                                                <div class="col-sm-6">
-                                                    <p class="mb-0 font-weight-bold text-dark">Full Name</p>
+                                        <div class="offset-lg-2 offset-md-1 offset-sm-0 col-lg-8 col-md-10 col-sm-12">
+                                            <div class="">
+                                                <div class="mb-4">
+                                                    <h3>
+                                                        Personal Information
+                                                    </h3>
+                                                    <div class="heading-bottom-line"></div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <p class="mb-0">Saad Ahmad</p>
+                                                <div class="">
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Full Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Father's Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Sur Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Gender</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Date of Birth</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Passport No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">European Residence Card No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Native Country</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">ID Card No. (Native Country)</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Address (Native Country)</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Cell No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Email</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Country</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Community</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Province</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">City</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Area / Street / House No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="row mb-4">
-                                                <div class="col-sm-6">
-                                                    <p class="mb-0 font-weight-bold text-dark">Full Name</p>
+                                            <div class="">
+                                                <div class="mb-4">
+                                                    <h3>
+                                                        Residential Relative Information
+                                                    </h3>
+                                                    <div class="heading-bottom-line"></div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <p class="mb-0">Saad Ahmad</p>
+                                                <div class="mb-3">
+                                                    <h5>
+                                                        Relative 1
+                                                    </h5>
+                                                </div>
+                                                <div class="">
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Full Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Relation</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Cell No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Complete Address</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <h5>
+                                                        Relative 2
+                                                    </h5>
+                                                </div>
+                                                <div class="">
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Full Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Relation</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Cell No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Complete Address</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="row mb-4">
-                                                <div class="col-sm-6">
-                                                    <p class="mb-0 font-weight-bold text-dark">Full Name</p>
+                                            <div class="">
+                                                <div class="mb-4">
+                                                    <h3>
+                                                        Native Country Relative Information
+                                                    </h3>
+                                                    <div class="heading-bottom-line"></div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <p class="mb-0">Saad Ahmad</p>
+                                                <div class="mb-3">
+                                                    <h5>
+                                                        Relative 1
+                                                    </h5>
+                                                </div>
+                                                <div class="">
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Full Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Relation</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Cell No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Complete Address</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <h5>
+                                                        Relative 2
+                                                    </h5>
+                                                </div>
+                                                <div class="">
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Full Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Relation</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Cell No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Complete Address</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class="mb-4">
+                                                    <h3>
+                                                        Representative Information
+                                                    </h3>
+                                                    <div class="heading-bottom-line"></div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Full Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Sur Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Passport No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Cell No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Complete Address</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class="mb-4">
+                                                    <h3>
+                                                        Supplementary Information
+                                                    </h3>
+                                                    <div class="heading-bottom-line"></div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Where do you want to be buried?</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Do you have any relatives registered in this fund?</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <h5>
+                                                            Registered Relative
+                                                        </h5>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Full Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Father's Name</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Relation</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Cell No.</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Complete Address</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">How much will you pay annually into this fund?</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-6">
+                                                            <p class="mb-0 text-dark">Signature</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <img class="mb-0 float-right font-weight-bold" src="" alt="signatures">
+                                                            {{-- <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p> --}}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
