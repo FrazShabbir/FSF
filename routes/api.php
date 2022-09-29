@@ -21,5 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/auth/register', [AuthController::class, 'createUser']); // register
 Route::post('/auth/login', [AuthController::class, 'loginUser']); // login
-Route::apiResource('fsf/application', ApplicationController::class); // application
-Route::get('/fsf/application/{id}/status', [ApplicationController::class, 'status']); // application status
+
+
+Route::middleware('auth:sanctum')->group( function () {
+    Route::apiResource('application', ApplicationController::class);// application
+    Route::get('application/{id}/status', [ApplicationController::class, 'status']); // application status
+    
+});
