@@ -60,7 +60,7 @@
                                                 <img class="rounded-circle" width="160px" src="http://i.pravatar.cc/500?img=7" alt="">
                                             </div>
                                         </div>
-                                        <div class="offset-lg-2 offset-md-1 offset-sm-0 col-lg-8 col-md-10 col-sm-12">
+                                        <div class="col-12">
                                             <div class="">
                                                 <div class="mb-4">
                                                     <h3>
@@ -68,31 +68,39 @@
                                                     </h3>
                                                     <div class="heading-bottom-line"></div>
                                                 </div>
-                                                <div class="">
-                                                    <div class="row mb-4">
-                                                        <div class="col-6">
-                                                            <p class="mb-0 text-dark">Full Name</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-4">
-                                                        <div class="col-6">
-                                                            <p class="mb-0 text-dark">Father's Name</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="row mb-4">
+                                                            <div class="col-6">
+                                                                <p class="mb-0 text-dark">Full Name</p>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-4">
-                                                        <div class="col-6">
-                                                            <p class="mb-0 text-dark">Sur Name</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="row mb-4">
+                                                            <div class="col-6">
+                                                                <p class="mb-0 text-dark">Father's Name</p>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                            </div>
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="row mb-4">
+                                                            <div class="col-6">
+                                                                <p class="mb-0 text-dark">Sur Name</p>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Gender</p>
@@ -101,6 +109,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Date of Birth</p>
@@ -109,6 +119,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Passport No.</p>
@@ -117,6 +129,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">European Residence Card No.</p>
@@ -125,6 +139,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Native Country</p>
@@ -133,6 +149,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">ID Card No. (Native Country)</p>
@@ -141,6 +159,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Address (Native Country)</p>
@@ -149,6 +169,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Cell No.</p>
@@ -157,6 +179,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Email</p>
@@ -165,6 +189,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Country</p>
@@ -173,6 +199,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Community</p>
@@ -181,6 +209,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Province</p>
@@ -189,6 +219,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">City</p>
@@ -197,6 +229,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Area / Street / House No.</p>
@@ -204,6 +238,7 @@
                                                         <div class="col-6">
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -219,7 +254,8 @@
                                                         Relative 1
                                                     </h5>
                                                 </div>
-                                                <div class="">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Full Name</p>
@@ -228,6 +264,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Relation</p>
@@ -236,6 +274,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Cell No.</p>
@@ -244,6 +284,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Complete Address</p>
@@ -251,6 +293,7 @@
                                                         <div class="col-6">
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
@@ -258,7 +301,8 @@
                                                         Relative 2
                                                     </h5>
                                                 </div>
-                                                <div class="">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Full Name</p>
@@ -267,6 +311,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Relation</p>
@@ -275,6 +321,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Cell No.</p>
@@ -283,6 +331,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Complete Address</p>
@@ -290,6 +340,7 @@
                                                         <div class="col-6">
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -305,7 +356,8 @@
                                                         Relative 1
                                                     </h5>
                                                 </div>
-                                                <div class="">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Full Name</p>
@@ -314,6 +366,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Relation</p>
@@ -322,6 +376,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Cell No.</p>
@@ -330,6 +386,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Complete Address</p>
@@ -337,6 +395,7 @@
                                                         <div class="col-6">
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
@@ -344,7 +403,8 @@
                                                         Relative 2
                                                     </h5>
                                                 </div>
-                                                <div class="">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Full Name</p>
@@ -353,6 +413,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Relation</p>
@@ -361,6 +423,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Cell No.</p>
@@ -369,6 +433,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Complete Address</p>
@@ -376,6 +442,7 @@
                                                         <div class="col-6">
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -386,7 +453,8 @@
                                                     </h3>
                                                     <div class="heading-bottom-line"></div>
                                                 </div>
-                                                <div class="">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Full Name</p>
@@ -395,6 +463,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Sur Name</p>
@@ -403,6 +473,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Passport No.</p>
@@ -411,6 +483,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Cell No.</p>
@@ -419,6 +493,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Complete Address</p>
@@ -426,6 +502,7 @@
                                                         <div class="col-6">
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -436,7 +513,8 @@
                                                     </h3>
                                                     <div class="heading-bottom-line"></div>
                                                 </div>
-                                                <div class="">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Where do you want to be buried?</p>
@@ -445,6 +523,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Do you have any relatives registered in this fund?</p>
@@ -453,11 +533,16 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <h5>
-                                                            Registered Relative
-                                                        </h5>
                                                     </div>
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <h5>
+                                                                Registered Relative
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Full Name</p>
@@ -466,6 +551,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Father's Name</p>
@@ -474,6 +561,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Relation</p>
@@ -482,6 +571,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Cell No.</p>
@@ -490,6 +581,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Complete Address</p>
@@ -498,6 +591,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">How much will you pay annually into this fund?</p>
@@ -506,6 +601,8 @@
                                                             <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="row mb-4">
                                                         <div class="col-6">
                                                             <p class="mb-0 text-dark">Signature</p>
@@ -514,6 +611,7 @@
                                                             <img class="mb-0 float-right font-weight-bold" src="" alt="signatures">
                                                             {{-- <p class="mb-0 float-right font-weight-bold">Saad Ahmad</p> --}}
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
