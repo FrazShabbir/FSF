@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ApplicationController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/auth/register', [AuthController::class, 'createUser']); // register
+Route::post('/auth/login', [AuthController::class, 'loginUser']); // login
+Route::apiResource('fsf/application', ApplicationController::class); // application
+Route::get('/fsf/application/{id}/status', [ApplicationController::class, 'status']); // application status
