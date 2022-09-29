@@ -8,10 +8,32 @@
 
 @push('css')
     <style>
+        body{
+            scroll-behavior: smooth;
+            transition: 0.4s all ease;
+        }
         .heading-bottom-line{
             width: 150px;
             height: 2px;
             background: #1f3d73;
+        }
+        .enroll_show_nav{
+            border-radius: 10px;
+        }
+        .enroll_show_nav .nav-link{
+            margin-right: 55px;
+            transition: 0.4s all ease;
+            border-radius: 10px;
+        }
+        .enroll_show_nav .nav-link:hover{
+            background: #1f3d73;
+            color: #fff!important;
+        }
+        @media screen and (max-width: 576px){
+            .nav-item{
+                background: #fff;
+                padding-left: 20px!important;
+            }
         }
     </style>
 @endpush
@@ -53,6 +75,34 @@
                         </div>
                         <div class="iq-card-body p-5">
                             <div class="row">
+                                <div class="col-12 mb-5">
+                                    <nav class="navbar navbar-expand-lg navbar-light bg-light enroll_show_nav">
+                                        {{-- <a class="navbar-brand" href="#">Navbar</a> --}}
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#enrol_show_nav" aria-controls="enrol_show_nav" aria-expanded="false" aria-label="Toggle navigation">
+                                          <span class="navbar-toggler-icon"></span>
+                                        </button>
+
+                                        <div class="collapse navbar-collapse" id="enrol_show_nav">
+                                          <ul class="navbar-nav ml-auto">
+                                            <li class="nav-item">
+                                              <a class="nav-link ml-0" href="#personal_info">Personal Info</a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" href="#residential_relative_info">Residential Relative Info</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#native_country_relative_info">Native Country Relative Info</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link" href="#representative_info">Representative Info</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link mr-0" href="#supplementary_info">Supplementary Info</a>
+                                              </li>
+                                          </ul>
+                                        </div>
+                                      </nav>
+                                </div>
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-12">
@@ -61,7 +111,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <div class="">
+                                            <div class="" id="personal_info">
                                                 <div class="mb-4">
                                                     <h3>
                                                         Personal Information
@@ -242,7 +292,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="">
+                                            <div class="" id="residential_relative_info">
                                                 <div class="mb-4">
                                                     <h3>
                                                         Residential Relative Information
@@ -344,7 +394,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="">
+                                            <div class="" id="native_country_relative_info">
                                                 <div class="mb-4">
                                                     <h3>
                                                         Native Country Relative Information
@@ -446,7 +496,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="">
+                                            <div class="" id="representative_info">
                                                 <div class="mb-4">
                                                     <h3>
                                                         Representative Information
@@ -506,7 +556,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="">
+                                            <div class="" id="supplementary_info">
                                                 <div class="mb-4">
                                                     <h3>
                                                         Supplementary Information
