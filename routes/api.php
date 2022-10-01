@@ -23,8 +23,10 @@ Route::post('/auth/register', [AuthController::class, 'createUser']); // registe
 Route::post('/auth/login', [AuthController::class, 'loginUser']); // login
 
 
-Route::middleware('auth:sanctum')->group( function () {
-    Route::apiResource('application', ApplicationController::class);// application
+// Route::group( function () {
+    // Route::apiResource('application', ApplicationController::class);// application
+    Route::post('application/store', [ApplicationController::class, 'store']); // application status
+
     Route::get('application/{id}/status', [ApplicationController::class, 'status']); // application status
     
-});
+// });

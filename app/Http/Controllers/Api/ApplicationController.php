@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Application;
 
 class ApplicationController extends Controller
 {
@@ -25,8 +26,11 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
+        $arr = [];
+
+        $arr['message'] = 'Hello';
+        $arr['status'] = 'success';
+        return json_encode($arr);
     }
 
     /**
