@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('application_id')->unsigned();
             $table->string('comment');
+            $table->string('status');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();

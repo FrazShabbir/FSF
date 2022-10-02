@@ -58,14 +58,11 @@
                               <form class="mt-4"  method="POST" action="{{ route('register') }}">
                                 @csrf
                                   <div class="form-group">
-                                      <label for="exampleInputEmail1">First Name</label>
-                                      <input type="text" name="first_name" class="form-control mb-0" id="exampleInputEmail1" placeholder="First Name">
+                                      <label for="exampleInputEmail1">Full Name</label>
+                                      <input type="text" name="full_name" class="form-control mb-0" id="exampleInputEmail1" placeholder="First Name">
                                   </div>
 
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Last Name</label>
-                                    <input type="text" name="last_name" class="form-control mb-0" id="exampleInputEmail1" placeholder="Last Name">
-                                </div>
+                              
 
                                   <div class="form-group">
                                       <label for="exampleInputEmail2">Email address</label>

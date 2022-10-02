@@ -26,15 +26,11 @@
                                 {{ @method_field('PUT') }}
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="first_name" class="required">First Name </label>
-                                        <input type="text" class="form-control" name="first_name" placeholder="e.g. Ali"
-                                            value="{{ $user->first_name }}">
+                                        <label for="first_name" class="required">Full Name </label>
+                                        <input type="text" class="form-control" name="full_name" placeholder="e.g. Ali"
+                                            value="{{ $user->full_name }}">
                                     </div>
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="last_name" class="required">Last Name</label>
-                                        <input type="text" class="form-control" name="last_name" placeholder="e.g. Raza"
-                                            value="{{ $user->last_name }}">
-                                    </div>
+                               
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">

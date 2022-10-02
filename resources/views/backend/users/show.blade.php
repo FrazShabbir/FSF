@@ -24,13 +24,10 @@
                    
                     <div class="row">
                         <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="first_name">First Name </label>
-                            <input type="text" class="form-control" name="first_name" disabled value="{{$user->first_name}}">
+                            <label for="first_name">Full Name </label>
+                            <input type="text" class="form-control" name="full_name" disabled value="{{$user->full_name}}">
                         </div>
-                        <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control" name="last_name" disabled value="{{$user->last_name}}">
-                        </div>
+                       
                      </div>
                      <div class="row">
                         <div class="col-md-6 col-sm-12 mb-3">

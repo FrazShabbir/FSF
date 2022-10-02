@@ -35,14 +35,14 @@ if (! function_exists('getFullName')) {
     function getFullName()
     {
         $user = Auth::user();
-        return $user->first_name.' '.$user->last_name;
+        return $user->full_name;
     }
 }
 if (! function_exists('getFullNameById')) {
     function getFullNameById($id)
     {
         $user = User::find($id);
-        return $user->first_name.' '.$user->last_name;
+        return $user->full_name;
     }
 }
 if (! function_exists('getUserStatus')) {

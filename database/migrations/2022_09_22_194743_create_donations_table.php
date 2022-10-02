@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('application_id')->unsigned();
             $table->string('amount');
             $table->string('description');
+            $table->string('type');
+            $table->string('receipt');
             $table->timestamps();
             $table->softDeletes();
 

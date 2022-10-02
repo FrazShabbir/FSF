@@ -23,47 +23,47 @@ return new class () extends Migration {
             $table->string('full_name');
             $table->string('father_name');
             $table->string('surname');
-            $table->string('gender');
+            $table->enum('gender',['Male','Female']);
             $table->string('phone');
-            $table->string('dob');
+            $table->date('dob');
             $table->string('native_country');
             $table->string('native_country_address');
             //Residensial Information
             $table->string('country', 30);
             $table->string('community');
             $table->string('province', 40);
-            $table->string('city', 40);
+            $table->string('city', 50);
             $table->string('area');
             // Relative Of Spain
             // Relative 1
-            $table->string('s_relative_1_name', 30);
-            $table->string('s_relative_1_relation', 30);
-            $table->string('s_relative_1_phone', 30);
+            $table->string('s_relative_1_name', 50);
+            $table->string('s_relative_1_relation', 50);
+            $table->string('s_relative_1_phone', 50);
             $table->text('s_relative_1_address');
             // Relative 1
-            $table->string('s_relative_2_name', 30);
-            $table->string('s_relative_2_relation', 30);
-            $table->string('s_relative_2_phone', 30);
+            $table->string('s_relative_2_name', 50);
+            $table->string('s_relative_2_relation', 50);
+            $table->string('s_relative_2_phone', 50);
             $table->text('s_relative_2_address');
 
             // Relative of Native Country
             // Relative 1
-            $table->string('n_relative_1_name', 30);
-            $table->string('n_relative_1_relation', 30);
-            $table->string('n_relative_1_phone', 30);
+            $table->string('n_relative_1_name', 50);
+            $table->string('n_relative_1_relation', 50);
+            $table->string('n_relative_1_phone', 50);
             $table->text('n_relative_1_address');
             // Relative 1
-            $table->string('n_relative_2_name', 30);
-            $table->string('n_relative_2_relation', 30);
-            $table->string('n_relative_2_phone', 30);
+            $table->string('n_relative_2_name', 50);
+            $table->string('n_relative_2_relation', 50);
+            $table->string('n_relative_2_phone', 50);
             $table->text('n_relative_2_address');
 
             // Representative Information
             $table->string('rep_name', 50);
-            $table->string('rep_sername', 50);
+            $table->string('rep_surname', 50);
             $table->string('rep_passport_no', 50);
             $table->string('rep_phone', 20);
-            $table->string('rep_address');
+            $table->text('rep_address');
             $table->boolean('rep_confirmed')->default(true);
 
             //Supplementary Information
@@ -75,7 +75,7 @@ return new class () extends Migration {
             $table->boolean('declaration_confirm')->default(false);
             $table->string('status')->default('PENDING');
 
-            $table->integer('receiver_id')->unsigned();
+            $table->integer('receiver_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
 

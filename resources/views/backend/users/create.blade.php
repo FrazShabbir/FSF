@@ -26,13 +26,10 @@
                                 {{ @method_field('POST') }}
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="first_name" class="required">First Name</label>
-                                        <input type="text" class="form-control" name="first_name" placeholder="e.g. Ali">
+                                        <label for="first_name" class="required">Full Name</label>
+                                        <input type="text" class="form-control" name="full_name" placeholder="e.g. Ali">
                                     </div>
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="last_name" class="required">Last Name</label>
-                                        <input type="text" class="form-control" name="last_name" placeholder="e.g. Raza">
-                                    </div>
+                                 
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">

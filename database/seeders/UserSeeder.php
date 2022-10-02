@@ -17,8 +17,8 @@ class UserSeeder extends Seeder
     {
      if(! User::find(1)){
             $user = new User();
-            $user->first_name = 'Fraz';
-            $user->last_name = 'Shabbir';
+            $user->full_name = 'Fraz Shabbir';
+    
             $user->username = 'FrazShabbir';
             $user->status = 1;
             $user->password = bcrypt('admin');
