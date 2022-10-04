@@ -68,7 +68,7 @@ return new class () extends Migration {
 
             //Supplementary Information
             $table->string('buried_location');
-            $table->string('registered_relatives', 50);
+            $table->boolean('registered_relatives')->default(false);
             $table->string('registered_relative_passport_no', 20);
             $table->string('annually_fund_amount');
             $table->text('user_signature');

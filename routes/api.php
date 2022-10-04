@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ApplicationController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,8 +26,9 @@ Route::post('/auth/login', [AuthController::class, 'loginUser']); // login
 
 // Route::group( function () {
     // Route::apiResource('application', ApplicationController::class);// application
-    Route::post('application/store', [ApplicationController::class, 'store']); // application status
+Route::get('application/create', [ApplicationController::class, 'create']); // application status
+Route::post('application/store', [ApplicationController::class, 'store']); // application status
 
-    Route::get('application/{id}/status', [ApplicationController::class, 'status']); // application status
-    
+Route::get('application/{id}/status', [ApplicationController::class, 'status']); // application status
+
 // });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Application;
+use App\Models\Province;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 // use Valida
@@ -20,6 +21,14 @@ class ApplicationController extends Controller
         return "hello";
     }
 
+    public function create(){
+        $arr = [];
+        $arr['provinces'] = Province::all();
+
+        return $arr;
+        
+
+    }
     /**
      * Store a newly created resource in storage.
      *

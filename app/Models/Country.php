@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ApplicationComment extends Model
+class Country extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     use SoftDeletes;
+
 }

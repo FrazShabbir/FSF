@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             GeneralSettingSeeder::class,
+            CitySeeder::class,
+            CountrySeeder::class,
+            ProvinceSeeder::class,
+            OfficeSeeder::class,
             ]);
             
         // \App\Models\User::factory(10)->create();

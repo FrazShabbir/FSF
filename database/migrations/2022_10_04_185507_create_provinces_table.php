@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('application_comments', function (Blueprint $table) {
+        Schema::create('provinces', function (Blueprint $table) {
             $table->id();
-            $table->integer('receiver_id')->unsigned();
-            $table->integer('application_id')->unsigned()->nullable();
-            $table->string('comment');
-            $table->string('status');
+            $table->string('name');
+            $table->integer('country_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
+
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('application_comments');
+        Schema::dropIfExists('provinces');
     }
 };
