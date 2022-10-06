@@ -14,6 +14,7 @@ return new class () extends Migration {
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
+            $table->string('application_id', 20)->unique();
             $table->integer('user_id')->unsigned();
             // Unique Information
             $table->string('passport_number', 20);

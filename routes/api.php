@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ApplicationController;
-
+use App\Http\Controllers\Api\GeneralController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,8 +32,17 @@ Route::post('getcities', [ApplicationController::class, 'getCities']); // applic
 
 Route::post('application/store', [ApplicationController::class, 'store']); // application status
 
-Route::get('application/{id}/edit', [ApplicationController::class, 'store']); // application Editing Mode
+Route::get('application/{id}', [ApplicationController::class, 'show']);
+ // application Editing Mode
+Route::get('application/{id}/edit', [ApplicationController::class, 'edit']); // application Editing Mode
 
-Route::get('application/{id}/status', [ApplicationController::class, 'status']); // application status
+Route::put('application/{id}/update', [ApplicationController::class, 'update']); // application update Mode
+
+
+
+Route::get('myprofile/{username}', [GeneralController::class, 'myprofile']); // application status
+Route::put('myprofile/{username}/update', [GeneralController::class, 'updateProfile']); // application status
+
+
 
 // });
