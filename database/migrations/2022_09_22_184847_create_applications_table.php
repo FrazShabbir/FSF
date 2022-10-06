@@ -18,7 +18,7 @@ return new class () extends Migration {
             // Unique Information
             $table->string('passport_number', 20);
             $table->string('nie', 25);
-            $table->string('native_id', 20);
+            $table->string('native_id',40); // Can Be CNIC
             // Personal Information
             $table->string('full_name');
             $table->string('father_name');
@@ -29,10 +29,10 @@ return new class () extends Migration {
             $table->string('native_country');
             $table->string('native_country_address');
             //Residensial Information
-            $table->string('country', 30);
+            $table->integer('country')->unsigned()->nullable();
             $table->string('community');
-            $table->string('province', 40);
-            $table->string('city', 50);
+            $table->integer('province')->unsigned()->nullable();
+            $table->integer('city')->unsigned()->nullable();
             $table->string('area');
             // Relative Of Spain
             // Relative 1
@@ -69,8 +69,8 @@ return new class () extends Migration {
             //Supplementary Information
             $table->string('buried_location');
             $table->boolean('registered_relatives')->default(false);
-            $table->string('registered_relative_passport_no', 20);
-            $table->string('annually_fund_amount');
+            $table->string('registered_relative_passport_no', 20)->nullable();
+            $table->string('annually_fund_amount')->default(0);
             $table->text('user_signature');
             $table->boolean('declaration_confirm')->default(false);
             $table->string('status')->default('PENDING');

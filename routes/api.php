@@ -27,7 +27,12 @@ Route::post('/auth/login', [AuthController::class, 'loginUser']); // login
 // Route::group( function () {
     // Route::apiResource('application', ApplicationController::class);// application
 Route::get('application/create', [ApplicationController::class, 'create']); // application status
+
+Route::post('getcities', [ApplicationController::class, 'getCities']); // application status
+
 Route::post('application/store', [ApplicationController::class, 'store']); // application status
+
+Route::get('application/{id}/edit', [ApplicationController::class, 'store']); // application Editing Mode
 
 Route::get('application/{id}/status', [ApplicationController::class, 'status']); // application status
 

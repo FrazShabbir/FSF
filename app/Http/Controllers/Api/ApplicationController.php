@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Application;
-use App\Models\Province;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 // use Valida
+// Models
+use App\Models\Province;
+use App\Models\City;
+use App\Models\Application;
+
 class ApplicationController extends Controller
 {
     /**
@@ -21,13 +24,36 @@ class ApplicationController extends Controller
         return "hello";
     }
 
-    public function create(){
+    public function create()
+    {
         $arr = [];
+        $arr['status'] = 200;
         $arr['provinces'] = Province::all();
 
-        return $arr;
+        return response()->json($arr, 200);
+    }
+    public function getCities(Request $request)
+    {
+        $arr = [];
+     
+        $cities = City::where('province_id', $request->province_id)->get();
+        if ($cities->count()>0) {
+            $arr['status'] = 200;
+            $arr['total_cities'] = $cities->count();
+            $arr['cities']=$cities;
+            $arr['message'] = 'All Cities fetched.';
+            return response()->json($arr, 200);
+        }elseif($cities->count()==0){
+            $arr['status'] = 404;
+            $arr['total_cities'] = $cities->count();
+            $arr['message'] = 'No City(s) found.';
+            return response()->json($arr, 404);
+        }else{
+            $arr['status'] = 500;
+            $arr['message'] = 'Internal Server Error';
+            return response()->json($arr, 500);
+        }
         
-
     }
     /**
      * Store a newly created resource in storage.
@@ -91,14 +117,11 @@ class ApplicationController extends Controller
                     'buried_location'=>'required',
 
                     'registered_relatives'=>'required',
-                    'registered_relative_passport_no'=>'required',
+                    'registered_relative_passport_no'=>'nullable',
 
                     'annually_fund_amount'=>'required',
                     'user_signature'=>'required',
                     'declaration_confirm'=>'required',
-
-
-
                 ]
             );
 

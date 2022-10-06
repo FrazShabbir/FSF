@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
     
             $user->username = 'FrazShabbir';
             $user->status = 1;
+            $user->passport_number = 1;
             $user->password = bcrypt('admin');
             $user->email = 'fraz.shabbir54@gmail.com';
             $user->email_verified_at = now();

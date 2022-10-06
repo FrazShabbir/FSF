@@ -28,6 +28,7 @@ class AuthController extends Controller
                     'phone' => 'required',
                     'username' => 'required||unique:users,username',
                     'email' => 'required|email|unique:users,email',
+                    'passport_number' => 'required|unique:users,passport_number',
                     'password' => 'required'
                 ]
             );
@@ -45,6 +46,7 @@ class AuthController extends Controller
                 'username' => $request->username,
                 'phone' => $request->phone,
                 'email' => $request->email,
+                'passport_number'=>$request->passport_number,
                 'password' => Hash::make($request->password)
             ]);
 

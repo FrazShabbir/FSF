@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('username')->unique(); 
             $table->string('phone')->nullable();
             $table->string('email')->unique();
+            $table->string('passport_number')->unique(); 
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('status')->nullable()->default(false);
             $table->string('password');
