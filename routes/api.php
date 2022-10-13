@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\GeneralController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,8 +28,8 @@ Route::post('/auth/login', [AuthController::class, 'loginUser']); // login
 // Route::group( function () {
     // Route::apiResource('application', ApplicationController::class);// application
 Route::get('application/create', [ApplicationController::class, 'create']); // application status
+Route::get('application/renew/{id}', [ApplicationController::class, 'renew']); // application status
 
-Route::post('getcities', [ApplicationController::class, 'getCities']); // application status
 
 Route::post('application/store', [ApplicationController::class, 'store']); // application status
 
@@ -43,6 +44,10 @@ Route::put('application/{id}/update', [ApplicationController::class, 'update']);
 Route::get('myprofile/{username}', [GeneralController::class, 'myprofile']); // application status
 Route::put('myprofile/{username}/update', [GeneralController::class, 'updateProfile']); // application status
 
+
+
+Route::post('getprovinces', [ApplicationController::class, 'getProvinces']); // application status
+Route::post('getcities', [ApplicationController::class, 'getCities']); // application status
 
 
 // });

@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('provinces', function (Blueprint $table) {
+        Schema::create('renew_applications', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('community_id')->unsigned();
+            $table->integer('application_id')->unsigned()->nullable();
+            $table->string('annually_fund_amount')->default(0);
+            $table->text('user_signature');
+            $table->boolean('declaration_confirm')->default(false);
             $table->timestamps();
-            $table->softDeletes();
-
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provinces');
+        Schema::dropIfExists('renew_applications');
     }
 };

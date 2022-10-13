@@ -30,10 +30,10 @@ return new class () extends Migration {
             $table->string('native_country');
             $table->string('native_country_address');
             //Residensial Information
-            $table->integer('country')->unsigned()->nullable();
-            $table->string('community');
-            $table->integer('province')->unsigned()->nullable();
-            $table->integer('city')->unsigned()->nullable();
+            $table->integer('country_id')->unsigned()->nullable();
+            $table->integer('community_id')->unsigned()->nullable();
+            $table->integer('province_id')->unsigned()->nullable();
+            $table->integer('city_id')->unsigned()->nullable();
             $table->string('area');
             // Relative Of Spain
             // Relative 1

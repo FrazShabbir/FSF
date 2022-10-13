@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\DB;
 // use Valida
 // Models
 use App\Models\Province;
+use App\Models\Community;
 use App\Models\City;
 use App\Models\Application;
+use App\Models\Country;
 
 class ApplicationController extends Controller
 {
@@ -26,22 +28,42 @@ class ApplicationController extends Controller
 
     public function create()
     {
-        $provinces = Province::all();
+        $communities = Community::all();
 
         return response()->json([
-            'status' => true,
-            'message' => 'Provinces Found',
-            'provinces' => $provinces
+            'status' => 200,
+            'message' => 'All communities Fetched',
+            'communities' => $communities
         ], 200);
     }
+
+    public function renew($id){
+        $application = Application::where('application_id', $id)->first();
+        if($application){
+            return response()->json([
+                'status'=>'200',
+                'application'=>$application,
+                'message'=>'Application Fetched',
+            ]);
+        }else{
+            return response()->json([
+                'status'=>'404',
+                'message'=>'Application Not Found',
+            ]);
+        }
+    }
+    public function storeRenewApplication(Request $request,$id){
+
+    }
+
     public function getCities(Request $request)
     {
-        $arr = [];
+        
 
         $cities = City::where('province_id', $request->province_id)->get();
         if ($cities->count()>0) {
             return response()->json([
-                'status' => true,
+                'status' => 200,
                 'total_cities'=>$cities->count(),
                 'message' => 'All Cities fetched.',
                 'cities' => $cities
@@ -60,6 +82,30 @@ class ApplicationController extends Controller
             ], 500);
         }
     }
+    public function getProvinces(Request $request)
+    {
+        $provinces = Province::where('community_id', $request->community_id)->get();
+        if ($provinces->count()>0) {
+            return response()->json([
+                'status' => true,
+                'total_provinces'=>$provinces->count(),
+                'message' => 'All Provinces fetched.',
+                'provinces' => $provinces
+            ], 200);
+        } elseif ($provinces->count()==0) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'No provinces Found',
+                'provinces' => $provinces,
+                'total_cities'=>$provinces->count(),
+            ], 404);
+        } else {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong',
+            ], 500);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -68,7 +114,7 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        $arr = [];
+       
         try {
             $validateApplicationRequest = Validator::make(
                 $request->all(),
@@ -85,10 +131,10 @@ class ApplicationController extends Controller
                     'dob'=>'required',
                     'native_country'=>'required',
                     'native_country_address'=>'required',
-                    'country'=>'required',
-                    'community'=>'required',
-                    'province'=>'required',
-                    'city'=>'required',
+                    'country_id'=>'required',
+                    'community_id'=>'required',
+                    'province_id'=>'required',
+                    'city_id'=>'required',
                     'area'=>'required',
 
                     's_relative_1_name'=>'required',
@@ -152,11 +198,11 @@ class ApplicationController extends Controller
                 $application->dob=$request->dob;
                 $application->native_country=$request->native_country;
                 $application->native_country_address=$request->native_country_address;
-                $application->country=$request->country;
+                $application->country_id=$request->country_id;
 
-                $application->community=$request->community;
-                $application->province=$request->province;
-                $application->city=$request->city;
+                $application->community_id=$request->community_id;
+                $application->province_id=$request->province_id;
+                $application->city_id=$request->city_id;
                 $application->area=$request->area;
 
                 $application->s_relative_1_name=$request->s_relative_1_name;
@@ -224,12 +270,93 @@ class ApplicationController extends Controller
      */
     public function show($id)
     {
-        $application = Application::where('application_id', $id)->first();
+        $application = Application::with('comments')->where('application_id', $id)->first();
+        // dd($application->countri->name);
         if ($application) {
+            // $country = Country::where('id', $application->country)->first();
+            // $community = Community::where('id', $application->community)->first();
+            // $province = Province::where('id', $application->province)->first();
+            // $city = City::where('id', $application->city)->first();
+
             return response()->json([
                 'status' => true,
                 'message' => 'Application found',
-                'application' => $application
+                'comments'=>$application->comments,
+                'application' => [
+                    'application_id' => $application->application_id,
+                    'user_id' => $application->user_id,
+                    'passport_number' => $application->passport_number,
+                    'nie' => $application->nie,
+                    'native_id' => $application->native_id,
+                    'full_name' => $application->full_name,
+                    'father_name' => $application->father_name,
+                    'surname' => $application->surname,
+                    'gender'=>$application->gender,
+                    'phone'=>$application->phone,
+                    'dob'=>$application->dob,
+                    'native_country'=>[
+                        'id'=>$application->nativecountry->id,
+                        'name'=>$application->nativecountry->name
+                    ],
+                    'native_country_address'=>$application->native_country_address,
+                    'country'=>[
+                        'id'=>$application->country->id,
+                        'name'=>$application->country->name
+                    ],
+                    'community'=>[
+                                'id'=>$application->community->id,
+                                'name'=>$application->community->name
+                    ],
+                    'province'=>[
+                        'id'=>$application->province->id,
+                        'name'=>$application->province->name
+                    ],
+                    'city'=>[
+                        'id'=>$application->city->id,
+                        'name'=>$application->city->name
+                    ],
+                    'area'=>$application->area,
+
+                    's_relative_1_name'=>$application->s_relative_1_name,
+                    's_relative_1_relation'=>$application->s_relative_1_relation,
+                    's_relative_1_phone'=>$application->s_relative_1_phone,
+                    's_relative_1_address'=>$application->s_relative_1_address,
+
+                    's_relative_2_name'=>$application->s_relative_2_name,
+                    's_relative_2_relation'=>$application->s_relative_2_relation,
+                    's_relative_2_phone'=>$application->s_relative_2_phone,
+                    's_relative_2_address'=>$application->s_relative_2_address,
+
+
+                    'n_relative_1_name'=>$application->n_relative_1_name,
+                    'n_relative_1_relation'=>$application->n_relative_1_relation,
+                    'n_relative_1_phone'=>$application->n_relative_1_phone,
+                    'n_relative_1_address'=>$application->n_relative_1_address,
+
+                    'n_relative_2_name'=>$application->n_relative_2_name,
+                    'n_relative_2_relation'=>$application->n_relative_2_relation,
+                    'n_relative_2_phone'=>$application->n_relative_2_phone,
+                    'n_relative_2_address'=>$application->n_relative_2_address,
+
+
+
+                    'rep_name'=>$application->rep_name,
+                    'rep_surname'=>$application->rep_surname,
+                    'rep_passport_no'=>$application->rep_passport_no,
+                    'rep_phone'=>$application->rep_phone,
+                    'rep_address'=>$application->rep_address,
+                    'rep_confirmed'=>$application->rep_confirmed==1?'Yes':'No',
+                    'buried_location'=>$application->buried_location,
+
+
+                    'registered_relatives'=>$application->registered_relatives==1?'Yes':'No',
+                    'registered_relative_passport_no'=>$application->registered_relative_passport_no,
+                    'annually_fund_amount'=>$application->annually_fund_amount,
+                    'user_signature'=>$application->user_signature,
+                    // 'declaration_confirm'=>$application->declaration_confirm,
+                    'status'=>$application->status,
+
+                ]
             ], 200);
         } else {
             return response()->json([

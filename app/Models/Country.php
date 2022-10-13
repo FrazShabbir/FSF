@@ -11,5 +11,7 @@ class Country extends Model
     use HasFactory;
     protected $guarded = [];
     use SoftDeletes;
-
+    public function applications(){
+        return $this->hasMany(Application::class);
+    }
 }

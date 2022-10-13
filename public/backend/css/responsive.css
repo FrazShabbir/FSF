@@ -1,7 +1,7 @@
 /*
-Template: FinDash - Responsive Bootstrap 4 Admin Dashboard Template
-Author: iqonicthemes.in
-Design and Developed by: iqonicthemes.in
+Template: FDD - Responsive Bootstrap 4 Admin Dashboard Template
+Author: TeamEssential
+Design and Developed by: EssentialSofts
 NOTE: This file contains the styling for responsive Template.
 */
 
@@ -48,7 +48,7 @@ NOTE: This file contains the styling for responsive Template.
   .iq-page-menu-horizontal .navbar-list li.nav-item.nav-icon > a { margin-left: 5px; margin-right: 5px; }
   .iq-menu-horizontal .iq-sidebar-menu .iq-menu li.active { background: none; }
   .iq-menu-horizontal .iq-sidebar-menu .iq-menu li { margin-bottom: 0px; }
-  .iq-menu-horizontal .iq-sidebar-menu .iq-menu li a { padding: 28px 10px 28px 0; }  
+  .iq-menu-horizontal .iq-sidebar-menu .iq-menu li a { padding: 28px 10px 28px 0; }
   .iq-menu-horizontal .iq-sidebar-menu .iq-menu .iq-submenu li a { padding: 12px 13px 12px 15px; }
   .iq-menu-horizontal .iq-sidebar-menu .iq-menu li.menu-open .iq-arrow-right, .iq-menu-horizontal .iq-sidebar-menu .iq-menu li:hover .iq-arrow-right { transform: rotate(90deg); }
   .iq-menu-horizontal .iq-sidebar-menu .iq-menu li li .iq-arrow-right, .iq-menu-horizontal .iq-sidebar-menu .iq-menu li:hover li .iq-arrow-right { transform: rotate(0deg); }
@@ -80,7 +80,7 @@ NOTE: This file contains the styling for responsive Template.
   .iq-menu-horizontal-tab .iq-sidebar-menu .iq-menu > li { padding: 10px 0; margin: 0px; }
   .tab-menu-horizontal .iq-sidebar-menu .iq-menu li.active { background: none; }
   .tab-menu-horizontal .iq-sidebar-menu .iq-menu li { margin-bottom: 0px; }
-  .iq-menu-horizontal-tab .iq-sidebar-menu .iq-menu > li > a { padding: 10px 20px; border-radius: 4px; color: var(--iq-white); transition: all 0.5s ease-out 0s; line-height: 20px;}  
+  .iq-menu-horizontal-tab .iq-sidebar-menu .iq-menu > li > a { padding: 10px 20px; border-radius: 4px; color: var(--iq-white); transition: all 0.5s ease-out 0s; line-height: 20px;}
   .iq-menu-horizontal-tab .iq-sidebar-menu .iq-menu > li:hover > a { background-color: var(--iq-white); color: #1e3d73; }
   .tab-menu-horizontal .iq-sidebar-menu .iq-menu .iq-submenu li a { padding: 12px 13px 12px 15px; }
   .tab-menu-horizontal .iq-sidebar-menu .iq-menu li ul { display: block; position: absolute; top: 100%; padding: 10px 0px; min-width: 200px; background: var(--iq-light-primary); border: 1px solid var(--iq-light-primary); z-index: 9; box-shadow: 0px 0px 12px 0px rgba(55, 73, 72, 0.06); transition: all 0.45s ease 0s; -webkit-transition: all 0.45s ease 0s; -moz-transition: all 0.45s ease 0s; -o-transition: all 0.45s ease 0s; transform: scale(1, 0); -webkit-transform: scale(1, 0);  -moz-transform: scale(1, 0); -o-transform: scale(1, 0); -webkit-transform-origin: 0 0 0; -moz-transform-origin: 0 0 0; -o-transform-origin: 0 0 0; transform-origin: 0 0 0; }
@@ -193,7 +193,7 @@ NOTE: This file contains the styling for responsive Template.
 	.iq-email-to-list { overflow-x: scroll; }
 	.iq-email-to-list ul li { margin: 0 5px 0 0; }
 	.iq-email-to-list .justify-content-between { float: left; width: 900px; }
-	.sign-in-from { padding: 0 30px; }
+	.sign-in-from { padding: 30px 30px; }
 	.sign-in-detail { padding: 100px 50px; }
 }
 
@@ -214,7 +214,7 @@ NOTE: This file contains the styling for responsive Template.
 	.icon-with-text .iq-search-bar { padding: 0; }
 	.navbar-collapse { position: absolute; top: 58px; left: 0; width: 100%; background: var(--iq-white); -webkit-box-shadow: 0px 5px 12px 0px rgba(55, 73, 72, 0.15); -moz-box-shadow: 0px 5px 12px 0px rgba(55, 73, 72, 0.15); box-shadow: 0px 5px 12px 0px rgba(55, 73, 72, 0.15); }
 	.navbar-nav.navbar-list { float: right; display: inline-block; }
-	.iq-top-navbar .iq-navbar-custom .iq-menu-bt { right: 125px; top: 18px; margin: 0; }	
+	.iq-top-navbar .iq-navbar-custom .iq-menu-bt { right: 125px; top: 18px; margin: 0; }
 	.navbar-list li:last-child>a { padding-right: 0; }
 	.animation-card .an-img .bodymovin { margin-bottom: 0; margin-left: 0; width: 100%; }
 	.iq-footer, .iq-footer .col-lg-6.text-right { text-align: center !important; }
@@ -253,7 +253,7 @@ NOTE: This file contains the styling for responsive Template.
 
 	.two-sidebar .iq-top-navbar .navbar { justify-content: flex-end; }
 	.iq-page-menu-horizontal .iq-navbar-custom {margin-top: 0px;}
-	.iq-page-menu-horizontal .iq-top-navbar .navbar,.top-tab-horizontal .iq-top-navbar .navbar { position: static; } 
+	.iq-page-menu-horizontal .iq-top-navbar .navbar,.top-tab-horizontal .iq-top-navbar .navbar { position: static; }
 }
 @media(max-width:979px) {
 	.iq-circle-progressbar .percent { font-size: 2.5rem !important; }

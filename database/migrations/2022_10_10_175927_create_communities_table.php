@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('provinces', function (Blueprint $table) {
+        Schema::create('communities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('community_id')->unsigned();
+            $table->integer('country_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provinces');
+        Schema::dropIfExists('communities');
     }
 };
