@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Application;
 class ApplicationController extends Controller
 {
     /**
@@ -14,7 +14,9 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        //
+        $applications = Application::all();
+        return view('backend.applications.index')
+        ->with('applications',$applications);
     }
 
     /**
