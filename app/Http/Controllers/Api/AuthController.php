@@ -23,12 +23,11 @@ class AuthController extends Controller
             $validateUser = Validator::make(
                 $request->all(),
                 [
-                    'full_name' => 'required',
-
-                    'phone' => 'required',
+                    // 'full_name' => 'required',
+                    // 'phone' => 'required',
                     'username' => 'required||unique:users,username',
                     'email' => 'required|email|unique:users,email',
-                    'passport_number' => 'required|unique:users,passport_number',
+                    // 'passport_number' => 'required|unique:users,passport_number',
                     'password' => 'required'
                 ]
             );
@@ -42,11 +41,11 @@ class AuthController extends Controller
             }
             $otp = rand(1000, 9999);
             $user = User::create([
-                'full_name' => $request->full_name,
+                // 'full_name' => $request->full_name,
                 'username' => $request->username,
-                'phone' => $request->phone,
+                // 'phone' => $request->phone,
                 'email' => $request->email,
-                'passport_number'=>$request->passport_number,
+                // 'passport_number'=>$request->passport_number,
                 'password' => Hash::make($request->password),
                 'otp' => $otp,
             ]);
@@ -57,13 +56,13 @@ class AuthController extends Controller
             });
 
             return response()->json([
-                'status' => true,
+                'status' => 200,
                 'message' => 'User Created Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'status' => false,
+                'status' => 500,
                 'message' => $th->getMessage()
             ], 500);
         }
@@ -81,7 +80,7 @@ public function verifyOtp(Request $request)
 
     if ($validateUser->fails()) {
         return response()->json([
-            'status' => false,
+            'status' => 401,
             'message' => 'validation error',
             'errors' => $validateUser->errors()
         ], 401);
@@ -142,6 +141,13 @@ public function verifyOtp(Request $request)
             }
 
             $user = User::where('email', $request->email)->first();
+            
+            if($user->status == 0){
+                return response()->json([
+                    'status' => 401,
+                    'message' => 'Please verify your account first.',
+                ], 401);
+            }
 
             return response()->json([
                 'status' => true,
