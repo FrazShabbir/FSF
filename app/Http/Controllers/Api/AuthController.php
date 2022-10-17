@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Mail;
 class AuthController extends Controller
 {
     /**
@@ -50,6 +50,11 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password),
                 'otp' => $otp,
             ]);
+            $email = $request->email;
+            $mail = Mail::raw('Your account activation OTP is  '.$user->otp.'.', function ($message) use ($email) {
+                $message->to($email)
+              ->subject('Your OTP ');
+            });
 
             return response()->json([
                 'status' => true,
@@ -84,7 +89,7 @@ public function verifyOtp(Request $request)
     $user = User::where('email', $request->email)->first();
     if ($user) {
         if ($user->otp == $request->otp) {
-            $user->status = true;
+            $user->status = 1;
             $user->save();
             return response()->json([
                 'status' => 200,
