@@ -23,6 +23,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('status')->nullable()->default(false);
             $table->string('password');
+            $table->string('otp')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
