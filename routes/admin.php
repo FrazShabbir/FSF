@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\GeneralController;
+use App\Http\Controllers\Backend\Application;
 
 /*
 |--------------------------------------------------------------------------

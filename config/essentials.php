@@ -17,7 +17,13 @@ return [
             'Delete Roles',
             'Export Roles',
         ],
-      
+        'Applications' => [
+            'Create Applications',
+            'Update Applications',
+            'Read Applications',
+            'Delete Applications',
+            'Export Applications',
+        ],
 
      
         'Settings' => [
