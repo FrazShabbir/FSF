@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Hierarchy;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Community;
+use App\Models\Country;
 class CommunityController extends Controller
 {
     /**
@@ -28,7 +29,9 @@ class CommunityController extends Controller
      */
     public function create()
     {
-        return view('backend.hierarchy.community.create');
+        $countries = Country::where('status',1)->get();
+        return view('backend.hierarchy.community.create')
+        ->with('countries',$countries);
         //
     }
 
@@ -47,6 +50,7 @@ class CommunityController extends Controller
         $community = Community::create([
             'name' => $request->name,
             'country_id' => $request->country_id,
+            'status' => $request->status,
         ]);
         alert()->success('Community Created Successfully');
         return redirect()->route('community.index');
@@ -75,8 +79,10 @@ class CommunityController extends Controller
     public function edit($id)
     {
         $community = Community::find($id);
+        $countries = Country::where('status',1)->get();
         return view('backend.hierarchy.community.edit')
-        ->with('community',$community);
+        ->with('community',$community)
+        ->with('countries',$countries);
     }
 
     /**

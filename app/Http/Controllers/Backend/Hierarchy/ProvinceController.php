@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Hierarchy;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Province;
+use App\Models\Community;
 class ProvinceController extends Controller
 {
     /**
@@ -28,7 +29,9 @@ class ProvinceController extends Controller
      */
     public function create()
     {
-        return view('backend.hierarchy.province.create');
+        $communities = Community::where('status',1)->get();
+        return view('backend.hierarchy.province.create')
+        ->with('communities',$communities);
         
         
     }
@@ -44,10 +47,12 @@ class ProvinceController extends Controller
         $request->validate([
             'name' => 'required',
             'community_id' => 'required',
+            'status' => 'required',
         ]);
         $province = Province::create([
             'name' => $request->name,
             'community_id' => $request->community_id,
+            'status' => $request->status,
         ]);
         alert()->success('Province Created Successfully');
         return redirect()->route('province.index');
@@ -77,8 +82,10 @@ class ProvinceController extends Controller
     public function edit($id)
     {
         $province = Province::find($id);
+        $communities = Community::where('status',1)->get();
         return view('backend.hierarchy.province.edit')
-        ->with('province',$province);
+        ->with('province',$province)
+        ->with('communities',$communities);
         
     
     }

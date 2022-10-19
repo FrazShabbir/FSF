@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Title')
+@section('title', 'All Countries')
 
 @section('styles')
 @endsection
@@ -19,18 +19,21 @@
                             <div class="iq-header-title">
                                 <h4 class="card-title">Countries</h4>
                             </div>
+                            <div class="">
+                                <a href="{{route('country.create')}}" class="btn btn-primary"><i class="las la-plus"></i>Add New Country</a>
+                            </div>
                         </div>
                         <div class="iq-card-body">
                             <div class="table-responsive">
                               
-                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
-                                    aria-describedby="user-list-page-info">
+                                <table id="FSF-Table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Region</th>
                                             <th>ISO3</th>
+                                            <th>Status</th>
                                           
                                             <th>Action</th>
                                         </tr>
@@ -45,7 +48,8 @@
                                                 <td>{{ $country->name }}</td>
                                                 <td>{{ $country->region }}</td>
                                                 <td>{{ $country->iso3 }}</td>
-                                              
+                                                <td><span class="badge badge-{{ $country->status }}">{{ getstatus($country->status) }}</span></td>
+
                                                 <td>
                                                     <form action="{{ route('country.destroy', $country->id) }}" method="post">
                                                         <div class="flex align-items-center list-user-action">
@@ -97,4 +101,38 @@
 @endsection
 
 @push('js')
+    <script>
+        $(document).ready(function() {
+            $('#FSF-Table').DataTable({
+                dom: 'Bfrtip',
+                buttons: [{
+                        extend: 'copyHtml5',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        }
+                    },
+                    'colvis'
+                ],
+                // "searching": false,
+                // "paging": false,
+                "info": false,
+                "lengthChange": false,
+
+            });
+            $('#FSF-Table_paginate ul').addClass("pagination-sm");
+
+        });
+    </script>
 @endpush

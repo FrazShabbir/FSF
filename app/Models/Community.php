@@ -11,6 +11,7 @@ class Community extends Model
     protected $fillable = [
         'name',
         'country_id',
+        'status'
     ];
     public function provinces(){
         return $this->hasMany(Province::class);

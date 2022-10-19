@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend\Hierarchy;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
+use App\Models\Province;
+use App\Models\Office;
 class CityController extends Controller
 {
     /**
@@ -26,7 +28,11 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('backend.hierarchy.city.create');
+        $provinces = Province::where('status',1)->get();
+        $offices = Office::where('status',1)->get();
+        return view('backend.hierarchy.city.create')
+        ->with('provinces',$provinces)
+        ->with('offices',$offices);
     }
 
     /**
@@ -40,7 +46,7 @@ class CityController extends Controller
         $request->validate([
             'name' => 'required',
             'province_id' => 'required',
-            'office_id' => 'required',
+            'office_id' => 'nullable',
         ]);
         $city = City::create([
             'name' => $request->name,
@@ -62,6 +68,7 @@ class CityController extends Controller
         $city = City::find($id);
         return view('backend.hierarchy.city.show')
         ->with('city',$city);
+      
     }
 
     /**
@@ -73,8 +80,12 @@ class CityController extends Controller
     public function edit($id)
     {
         $city = City::find($id);
+        $provinces = Province::where('status',1)->get();
+        $offices = Office::where('status',1)->get();
         return view('backend.hierarchy.city.edit')
-        ->with('city',$city);
+        ->with('city',$city)
+        ->with('provinces',$provinces)
+        ->with('offices',$offices);
     }
 
     /**
@@ -89,7 +100,7 @@ class CityController extends Controller
         $request->validate([
             'name' => 'required',
             'province_id' => 'required',
-            'office_id' => 'required',
+            'office_id' => 'nullable',
         ]);
         $city = City::find($id);
         $city->name = $request->name;

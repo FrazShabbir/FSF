@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('province_id')->unsigned();
             $table->integer('office_id')->unsigned();
+            $table->boolean('status')->nullable()->default(true);
             $table->timestamps();
             $table->softDeletes();
 

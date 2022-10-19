@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('country_id')->unsigned();
+            $table->boolean('status')->nullable()->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

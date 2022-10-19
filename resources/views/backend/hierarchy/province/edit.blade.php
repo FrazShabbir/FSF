@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Edit User - FDD')
+@section('title', 'Edit '.$province->name.' Province | FSF')
 
 @section('styles')
 @endsection
@@ -17,63 +17,49 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">Edit User</h4>
+                                <h4 class="card-title">Edit {{$province->name}}</h4>
                             </div>
                         </div>
                         <div class="iq-card-body px-4">
-                            <form action="{{ route('users.update', $user->id) }}" method="POST">
+                            <form action="{{ route('province.update',$province->id) }}" method="POST">
                                 @csrf
-                                {{ @method_field('PUT') }}
+                                {{ method_field('PUT') }}
+
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="first_name" class="required">Full Name </label>
-                                        <input type="text" class="form-control" name="full_name" placeholder="e.g. Ali"
-                                            value="{{ $user->full_name }}">
+                                        <label for="name" class="required">Province Name</label>
+                                        <input type="text" class="form-control" name="name" placeholder="e.g. Spain"
+                                            value="{{$province->name ?? old('name') }}">
                                     </div>
-                               
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label for="iso2" class="required">Country</label>
+
+                                        <select name="community_id" id="" class="form-control" required>
+                                            @foreach ($communities as $key)
+                                                <option value="{{ $key->id }}" {{$province->community_id==$key->id?'selected':''}}>{{ $key->name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label class="required" for="username">Username:</label>
-                                        <input type="text" class="form-control" id="username" name="username"
-                                            placeholder="e.g. aliraza12" value="{{ $user->username }}">
+                                        <label class="required" for="status">status:</label>
+                                        <select name="status" id="" class="form-control">
+                                            <option value="1" {{$province->status==1?'selected':''}}>Active</option>
+                                            <option value="0" {{$province->status==0?'selected':''}}>in Active</option>
+                                        </select>
+
                                     </div>
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label class="required" for="email">Email address:</label>
-                                        <input type="email" class="form-control" id="email" name="email"
-                                            placeholder="e.g. abc@email.com" value="{{ $user->email }}">
-                                    </div>
+
                                 </div>
 
-                                
-                                <div class="mt-5 mb-4">
-                                    <div class="row">
-                                        <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <div class="mt-2 mb-3">
-                                                <h4 class="required">
-                                                    User Status
-                                                </h4>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-12">
-                                            <div class="form-group">
-                                                {{-- <label for="exampleFormControlSelect1">Select Input</label> --}}
-                                                <select class="form-control" id="exampleFormControlSelect1" name="status"
-                                                    required>
-                                                    <option selected="" disabled="">Select Status</option>
-                                                    <option value="1" {{ $user->status == 1 ? 'selected' : '' }}>Active
-                                                    </option>
-                                                    <option value="0" {{ $user->status == 0 ? 'selected' : '' }}>In Active
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-primary mr-3">Update Data</button>
-                                <a href="{{ route('users.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
-                             
+
+
+                                <button type="submit" class="btn btn-primary mr-3">Update Province</button>
+                                <a href="{{ route('province.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
+
                             </form>
                         </div>
                     </div>

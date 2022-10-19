@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'User - FDD')
+@section('title', 'Province - FSF')
 
 @section('styles')
 @endsection
@@ -17,26 +17,25 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                    <div class="iq-header-title">
-                      <h4 class="card-title">User Detail</h4>
+                      <h4 class="card-title">Province Details</h4>
                    </div>
                 </div>
                 <div class="iq-card-body px-4">
                    
                     <div class="row">
                         <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="first_name">Full Name </label>
-                            <input type="text" class="form-control" name="full_name" disabled value="{{$user->full_name}}">
+                            <label for="">Name </label>
+                            <input type="text" class="form-control"  disabled value="{{$province->name}}">
                         </div>
                        
-                     </div>
-                     <div class="row">
+                     
                         <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="username">Username:</label>
-                            <input type="text" class="form-control" id="username" name="username" disabled value="{{$user->username}}">
+                            <label for="">Community:</label>
+                            <input type="text" class="form-control" disabled value="{{$province->community->name}}">
                         </div>
                         <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="email">Email address:</label>
-                            <input type="email" class="form-control" id="email" name="email" disabled value="{{$user->email}}">
+                            <label for="">Country</label>
+                            <input type="text" class="form-control" disabled value="{{$province->community->country->name}}">
                         </div>
                      </div>
                    
@@ -46,20 +45,19 @@
                             <div class="col-lg-2 col-md-2 col-sm-12">
                                 <div class="mt-2 mb-3">
                                     <h4>
-                                        User Status
+                                        Province Status
                                     </h4>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control"  disabled value="{{getUserStatus($user->id)}}">
+                                    <input type="text" class="form-control"  disabled value="{{getStatus($province->status)}}">
                                  </div>
                             </div>
                         </div>
                       </div>
-                      <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary mr-3">Edit User</a>
-                      <a href="{{route('users.index')}}" class="btn iq-bg-danger mr-3">Back</a>
-                      <a href="{{route('users.reset_password',$user->id)}}" class="btn iq-bg-info">Reset Password</a>
+                      <a href="{{route('province.edit',$province->id)}}" class="btn btn-primary mr-3">Edit Province</a>
+                      <a href="{{route('province.index')}}" class="btn iq-bg-danger mr-3">Back</a>
 
                 </div>
              </div>

@@ -17,7 +17,7 @@ class CountrySeeder extends Seeder
     {
         Country::create([
             'name' => 'Spain',
-            'iso' => 'ES',
+            'iso2' => 'ES',
             'iso3' => 'ESP',
         ]);
     }

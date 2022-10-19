@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('area');
             $table->string('street');
             $table->integer('officehead')->unsigned();
+            $table->boolean('status')->nullable()->default(true);
             $table->timestamps();
             $table->softDeletes();
 

@@ -11,5 +11,8 @@ class Province extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+    public function community(){
+        return $this->belongsTo(Community::class,'community_id');
+    }
 
 }

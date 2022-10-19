@@ -5,7 +5,7 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>FDD | {{fromSettings('site_title')}} </title>
+      <title>FSF | {{fromSettings('site_title')}} </title>
       <link rel="shortcut icon" href="{{asset(fromSettings('favicon')??'backend/images/fdd_logo.png')}}" />
 
       <!-- Favicon -->

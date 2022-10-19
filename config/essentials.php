@@ -1,4 +1,5 @@
 <?php
+
 return [
 
     'permissions' => [
@@ -9,7 +10,7 @@ return [
             'Delete Users',
             'Export Users',
         ],
-      
+
         'Roles' => [
             'Create Roles',
             'Update Roles',
@@ -25,13 +26,23 @@ return [
             'Export Applications',
         ],
 
-     
+
         'Settings' => [
             'Update Settings',
         ],
-     
-      
 
 
-    ]
+
+
+    ],
+
+    'Regions'=>[
+        'Asia'=>'Asia',
+        'Africa'=>'Africa',
+        'North America'=>'North America',
+        'South America'=>'South America',
+        'Antarctica'=>'Antarctica',
+        'Europe'=>'Europe',
+        'Oceania'=>'Oceania',
+    ],
 ];

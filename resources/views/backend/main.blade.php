@@ -44,7 +44,6 @@
     <!-- Page Content END  -->
 
 
-@include('backend.partials._colorizor')
     <!-- Wrapper END -->
     <!-- Footer -->
     @include('backend.partials._footer')

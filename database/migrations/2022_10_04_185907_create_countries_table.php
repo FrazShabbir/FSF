@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('region')->default('Europe');
-            $table->string('iso');
-            $table->string('iso3');
+            $table->string('iso2')->nullable();
+            $table->string('iso3')->nullable();
+            $table->boolean('status')->nullable()->default(true);
             $table->timestamps();
             $table->softDeletes();
 
