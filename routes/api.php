@@ -23,6 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/auth/register', [AuthController::class, 'createUser']); // register
 Route::post('/auth/login', [AuthController::class, 'loginUser']); // login
+Route::post('/auth/resend-otp', [AuthController::class, 'resendOtp']); // login
+Route::post('/auth/forget-password', [AuthController::class, 'forgetPassword']); // login
+Route::post('/auth/set-new-password', [AuthController::class, 'setNewPassword']); // login
+
 Route::post('/auth/verify-otp', [AuthController::class, 'verifyOtp']); // login
 
 

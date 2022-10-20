@@ -28,12 +28,14 @@
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="name" class="required">Province Name</label>
                                         <input type="text" class="form-control" name="name" placeholder="e.g. Spain"
-                                            value="{{ old('name') }}">
+                                            value="{{ old('name') }}" required>
                                     </div>
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="iso2" class="required">Community</label>
 
                                         <select name="community_id" id="" class="form-control" required>
+                                            <option value="" selected>Select Option</option>
+
                                             @foreach ($communities as $key)
                                                 <option value="{{ $key->id }}">{{ $key->name }}</option>
                                             @endforeach

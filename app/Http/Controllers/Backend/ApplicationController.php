@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Application;
+use App\Models\Country;
 class ApplicationController extends Controller
 {
     /**
@@ -26,7 +27,9 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        //
+        $countries = Country::where('status',1)->get();
+        return view('backend.applications.create')
+        ->with('countries',$countries);
     }
 
     /**
@@ -37,7 +40,13 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'fullname'=>'required',
+            'email'=>'required|email|unique:users,email',
+            'phone'=>'required',
+            'passport_number'=>'required',
+        ]);
+        
     }
 
     /**
