@@ -27,7 +27,11 @@ Route::post('/auth/resend-otp', [AuthController::class, 'resendOtp']); // login
 Route::post('/auth/forget-password', [AuthController::class, 'forgetPassword']); // login
 Route::post('/auth/set-new-password', [AuthController::class, 'setNewPassword']); // login
 
+Route::post('/auth/verify-email', [AuthController::class, 'verfiyEmail']); // login
+
+
 Route::post('/auth/verify-otp', [AuthController::class, 'verifyOtp']); // login
+
 
 
 // Route::group( function () {

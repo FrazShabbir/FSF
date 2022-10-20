@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Mail;
-
+use Carbon\Carbon;
 class AuthController extends Controller
 {
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+    //-------------------------Register New User-----------------------
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
     /**
       * Create User
       * @param Request $request
@@ -70,171 +75,12 @@ class AuthController extends Controller
     }
 
 
-    public function verifyOtp(Request $request)
-    {
-        $validateUser = Validator::make(
-            $request->all(),
-            [
 
-                'email' => 'required|email',
-                'otp' => 'required'
-            ]
-        );
-
-        if ($validateUser->fails()) {
-            return response()->json([
-                'status' => 401,
-                'message' => 'validation error',
-                'errors' => $validateUser->errors()
-            ], 401);
-        }
-        $user = User::where('email', $request->email)->first();
-        if ($user) {
-            if ($user->otp == $request->otp) {
-                $user->status = 1;
-                $user->otp = null;
-                $user->save();
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'User Verified Successfully',
-                    'token' => $user->createToken("API TOKEN")->plainTextToken
-                ], 200);
-            } else {
-                return response()->json([
-                    'status' => 401,
-                    'message' => 'Invalid OTP'
-                ], 401);
-            }
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'User Not Found'
-            ], 401);
-        }
-    }
-
-    public function resendOtp(Request $request)
-    {
-        $validateUser = Validator::make(
-            $request->all(),
-            [
-                'email' => 'required|email',
-            ]
-        );
-
-        if ($validateUser->fails()) {
-            return response()->json([
-                'status' => 401,
-                'message' => 'validation error',
-                'errors' => $validateUser->errors()
-            ], 401);
-        }
-        $user = User::where('email', $request->email)->first();
-        if ($user) {
-            $otp = rand(1000, 9999);
-            $user->otp = $otp;
-            $user->save();
-            $email = $request->email;
-            $mail = Mail::raw('Your account activation OTP is  '.$user->otp.'.', function ($message) use ($email) {
-                $message->to($email)
-          ->subject('Your OTP ');
-            });
-            return response()->json([
-                'status' => 200,
-                'message' => 'OTP Resend Successfully',
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'User Not Found'
-            ], 401);
-        }
-    }
-
-    public function forgetPassword(Request $request)
-    {
-        $validateUser = Validator::make(
-            $request->all(),
-            [
-                'email' => 'required|email',
-            ]
-        );
-
-        if ($validateUser->fails()) {
-            return response()->json([
-                'status' => 401,
-                'message' => 'validation error',
-                'errors' => $validateUser->errors()
-            ], 401);
-        }
-        $user = User::where('email', $request->email)->first();
-        if ($user) {
-            $otp = rand(1000, 9999);
-            $user->otp = $otp;
-            $user->save();
-            $email = $request->email;
-            $mail = Mail::raw('Your  OTP FOR PASSWORD RESET is  '.$user->otp.'.', function ($message) use ($email) {
-                $message->to($email)
-          ->subject('Your OTP ');
-            });
-
-            return response()->json([
-                'status' => 200,
-                'message' => 'OTP Resend Successfully',
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'User Not Found'
-            ], 401);
-        }
-    }
-    public function setNewPassword(Request $request)
-    {
-        $validateUser = Validator::make(
-            $request->all(),
-            [
-                'email' => 'required|email',
-                'password' => 'required',
-                'otp' => 'required',
-            ]
-        );
-        if ($validateUser->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'validation error',
-                'errors' => $validateUser->errors()
-            ], 401);
-        }
-        $user = User::where('email', $request->email)->first();
-        if ($user) {
-            if ($user->otp == $request->otp) {
-                $user->password = Hash::make($request->password);
-                $user->otp = null;
-                $user->save();
-                $email = $request->email;
-                $mail = Mail::raw('Your Password has been updated.', function ($message) use ($email) {
-                    $message->to($email)
-                ->subject('Your OTP ');
-                });
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Password Changed Successfully',
-                    'token' => $user->createToken("API TOKEN")->plainTextToken
-                ], 200);
-            }else{
-                return response()->json([
-                    'status' => 401,
-                    'message' => 'Invalid Request'
-                ], 401);
-            }
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'User Not Found'
-            ], 401);
-        }
-    }
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+    //--------------------------Login User-----------------------------
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
     /**
      * Login The User
      * @param Request $request
@@ -286,6 +132,246 @@ class AuthController extends Controller
                 'status' => false,
                 'message' => $th->getMessage()
             ], 500);
+        }
+    }
+
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+    //-------------------------Resend OTPs-----------------------------
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+
+    public function resendOtp(Request $request)
+    {
+        $validateUser = Validator::make(
+            $request->all(),
+            [
+                'email' => 'required|email',
+            ]
+        );
+
+        if ($validateUser->fails()) {
+            return response()->json([
+                'status' => 401,
+                'message' => 'validation error',
+                'errors' => $validateUser->errors()
+            ], 401);
+        }
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $otp = rand(1000, 9999);
+            $user->otp = $otp;
+            $user->save();
+            $email = $request->email;
+            $mail = Mail::raw('Your account activation OTP is  '.$user->otp.'.', function ($message) use ($email) {
+                $message->to($email)
+          ->subject('Your OTP ');
+            });
+            return response()->json([
+                'status' => 200,
+                'message' => 'OTP Resend Successfully',
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found'
+            ], 401);
+        }
+    }
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+    //-------------------Forget Password Request------------------------
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+
+    public function forgetPassword(Request $request)
+    {
+        $validateUser = Validator::make(
+            $request->all(),
+            [
+                'email' => 'required|email',
+            ]
+        );
+
+        if ($validateUser->fails()) {
+            return response()->json([
+                'status' => 401,
+                'message' => 'validation error',
+                'errors' => $validateUser->errors()
+            ], 401);
+        }
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $otp = rand(1000, 9999);
+            $user->otp = $otp;
+            $user->save();
+            $email = $request->email;
+            $mail = Mail::raw('Your  OTP FOR PASSWORD RESET is  '.$user->otp.'.', function ($message) use ($email) {
+                $message->to($email)
+          ->subject('Your OTP ');
+            });
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'OTP Resend Successfully',
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found'
+            ], 401);
+        }
+    }
+
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+    //-------------------------Set New Password------------------------
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+
+
+    public function setNewPassword(Request $request)
+    {
+        $validateUser = Validator::make(
+            $request->all(),
+            [
+                'email' => 'required|email',
+                'password' => 'required',
+                'otp' => 'required',
+            ]
+        );
+        if ($validateUser->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'validation error',
+                'errors' => $validateUser->errors()
+            ], 401);
+        }
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            if ($user->otp == $request->otp) {
+                $user->password = Hash::make($request->password);
+                $user->otp = null;
+                $user->save();
+                $email = $request->email;
+                $mail = Mail::raw('Your Password has been updated.', function ($message) use ($email) {
+                    $message->to($email)
+                ->subject('Your OTP ');
+                });
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Password Changed Successfully',
+                    'token' => $user->createToken("API TOKEN")->plainTextToken
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 401,
+                    'message' => 'Invalid Request'
+                ], 401);
+            }
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found'
+            ], 401);
+        }
+    }
+
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+    //-------------------Verify Email Request--------------------------
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+
+    public function verfiyEmail(Request $request)
+    {
+        $validateUser = Validator::make(
+            $request->all(),
+            [
+                'email' => 'required|email',
+            ]
+        );
+
+        if ($validateUser->fails()) {
+            return response()->json([
+                'status' => 401,
+                'message' => 'validation error',
+                'errors' => $validateUser->errors()
+            ], 401);
+        }
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $otp = rand(1000, 9999);
+            $user->otp = $otp;
+            $user->save();
+            $email = $request->email;
+            $mail = Mail::raw('Your OTP FOR Email Verfication is  '.$user->otp.'.', function ($message) use ($email) {
+                $message->to($email)
+          ->subject('Your OTP ');
+            });
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'OTP for Email Verification Sent Successfully',
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found'
+            ], 401);
+        }
+    }
+
+  
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+    //-------------------------Verify OTPs-----------------------------
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+
+    public function verifyOtp(Request $request)
+    {
+        $validateUser = Validator::make(
+            $request->all(),
+            [
+
+                'email' => 'required|email',
+                'otp' => 'required'
+            ]
+        );
+
+        if ($validateUser->fails()) {
+            return response()->json([
+                'status' => 401,
+                'message' => 'validation error',
+                'errors' => $validateUser->errors()
+            ], 401);
+        }
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            if ($user->otp == $request->otp) {
+                $user->status = 1;
+                if ($user->email_verified_at == null) {
+                    $user->email_verified_at = Carbon::now();
+                }
+                $user->otp = null;
+                $user->save();
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'User Verified Successfully',
+                    'token' => $user->createToken("API TOKEN")->plainTextToken
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 401,
+                    'message' => 'Invalid OTP'
+                ], 401);
+            }
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found'
+            ], 401);
         }
     }
 }
