@@ -29,9 +29,9 @@ class AuthController extends Controller
             $validateUser = Validator::make(
                 $request->all(),
                 [
-                    // 'full_name' => 'required',
+                     'full_name' => 'required',
                     // 'phone' => 'required',
-                    'username' => 'required||unique:users,username',
+                    // 'username' => 'required||unique:users,username',
                     'email' => 'required|email|unique:users,email',
                     // 'passport_number' => 'required|unique:users,passport_number',
                     'password' => 'required'
@@ -46,9 +46,14 @@ class AuthController extends Controller
                 ], 401);
             }
             $otp = rand(1000, 9999);
+            $username = str_replace(' ', '.', $request->full_name);
+            $alreadyUser = User::where('username', $username)->first();
+            if($alreadyUser){
+                $username = $username.''.rand(1000, 9999);
+            }
             $user = User::create([
-                // 'full_name' => $request->full_name,
-                'username' => $request->username,
+                'full_name' => $request->full_name,
+                'username' => $username,
                 // 'phone' => $request->phone,
                 'email' => $request->email,
                 // 'passport_number'=>$request->passport_number,
