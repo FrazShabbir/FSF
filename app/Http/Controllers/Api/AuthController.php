@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Mail;
 use Carbon\Carbon;
+
 class AuthController extends Controller
 {
     //-----------------------------------------------------------------
@@ -48,9 +49,10 @@ class AuthController extends Controller
             $otp = rand(1000, 9999);
             $username = str_replace(' ', '.', $request->full_name);
             $alreadyUser = User::where('username', $username)->first();
-            if($alreadyUser){
+            if ($alreadyUser) {
                 $username = $username.''.rand(1000, 9999);
             }
+            $imagePath=base64_encode(public_path('./placeholder.png'));
             $user = User::create([
                 'full_name' => $request->full_name,
                 'username' => $username,
@@ -59,8 +61,10 @@ class AuthController extends Controller
                 // 'passport_number'=>$request->passport_number,
                 'password' => Hash::make($request->password),
                 'otp' => $otp,
+                'avatar' =>"data:image/png;base64,".base64_encode(file_get_contents($imagePath)),
             ]);
             $email = $request->email;
+            $user->assignRole('member');
             $mail = Mail::raw('Your account activation OTP is  '.$user->otp.'.', function ($message) use ($email) {
                 $message->to($email)
               ->subject('Your OTP ');
@@ -327,7 +331,7 @@ class AuthController extends Controller
         }
     }
 
-  
+
     //-----------------------------------------------------------------
     //-----------------------------------------------------------------
     //-------------------------Verify OTPs-----------------------------

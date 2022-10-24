@@ -57,6 +57,12 @@ class GeneralController extends Controller
                 'email' => $request->email?? $user->email,
                 'passport_number'=>$request->passport_number,
             ]);
+            if($request->avatar){
+                $user->update([
+                    'avatar' => $request->avatar,
+                ]);
+            }
+            $user->assignRole('member');
             return response()->json([
                 'user' => $user,
                 'status' => 200,

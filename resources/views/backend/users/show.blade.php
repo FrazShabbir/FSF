@@ -79,6 +79,24 @@
                             </div>
                         </div>
                       </div>
+
+                      <div class="mt-5 mb-4">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                <div class="mt-2 mb-3">
+                                    <h4>
+                                        User Avatar
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <img src="{!!base64_decode($user->avatar)!!}" alt="">
+                                 </div>
+                            </div>
+                        </div>
+                      </div>
+
                       <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary mr-3">Edit User</a>
                       <a href="{{route('users.index')}}" class="btn iq-bg-danger mr-3">Back</a>
                       <a href="{{route('users.reset_password',$user->id)}}" class="btn iq-bg-info">Reset Password</a>

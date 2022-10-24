@@ -33,7 +33,7 @@ class RoleSeeder extends Seeder
                 'role_for' => 'Admin',
             ],
             [
-                'name' => 'user',
+                'name' => 'member',
                 'guard_name' => 'web',
                 'role_for' => 'Admin',
             ],
