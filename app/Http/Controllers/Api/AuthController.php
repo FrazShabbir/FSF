@@ -52,7 +52,8 @@ class AuthController extends Controller
             if ($alreadyUser) {
                 $username = $username.''.rand(1000, 9999);
             }
-            $imagePath=base64_encode(public_path('./placeholder.png'));
+            // $imagePath=base64_encode(public_path('placeholder.png'));
+            // dd(public_path('placeholder.png'));
             $user = User::create([
                 'full_name' => $request->full_name,
                 'username' => $username,
@@ -61,7 +62,7 @@ class AuthController extends Controller
                 // 'passport_number'=>$request->passport_number,
                 'password' => Hash::make($request->password),
                 'otp' => $otp,
-                'avatar' =>"data:image/png;base64,".base64_encode(file_get_contents($imagePath)),
+                // 'avatar' =>"data:image/png;base64,".base64_encode(file_get_contents($imagePath)),
             ]);
             $email = $request->email;
             $user->assignRole('member');
