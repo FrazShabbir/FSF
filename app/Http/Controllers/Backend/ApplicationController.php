@@ -47,6 +47,30 @@ class ApplicationController extends Controller
             'passport_number'=>'required',
         ]);
         
+
+        try {
+            DB::beginTransaction();
+            $user = User::create([
+                'full_name'=>$request->full_name,
+                'username'=>$request->username,
+                'phone'=>$request->phone,
+                'email'=>$request->email,
+                'passport_number'=>$request->passport_number,
+                'status'=>'1',
+                'password'=>Hash::make('12345678'),
+            ]);
+            $user->assignRole('member');
+            event(new Registered($user));
+            dd($user);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+        }
+       
+
+
     }
 
     /**
