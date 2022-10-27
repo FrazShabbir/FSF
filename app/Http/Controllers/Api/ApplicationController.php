@@ -185,7 +185,7 @@ class ApplicationController extends Controller
             } else {
                 DB::beginTransaction();
                 $application = new Application();
-                $application->application_id= 'App-'.getRandomString(10);
+                $application->application_id= 'M-App-'.getRandomString(10);
                 $application->user_id = $request->user_id;
                 $application->passport_number = $request->passport_number;
                 $application->nie = $request->nie;
@@ -397,6 +397,7 @@ class ApplicationController extends Controller
             [
                 'user_id' => 'required',
                 'passport_number' => 'required',
+                // 'email'=>'required',
                 'nie' => 'required',
                 'native_id'=>'required',
                 'full_name'=>'required',
@@ -465,6 +466,7 @@ class ApplicationController extends Controller
                 if ($application) {
                     $application->passport_number = $request->passport_number;
                     $application->nie = $request->nie;
+                    // $application->email = $request->email;
                     $application->native_id = $request->native_id;
                     $application->full_name = $request->full_name;
                     $application->father_name = $request->father_name;
