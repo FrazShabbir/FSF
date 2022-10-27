@@ -1512,7 +1512,7 @@
 
         $("#download").click(downloadImg);
         $("#clearSig").click(clearSig);
-    </script>
+    </script> --}}
     {{-- Upload Avatar --}}
     <script>
         function readURL(input) {
