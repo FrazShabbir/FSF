@@ -211,7 +211,7 @@
                                                         Personal Information
                                                     </h4>
                                                 </div>
-                                                <div class="col-12">
+                                                {{-- <div class="col-12">
                                                     <div class="avatar-upload">
                                                         <div class="avatar-edit">
                                                             <input type='file' id="imageUpload"
@@ -224,58 +224,26 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
+                                                {{-- Fullname --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="full_name">Full Name:</label>
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="full_name"
-                                                                name="full_name" placeholder="Enter Your Full Name"
-                                                                required>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your full name.
-                                                                  </div>
+                                                                name="full_name" placeholder="Enter Your Full Name" required
+                                                                value="{{ old('full_name') }}">
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your full name.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                    <div class="form-group row mb-4">
-                                                        <label class="control-label col-sm-12 align-self-center mb-0"
-                                                            for="full_name">Email:</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="email"
-                                                                name="email" placeholder="johndoe@gmail.com"
-                                                                required>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your Email.
-                                                                  </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                    <div class="form-group row mb-4">
-                                                        <label class="control-label col-sm-12 align-self-center mb-0"
-                                                            for="phone">Phone No.:</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="phone"
-                                                                name="phone" placeholder="2345678"
-                                                                required>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your Phone Number.
-                                                                  </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                {{-- fathers name --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
@@ -283,71 +251,117 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="father_name"
                                                                 name="father_name" placeholder="Enter Your Father's Name"
-                                                                required>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your complete father's name.
-                                                                  </div>
+                                                                required value="{{ old('full_name') }}">
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your complete father's name.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {{-- surname --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="surname">Sur Name</label>
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="surname"
-                                                                name="surname" placeholder="Enter Your Sur Name" required>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your sur-name.
-                                                                  </div>
+                                                                name="surname" placeholder="Enter Your Sur Name" required
+                                                                value="{{ old('surname') }}">
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your sur-name.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                {{-- email --}}
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group row mb-4">
+                                                        <label class="control-label col-sm-12 align-self-center mb-0"
+                                                            for="full_name">Email:</label>
+                                                        <div class="col-sm-12">
+                                                            <input type="text" class="form-control" id="email"
+                                                                name="email" placeholder="johndoe@gmail.com" required
+                                                                value="{{ old('email') }}">
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your Email.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{-- phone --}}
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group row mb-4">
+                                                        <label class="control-label col-sm-12 align-self-center mb-0"
+                                                            for="phone">Phone No.:</label>
+                                                        <div class="col-sm-12">
+                                                            <input type="text" class="form-control" id="phone"
+                                                                name="phone" placeholder="2345678" required
+                                                                value="{{ old('phone') }}">
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your Phone Number.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                {{-- Gender --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="gender">Gender</label>
                                                         <div class="col-sm-12">
                                                             <select class="form-control" name="gender" id="gender"
-                                                                disabled required>
+                                                                required>
                                                                 <option selected value="" disabled="">Select
                                                                     Gender
                                                                 </option>
-                                                                <option>Male</option>
-                                                                <option>Female</option>
+                                                                <option value="Male">Male</option>
+                                                                <option value="Female">Female</option>
                                                             </select>
                                                             <div class="valid-feedback">
                                                                 Looks good!
-                                                              </div>
-                                                              <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="invalid-feedback">
                                                                 Please select your gender.
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {{-- DOB --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="dob">Date of Birth</label>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="dob"
+                                                            <input type="date" class="form-control" name="dob"
                                                                 id="dob" placeholder="Enter Your Date of Birth"
-                                                                disabled>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your correct date of birth.
-                                                                  </div>
+                                                                max="{{ date('Y-m-d') }}" value="{{ old('dob') }}"
+                                                                required>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your correct date of birth.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                {{-- Passport No. --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
@@ -355,16 +369,18 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control"
                                                                 name="passport_number" id="passport_number"
-                                                                placeholder="Enter Your Passport No." disabled>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your correct passport no.
-                                                                  </div>
+                                                                placeholder="Enter Your Passport No." required
+                                                                value="{{ old('passport_number') }}">
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your correct passport no.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {{-- European Residence Card No. --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
@@ -373,33 +389,42 @@
                                                             <input type="text" class="form-control" name="nie"
                                                                 id="nie"
                                                                 placeholder="Enter Your European Residence Card No."
-                                                                disabled>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your Residence Card No.
-                                                                  </div>
+                                                                required value="{{ old('nie') }}">
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your Residence Card No.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {{-- Native Country --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="native_country">Native Country</label>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control"
-                                                                name="native_country" id="native_country"
-                                                                placeholder="Enter Your Native Country" disabled>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your native country.
-                                                                  </div>
+                                                            <select name="native_country" id="native_country"
+                                                                class="form-control" required>
+                                                                <option value="" selected disabled>Choose Your Native
+                                                                    Country</option>
+                                                                @foreach ($countries as $country)
+                                                                    <option value="{{ $country->id }}">
+                                                                        {{ $country->name }}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your native country.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {{-- ID Card No. (Native Country) --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
@@ -408,64 +433,36 @@
                                                             <input type="text" class="form-control" name="native_id"
                                                                 id="native_id"
                                                                 placeholder="Enter Your ID Card No. (Native Country)"
-                                                                disabled>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your Native countery Id card no.
-                                                                  </div>
+                                                                required value="{{ old('native_id') }}">
+
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your Native countery Id card no.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {{-- AddressAddress (Native Country) --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="native_country_address">Address (Native Country)</label>
                                                         <div class="col-sm-12">
                                                             <textarea class="form-control" name="native_country_address" id="native_country_address"
-                                                                placeholder="Enter Your Address (Native Country)" required></textarea>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your native country address.
-                                                                  </div>
+                                                                placeholder="Enter Your Address (Native Country)" required>{{ old('native_country_address') }}</textarea>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your native country address.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                    <div class="form-group row mb-4">
-                                                        <label class="control-label col-sm-12 align-self-center mb-0"
-                                                            for="phone">Cell No.</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="phone"
-                                                                id="phone" placeholder="Enter Your Cell No.">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your cell No.
-                                                                  </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                    <div class="form-group row mb-4">
-                                                        <label class="control-label col-sm-12 align-self-center mb-0"
-                                                            for="user_email">Email</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="user_email"
-                                                                id="user_email" placeholder="Enter Your Email" required>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your REmail.
-                                                                  </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+
                                                 <div class="col-12">
                                                     <h4 class="mb-4">
                                                         Residensial Information
@@ -476,20 +473,21 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="country">Country</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="country" id="country" required>
-                                                                <option selected value="" disabled="">Select Your
-                                                                    Country
-                                                                </option>
-                                                              @foreach ($countries as $key )
-                                                                  <option value="{{$key->id}}">{{$key->name}}</option>
-                                                              @endforeach
+                                                            <select class="form-control" name="country" id="country"
+                                                                required>
+                                                                <option value="" selected disabled>Choose Your
+                                                                    Country</option>
+                                                                @foreach ($countries as $country)
+                                                                    <option value="{{ $country->id }}">
+                                                                        {{ $country->name }}</option>
+                                                                @endforeach
                                                             </select>
                                                             <div class="valid-feedback">
                                                                 Looks good!
-                                                              </div>
-                                                              <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="invalid-feedback">
                                                                 Please enter your residential country
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -499,29 +497,28 @@
                                                             for="community">Community</label>
                                                         <div class="col-sm-12">
                                                             <select class="form-control" name="community" id="community"
-                                                                required>
-                                                                <option selected value="" disabled="">Select Your
+                                                                >
+                                                                <option selected value="dsds" >Select Your
                                                                     Community</option>
-                                                                <option></option>
-                                                                <option></option>
                                                             </select>
 
                                                             <div class="valid-feedback">
                                                                 Looks good!
-                                                              </div>
-                                                              <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="invalid-feedback">
                                                                 Please enter your community
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="province">Province</label>
                                                         <div class="col-sm-12">
                                                             <select class="form-control" name="province" id="province"
-                                                                required>
+                                                                required value="{{ old('full_name') }}">
                                                                 <option selected value="" disabled="">Select Your
                                                                     Province
                                                                 </option>
@@ -530,10 +527,10 @@
                                                             </select>
                                                             <div class="valid-feedback">
                                                                 Looks good!
-                                                              </div>
-                                                              <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="invalid-feedback">
                                                                 Please enter your Province.
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -552,10 +549,10 @@
                                                             </select>
                                                             <div class="valid-feedback">
                                                                 Looks good!
-                                                              </div>
-                                                              <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="invalid-feedback">
                                                                 Please enter your City.
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -569,10 +566,10 @@
                                                             </textarea>
                                                             <div class="valid-feedback">
                                                                 Looks good!
-                                                              </div>
-                                                              <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="invalid-feedback">
                                                                 Please enter your complete Residence Card No.
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -602,12 +599,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_1_name" name="s_relative_1_name"
                                                                 placeholder="Enter Relative Full Name" required>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter reletives full name.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter reletives full name.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -619,12 +616,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_1_relation" name="s_relative_1_relation"
                                                                 placeholder="Enter Your Realtion">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your realation.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your realation.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -636,12 +633,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_1_phone" name="s_relative_1_phone"
                                                                 placeholder="Enter Relative Cell No.">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your Cell no.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your Cell no.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -654,10 +651,10 @@
                                                                 placeholder="Enter Relative Complete Address">ds</textarea>
                                                             <div class="valid-feedback">
                                                                 Looks good!
-                                                              </div>
-                                                              <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="invalid-feedback">
                                                                 Please enter your complete Residence.
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -674,12 +671,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_2_name" name="s_relative_2_name"
                                                                 placeholder="Enter Relative Full Name">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter reletives full name.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter reletives full name.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -691,12 +688,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_2_relation" name="s_relative_2_relation"
                                                                 placeholder="Enter Your Realtion">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your realation.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your realation.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -708,12 +705,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="s_relative_2_phone" name="s_relative_2_phone"
                                                                 placeholder="Enter Relative Cell No.">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your Cell no.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your Cell no.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -727,10 +724,10 @@
                                                             </textarea>
                                                             <div class="valid-feedback">
                                                                 Looks good!
-                                                              </div>
-                                                              <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="invalid-feedback">
                                                                 Please enter your complete Residence.
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -759,12 +756,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_1_name" name="n_relative_1_name"
                                                                 placeholder="Enter Relative Full Name">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter reletives full name.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter reletives full name.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -776,12 +773,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_1_relation" name="n_relative_1_relation"
                                                                 placeholder="Enter Your Realtion">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your realation.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your realation.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -793,12 +790,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_1_phone" name="n_relative_1_phone"
                                                                 placeholder="Enter Relative Cell No.">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your Cell no.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your Cell no.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -812,10 +809,10 @@
                                                             </textarea>
                                                             <div class="valid-feedback">
                                                                 Looks good!
-                                                              </div>
-                                                              <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="invalid-feedback">
                                                                 Please enter your complete Residence.
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -832,12 +829,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_2_name" name="n_relative_2_name"
                                                                 placeholder="Enter Relative Full Name">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter reletives full name.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter reletives full name.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -849,12 +846,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_2_relation" name="n_relative_2_relation"
                                                                 placeholder="Enter Your Realtion">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your realation.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your realation.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -866,12 +863,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="n_relative_2_phone" name="n_relative_2_phone"
                                                                 placeholder="Enter Relative Cell No.">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your cell No..
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your cell No..
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -885,10 +882,10 @@
                                                             </textarea>
                                                             <div class="valid-feedback">
                                                                 Looks good!
-                                                              </div>
-                                                              <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="invalid-feedback">
                                                                 Please enter your complete Residence.
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -912,12 +909,12 @@
                                                             <input type="text" class="form-control" id="rep_name"
                                                                 name="rep_name"
                                                                 placeholder="Enter Representative Full Name" disabled>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your full name.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your full name.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -929,12 +926,12 @@
                                                             <input type="text" class="form-control" id="rep_sername"
                                                                 name="rep_sername"
                                                                 placeholder="Enter Representative Sur Name" disabled>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your sur name
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your sur name
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -946,12 +943,12 @@
                                                             <input type="text" class="form-control"
                                                                 id="rep_passport_no" name="rep_passport_no"
                                                                 placeholder="Enter Representative Passport No." disabled>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your passport no.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your passport no.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -963,12 +960,12 @@
                                                             <input type="text" class="form-control" id="rep_phone"
                                                                 name="rep_phone"
                                                                 placeholder="Enter Representative Cell No." disabled>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your cell no.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your cell no.
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -979,12 +976,12 @@
                                                         <div class="col-sm-12">
                                                             <textarea class="form-control" name="rep_address" id="rep_address"
                                                                 placeholder="Enter Representative Complete Address" disabled></textarea>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
-                                                                    Please enter your Complete Addrtess.
-                                                                  </div>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter your Complete Addrtess.
+                                                            </div>
                                                             </textarea>
                                                         </div>
                                                     </div>
@@ -1006,177 +1003,184 @@
                                     <div id="step-5" class="tab-pane" role="tabpanel" aria-labelledby="step-5">
                                         <form id="form-5" class="needs-validation" novalidate>
 
-                                        <div class="row mb-5">
-                                            <div class="col-12">
-                                                <h4 class="mb-4">
-                                                    Supplementary Information
-                                                </h4>
-                                            </div>
-                                            <div class="col-12 mb-4">
-                                                <p>Where do you want to be buried?</p>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="residential" name="buried_location"
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label" for="residential"> Spain
-                                                    </label>
+                                            <div class="row mb-5">
+                                                <div class="col-12">
+                                                    <h4 class="mb-4">
+                                                        Supplementary Information
+                                                    </h4>
+                                                </div>
+                                                <div class="col-12 mb-4">
+                                                    <p>Where do you want to be buried?</p>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="residential" name="buried_location"
+                                                            class="custom-control-input">
+                                                        <label class="custom-control-label" for="residential"> Spain
+                                                        </label>
 
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="native" name="buried_location"
+                                                            class="custom-control-input">
+                                                        <label class="custom-control-label" for="native"> Native Country
+                                                        </label>
+                                                    </div>
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Please select any one of these
+                                                    </div>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="native" name="buried_location"
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label" for="native"> Native Country
-                                                    </label>
+                                                <div class="col-12 mb-4">
+                                                    <p>Do you have any relatives registered in this fund?</p>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="registed_relative_yes" value="Yes"
+                                                            name="registered_relatives" class="custom-control-input">
+                                                        <label class="custom-control-label"
+                                                            for="registed_relative_yes">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="registed_relative_no" value="No"
+                                                            name="registered_relatives" class="custom-control-input">
+                                                        <label class="custom-control-label"
+                                                            for="registed_relative_no">No</label>
+                                                    </div>
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Please select any one of these
+                                                    </div>
                                                 </div>
-                                                <div class="valid-feedback">
-                                                    Looks good!
-                                                  </div>
-                                                  <div class="invalid-feedback">
-                                                    Please select any one of these
-                                                  </div>
-                                            </div>
-                                            <div class="col-12 mb-4">
-                                                <p>Do you have any relatives registered in this fund?</p>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="registed_relative_yes" value="Yes"
-                                                        name="registered_relatives" class="custom-control-input">
-                                                    <label class="custom-control-label"
-                                                        for="registed_relative_yes">Yes</label>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="registed_relative_no" value="No"
-                                                        name="registered_relatives" class="custom-control-input">
-                                                    <label class="custom-control-label"
-                                                        for="registed_relative_no">No</label>
-                                                </div>
-                                                <div class="valid-feedback">
-                                                    Looks good!
-                                                  </div>
-                                                  <div class="invalid-feedback">
-                                                    Please select any one of these
-                                                  </div>
-                                            </div>
-                                            <div id="reg_relative_passport_no" class="d-none w-100">
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                    <div class="form-group row mb-4">
-                                                        <label class="control-label col-sm-12 align-self-center mb-0"
-                                                            for="registered_relative_passport_no">Relative Passport
-                                                            No.</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control"
-                                                                id="registered_relative_passport_no"
-                                                                name="registered_relative_passport_no"
-                                                                placeholder="Enter Registered Relative Passport No.">
+                                                <div id="reg_relative_passport_no" class="d-none w-100">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group row mb-4">
+                                                            <label class="control-label col-sm-12 align-self-center mb-0"
+                                                                for="registered_relative_passport_no">Relative Passport
+                                                                No.</label>
+                                                            <div class="col-sm-12">
+                                                                <input type="text" class="form-control"
+                                                                    id="registered_relative_passport_no"
+                                                                    name="registered_relative_passport_no"
+                                                                    placeholder="Enter Registered Relative Passport No.">
                                                                 <div class="valid-feedback">
                                                                     Looks good!
-                                                                  </div>
-                                                                  <div class="invalid-feedback">
+                                                                </div>
+                                                                <div class="invalid-feedback">
                                                                     Please enter your relative Passport no
-                                                                  </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-12 mb-4">
-                                                <p>How much will you pay annually into this fund?</p>
-                                                <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="no_amount_anual"
-                                                        name="annually_fund_amount" class="custom-control-input">
-                                                    <label class="custom-control-label" for="no_amount_anual"> I will
-                                                        not give any amount annually </label>
-                                                </div>
-                                                <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="amount_anual_30"
-                                                        name="annually_fund_amount" class="custom-control-input">
-                                                    <label class="custom-control-label" for="amount_anual_30"> € 30
-                                                    </label>
-                                                </div>
-                                                <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="amount_anual_50"
-                                                        name="annually_fund_amount" class="custom-control-input">
-                                                    <label class="custom-control-label" for="amount_anual_50"> € 50
-                                                    </label>
-                                                </div>
-                                                <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="amount_anual_70"
-                                                        name="annually_fund_amount" class="custom-control-input">
-                                                    <label class="custom-control-label" for="amount_anual_70"> € 70
-                                                    </label>
-                                                </div>
-                                                <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="amount_anual_90"
-                                                        name="annually_fund_amount" class="custom-control-input">
-                                                    <label class="custom-control-label" for="amount_anual_90"> € 90
-                                                    </label>
-                                                </div>
-                                                <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="amount_anual_100"
-                                                        name="annually_fund_amount" class="custom-control-input">
-                                                    <label class="custom-control-label" for="amount_anual_100"> € 100
-                                                    </label>
-                                                </div>
-                                                <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="amount_anual_other" value="other"
-                                                        name="annually_fund_amount" class="custom-control-input">
-                                                    <label class="custom-control-label" for="amount_anual_other">
-                                                        Other </label>
-                                                </div>
+                                                <div class="col-12 mb-4">
+                                                    <p>How much will you pay annually into this fund?</p>
+                                                    <div class="custom-control custom-radio mb-3">
+                                                        <input type="radio" id="no_amount_anual"
+                                                            name="annually_fund_amount" class="custom-control-input">
+                                                        <label class="custom-control-label" for="no_amount_anual"> I will
+                                                            not give any amount annually </label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mb-3">
+                                                        <input type="radio" id="amount_anual_30"
+                                                            name="annually_fund_amount" class="custom-control-input">
+                                                        <label class="custom-control-label" for="amount_anual_30"> € 30
+                                                        </label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mb-3">
+                                                        <input type="radio" id="amount_anual_50"
+                                                            name="annually_fund_amount" class="custom-control-input">
+                                                        <label class="custom-control-label" for="amount_anual_50"> € 50
+                                                        </label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mb-3">
+                                                        <input type="radio" id="amount_anual_70"
+                                                            name="annually_fund_amount" class="custom-control-input">
+                                                        <label class="custom-control-label" for="amount_anual_70"> € 70
+                                                        </label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mb-3">
+                                                        <input type="radio" id="amount_anual_90"
+                                                            name="annually_fund_amount" class="custom-control-input">
+                                                        <label class="custom-control-label" for="amount_anual_90"> € 90
+                                                        </label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mb-3">
+                                                        <input type="radio" id="amount_anual_100"
+                                                            name="annually_fund_amount" class="custom-control-input">
+                                                        <label class="custom-control-label" for="amount_anual_100"> € 100
+                                                        </label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mb-3">
+                                                        <input type="radio" id="amount_anual_other" value="other"
+                                                            name="annually_fund_amount" class="custom-control-input">
+                                                        <label class="custom-control-label" for="amount_anual_other">
+                                                            Other </label>
+                                                    </div>
 
 
 
-                                            </div>
-                                            <div id="other_amount" class="d-none w-100">
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                    <div class="form-group row mb-4">
-                                                        <label class="control-label col-sm-12 align-self-center mb-0"
-                                                            for="other_annually_fund_amount">Enter Other Amount</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control"
-                                                                id="other_annually_fund_amount"
-                                                                name="other_annually_fund_amount"
-                                                                placeholder="Enter Anually Fund Amount">
+                                                </div>
+                                                <div id="other_amount" class="d-none w-100">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group row mb-4">
+                                                            <label class="control-label col-sm-12 align-self-center mb-0"
+                                                                for="other_annually_fund_amount">Enter Other Amount</label>
+                                                            <div class="col-sm-12">
+                                                                <input type="text" class="form-control"
+                                                                    id="other_annually_fund_amount"
+                                                                    name="other_annually_fund_amount"
+                                                                    placeholder="Enter Anually Fund Amount">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please enter select anual fund
+                                                </div>
                                             </div>
-                                            <div class="valid-feedback">
-                                                Looks good!
-                                              </div>
-                                              <div class="invalid-feedback">
-                                                Please enter select anual fund
-                                              </div>
-                                        </div>
                                         </form>
                                     </div>
                                     <div id="step-6" class="tab-pane" role="tabpanel" aria-labelledby="step-6">
                                         <form id="form-6" class="needs-validation" novalidate>
 
-                                        <div class="row mb-5">
-                                            <div class="col-12">
-                                                <h4 class="mb-4">
-                                                    Sign Your Form
-                                                </h4>
-                                            </div>
-                                            <div class="col-12 mb-4">
-                                                <div id="signature">
-                                                    <canvas width="500" height="200"></canvas>
-                                                    <div class="controls">
-                                                        {{-- <a class="btn-green" href="#"
+                                            <div class="row mb-5">
+                                                <div class="col-12">
+                                                    <h4 class="mb-4">
+                                                        Sign Your Form
+                                                    </h4>
+                                                </div>
+                                                <div class="col-12 mb-4">
+                                                    <div id="signature">
+                                                        <canvas width="500" height="200"></canvas>
+                                                        <div class="controls">
+                                                            {{-- <a class="btn-green" href="#"
                                                                 id="download">Download</a> --}}
-                                                        <a class="btn btn-primary" href="#" id="clearSig">Clear
-                                                            Signature</a>
+                                                            <a class="btn btn-primary" href="#"
+                                                                id="clearSig">Clear
+                                                                Signature</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-12">
-                                                <div class="custom-control custom-checkbox custom-control-inline">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="rep_confirmed" name="rep_confirmed">
-                                                    <label class="custom-control-label" for="rep_confirmed">Have you
-                                                        read carefully to all the conditions and regulations of this
-                                                        funeral service fund?</label>
+                                                <div class="col-lg-8 col-md-8 col-sm-12">
+                                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="rep_confirmed" name="rep_confirmed">
+                                                        <label class="custom-control-label" for="rep_confirmed">Have you
+                                                            read carefully to all the conditions and regulations of this
+                                                            funeral service fund?</label>
+                                                    </div>
                                                 </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-12">
+                                                    <button type="button" id="submit_btn"
+                                                        class="btn btn-primary mr-2">Submit</button>
+
+                                                </div>
+
                                             </div>
-                                        </div>
                                         </form>
                                     </div>
                                 </div>
@@ -1410,12 +1414,15 @@
                                     </div>
                                 </div> --}}
                             {{-- </form> --}}
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 @endsection
 
 
@@ -1459,7 +1466,7 @@
         });
     </script>
     {{-- Signature Pad JS --}}
-    <script>
+    {{-- <script>
         var color = "#000000";
         var context = $("canvas")[0].getContext("2d");
         var canvas = $("canvas");
@@ -1505,7 +1512,7 @@
 
         $("#download").click(downloadImg);
         $("#clearSig").click(clearSig);
-    </script>
+    </script> --}}
     {{-- Upload Avatar --}}
     <script>
         function readURL(input) {
@@ -1543,7 +1550,7 @@
                 showPreviousButton: true, // show/hide a Previous button
                 position: 'bottom', // none/ top/ both bottom
                 // extraHtml: `<button class="btn btn-success" id="btnFinish" disabled onclick="onConfirm()">Complete Order</button>
-                //           <button class="btn btn-danger" id="btnCancel" onclick="onCancel()">Cancel</button>`
+            //           <button class="btn btn-danger" id="btnCancel" onclick="onCancel()">Cancel</button>`
             },
             anchor: {
                 enableNavigation: true, // Enable/Disable anchor navigation
@@ -1626,7 +1633,7 @@
                 $("#sw-total-step").text(stepInfo.totalSteps);
 
                 if (stepPosition == 'last') {
-                    showConfirm();
+                    // showConfirm();
                     $("#btnFinish").prop('disabled', false);
                 } else {
                     $("#btnFinish").prop('disabled', true);
@@ -1644,5 +1651,28 @@
 
 
         });
+    </script>
+
+
+    <script>
+$(document).ready(function(){
+
+    $('#submit_btn').click(function(){
+        $.ajax({
+            url: '{{route("application.store")}}',
+            dataType: 'json',
+            type: 'post', // send as POST
+            data: $('form').serialize(),
+            success: function(data) {
+                console.log(data);
+                window.location.href = "{{route('application.index')}}";
+            },
+            error: function(xhr, status, error) {
+                alert('error');
+            }
+        });
+    })
+})
+      
     </script>
 @endpush
