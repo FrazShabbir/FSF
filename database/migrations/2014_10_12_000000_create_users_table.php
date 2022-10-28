@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('passport_number')->unique()->nullable(); 
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('status')->nullable()->default(false);
+            $table->integer('application_status')->unsigned()->default(0);
             $table->string('password');
             $table->string('otp')->nullable();
             $table->rememberToken();

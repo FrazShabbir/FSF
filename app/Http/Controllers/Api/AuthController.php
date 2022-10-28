@@ -57,7 +57,7 @@ class AuthController extends Controller
             $user = User::create([
                 'full_name' => $request->full_name,
                 'username' => $username,
-                // 'phone' => $request->phone,
+                'avatar' => config('app.url').'placeholder.png',
                 'email' => $request->email,
                 // 'passport_number'=>$request->passport_number,
                 'password' => Hash::make($request->password),
@@ -218,7 +218,7 @@ class AuthController extends Controller
             $email = $request->email;
             $mail = Mail::raw('Your  OTP FOR PASSWORD RESET is  '.$user->otp.'.', function ($message) use ($email) {
                 $message->to($email)
-          ->subject('Your OTP ');
+                ->subject('Your OTP ');
             });
 
             return response()->json([

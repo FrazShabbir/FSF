@@ -12,7 +12,7 @@ class GeneralController extends Controller
     public function myprofile($username)
     {
         $arr=[];
-        $user = User::where('username', $username)->first();
+        $user = User::where('username', $username)->orWhere('email',$username)->first();
         if ($user) {
             return response()->json([
                 'user' => $user,
