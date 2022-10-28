@@ -364,7 +364,7 @@ class AuthController extends Controller
                 if ($user->email_verified_at == null) {
                     $user->email_verified_at = Carbon::now();
                 }
-                $user->otp = null;
+                // $user->otp = null;
                 $user->save();
                 return response()->json([
                     'status' => 200,
