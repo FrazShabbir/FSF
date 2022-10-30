@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string('username')->unique(); 
             $table->string('phone')->nullable();
             $table->string('email')->unique();
-            $table->longText('avatar')->nullable();
+            $table->text('avatar')->nullable();
             $table->string('passport_number')->unique()->nullable(); 
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('status')->nullable()->default(false);
             $table->integer('application_status')->unsigned()->default(0);
             $table->string('password');
+            $table->string('api_token', 80)->unique()->nullable()->default(null);
             $table->string('otp')->nullable();
             $table->rememberToken();
             $table->timestamps();

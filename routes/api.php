@@ -32,6 +32,7 @@ Route::post('/auth/verify-email', [AuthController::class, 'verfiyEmail']); // lo
 
 Route::post('/auth/verify-otp', [AuthController::class, 'verifyOtp']); // login
 
+Route::post('/auth/logout', [AuthController::class, 'logout']); // login
 
 
 // Route::group( function () {

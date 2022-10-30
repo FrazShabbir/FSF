@@ -30,9 +30,9 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
-        'otp',
         'avatar',
-        
+        'api_token',
+        'application_status',
     ];
 
     /**
@@ -43,7 +43,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        
+        'otp',
     ];
 
     /**

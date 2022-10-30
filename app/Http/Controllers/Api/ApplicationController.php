@@ -12,6 +12,7 @@ use App\Models\Province;
 use App\Models\Community;
 use App\Models\City;
 use App\Models\Application;
+use App\Models\User;
 use App\Models\Country;
 
 class ApplicationController extends Controller
@@ -119,6 +120,7 @@ class ApplicationController extends Controller
             $validateApplicationRequest = Validator::make(
                 $request->all(),
                 [
+                    'api_token' => 'required',
                     'user_id' => 'required',
                     'passport_number' => 'required',
                     'nie' => 'required',
@@ -183,6 +185,14 @@ class ApplicationController extends Controller
                     'errors' => $validateApplicationRequest->errors()
                 ], 401);
             } else {
+              $user = User::where('id',$request->user_id)->where('api_token', $request->api_token)->first();
+                if(!$user){
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Invalid Request',
+                    ], 404);
+                }
+
                 DB::beginTransaction();
                 $application = new Application();
                 $application->application_id= 'M-App-'.getRandomString(10);

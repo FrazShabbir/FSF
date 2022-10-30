@@ -57,9 +57,14 @@ class GeneralController extends Controller
                 'email' => $request->email?? $user->email,
                 'passport_number'=>$request->passport_number,
             ]);
+            
             if($request->avatar){
+                $file = $request->avatar;
+                $extension = $file->getClientOriginalExtension();
+                $filename = getRandomString().'-'.time() . '.' . $extension;
+                $file->move('uploads/avatars', $filename);
                 $user->update([
-                    'avatar' => $request->avatar,
+                    'avatar' =>  config('app.url').'uploads/avatars'. $filename
                 ]);
             }
             $user->assignRole('member');

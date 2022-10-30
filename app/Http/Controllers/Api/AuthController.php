@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Mail;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -62,9 +63,12 @@ class AuthController extends Controller
                 // 'passport_number'=>$request->passport_number,
                 'password' => Hash::make($request->password),
                 'otp' => $otp,
+                'api_token' => Str::random(60),
                 // 'avatar' =>"data:image/png;base64,".base64_encode(file_get_contents($imagePath)),
             ]);
             $email = $request->email;
+            $user->otp= $otp;
+            $user->save();
             $user->assignRole('member');
             $mail = Mail::raw('Your account activation OTP is  '.$user->otp.'.', function ($message) use ($email) {
                 $message->to($email)
@@ -74,7 +78,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 200,
                 'message' => 'User Created Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'api_token' => $user->api_token
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -130,12 +134,13 @@ class AuthController extends Controller
                     'message' => 'Please verify your account first.',
                 ], 401);
             }
-
+            $user->api_token = Str::random(60);
+            $user->save();
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
                 'user'=> $user,
-                'token' =>$user->createToken("API TOKEN")->plainTextToken
+                'token' =>$user->api_token
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -383,5 +388,25 @@ class AuthController extends Controller
                 'message' => 'User Not Found'
             ], 401);
         }
+    }
+
+
+    public function logout(Request $request)
+    {
+        $user = User::where('id', $request->user_id)->where('api_token', $request->token)->first();
+        if($user){
+            $user->api_token = null;
+            $user->save();
+            return response()->json([
+                'status' => 200,
+                'message' => 'User Logged Out Successfully',
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found'
+            ], 401);
+        }
+        
     }
 }
