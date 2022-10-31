@@ -29,7 +29,7 @@ class ApplicationController extends Controller
 
     public function create(Request $request)
     {
-        if(User::where('id',$request->user_id)->where('api_token',$request->api_token)->first()){
+        if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
             $communities = Community::all();
 
             return response()->json([
@@ -37,39 +37,36 @@ class ApplicationController extends Controller
                 'message' => 'All communities Fetched',
                 'communities' => $communities
             ], 200);
-        }else{
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'User Not Found',
             ], 404);
         }
-
-       
     }
 
-    public function renew($id){
+    public function renew($id)
+    {
         $application = Application::where('application_id', $id)->first();
-        if($application){
+        if ($application) {
             return response()->json([
                 'status'=>'200',
                 'application'=>$application,
                 'message'=>'Application Fetched',
             ]);
-        }else{
+        } else {
             return response()->json([
                 'status'=>'404',
                 'message'=>'Application Not Found',
             ]);
         }
     }
-    public function storeRenewApplication(Request $request,$id){
-
+    public function storeRenewApplication(Request $request, $id)
+    {
     }
 
     public function getCities(Request $request)
     {
-        
-
         $cities = City::where('province_id', $request->province_id)->get();
         if ($cities->count()>0) {
             return response()->json([
@@ -124,7 +121,6 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-       
         try {
             $validateApplicationRequest = Validator::make(
                 $request->all(),
@@ -194,8 +190,8 @@ class ApplicationController extends Controller
                     'errors' => $validateApplicationRequest->errors()
                 ], 401);
             } else {
-              $user = User::where('id',$request->user_id)->where('api_token', $request->api_token)->first();
-                if(!$user){
+                $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
+                if (!$user) {
                     return response()->json([
                         'status' => 400,
                         'message' => 'Invalid Request',
@@ -287,9 +283,28 @@ class ApplicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $user_id, $token)
     {
-        $application = Application::with('comments')->where('application_id', $id)->first();
+        $user = User::where('id', $user_id)->where('api_token', $token)->get();
+        if ($user->count()>0) {
+            $user = User::where('id', $user_id)->where('api_token', $token)->first();
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Invalid Request',
+            ], 404);
+        }
+
+        $application = Application::with('comments')->where('application_id', $id)->where('user_id', $user->id)->get();
+
+        if ($application->count()>0) {
+            $application = Application::with('comments')->where('application_id', $id)->where('user_id', $user->id)->first();
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Application Not Found',
+            ], 404);
+        }
         // dd($application->countri->name);
         if ($application) {
             // $country = Country::where('id', $application->country)->first();
@@ -364,11 +379,11 @@ class ApplicationController extends Controller
                     'rep_passport_no'=>$application->rep_passport_no,
                     'rep_phone'=>$application->rep_phone,
                     'rep_address'=>$application->rep_address,
-                    'rep_confirmed'=>$application->rep_confirmed==1?'Yes':'No',
+                    'rep_confirmed'=>$application->rep_confirmed==1 ? 'Yes' : 'No',
                     'buried_location'=>$application->buried_location,
 
 
-                    'registered_relatives'=>$application->registered_relatives==1?'Yes':'No',
+                    'registered_relatives'=>$application->registered_relatives==1 ? 'Yes' : 'No',
                     'registered_relative_passport_no'=>$application->registered_relative_passport_no,
                     'annually_fund_amount'=>$application->annually_fund_amount,
                     'user_signature'=>$application->user_signature,

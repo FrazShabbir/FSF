@@ -43,7 +43,7 @@ Route::get('application/renew/{id}', [ApplicationController::class, 'renew']); /
 
 Route::post('application/store', [ApplicationController::class, 'store']); // application status
 
-Route::get('application/{id}', [ApplicationController::class, 'show']);
+Route::get('application/{id}/{user}/{token}', [ApplicationController::class, 'show']);
  // application Editing Mode
 Route::get('application/{id}/edit', [ApplicationController::class, 'edit']); // application Editing Mode
 
