@@ -51,8 +51,8 @@ Route::put('application/{id}/update', [ApplicationController::class, 'update']);
 
 
 
-Route::get('myprofile/{username}', [GeneralController::class, 'myprofile']); // application status
-Route::put('myprofile/{username}/update', [GeneralController::class, 'updateProfile']); // application status
+Route::get('myprofile/{id}/{token}', [GeneralController::class, 'myprofile']); // application status
+Route::put('myprofile/{id}/update', [GeneralController::class, 'updateProfile']); // application status
 
 
 

@@ -27,15 +27,24 @@ class ApplicationController extends Controller
         return "hello";
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $communities = Community::all();
+        if(User::where('id',$request->user_id)->where('api_token',$request->api_token)->first()){
+            $communities = Community::all();
 
-        return response()->json([
-            'status' => 200,
-            'message' => 'All communities Fetched',
-            'communities' => $communities
-        ], 200);
+            return response()->json([
+                'status' => 200,
+                'message' => 'All communities Fetched',
+                'communities' => $communities
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found',
+            ], 404);
+        }
+
+       
     }
 
     public function renew($id){

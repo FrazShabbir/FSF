@@ -9,26 +9,51 @@ use Illuminate\Support\Facades\Validator;
 
 class GeneralController extends Controller
 {
-    public function myprofile($username)
+    public function myprofile($id, $token)
     {
         $arr=[];
-        $user = User::where('username', $username)->orWhere('email',$username)->first();
+        $user = User::where('id', $id)->where('api_token', $token)->first();
         if ($user) {
             return response()->json([
                 'user' => $user,
                 'status' => true,
                 'message' => 'User Found',
             ], 200);
-        
         } else {
             $arr['status'] = 404;
             $arr['message'] = 'User Not Found';
             return response()->json($arr, 404);
         }
-      
     }
-    public function updateProfile(Request $request, $username){
-        $user = User::where('username', $username)->first();
+    public function updateProfile(Request $request, $id)
+    {
+        $validateUser = Validator::make(
+            $request->all(),
+            [
+                'api_token' => 'required',
+            ]
+        );
+
+
+        if ($validateUser->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'validation error',
+                'errors' => $validateUser->errors()
+            ], 401);
+        }
+
+        $checkUser = User::where('id', $id)->where('api_token', $request->api_token)->get();
+
+        if ($checkUser->count()>0) {
+            $user = User::where('id', $id)->where('api_token', $request->api_token)->first();
+
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found',
+            ], 404);
+        }
 
         $validateUser = Validator::make(
             $request->all(),
@@ -38,7 +63,7 @@ class GeneralController extends Controller
                 // 'username' => 'required||unique:users,username',
                 'email' => 'required|email|unique:users,email,'.$user->id,
                 'passport_number' => 'required|unique:users,passport_number,'.$user->id,
-           
+
             ]
         );
 
@@ -57,8 +82,8 @@ class GeneralController extends Controller
                 'email' => $request->email?? $user->email,
                 'passport_number'=>$request->passport_number,
             ]);
-            
-            if($request->avatar){
+
+            if ($request->avatar) {
                 $file = $request->avatar;
                 $extension = $file->getClientOriginalExtension();
                 $filename = getRandomString().'-'.time() . '.' . $extension;
@@ -67,7 +92,7 @@ class GeneralController extends Controller
                     'avatar' =>  config('app.url').'uploads/avatars'. $filename
                 ]);
             }
-            $user->assignRole('member');
+            // $user->assignRole('member');
             return response()->json([
                 'user' => $user,
                 'status' => 200,
@@ -77,9 +102,8 @@ class GeneralController extends Controller
             return response()->json([
                 'status' => 404,
                 'message' => 'User Not Found',
-       
+
             ], 404);
         }
     }
-
 }
