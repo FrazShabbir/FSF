@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::delete('city/{id}', [CityController::class, 'destroy'])->name('city.destroy');
 
 
+    
 
 
 });

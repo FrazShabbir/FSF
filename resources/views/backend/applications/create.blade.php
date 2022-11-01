@@ -326,7 +326,7 @@
                                                         <div class="col-sm-12">
                                                             <select class="form-control" name="gender" id="gender"
                                                                 required>
-                                                                <option selected value="" disabled="">Select
+                                                                <option selected value="">Select
                                                                     Gender
                                                                 </option>
                                                                 <option value="Male">Male</option>
@@ -473,7 +473,7 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="country">Country</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="country" id="country"
+                                                            <select class="form-control" name="country" id="country_id"
                                                                 required>
                                                                 <option value="" selected disabled>Choose Your
                                                                     Country</option>
@@ -496,10 +496,8 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="community">Community</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="community" id="community"
-                                                                >
-                                                                <option selected value="dsds" >Select Your
-                                                                    Community</option>
+                                                            <select class="form-control" name="community" id="community">
+                                                                <option selected value="dsds" >Select Your Community</option>
                                                             </select>
 
                                                             <div class="valid-feedback">
@@ -517,12 +515,12 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="province">Province</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="province" id="province"
+                                                            <select class="form-control" name="province" id="province_id"
                                                                 required value="{{ old('full_name') }}">
-                                                                <option selected value="" disabled="">Select Your
+                                                                <option selected value="" >Select Your
                                                                     Province
                                                                 </option>
-                                                                <option></option>
+                                                                <option>hsdfjksd</option>
                                                                 <option></option>
                                                             </select>
                                                             <div class="valid-feedback">
@@ -534,6 +532,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
@@ -541,7 +540,7 @@
                                                         <div class="col-sm-12">
                                                             <select class="form-control" name="city" id="city"
                                                                 required>
-                                                                <option selected value="" disabled="">Select Your
+                                                                <option selected value="" >Select Your
                                                                     City
                                                                 </option>
                                                                 <option></option>
@@ -908,7 +907,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="rep_name"
                                                                 name="rep_name"
-                                                                placeholder="Enter Representative Full Name" disabled>
+                                                                placeholder="Enter Representative Full Name" >
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -925,7 +924,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="rep_sername"
                                                                 name="rep_sername"
-                                                                placeholder="Enter Representative Sur Name" disabled>
+                                                                placeholder="Enter Representative Sur Name" >
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -942,7 +941,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control"
                                                                 id="rep_passport_no" name="rep_passport_no"
-                                                                placeholder="Enter Representative Passport No." disabled>
+                                                                placeholder="Enter Representative Passport No." >
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -959,7 +958,7 @@
                                                         <div class="col-sm-12">
                                                             <input type="text" class="form-control" id="rep_phone"
                                                                 name="rep_phone"
-                                                                placeholder="Enter Representative Cell No." disabled>
+                                                                placeholder="Enter Representative Cell No." >
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -975,7 +974,7 @@
                                                             for="rep_address">Complete Address</label>
                                                         <div class="col-sm-12">
                                                             <textarea class="form-control" name="rep_address" id="rep_address"
-                                                                placeholder="Enter Representative Complete Address" disabled></textarea>
+                                                                placeholder="Enter Representative Complete Address" ></textarea>
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -990,7 +989,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                                     <div class="custom-control custom-checkbox custom-control-inline">
                                                         <input type="checkbox" class="custom-control-input"
-                                                            id="rep_confirmed" name="rep_confirmed" disabled>
+                                                            id="rep_confirmed" name="rep_confirmed" >
                                                         <label class="custom-control-label" for="rep_confirmed">Have you
                                                             informed him that you are appointing this person as your
                                                             Representative in FSF and this person will be authorized to
@@ -1675,4 +1674,61 @@ $(document).ready(function(){
 })
       
     </script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#country_id').on('change', function () {
+          
+            var country_id = this.value;
+            $("#community").html('');
+            $.ajax({
+                url: "{{route('get.communities')}}",
+                type: "POST",
+                data: {
+                    country_id: country_id,
+                    _token: '{{csrf_token()}}'
+                },
+                dataType: 'json',
+                success: function (result) {
+                    $('#community').html('<option value="">-- Select community --</option>');
+                    $.each(result.community, function (key, value) {
+                        $("#community").append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+        });
+
+        /*------------------------------------------
+        --------------------------------------------
+        Center Dropdown Change Event
+        --------------------------------------------
+        --------------------------------------------*/
+        $('#community').on('change', function () {
+            var community_id = this.value;
+            $("#province_id").html('');
+            $.ajax({
+                url: "{{route('get.provinces')}}",
+                type: "POST",
+                data: {
+                    community_id: community_id,
+                    _token: '{{csrf_token()}}'
+                },
+                dataType: 'json',
+                success: function (result) {
+                    $('#province_id').html('<option value="">-- Select Province --</option>');
+                    $.each(result.provinces, function (key, value) {
+                        $("#province_id").append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+        });
+
+
+
+    });
+</script>
 @endpush

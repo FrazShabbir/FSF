@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <img src="{!!base64_decode($user->avatar)!!}" alt="">
+                                    <img src="{{asset($user->avatar)}}" alt="">
                                  </div>
                             </div>
                         </div>

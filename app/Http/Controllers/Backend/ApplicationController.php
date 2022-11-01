@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Application;
 use App\Models\User;
 use App\Models\Country;
+use App\Models\Community;
+use App\Models\Province;
+use App\Models\City;
 use Illuminate\Support\Facades\DB;
 
 
@@ -18,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 use Illuminate\Support\Str;
+
 class ApplicationController extends Controller
 {
     /**
@@ -52,62 +56,62 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'email'=>'required|email|unique:users,email',
-        //     'passport_number' => 'required',
-        //     'nie' => 'required',
-        //     'native_id'=>'required',
-        //     'full_name'=>'required',
-        //     'father_name'=>'required',
-        //     'surname'=>'required',
-        //     'gender'=>'required',
-        //     'phone'=>'required',
-        //     'dob'=>'required',
-        //     'native_country'=>'required',
-        //     'native_country_address'=>'required',
-        //     'country_id'=>'required',
-        //     'community_id'=>'required',
-        //     'province_id'=>'required',
-        //     'city_id'=>'required',
-        //     'area'=>'required',
+        $request->validate([
+            'email'=>'required|email|unique:users,email',
+            'passport_number' => 'required',
+            'nie' => 'required',
+            'native_id'=>'required',
+            'full_name'=>'required',
+            'father_name'=>'required',
+            'surname'=>'required',
+            'gender'=>'required',
+            'phone'=>'required',
+            'dob'=>'required',
+            'native_country'=>'required',
+            'native_country_address'=>'required',
+            'country_id'=>'required',
+            'community_id'=>'required',
+            'province_id'=>'required',
+            'city_id'=>'required',
+            'area'=>'required',
 
-        //     's_relative_1_name'=>'required',
-        //     's_relative_1_relation'=>'required',
-        //     's_relative_1_phone'=>'required',
-        //     's_relative_1_address'=>'required',
+            's_relative_1_name'=>'required',
+            's_relative_1_relation'=>'required',
+            's_relative_1_phone'=>'required',
+            's_relative_1_address'=>'required',
 
-        //     's_relative_2_name'=>'required',
-        //     's_relative_2_relation'=>'required',
-        //     's_relative_2_phone'=>'required',
-        //     's_relative_2_address'=>'required',
+            's_relative_2_name'=>'required',
+            's_relative_2_relation'=>'required',
+            's_relative_2_phone'=>'required',
+            's_relative_2_address'=>'required',
 
-        //     'n_relative_1_name'=>'required',
-        //     'n_relative_1_relation'=>'required',
-        //     'n_relative_1_phone'=>'required',
-        //     'n_relative_1_address'=>'required',
+            'n_relative_1_name'=>'required',
+            'n_relative_1_relation'=>'required',
+            'n_relative_1_phone'=>'required',
+            'n_relative_1_address'=>'required',
 
 
-        //     'n_relative_2_name'=>'required',
-        //     'n_relative_2_relation'=>'required',
-        //     'n_relative_2_phone'=>'required',
-        //     'n_relative_2_address'=>'required',
+            'n_relative_2_name'=>'required',
+            'n_relative_2_relation'=>'required',
+            'n_relative_2_phone'=>'required',
+            'n_relative_2_address'=>'required',
 
-        //     'rep_name'=>'required',
-        //     'rep_surname'=>'required',
-        //     'rep_passport_no'=>'required',
-        //     'rep_phone'=>'required',
-        //     'rep_address'=>'required',
-        //     'rep_confirmed'=>'required',
+            'rep_name'=>'required',
+            'rep_surname'=>'required',
+            'rep_passport_no'=>'required',
+            'rep_phone'=>'required',
+            'rep_address'=>'required',
+            'rep_confirmed'=>'required',
 
-        //     'buried_location'=>'required',
+            'buried_location'=>'required',
 
-        //     'registered_relatives'=>'required',
-        //     'registered_relative_passport_no'=>'nullable',
+            'registered_relatives'=>'required',
+            'registered_relative_passport_no'=>'nullable',
 
-        //     'annually_fund_amount'=>'required',
-        //     'user_signature'=>'required',
-        //     'declaration_confirm'=>'required',
-        // ]);
+            'annually_fund_amount'=>'required',
+            'user_signature'=>'required',
+            'declaration_confirm'=>'required',
+        ]);
 
         try {
             DB::beginTransaction();
@@ -132,7 +136,7 @@ class ApplicationController extends Controller
 
             $application = Application::create([
                 'application_id'=>'W-App-'.getRandomString(10),
-                'user_id'=>$user->id??'0',
+                'user_id'=>$user->id,
                 'passport_number' => $request->passport_number??'0',
                 'nie' => $request->nie??'0',
                 'native_id'=>$request->native_id??'0',
@@ -197,7 +201,6 @@ class ApplicationController extends Controller
             ]);
             DB::commit();
             return response()->json(['success'=>'Application Created Successfully']);
-            
         } catch (\Throwable $th) {
             DB::rollback();
             dd($th);
@@ -247,5 +250,22 @@ class ApplicationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function getCommunities(Request $request)
+    {
+        $data['community'] = Community::where("country_id", $request->country_id)
+        ->get(["name", "id"]);
+
+        return response()->json($data);
+    }
+
+    public function getProvinces(Request $request)
+    {
+        $data['provinces'] = Province::where("community_id", $request->community_id)
+        ->get(["name", "id"]);
+
+        return response()->json($data);
     }
 }

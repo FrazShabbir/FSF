@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\ApplicationController;
 
 
 /*
@@ -21,6 +22,10 @@ Route::get('/', function () {
         return redirect('/login');
     }
 });
+
+
+Route::post('get-communities', [ApplicationController::class, 'getCommunities'])->name('get.communities');
+Route::post('get-provinces', [ApplicationController::class, 'getProvinces'])->name('get.provinces');
 
 
 require __DIR__.'/auth.php';
