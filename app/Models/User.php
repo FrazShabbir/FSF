@@ -31,7 +31,6 @@ class User extends Authenticatable
         'phone',
         'password',
         'avatar',
-        'api_token',
         'application_status',
     ];
 
@@ -44,6 +43,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'otp',
+        'api_token'
     ];
 
     /**
