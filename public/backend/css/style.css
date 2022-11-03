@@ -886,11 +886,11 @@ Calender
 /* validate */
 .stepwizard-row { display: block; margin: 0 -20px; }
 .stepwizard { display: table; width: 100%; position: relative; }
-.setup-content { margin-top: 60px; }
-.wizard-step { font-size: 18px; width: 25%; float: left; position: relative; font-weight: 400; text-align: center; }
-.stepwizard-row .wizard-step a.btn { background: var(--iq-white); color: var(--iq-body-text); font-size: 18px; font-weight: 400; display: block; padding: 50px 15px; margin: 10px 20px; border-radius: 5px; -webkit-border-radius: 5px; text-decoration: none; border: 1px solid var(--iq-light-primary); }
+.setup-content { margin-top: 30px; }
+.wizard-step { font-size: 18px; width: 16.6%; float: left; position: relative; font-weight: 400; text-align: center; }
+.stepwizard-row .wizard-step a.btn { background: var(--iq-white); color: var(--iq-body-text); font-size: 18px; font-weight: 400; display: block; padding: 15px 15px; margin: 10px 10px; min-height: 215px; border-radius: 5px; -webkit-border-radius: 5px; text-decoration: none;  }
 .stepwizard-row .wizard-step i { display: block; text-align: center; height: 65px; width: 65px; line-height: 65px; font-size: 25px; border-radius: 50%; margin: 0 auto 20px; color: var(--iq-white); background: var(--iq-primary); }
-.stepwizard-row #user.active a { background: var(--iq-light-primary); border-color: var(--iq-primary); }
+.stepwizard-row #user.active a { background: transparent; }
 .stepwizard-row #document.active a { background: var(--iq-light-danger); border-color: var(--iq-danger); }
 .stepwizard-row #bank.active a { background: var(--iq-light-success); border-color: var(--iq-success); }
 .stepwizard-row #confirm.active a { background: var(--iq-light-warning); border-color: var(--iq-warning); }
@@ -898,7 +898,7 @@ Calender
 .stepwizard-row .wizard-step#document i { background: var(--iq-light-danger); color: var(--iq-danger); }
 .stepwizard-row .wizard-step#bank i { background: var(--iq-light-success); color: var(--iq-success); }
 .stepwizard-row .wizard-step#confirm i { background: var(--iq-light-warning); color: var(--iq-warning); }
-.stepwizard-row .wizard-step.active i { background-color: var(--iq-white) !important; }
+.stepwizard-row .wizard-step.active i { color: var(--iq-white) !important; background-color: var(--iq-primary) !important; }
 .stepwizard-row .wizard-step#document.active i { background: var(--iq-light-danger); color: var(--iq-danger); }
 .stepwizard-row .wizard-step#bank.active i { background: var(--iq-light-success); color: var(--iq-success); }
 .stepwizard-row .wizard-step#confirm.active i { background: var(--iq-light-warning); color: var(--iq-warning); }
@@ -1232,4 +1232,9 @@ cursor: pointer;
     display: none;  /* Safari and Chrome */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */
+}
+@media only screen and (min-width: 992px) and (max-width: 1024px){
+    .stepwizard-row .wizard-step a.btn {
+
+    }
 }
