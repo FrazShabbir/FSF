@@ -56,6 +56,7 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'email'=>'required|email|unique:users,email',
             'passport_number' => 'required',
@@ -69,10 +70,10 @@ class ApplicationController extends Controller
             'dob'=>'required',
             'native_country'=>'required',
             'native_country_address'=>'required',
-            'country_id'=>'required',
-            'community_id'=>'required',
-            'province_id'=>'required',
-            'city_id'=>'required',
+            'country'=>'required',
+            'community'=>'required',
+            'province'=>'required',
+            'city'=>'required',
             'area'=>'required',
 
             's_relative_1_name'=>'required',
@@ -109,7 +110,7 @@ class ApplicationController extends Controller
             'registered_relative_passport_no'=>'nullable',
 
             'annually_fund_amount'=>'required',
-            'user_signature'=>'required',
+            // 'user_signature'=>'required',
             'declaration_confirm'=>'required',
         ]);
 
@@ -149,11 +150,11 @@ class ApplicationController extends Controller
                 'dob'=>$request->dob??'0',
                 'native_country'=>$request->native_country??'0',
                 'native_country_address'=>$request->native_country_address??'0',
-                'country_id'=>$request->country_id??'0',
+                'country_id'=>$request->country??'0',
 
-                'community_id'=>$request->community_id??'0',
-                'province_id'=>$request->province_id??'0',
-                'city_id'=>$request->city_id??'0',
+                'community_id'=>$request->community??'0',
+                'province_id'=>$request->province??'0',
+                'city_id'=>$request->city??'0',
                 'area'=>$request->area??'0',
 
 
@@ -264,6 +265,14 @@ class ApplicationController extends Controller
     public function getProvinces(Request $request)
     {
         $data['provinces'] = Province::where("community_id", $request->community_id)
+        ->get(["name", "id"]);
+
+        return response()->json($data);
+    }
+
+    public function getCities(Request $request)
+    {
+        $data['cities'] = City::where("province_id", $request->province_id)
         ->get(["name", "id"]);
 
         return response()->json($data);

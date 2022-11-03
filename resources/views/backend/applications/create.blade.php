@@ -2,8 +2,9 @@
 @section('title', 'Page')
 
 @section('styles')
-    <link href="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/css/smart_wizard_all.min.css" rel="stylesheet"
-        type="text/css" />
+
+        <link href="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
+
 @endsection
 
 @push('css')
@@ -517,11 +518,8 @@
                                                         <div class="col-sm-12">
                                                             <select class="form-control" name="province" id="province_id"
                                                                 required value="{{ old('full_name') }}">
-                                                                <option selected value="" >Select Your
-                                                                    Province
-                                                                </option>
-                                                                <option>hsdfjksd</option>
-                                                                <option></option>
+                                                                <option selected value="" >Select Your  </option>
+                                                        
                                                             </select>
                                                             <div class="valid-feedback">
                                                                 Looks good!
@@ -538,13 +536,12 @@
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
                                                             for="city">City</label>
                                                         <div class="col-sm-12">
-                                                            <select class="form-control" name="city" id="city"
+                                                            <select class="form-control" name="city" id="city_id"
                                                                 required>
                                                                 <option selected value="" >Select Your
                                                                     City
                                                                 </option>
-                                                                <option></option>
-                                                                <option></option>
+                                                    
                                                             </select>
                                                             <div class="valid-feedback">
                                                                 Looks good!
@@ -920,10 +917,10 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group row mb-4">
                                                         <label class="control-label col-sm-12 align-self-center mb-0"
-                                                            for="rep_sername">Sur Name</label>
+                                                            for="rep_surname">Sur Name</label>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="rep_sername"
-                                                                name="rep_sername"
+                                                            <input type="text" class="form-control" id="rep_surname"
+                                                                name="rep_surname"
                                                                 placeholder="Enter Representative Sur Name" >
                                                             <div class="valid-feedback">
                                                                 Looks good!
@@ -989,7 +986,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                                     <div class="custom-control custom-checkbox custom-control-inline">
                                                         <input type="checkbox" class="custom-control-input"
-                                                            id="rep_confirmed" name="rep_confirmed" >
+                                                            id="rep_confirmed" name="rep_confirmed" value="1" >
                                                         <label class="custom-control-label" for="rep_confirmed">Have you
                                                             informed him that you are appointing this person as your
                                                             Representative in FSF and this person will be authorized to
@@ -1012,14 +1009,14 @@
                                                     <p>Where do you want to be buried?</p>
                                                     <div class="custom-control custom-radio custom-control-inline">
                                                         <input type="radio" id="residential" name="buried_location"
-                                                            class="custom-control-input">
+                                                            class="custom-control-input" value="Spain">
                                                         <label class="custom-control-label" for="residential"> Spain
                                                         </label>
 
                                                     </div>
                                                     <div class="custom-control custom-radio custom-control-inline">
                                                         <input type="radio" id="native" name="buried_location"
-                                                            class="custom-control-input">
+                                                            class="custom-control-input" value="Native Country">
                                                         <label class="custom-control-label" for="native"> Native Country
                                                         </label>
                                                     </div>
@@ -1167,8 +1164,8 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                                     <div class="custom-control custom-checkbox custom-control-inline">
                                                         <input type="checkbox" class="custom-control-input"
-                                                            id="rep_confirmed" name="rep_confirmed">
-                                                        <label class="custom-control-label" for="rep_confirmed">Have you
+                                                            id="declaration_confirm" name="declaration_confirm" value="1">
+                                                        <label class="custom-control-label" for="declaration_confirm">Have you
                                                             read carefully to all the conditions and regulations of this
                                                             funeral service fund?</label>
                                                     </div>
@@ -1465,7 +1462,7 @@
         });
     </script>
     {{-- Signature Pad JS --}}
-    {{-- <script>
+    <script>
         var color = "#000000";
         var context = $("canvas")[0].getContext("2d");
         var canvas = $("canvas");
@@ -1511,7 +1508,7 @@
 
         $("#download").click(downloadImg);
         $("#clearSig").click(clearSig);
-    </script> --}}
+    </script>
     {{-- Upload Avatar --}}
     <script>
         function readURL(input) {
@@ -1727,6 +1724,27 @@ $(document).ready(function(){
             });
         });
 
+
+        $('#province_id').on('change', function () {
+            var province_id = this.value;
+            $("#city_id").html('');
+            $.ajax({
+                url: "{{route('get.cities')}}",
+                type: "POST",
+                data: {
+                    province_id: province_id,
+                    _token: '{{csrf_token()}}'
+                },
+                dataType: 'json',
+                success: function (result) {
+                    $('#city_id').html('<option value="">-- Select Province --</option>');
+                    $.each(result.cities, function (key, value) {
+                        $("#city_id").append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+        });
 
 
     });

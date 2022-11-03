@@ -32,7 +32,7 @@
                 </li>
              
                 <li class="nav-item nav-icon">
-                    @include('backend.partials._notification')
+                    {{-- @include('backend.partials._notification') --}}
                 </li>
              </ul>
           </div>

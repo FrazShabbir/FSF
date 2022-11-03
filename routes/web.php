@@ -26,6 +26,7 @@ Route::get('/', function () {
 
 Route::post('get-communities', [ApplicationController::class, 'getCommunities'])->name('get.communities');
 Route::post('get-provinces', [ApplicationController::class, 'getProvinces'])->name('get.provinces');
+Route::post('get-cities', [ApplicationController::class, 'getCities'])->name('get.cities');
 
 
 require __DIR__.'/auth.php';
