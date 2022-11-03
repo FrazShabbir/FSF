@@ -2,8 +2,6 @@
 @section('title', 'Page')
 
 @section('styles')
-    {{-- <link href="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/css/smart_wizard_all.min.css" rel="stylesheet" --}}
-        {{-- type="text/css" /> --}}
 @endsection
 
 @push('css')
@@ -138,7 +136,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <form class="form">
+                            <form class="form" action="{{route("application.store")}}" method="POST">
+                                @csrf
                                 <div class="row setup-content px-3" id="user-detail" style="display: flex;">
                                     <div class="col-12">
                                         <div class="avatar-upload">
@@ -360,11 +359,13 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="country">Country</label>
                                             <div class="col-sm-12">
-                                                <select class="form-control" name="country" id="country" required>
-                                                    <option selected="" disabled="">Select Your Country
+                                                <select class="form-control" name="country" id="country_id" required>
+                                                    <option selected value="" disabled>Select Your Country
                                                     </option>
-                                                    <option></option>
-                                                    <option></option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->id }}">
+                                                        {{ $country->name }}</option>
+                                                    @endforeach
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -381,10 +382,8 @@
                                                 for="community">Community</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="community" id="community" required>
-                                                    <option selected="" disabled="">Select Your
+                                                    <option selected value="" disabled>Select Your
                                                         Community</option>
-                                                    <option></option>
-                                                    <option></option>
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -400,11 +399,9 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="province">Province</label>
                                             <div class="col-sm-12">
-                                                <select class="form-control" name="province" id="province" required>
-                                                    <option selected="" disabled="">Select Your Province
+                                                <select class="form-control" name="province" id="province_id" required>
+                                                    <option selected value="" disabled>Select Your Province
                                                     </option>
-                                                    <option></option>
-                                                    <option></option>
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -420,11 +417,9 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="city">City</label>
                                             <div class="col-sm-12">
-                                                <select class="form-control" name="city" id="city" required>
-                                                    <option selected="" disabled="">Select Your City
+                                                <select class="form-control" name="city" id="city_id" required>
+                                                    <option selected value="" disabled>Select Your City
                                                     </option>
-                                                    <option></option>
-                                                    <option></option>
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -788,10 +783,10 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
                                             <label class="control-label col-sm-12 align-self-center mb-0"
-                                                for="rep_sername">Sur Name</label>
+                                                for="rep_surname">Sur Name</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="rep_sername"
-                                                    name="rep_sername"
+                                                <input type="text" class="form-control" id="rep_surname"
+                                                    name="rep_surname"
                                                     placeholder="Enter Representative Sur Name" required>
                                                     <div class="valid-feedback">
                                                         Looks good!
@@ -895,13 +890,13 @@
                                     <div class="col-12 mb-4">
                                         <p>Do you have any relatives registered in this fund?</p>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="registed_relative_yes" value="Yes"
+                                            <input type="radio" id="registed_relative_yes" value="1"
                                                 name="registered_relatives" class="custom-control-input" required>
                                             <label class="custom-control-label"
                                                 for="registed_relative_yes">Yes</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="registed_relative_no" value="No"
+                                            <input type="radio" id="registed_relative_no" value="0"
                                                 name="registered_relatives" class="custom-control-input" required>
                                             <label class="custom-control-label"
                                                 for="registed_relative_no">No</label>
@@ -923,7 +918,7 @@
                                                     <input type="text" class="form-control"
                                                         id="registered_relative_passport_no"
                                                         name="registered_relative_passport_no"
-                                                        placeholder="Enter Registered Relative Passport No." required>
+                                                        placeholder="Enter Registered Relative Passport No.">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                           </div>
@@ -987,7 +982,7 @@
                                                         <input type="text" class="form-control"
                                                             id="other_annually_fund_amount"
                                                             name="other_annually_fund_amount"
-                                                            placeholder="Enter Anually Fund Amount" required>
+                                                            placeholder="Enter Anually Fund Amount">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1044,20 +1039,10 @@
 
 
 @section('scripts')
-    {{-- <script src="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/js/jquery.smartWizard.min.js" type="text/javascript"> --}}
-    </script>
+
 @endsection
 
 @push('js')
-    {{-- <script>
-        $(function() {
-            // SmartWizard initialize
-            $('#smartwizard').smartWizard({
-                theme: 'dots',
-            });
-        });
-    </script> --}}
-    {{-- Relative Registration Check --}}
     <script>
         $(document).ready(function() {
             $('input[type=radio][name=registered_relatives]').change(function() {
@@ -1082,7 +1067,7 @@
         });
     </script>
     {{-- Signature Pad JS --}}
-    {{-- <script>
+    <script>
         var color = "#000000";
         var context = $("canvas")[0].getContext("2d");
         var canvas = $("canvas");
@@ -1128,7 +1113,7 @@
 
         $("#download").click(downloadImg);
         $("#clearSig").click(clearSig);
-    </script> --}}
+    </script>
     {{-- Upload Avatar --}}
     <script>
         function readURL(input) {
@@ -1144,6 +1129,81 @@
         }
         $("#imageUpload").change(function() {
             readURL(this);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#country_id').on('change', function () {
+
+                var country_id = this.value;
+                $("#community").html('');
+                $.ajax({
+                    url: "{{route('get.communities')}}",
+                    type: "POST",
+                    data: {
+                        country_id: country_id,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $('#community').html('<option value="">-- Select community --</option>');
+                        $.each(result.community, function (key, value) {
+                            $("#community").append('<option value="' + value
+                                .id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+
+            /*------------------------------------------
+            --------------------------------------------
+            Center Dropdown Change Event
+            --------------------------------------------
+            --------------------------------------------*/
+            $('#community').on('change', function () {
+                var community_id = this.value;
+                $("#province_id").html('');
+                $.ajax({
+                    url: "{{route('get.provinces')}}",
+                    type: "POST",
+                    data: {
+                        community_id: community_id,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $('#province_id').html('<option value="">-- Select Province --</option>');
+                        $.each(result.provinces, function (key, value) {
+                            $("#province_id").append('<option value="' + value
+                                .id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+
+
+            $('#province_id').on('change', function () {
+                var province_id = this.value;
+                $("#city_id").html('');
+                $.ajax({
+                    url: "{{route('get.cities')}}",
+                    type: "POST",
+                    data: {
+                        province_id: province_id,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $('#city_id').html('<option value="">-- Select Province --</option>');
+                        $.each(result.cities, function (key, value) {
+                            $("#city_id").append('<option value="' + value
+                                .id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+
+
         });
     </script>
 @endpush
