@@ -442,6 +442,7 @@ class ApplicationController extends Controller
                 'dob'=>'required',
                 'native_country'=>'required',
                 'native_country_address'=>'required',
+                
                 'country'=>'required',
                 'community'=>'required',
                 'province'=>'required',

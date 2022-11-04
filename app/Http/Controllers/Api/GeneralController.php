@@ -56,7 +56,7 @@ class GeneralController extends Controller
                 'phone' => 'required',
                 // 'username' => 'required||unique:users,username',
                 'email' => 'required|email|unique:users,email,'.$user->id,
-                'passport_number' => 'required|unique:users,passport_number,'.$user->id,
+                // 'passport_number' => 'required|unique:users,passport_number,'.$user->id,
 
             ]
         );
@@ -74,7 +74,7 @@ class GeneralController extends Controller
                 'full_name' => $request->full_name??$user->full_name,
                 'phone' => $request->phone ?? $user->phone,
                 'email' => $request->email?? $user->email,
-                'passport_number'=>$request->passport_number,
+                // 'passport_number'=>$request->passport_number,
             ]);
 
             if ($request->avatar) {
