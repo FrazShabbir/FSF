@@ -207,7 +207,7 @@
                                                 for="gender">Gender</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="gender" id="gender" required>
-                                                    <option selected="" disabled="">Select Gender</option>
+                                                    <option selected="" >Select Gender</option>
                                                     <option>Male</option>
                                                     <option>Female</option>
                                                 </select>
@@ -916,7 +916,7 @@
                                                     No.</label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control"
-                                                        id="registered_relative_passport_no"
+                                                        id="registered_relative_passport_no_input"
                                                         name="registered_relative_passport_no"
                                                         placeholder="Enter Registered Relative Passport No.">
                                                         <div class="valid-feedback">
@@ -1048,11 +1048,13 @@
             $('input[type=radio][name=registered_relatives]').change(function() {
                 if (this.value == '1') {
                     $("#reg_relative_passport_no").removeClass('d-none');
-                    // $('#reg_relative_passport_no').setAttribute('required', 'true');
-                    document.getElementById("reg_relative_passport_no").attributes["required"] = "";
+                    $('#registered_relative_passport_no_input').prop('required', 'true');
+                    // document.getElementById("reg_relative_passport_no").attributes["required"] = "";
 
                 } else if (this.value == '0') {
                     $("#reg_relative_passport_no").addClass('d-none');
+                    $('#registered_relative_passport_no_input').prop('required',false);
+
                 }
             });
         });
@@ -1063,8 +1065,13 @@
             $('input[type=radio][name=annually_fund_amount]').change(function() {
                 if (this.value == 'other') {
                     $("#other_amount").removeClass('d-none');
+                    $('#other_annually_fund_amount').prop('required', 'true');
+
+                    
                 } else {
                     $("#other_amount").addClass('d-none');
+                    $('#other_annually_fund_amount').prop('required', 'false');
+
                 }
             });
         });
