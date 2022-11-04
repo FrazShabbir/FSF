@@ -27,27 +27,21 @@ class GeneralController extends Controller
     }
     public function updateProfile(Request $request, $id)
     {
-        $validateUser = Validator::make(
-            $request->all(),
-            [
-                'api_token' => 'required',
-            ]
-        );
-
-
-        if ($validateUser->fails()) {
+        if (!$request->api_token) {
             return response()->json([
-                'status' => false,
-                'message' => 'validation error',
-                'errors' => $validateUser->errors()
-            ], 401);
+                'status' => 500,
+                'message' => 'INVALID TOKEN',
+                'errors' => 'NO API TOKEN'
+            ], 500);
         }
+
+
+
 
         $checkUser = User::where('id', $id)->where('api_token', $request->api_token)->get();
 
         if ($checkUser->count()>0) {
             $user = User::where('id', $id)->where('api_token', $request->api_token)->first();
-
         } else {
             return response()->json([
                 'status' => 404,
@@ -87,9 +81,9 @@ class GeneralController extends Controller
                 $file = $request->avatar;
                 $extension = $file->getClientOriginalExtension();
                 $filename = getRandomString().'-'.time() . '.' . $extension;
-                $file->move('uploads/avatars', $filename);
+                $file->move('uploads/avatars/', $filename);
                 $user->update([
-                    'avatar' =>  config('app.url').'uploads/avatars'. $filename
+                    'avatar' =>  config('app.url').'uploads/avatars/'. $filename
                 ]);
             }
             // $user->assignRole('member');
