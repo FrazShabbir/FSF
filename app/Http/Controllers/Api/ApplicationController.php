@@ -69,7 +69,7 @@ class ApplicationController extends Controller
 
     public function getCommunities(Request $request)
     {
-        $communities = Communities::where('country_id', $request->country_id)->get();
+        $communities = Community::where('country_id', $request->country_id)->get();
         
         if ($communities->count()>0) {
             return response()->json([
