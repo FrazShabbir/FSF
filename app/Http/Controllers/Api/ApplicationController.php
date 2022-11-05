@@ -30,13 +30,15 @@ class ApplicationController extends Controller
     public function create(Request $request)
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
-            $communities = Community::all();
 
+            $countries = Country::all();
             return response()->json([
                 'status' => 200,
-                'message' => 'All communities Fetched',
-                'communities' => $communities
+                'message' => 'All Countries Fetched',
+                'countries' => $countries,
             ], 200);
+
+
         } else {
             return response()->json([
                 'status' => 404,
@@ -65,6 +67,32 @@ class ApplicationController extends Controller
     {
     }
 
+    public function getCommunities(Request $request)
+    {
+        $communities = Communities::where('country_id', $request->country_id)->get();
+        
+        if ($communities->count()>0) {
+            return response()->json([
+                'status' => 200,
+                'total_communities' => $communities->count(),
+                'message' => 'All communities fetched.',
+                'communities' => $communities
+            ], 200);
+        } elseif ($cities->count()==0) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'No communities Found',
+                'communities' => $communities,
+                'total_communities'=>$communities->count(),
+            ], 404);
+        } else {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong',
+            ], 500);
+        }
+    }
+
     public function getCities(Request $request)
     {
         $cities = City::where('province_id', $request->province_id)->get();
@@ -89,6 +117,8 @@ class ApplicationController extends Controller
             ], 500);
         }
     }
+
+
     public function getProvinces(Request $request)
     {
         $provinces = Province::where('community_id', $request->community_id)->get();
@@ -113,6 +143,8 @@ class ApplicationController extends Controller
             ], 500);
         }
     }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -262,9 +294,18 @@ class ApplicationController extends Controller
                     $file = $request->user_signature;
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
-                    $file->move('uploads/signatures/', $filename);
-                    $application->user_signature= config('app.url').'uploads/signatures/'. $filename;
+                    $file->move('uploads/application/signatures/', $filename);
+                    $application->user_signature= config('app.url').'uploads/application/signatures/'. $filename;
                 }
+
+                if ($request->avatar) {
+                    $file = $request->avatar;
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = getRandomString().'-'.time() . '.' . $extension;
+                    $file->move('uploads/application/avatars/', $filename);
+                    $application->avatar= config('app.url').'uploads/application/avatars/'. $filename;
+                }
+
                 $application->save();
                 DB::commit();
                 return response()->json([
@@ -593,5 +634,53 @@ class ApplicationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+
+
+
+    public function passportInfo($id, $user_id, $token)
+    {
+        $user = User::where('id', $user_id)->where('api_token', $token)->get();
+        if ($user->count()>0) {
+            $user = User::where('id', $user_id)->where('api_token', $token)->first();
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Invalid Request',
+            ], 404);
+        }
+
+        $application = Application::where('passport_number', $id)->get();
+
+        if ($application->count()>0) {
+            $application = Application::where('passport_number', $id)->first();
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Passport Not Found',
+            ], 404);
+        }
+        if ($application) {
+      
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Passport Found',
+                'user' => [
+                    'full_name' => $application->full_name,
+                    'father_name' => $application->father_name,
+                    'surname' => $application->surname,
+                ]
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Passport not found',
+                'user' => null
+                ], 404);
+        }
     }
 }

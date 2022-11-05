@@ -362,10 +362,10 @@
                                                 <select class="form-control" name="country" id="country_id" required>
                                                     <option selected value="" disabled>Select Your Country
                                                     </option>
-                                                    @foreach ($countries as $country)
+                                                    {{-- @foreach ($countries as $country)
                                                         <option value="{{ $country->id }}">
                                                         {{ $country->name }}</option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks good!

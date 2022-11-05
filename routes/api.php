@@ -44,6 +44,8 @@ Route::get('application/renew/{id}', [ApplicationController::class, 'renew']); /
 Route::post('application/store', [ApplicationController::class, 'store']); // application status
 
 Route::get('application/{id}/{user}/{token}', [ApplicationController::class, 'show']);
+
+Route::get('get_passport/info/{id}/{user}/{token}', [ApplicationController::class, 'passportInfo']);
  // application Editing Mode
 Route::get('application/{id}/edit', [ApplicationController::class, 'edit']); // application Editing Mode
 
@@ -58,6 +60,7 @@ Route::post('myprofile/{id}/update', [GeneralController::class, 'updateProfile']
 
 Route::post('getprovinces', [ApplicationController::class, 'getProvinces']); // application status
 Route::post('getcities', [ApplicationController::class, 'getCities']); // application status
+Route::post('getCommunities', [ApplicationController::class, 'getCommunities']); // application status
 
 
 // });

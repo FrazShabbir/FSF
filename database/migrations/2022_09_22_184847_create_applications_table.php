@@ -16,6 +16,8 @@ return new class () extends Migration {
             $table->id();
             $table->string('application_id', 20)->unique();
             $table->integer('user_id')->unsigned();
+            $table->string('avatar')->nullable();
+
             // Unique Information
             $table->string('passport_number', 20);
             $table->string('nie', 25);
