@@ -258,6 +258,13 @@ class ApplicationController extends Controller
                 $application->annually_fund_amount=$request->annually_fund_amount;
                 $application->user_signature=$request->user_signature;
                 $application->declaration_confirm=$request->declaration_confirm;
+                if ($request->user_signature) {
+                    $file = $request->user_signature;
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = getRandomString().'-'.time() . '.' . $extension;
+                    $file->move('uploads/signatures/', $filename);
+                    $application->user_signature= config('app.url').'uploads/signatures/'. $filename;
+                }
                 $application->save();
                 DB::commit();
                 return response()->json([
