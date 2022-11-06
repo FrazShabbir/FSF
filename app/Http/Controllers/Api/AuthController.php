@@ -137,7 +137,7 @@ class AuthController extends Controller
             $user->api_token = Str::random(60);
             $user->save();
             return response()->json([
-                'status' => true,
+                'status' => 200,
                 'message' => 'User Logged In Successfully',
                 'user'=> $user,
                 'token' =>$user->api_token
