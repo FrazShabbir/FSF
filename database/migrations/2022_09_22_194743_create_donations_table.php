@@ -28,7 +28,8 @@ return new class extends Migration
             $table->string('type'); //Made by Office / User
             
             $table->string('mode'); //Made by Office / User
-            $table->string('receipt');
+            $table->string('receipt')->nullable();
+
             $table->string('status')->default('PENDING');
             $table->timestamps();
             $table->softDeletes();

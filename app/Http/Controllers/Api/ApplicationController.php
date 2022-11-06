@@ -12,6 +12,7 @@ use App\Models\Province;
 use App\Models\Community;
 use App\Models\City;
 use App\Models\Application;
+use App\Models\ApplicationComment;
 use App\Models\User;
 use App\Models\Country;
 
@@ -307,6 +308,13 @@ class ApplicationController extends Controller
                 }
 
                 $application->save();
+
+                $comment = new ApplicationComment();
+                $comment->application_id = $application->id;
+                $comment->comment = 'Application Submitted Successfully';
+                $comment->status = 'Submitted';
+                $comment->save();
+
                 DB::commit();
                 return response()->json([
                     'status' => true,

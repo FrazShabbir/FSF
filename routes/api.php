@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\GeneralController;
+use App\Http\Controllers\Api\DonationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,10 @@ Route::put('application/{id}/update', [ApplicationController::class, 'update']);
 
 Route::get('myprofile/{id}/{token}', [GeneralController::class, 'myprofile']); // application status
 Route::post('myprofile/{id}/update', [GeneralController::class, 'updateProfile']); // application status
+
+Route::get('donation/create', [DonationController::class, 'create']); // application status
+Route::get('donations/all', [DonationController::class, 'allDonation']); // application status
+Route::post('donation/store', [DonationController::class, 'store']); // application status
 
 
 

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('application_comments', function (Blueprint $table) {
             $table->id();
-            $table->integer('receiver_id')->unsigned();
+            $table->integer('receiver_id')->unsigned()->nullable();
             $table->integer('application_id')->unsigned()->nullable();
             $table->string('comment');
             $table->string('status');
