@@ -20,7 +20,8 @@ return new class extends Migration
 
             $table->string('donor_bank_name')->nullable();
             $table->string('donor_bank_no')->nullable();
-
+            
+            $table->integer('fsf_bank_id')->nullable();
             $table->string('fsf_bank_name')->nullable();
             $table->string('fsf_bank_no')->nullable();
 

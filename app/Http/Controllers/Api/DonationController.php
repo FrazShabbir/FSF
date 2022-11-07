@@ -10,22 +10,18 @@ use App\Models\User;
 use App\Models\Account;
 use App\Models\Donation;
 use App\Models\Application;
+
 class DonationController extends Controller
 {
-
-
     public function create(Request $request)
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
-
             $accounts = Account::all();
             return response()->json([
                 'status' => 200,
                 'message' => 'All accounts Fetched',
                 'accounts' => $accounts,
             ], 200);
-
-
         } else {
             return response()->json([
                 'status' => 404,
@@ -83,10 +79,10 @@ class DonationController extends Controller
                     'application_id' => 'nullable',
                     'donor_bank_name' => 'required',
                     'donor_bank_no' => 'required',
-                    'fsf_bank_name' => 'nullable',
-                    'fsf_bank_no' => 'nullable',
+                    'fsf_bank_id' => 'required',
+                    // 'fsf_bank_no' => 'nullable',
                     'amount' => 'required',
-             
+
                     'receipt' => 'required',
 
                 ]
@@ -100,15 +96,20 @@ class DonationController extends Controller
                 ], 401);
             }
             DB::beginTransaction();
+
             $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
             if ($user) {
                 $application = Application::where('application_id', $request->application_id)->first();
-                if($application){
+                if ($application) {
                     $application_id = $application->id;
                     $type = 'Application';
-                }else{
+                } else {
                     $application_id = null;
                     $type = 'General';
+                }
+
+                if ($request->fsf_bank_id) {
+                    $account = Account::where('id', $request->fsf_bank_id)->first();
                 }
 
                 $donation = Donation::create([
@@ -116,8 +117,9 @@ class DonationController extends Controller
                     'application_id' => $application_id,
                     'donor_bank_name' => $request->donor_bank_name,
                     'donor_bank_no' => $request->donor_bank_no,
-                    'fsf_bank_name' => $request->fsf_bank_name,
-                    'fsf_bank_no' => $request->fsf_bank_no,
+                    'fsf_bank_id' => $account->id ?? null,
+                    'fsf_bank_name' => $account->name?? null,
+                    'fsf_bank_no' => $account->account_number??null,
                     'amount' => $request->amount,
                     'type' => $type,
                     'mode' => 'M-Online',
@@ -137,7 +139,6 @@ class DonationController extends Controller
                     'status' => 200,
                     'message' => 'Donation Created',
                 ], 200);
-
             } else {
                 DB::rollback();
                 return response()->json([
