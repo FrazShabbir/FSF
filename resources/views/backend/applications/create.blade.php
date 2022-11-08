@@ -139,7 +139,7 @@
                             <form class="form" action="{{ route('application.store') }}" method="POST">
                                 @csrf
                                 <div class="row setup-content px-3" id="user-detail" style="display: flex;">
-                                    <div class="col-12">
+                                    {{-- <div class="col-12">
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
                                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
@@ -152,7 +152,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
                                             <label class="control-label col-sm-12 align-self-center mb-0"
@@ -878,7 +878,7 @@
                                         <p>Where do you want to be buried?</p>
                                         <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="residential" name="buried_location"
-                                                class="custom-control-input" value="Spain">
+                                                class="custom-control-input" value="Spain" checked>
                                             <label class="custom-control-label" for="residential"> Spain
                                             </label>
                                         </div>
@@ -904,7 +904,7 @@
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="registed_relative_no" value="No"
-                                                name="registered_relatives" class="custom-control-input">
+                                                name="registered_relatives" class="custom-control-input" checked>
                                             <label class="custom-control-label" for="registed_relative_no">No</label>
                                         </div>
                                         <div class="valid-feedback">
@@ -945,31 +945,31 @@
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
                                             <input type="radio" id="amount_anual_30" name="annually_fund_amount"
-                                                class="custom-control-input">
+                                                class="custom-control-input" value="30">
                                             <label class="custom-control-label" for="amount_anual_30"> € 30
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
                                             <input type="radio" id="amount_anual_50" name="annually_fund_amount"
-                                                class="custom-control-input">
+                                                class="custom-control-input" value="50">
                                             <label class="custom-control-label" for="amount_anual_50"> € 50
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
                                             <input type="radio" id="amount_anual_70" name="annually_fund_amount"
-                                                class="custom-control-input">
+                                                class="custom-control-input" value="70">
                                             <label class="custom-control-label" for="amount_anual_70"> € 70
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
                                             <input type="radio" id="amount_anual_90" name="annually_fund_amount"
-                                                class="custom-control-input">
+                                                class="custom-control-input" value="90">
                                             <label class="custom-control-label" for="amount_anual_90"> € 90
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
                                             <input type="radio" id="amount_anual_100" name="annually_fund_amount"
-                                                class="custom-control-input">
+                                                class="custom-control-input" value="100" checked>
                                             <label class="custom-control-label" for="amount_anual_100"> € 100
                                             </label>
                                         </div>
@@ -1054,7 +1054,7 @@
             $('input[type=radio][name=registered_relatives]').change(function() {
                 if (this.value == '1') {
                     $("#reg_relative_passport_no").removeClass('d-none');
-                    $('#registered_relative_passport_no_input').prop('required', 'true');
+                    $('#registered_relative_passport_no_input').prop('required', true);
                     // document.getElementById("reg_relative_passport_no").attributes["required"] = "";
 
                 } else if (this.value == '0') {
@@ -1071,12 +1071,12 @@
             $('input[type=radio][name=annually_fund_amount]').change(function() {
                 if (this.value == 'other') {
                     $("#other_amount").removeClass('d-none');
-                    $('#other_annually_fund_amount').prop('required', 'true');
+                    $('#other_annually_fund_amount').prop('required', true);
 
 
                 } else {
                     $("#other_amount").addClass('d-none');
-                    $('#other_annually_fund_amount').prop('required', 'false');
+                    $('#other_annually_fund_amount').prop('required', false);
 
                 }
             });
@@ -1223,5 +1223,33 @@
 
 
         });
+
+
+        
     </script>
+
+<script>
+    $(document).ready(function() {
+        $('input[type=radio][name=registered_relatives]').change(function() {
+            if (this.value == 'Yes') {
+                $("#reg_relative_passport_no").removeClass('d-none');
+            } else if (this.value == 'No') {
+                $("#reg_relative_passport_no").addClass('d-none');
+            }
+        });
+    });
+</script>
+{{-- Anual Amount Others --}}
+<script>
+    $(document).ready(function() {
+        $('input[type=radio][name=annually_fund_amount]').change(function() {
+            if (this.value == 'other') {
+                $("#other_amount").removeClass('d-none');
+            } else {
+                $("#other_amount").addClass('d-none');
+            }
+        });
+    });
+</script>
+{{-- Signature Pad JS --}}
 @endpush

@@ -46,7 +46,7 @@
                                                 <div class="flex align-items-center list-user-action">
                                                     <a class="iq-bg-primary" data-toggle="tooltip"
                                                         data-placement="top" title=""
-                                                        data-original-title="Show" href=""><i class="lar la-eye"></i></a>
+                                                        data-original-title="Show" href="{{route('application.show',$application->application_id)}}"><i class="lar la-eye"></i></a>
                                                     <a class="iq-bg-primary" data-toggle="tooltip"
                                                         data-placement="top" title=""
                                                         data-original-title="Edit" href=""><i

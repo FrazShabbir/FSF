@@ -138,70 +138,72 @@ class ApplicationController extends Controller
             $application = Application::create([
                 'application_id'=>'W-App-'.getRandomString(10),
                 'user_id'=>$user->id,
-                'passport_number' => $request->passport_number??'0',
-                'nie' => $request->nie??'0',
-                'native_id'=>$request->native_id??'0',
-                'full_name'=>$request->full_name??'0',
-                'father_name'=>$request->father_name??'0',
-                'surname'=>$request->surname??'0',
+                'passport_number' => $request->passport_number,
+                'nie' => $request->nie,
+                'native_id'=>$request->native_id,
+                'full_name'=>$request->full_name,
+                'father_name'=>$request->father_name,
+                'surname'=>$request->surname,
 
-                'gender'=>$request->gender??'0',
-                'phone'=>$request->phone??'0',
-                'dob'=>$request->dob??'0',
-                'native_country'=>$request->native_country??'0',
-                'native_country_address'=>$request->native_country_address??'0',
-                'country_id'=>$request->country??'0',
+                'gender'=>$request->gender,
+                'phone'=>$request->phone,
+                'dob'=>$request->dob,
+                'native_country'=>$request->native_country,
+                'native_country_address'=>$request->native_country_address,
+                'country_id'=>$request->country,
 
-                'community_id'=>$request->community??'0',
-                'province_id'=>$request->province??'0',
-                'city_id'=>$request->city??'0',
-                'area'=>$request->area??'0',
-
-
+                'community_id'=>$request->community,
+                'province_id'=>$request->province,
+                'city_id'=>$request->city,
+                'area'=>$request->area,
 
 
 
-                's_relative_1_name'=>$request->s_relative_1_name??'0',
-                's_relative_1_relation'=>$request->s_relative_1_relation??'0',
-                's_relative_1_phone'=>$request->s_relative_1_phone??'0',
-                's_relative_1_address'=>$request->s_relative_1_address??'0',
-
-                's_relative_2_name'=>$request->s_relative_2_name??'0',
-                's_relative_2_relation'=>$request->s_relative_2_relation??'0',
-                's_relative_2_phone'=>$request->s_relative_2_phone??'0',
-                's_relative_2_address'=>$request->s_relative_2_address??'0',
 
 
-                'n_relative_1_name'=>$request->n_relative_1_name??'0',
-                'n_relative_1_relation'=>$request->n_relative_1_relation??'0',
-                'n_relative_1_phone'=>$request->n_relative_1_phone??'0',
-                'n_relative_1_address'=>$request->n_relative_1_address??'0',
+                's_relative_1_name'=>$request->s_relative_1_name,
+                's_relative_1_relation'=>$request->s_relative_1_relation,
+                's_relative_1_phone'=>$request->s_relative_1_phone,
+                's_relative_1_address'=>$request->s_relative_1_address,
 
-                'n_relative_2_name'=>$request->n_relative_2_name??'0',
-                'n_relative_2_relation'=>$request->n_relative_2_relation??'0',
-                'n_relative_2_phone'=>$request->n_relative_2_phone??'0',
-                'n_relative_2_address'=>$request->n_relative_2_address??'0',
+                's_relative_2_name'=>$request->s_relative_2_name,
+                's_relative_2_relation'=>$request->s_relative_2_relation,
+                's_relative_2_phone'=>$request->s_relative_2_phone,
+                's_relative_2_address'=>$request->s_relative_2_address,
+
+
+                'n_relative_1_name'=>$request->n_relative_1_name,
+                'n_relative_1_relation'=>$request->n_relative_1_relation,
+                'n_relative_1_phone'=>$request->n_relative_1_phone,
+                'n_relative_1_address'=>$request->n_relative_1_address,
+
+                'n_relative_2_name'=>$request->n_relative_2_name,
+                'n_relative_2_relation'=>$request->n_relative_2_relation,
+                'n_relative_2_phone'=>$request->n_relative_2_phone,
+                'n_relative_2_address'=>$request->n_relative_2_address,
 
 
 
-                'rep_name'=>$request->rep_name??'0',
-                'rep_surname'=>$request->rep_surname??'0',
-                'rep_passport_no'=>$request->rep_passport_no??'0',
-                'rep_phone'=>$request->rep_phone??'0',
-                'rep_address'=>$request->rep_address??'0',
-                'rep_confirmed'=>$request->rep_confirmed??'0',
+                'rep_name'=>$request->rep_name,
+                'rep_surname'=>$request->rep_surname,
+                'rep_passport_no'=>$request->rep_passport_no,
+                'rep_phone'=>$request->rep_phone,
+                'rep_address'=>$request->rep_address,
+                'rep_confirmed'=>$request->rep_confirmed,
 
-                'buried_location'=>$request->buried_location??'0',
+                'buried_location'=>$request->buried_location,
 
                 'registered_relatives'=>'1',
-                'registered_relative_passport_no'=>$request->registered_relative_passport_no??'0',
-                'annually_fund_amount'=>$request->annually_fund_amount??'0',
-                'user_signature'=>$request->user_signature??'0',
+                'registered_relative_passport_no'=>$request->registered_relative_passport_no,
+                'annually_fund_amount'=>$request->annually_fund_amount,
+                'user_signature'=>$request->user_signature??'DONE BY OPERATOR',
                 'declaration_confirm'=>$request->declaration_confirm??'0',
 
             ]);
             DB::commit();
-            return response()->json(['success'=>'Application Created Successfully']);
+            alert()->success('Success', 'Application Submitted Successfully');
+            return redirect()->route('application.index');
+            // return response()->json(['success'=>'Application Created Successfully']);
         } catch (\Throwable $th) {
             DB::rollback();
             dd($th);
@@ -216,7 +218,10 @@ class ApplicationController extends Controller
      */
     public function show($id)
     {
-        //
+        $application = Application::where('application_id',$id)->firstOrFail();
+// dd($application);
+        return view('backend.applications.show')
+            ->with('application', $application);
     }
 
     /**
