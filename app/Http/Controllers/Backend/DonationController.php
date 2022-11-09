@@ -24,7 +24,7 @@ class DonationController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.donation.create');
     }
 
     /**

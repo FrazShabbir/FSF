@@ -101,6 +101,29 @@
         </li>
 
 
+        <li @if (in_array(request()->route()->getName(),
+            ['donation.create', 'donation.edit', 'donation.index', 'donation.show'])) class="active" @endif>
+            <a href="#donation" class="iq-waves-effect" data-toggle="collapse"
+                @if (in_array(request()->route()->getName(),
+                    ['donation.create', 'donation.edit', 'donation.index', 'donation.show'])) aria-expanded="true" @else aria-expanded="false" @endif><span
+                    class="ripple rippleEffect"></span><i
+                    class="las la-money-check-alt iq-arrow-left"></i><span>Donations</span><i
+                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+            <ul id="donation" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
+                @can('Create Donations')
+                    <li class="{{ request()->route()->getName() == 'donation.create'? 'active': '' }}"><a
+                            href="{{ route('donation.create') }}"><i class="las la-plus"></i>New Donation</a>
+                    </li>
+                @endcan
+                @can('Read Donations')
+                    <li class="{{ request()->route()->getName() == 'donation.index'? 'active': '' }}"><a
+                            href="{{ route('donation.index') }}"><i class="las la-money-check-all"></i>All
+                            Donations</a>
+                    </li>
+                @endcan
+            </ul>
+        </li>
+
 
         {{-- SETTINGS ONLY FOR ADMIN AND SUPERADMIN --}}
         @can('Update Settings')

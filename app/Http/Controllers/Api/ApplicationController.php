@@ -292,6 +292,20 @@ class ApplicationController extends Controller
                 $application->user_signature=$request->user_signature;
                 $application->declaration_confirm=$request->declaration_confirm;
                 if ($request->user_signature) {
+                    $avatarValidator = Validator::make(
+                        $request->all(),
+                        [
+                            'user_signature' => 'requred|mimes:png,jpg,jpeg',]
+                    );
+                    if ($avatarValidator->fails()) {
+                        DB::rollback();
+                        return response()->json([
+                            'status' => false,
+                            'message' => 'validation error',
+                            'errors' => $avatarValidator->errors()
+                        ], 401);
+                    }
+
                     $file = $request->user_signature;
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
@@ -300,6 +314,19 @@ class ApplicationController extends Controller
                 }
 
                 if ($request->avatar) {
+                    $avatarValidator = Validator::make(
+                        $request->all(),
+                        [
+                            'avatar' => 'requred|mimes:png,jpg,jpeg',]
+                    );
+                    if ($avatarValidator->fails()) {
+                        DB::rollback();
+                        return response()->json([
+                            'status' => false,
+                            'message' => 'validation error',
+                            'errors' => $avatarValidator->errors()
+                        ], 401);
+                    }
                     $file = $request->avatar;
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
@@ -308,7 +335,6 @@ class ApplicationController extends Controller
                 }
 
                 $application->save();
-
                 $comment = new ApplicationComment();
                 $comment->application_id = $application->id;
                 $comment->comment = 'Application Submitted Successfully';

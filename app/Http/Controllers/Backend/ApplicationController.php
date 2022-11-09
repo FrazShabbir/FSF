@@ -12,6 +12,7 @@ use App\Models\Province;
 use App\Models\City;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Password;
@@ -56,7 +57,7 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        //  dd($request->all());
         $request->validate([
             'email'=>'required|email|unique:users,email',
             'passport_number' => 'required',
@@ -200,6 +201,22 @@ class ApplicationController extends Controller
                 'declaration_confirm'=>$request->declaration_confirm??'0',
 
             ]);
+
+            if ($request->avatar) {
+                $request->validate([
+                    'avatar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                ]);
+
+               
+                $file = $request->avatar;
+                $extension = $file->getClientOriginalExtension();
+                $filename = getRandomString().'-'.time() . '.' . $extension;
+                $file->move('uploads/application/avatars/', $filename);
+                $application->avatar= config('app.url').'uploads/application/avatars/'. $filename;
+                $application->save();
+            }
+
+
             DB::commit();
             alert()->success('Success', 'Application Submitted Successfully');
             return redirect()->route('application.index');

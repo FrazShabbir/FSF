@@ -136,23 +136,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <form class="form" action="{{ route('application.store') }}" method="POST">
+                            <form class="form" action="{{ route('application.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row setup-content px-3" id="user-detail" style="display: flex;">
-                                    {{-- <div class="col-12">
+                                    <div class="col-12">
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
                                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
-                                                    required />
+                                                    required name="avatar" />
                                                 <label for="imageUpload"></label>
                                             </div>
                                             <div class="avatar-preview">
                                                 <div id="imagePreview"
-                                                    style="background-image: url('http://i.pravatar.cc/500?img=7');">
+                                                    style="background-image: url({{asset('placeholder.png')}});">
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
                                             <label class="control-label col-sm-12 align-self-center mb-0"

@@ -118,7 +118,7 @@
                                         <div class="col-12">
                                             <div class="text-center mb-5">
                                                 <img class="rounded-circle" width="160px"
-                                                    src="http://i.pravatar.cc/500?img=7" alt="">
+                                                    src="{{$application->avatar ?? asset('placeholder.png')}}" alt="">
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -635,7 +635,7 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->registered_relatives }}</p>
+                                                                    {{ $application->registered_relatives=='1'?'Yes':'No' }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -649,7 +649,7 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->full_name }}</p>
+                                                                    <span class="font-weight-bold mr-1">€</span>{{ $application->annually_fund_amount }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -670,6 +670,9 @@
 
 
                                             @if ($application->registered_relatives == 1)
+                                                @php
+                                                    $relative = App\Models\Application::where('passport_number', $application->registered_relative_passport_no)->first();
+                                                @endphp
                                                 <div class="" id="relative_registers">
                                                     <div class="mb-4">
                                                         <h3>
@@ -685,7 +688,7 @@
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <p class="mb-0 float-right font-weight-bold">
-                                                                        {{ $application->rep_name }}</p>
+                                                                        {{ $relative->full_name }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -696,7 +699,7 @@
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <p class="mb-0 float-right font-weight-bold">
-                                                                        {{ $application->rep_surname }}</p>
+                                                                        {{ $relative->father_name }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -707,7 +710,7 @@
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <p class="mb-0 float-right font-weight-bold">
-                                                                        {{ $application->rep_passport_no }}</p>
+                                                                        {{ $relative->passport_number }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -718,7 +721,7 @@
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <p class="mb-0 float-right font-weight-bold">
-                                                                        {{ $application->rep_phone }}</p>
+                                                                        {{ $relative->phone }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -729,7 +732,7 @@
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <p class="mb-0 float-right font-weight-bold">
-                                                                        {{ $application->rep_address }}</p>
+                                                                        {{ $relative->area }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>

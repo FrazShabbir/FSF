@@ -25,6 +25,14 @@ return [
             'Delete Applications',
             'Export Applications',
         ],
+        
+        'Donations' => [
+            'Create Donations',
+            'Update Donations',
+            'Read Donations',
+            'Delete Donations',
+            'Export Donations',
+        ],
 
 
         'Settings' => [
