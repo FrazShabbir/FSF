@@ -82,7 +82,6 @@ class DonationController extends Controller
                     'fsf_bank_id' => 'required',
                     // 'fsf_bank_no' => 'nullable',
                     'amount' => 'required',
-
                     'receipt' => 'required',
 
                 ]

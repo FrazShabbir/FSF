@@ -56,8 +56,8 @@
 
 
 
-                                <button type="submit" class="btn btn-primary mr-3">Add Province</button>
-                                <a href="{{ route('province.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
+                                <button type="submit" class="btn btn-primary mr-3">Add City</button>
+                                <a href="{{ route('city.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
 
                             </form>
                         </div>

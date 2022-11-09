@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'All Cities')
+@section('title', 'All Donations')
 
 @section('styles')
 @endsection
@@ -17,10 +17,10 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">Cities</h4>
+                                <h4 class="card-title">Donations</h4>
                             </div>
                             <div class="">
-                                <a href="{{route('city.create')}}" class="btn btn-primary"><i class="las la-plus"></i>Add New City</a>
+                                <a href="{{route('donation.create')}}" class="btn btn-primary"><i class="las la-plus"></i>Add New Donation</a>
                             </div>
                         </div>
                         <div class="iq-card-body">
@@ -30,11 +30,10 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Name</th>
-                                            <th>Province</th>
-                                            <th>Community</th>
-                                            <th>Country</th>
-                                          
+                                            <th>Donor</th>
+                                            <th>Mode</th>
+                                            <th>receipt</th>
+                                            <th>Amount</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -42,25 +41,31 @@
                                         @php
                                             $i = 1;
                                         @endphp
-                                        @foreach ($cities as $city)
+                                        @foreach ($donations as $donation)
                                             <tr>
                                                 <td>{{ $i }}</td>
-                                                <td>{{ $city->name }}</td>
-                                                <td>{{ $city->province->name }}</td>
-                                                <td>{{ $city->province->community->name }}</td>
-                                                <td>{{ $city->province->community->country->name }}</td>
-                                              
-                                                <td>
-                                                    <form action="{{ route('city.destroy', $city->id) }}" method="post">
+                                                <td>{{ $donation->application->full_name??$donation->user->full_name ??'Manual' }}</td>
+                                                <td>{{ $donation->mode }}</td>
+                                                <th>
+                                                    <img id="uploadedImage_data_{{ $donation->id }}"
+                                                    class="img-preview img_modal" 
+                                                    src="{{ asset($donation->reeipt ??fromSettings('logo') ?? 'backend/images/fs_logo.png') }}"
+                                                    alt="" accept="image/png, image/jpeg">
+
+                                                </th>
+
+                                                <td><span class="font-weight-bold mr-1">€</span>{{ $donation->amount }}</td>
+                                             <td>
+                                                    <form action="{{ route('donation.destroy', $donation->id) }}" method="post">
                                                         <div class="flex align-items-center list-user-action">
                                                             <a class="iq-bg-primary" data-toggle="tooltip"
                                                                 data-placement="top" title=""
-                                                                data-original-title="Show" href="{{route('city.show', $city->id)}}"><i
+                                                                data-original-title="Show" href="{{route('donation.show', $donation->id)}}"><i
                                                                     class="lar la-eye"></i></a>
                                                             <a class="iq-bg-primary" data-toggle="tooltip"
                                                                 data-placement="top" title=""
                                                                 data-original-title="Edit"
-                                                                href="{{ route('city.edit', $city->id) }}"><i
+                                                                href="{{ route('donation.edit', $donation->id) }}"><i
                                                                     class="ri-pencil-line"></i></a>
                                                         
                                                                 @csrf
@@ -94,6 +99,25 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="ImageViewer" tabindex="-1" role="dialog" aria-labelledby="ImageViewerLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content text-center">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Image Viewer</h5>
+           
+            </div>
+            <div class="modal-body">
+             
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary close_modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 @endsection
 
 
@@ -108,7 +132,7 @@
                 buttons: [{
                         extend: 'copyHtml5',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4]
+                            columns: [0, 1, 2, 3]
                         }
                     },
                     {
@@ -120,7 +144,7 @@
                     {
                         extend: 'pdfHtml5',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4]
+                            columns: [0, 1, 2, 3]
                         }
                     },
                     'colvis'
@@ -135,4 +159,18 @@
 
         });
     </script>
+
+
+<script>
+    $('.img_modal').click(function() {
+        $('#ImageViewer').modal('show');
+        $('#ImageViewer .modal-body').html('<img src="'+$(this).attr('src')+'" class="img-fluid">');
+    });
+    $('.close_modal').click(function() {
+        $('#ImageViewer').modal('hide');
+
+    });
+</script>
+
+
 @endpush

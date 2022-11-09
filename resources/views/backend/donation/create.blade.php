@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Add New City | FSF')
+@section('title', 'Add New Donation | FSF')
 
 @section('styles')
 @endsection
@@ -17,14 +17,12 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">Add City</h4>
+                                <h4 class="card-title">Add Donation</h4>
                             </div>
                         </div>
                         <div class="iq-card-body px-4">
-                            <form action="{{ route('city.store') }}" method="POST">
+                            <form action="{{ route('donation.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-
-                             
                                 <div class="row">
 
                                     <div class="col-md-6 col-sm-12 mb-3">
@@ -33,15 +31,52 @@
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label class="" for="donor_bank_name">Donor Bank Name:</label>
-                                        <input type="text" name="donor_bank_name" id="" class="form-control" placeholder="Bank ABC">
+                                        <label class="required" for="donor_bank_name">Donor Bank Name:</label>
+                                        <input type="text" name="donor_bank_name" id="" class="form-control" placeholder="Bank ABC" required>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label class="required" for="donor_bank_no">Account Number/IBAN:</label>
+                                        <input type="text" name="donor_bank_no" id="" class="form-control" placeholder="Bank-90979" required>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label for="iso2" class="required">FSF Bank Name</label>
+
+                                        <select name="fsf_bank_id" id="" class="form-control" required>
+                                            @foreach ($accounts as $key)
+                                                <option value="{{ $key->id }}">{{ $key->name }} - {{$key->account_number}} - {{$key->bank}} - {{$key->city}}</option>
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label class="required" for="amount">Amount:</label>
+                                        <input type="number" step="0.01" name="amount" id="" class="form-control" placeholder="90" required>
+                                    </div>
+
+                             
+
+                                    
+
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <div class="form-group">
+                                            <p class="required">Receipt</p>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="receipt"
+                                                    id="receipt"  accept=".png, .jpg, .jpeg">
+                                                <label class="custom-file-label" for="image">Choose Logo
+                                                    (.png,.jpeg,jpg)</label>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
 
 
 
-                                <button type="submit" class="btn btn-primary mr-3">Add Province</button>
+                                <button type="submit" class="btn btn-primary mr-3">Save Donation</button>
                                 <a href="{{ route('province.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
 
                             </form>
