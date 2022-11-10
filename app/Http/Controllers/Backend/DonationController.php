@@ -17,9 +17,21 @@ class DonationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $donations = Donation::all();
+        $donations = Donation::when(!empty(request()->input('date_from')), function ($q) {
+            return $q->whereBetween('created_at', [date(request()->date_from), date(request()->date_to)]);
+        })
+        ->when(!empty(request()->input('date_from')), function ($q) {
+            return $q->where('created_at', '=', request()->input('date_from'));
+        })
+        ->when(!empty(request()->input('date_to')), function ($q) {
+            return $q->where('created_at', '=', request()->input('date_to'));
+        })
+        ->orderBy('id', 'ASC')
+        ->get();
+
+
         return view('backend.donation.index')
             ->with('donations', $donations);
     }
