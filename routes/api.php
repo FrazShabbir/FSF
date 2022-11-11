@@ -39,7 +39,7 @@ Route::post('/auth/logout', [AuthController::class, 'logout']); // login
 // Route::group( function () {
     // Route::apiResource('application', ApplicationController::class);// application
 Route::get('application/create', [ApplicationController::class, 'create']); // application status
-Route::get('application/renew/{id}', [ApplicationController::class, 'renew']); // application status
+Route::get('application/renew/', [ApplicationController::class, 'renew']); // application status
 
 
 Route::post('application/store', [ApplicationController::class, 'store']); // application status

@@ -31,15 +31,12 @@ class ApplicationController extends Controller
     public function create(Request $request)
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
-
             $countries = Country::all();
             return response()->json([
                 'status' => 200,
                 'message' => 'All Countries Fetched',
                 'countries' => $countries,
             ], 200);
-
-
         } else {
             return response()->json([
                 'status' => 404,
@@ -48,30 +45,258 @@ class ApplicationController extends Controller
         }
     }
 
-    public function renew($id)
+    public function renew(Request $request)
     {
-        $application = Application::where('application_id', $id)->first();
-        if ($application) {
-            return response()->json([
-                'status'=>'200',
-                'application'=>$application,
-                'message'=>'Application Fetched',
-            ]);
+        if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
+            $application = Application::where('application_id', $request->application_id)->first();
+            if ($application) {
+                if ($application->user_id != $request->user_id) {
+                    return response()->json([
+                        'status' => 403,
+                        'message' => 'Unauthorized Access',
+                    ], 403);
+                }
+                $countries = Country::all();
+                return response()->json([
+                    'status'=>'200',
+                    'countries' => $countries,
+                    'application'=>$application,
+                    'message'=>'Application Fetched',
+                ]);
+            } else {
+                return response()->json([
+                    'status'=>'404',
+                    'message'=>'Application Not Found',
+                ]);
+            }
         } else {
             return response()->json([
                 'status'=>'404',
-                'message'=>'Application Not Found',
+                'message'=>'User Not Found',
             ]);
         }
     }
     public function storeRenewApplication(Request $request, $id)
     {
+        try {
+            DB::beginTransaction();
+            $validateApplicationRequest = Validator::make(
+                $request->all(),
+                [
+                    'api_token' => 'required',
+                    'user_id' => 'required',
+                    'passport_number' => 'required',
+                    'nie' => 'required',
+                    'native_id'=>'required',
+                    'full_name'=>'required',
+                    'father_name'=>'required',
+                    'surname'=>'required',
+                    'gender'=>'required',
+                    'phone'=>'required',
+                    'dob'=>'required',
+                    'native_country'=>'required',
+                    'native_country_address'=>'required',
+                    'country_id'=>'required',
+                    'community_id'=>'required',
+                    'province_id'=>'required',
+                    'city_id'=>'required',
+                    'area'=>'required',
+
+                    's_relative_1_name'=>'required',
+                    's_relative_1_relation'=>'required',
+                    's_relative_1_phone'=>'required',
+                    's_relative_1_address'=>'required',
+
+                    's_relative_2_name'=>'required',
+                    's_relative_2_relation'=>'required',
+                    's_relative_2_phone'=>'required',
+                    's_relative_2_address'=>'required',
+
+                    'n_relative_1_name'=>'required',
+                    'n_relative_1_relation'=>'required',
+                    'n_relative_1_phone'=>'required',
+                    'n_relative_1_address'=>'required',
+
+
+                    'n_relative_2_name'=>'required',
+                    'n_relative_2_relation'=>'required',
+                    'n_relative_2_phone'=>'required',
+                    'n_relative_2_address'=>'required',
+
+                    'rep_name'=>'required',
+                    'rep_surname'=>'required',
+                    'rep_passport_no'=>'required',
+                    'rep_phone'=>'required',
+                    'rep_address'=>'required',
+                    'rep_confirmed'=>'required',
+
+                    'buried_location'=>'required',
+
+                    'registered_relatives'=>'required',
+                    'registered_relative_passport_no'=>'nullable',
+
+                    'annually_fund_amount'=>'required',
+                    'user_signature'=>'required',
+                    'declaration_confirm'=>'required',
+                ]
+            );
+
+            if ($validateApplicationRequest->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateApplicationRequest->errors()
+                ], 401);
+            } else {
+                $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
+                if (!$user) {
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Invalid Request',
+                    ], 404);
+                }
+                $application = Application::where('application_id', $request->application_id)->first();
+                if (!$application) {
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Application Not found.',
+                    ], 404);
+                }
+                $application->passport_number = $request->passport_number;
+                $application->nie = $request->nie;
+                $application->native_id = $request->native_id;
+                $application->full_name = $request->full_name;
+                $application->father_name = $request->father_name;
+                $application->surname = $request->surname;
+                $application->gender=$request->gender;
+                $application->phone=$request->phone;
+                $application->dob=$request->dob;
+                $application->native_country=$request->native_country;
+                $application->native_country_address=$request->native_country_address;
+                $application->country_id=$request->country_id;
+
+                $application->community_id=$request->community_id;
+                $application->province_id=$request->province_id;
+                $application->city_id=$request->city_id;
+                $application->area=$request->area;
+
+                $application->s_relative_1_name=$request->s_relative_1_name;
+                $application->s_relative_1_relation=$request->s_relative_1_relation;
+                $application->s_relative_1_phone=$request->s_relative_1_phone;
+                $application->s_relative_1_address=$request->s_relative_1_address;
+
+                $application->s_relative_2_name=$request->s_relative_2_name;
+                $application->s_relative_2_relation=$request->s_relative_2_relation;
+                $application->s_relative_2_phone=$request->s_relative_2_phone;
+                $application->s_relative_2_address=$request->s_relative_2_address;
+
+
+                $application->n_relative_1_name=$request->n_relative_1_name;
+                $application->n_relative_1_relation=$request->n_relative_1_relation;
+                $application->n_relative_1_phone=$request->n_relative_1_phone;
+                $application->n_relative_1_address=$request->n_relative_1_address;
+
+                $application->n_relative_2_name=$request->n_relative_2_name;
+                $application->n_relative_2_relation=$request->n_relative_2_relation;
+                $application->n_relative_2_phone=$request->n_relative_2_phone;
+                $application->n_relative_2_address=$request->n_relative_2_address;
+
+
+
+                $application->rep_name=$request->rep_name;
+                $application->rep_surname=$request->rep_surname;
+                $application->rep_passport_no=$request->rep_passport_no;
+                $application->rep_phone=$request->rep_phone;
+                $application->rep_address=$request->rep_address;
+                $application->rep_confirmed=$request->rep_confirmed;
+
+                $application->buried_location=$request->buried_location;
+
+
+                $application->registered_relatives=$request->registered_relatives;
+                $application->registered_relative_passport_no=$request->registered_relative_passport_no;
+                $application->annually_fund_amount=$request->annually_fund_amount;
+                $application->declaration_confirm=$request->declaration_confirm;
+                $application->status='PENDING';
+                if ($request->avatar) {
+                    $avatarValidator = Validator::make(
+                        $request->all(),
+                        [
+                            'avatar' => 'requred|mimes:png,jpg,jpeg',]
+                    );
+                    if ($avatarValidator->fails()) {
+                        DB::rollback();
+                        return response()->json([
+                            'status' => false,
+                            'message' => 'validation error',
+                            'errors' => $avatarValidator->errors()
+                        ], 401);
+                    }
+                    $file = $request->avatar;
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = getRandomString().'-'.time() . '.' . $extension;
+                    $file->move('uploads/application/avatars/', $filename);
+                    $application->avatar= config('app.url').'uploads/application/avatars/'. $filename;
+                }
+
+                $application->save();
+                $comment = new ApplicationComment();
+                $comment->application_id = $application->id;
+                $comment->comment = 'Application Submitted for Renewal.';
+                $comment->status = 'PENDING';
+                $comment->save();
+
+                $applicationRenewal = RenewApplication::create([
+                    'application_id' => $application->id,
+                    'annually_fund_amount' => $user->id,
+
+                    'declaration_confirm' => $request->declaration_confirm,
+                ]);
+
+                if ($request->user_signature) {
+                    $avatarValidator = Validator::make(
+                        $request->all(),
+                        [
+                            'user_signature' => 'required|mimes:png,jpg,jpeg',]
+                    );
+                    if ($avatarValidator->fails()) {
+                        DB::rollback();
+                        return response()->json([
+                            'status' => 401,
+                            'message' => 'validation error',
+                            'errors' => $avatarValidator->errors()
+                        ], 401);
+                    }
+
+                    $file = $request->user_signature;
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = getRandomString().'-'.time() . '.' . $extension;
+                    $file->move('uploads/application/signatures/', $filename);
+                    $applicationRenewal->user_signature= config('app.url').'uploads/application/signatures/'. $filename;
+                    $applicationRenewal->save();
+                }
+                $application->save();
+                DB::commit();
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Application Submitted Successfully.',
+                    'data' => $application
+                ], 200);
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => 'Something went wrong',
+                'error' => $th->getMessage()
+            ], 500);
+        }
     }
 
     public function getCommunities(Request $request)
     {
         $communities = Community::where('country_id', $request->country_id)->get();
-        
+
         if ($communities->count()>0) {
             return response()->json([
                 'status' => 200,
@@ -289,18 +514,18 @@ class ApplicationController extends Controller
                 $application->registered_relatives=$request->registered_relatives;
                 $application->registered_relative_passport_no=$request->registered_relative_passport_no;
                 $application->annually_fund_amount=$request->annually_fund_amount;
-                $application->user_signature=$request->user_signature;
                 $application->declaration_confirm=$request->declaration_confirm;
+
                 if ($request->user_signature) {
                     $avatarValidator = Validator::make(
                         $request->all(),
                         [
-                            'user_signature' => 'requred|mimes:png,jpg,jpeg',]
+                            'user_signature' => 'required|mimes:png,jpg,jpeg',]
                     );
                     if ($avatarValidator->fails()) {
                         DB::rollback();
                         return response()->json([
-                            'status' => false,
+                            'status' => 401,
                             'message' => 'validation error',
                             'errors' => $avatarValidator->errors()
                         ], 401);
@@ -338,9 +563,8 @@ class ApplicationController extends Controller
                 $comment = new ApplicationComment();
                 $comment->application_id = $application->id;
                 $comment->comment = 'Application Submitted Successfully';
-                $comment->status = 'Submitted';
+                $comment->status = 'SUBMITTED';
                 $comment->save();
-
                 DB::commit();
                 return response()->json([
                     'status' => true,
@@ -486,8 +710,10 @@ class ApplicationController extends Controller
     {
         $application = Application::where('application_id', $id)->first();
         if ($application) {
+            $countries = Country::all();
             return response()->json([
                 'status' => true,
+                'countries' => $countries,
                 'message' => 'Application found',
                 'application' => $application
                 ], 200);
@@ -524,7 +750,7 @@ class ApplicationController extends Controller
                 'dob'=>'required',
                 'native_country'=>'required',
                 'native_country_address'=>'required',
-                
+
                 'country'=>'required',
                 'community'=>'required',
                 'province'=>'required',
@@ -636,9 +862,30 @@ class ApplicationController extends Controller
                     $application->registered_relatives=$request->registered_relatives;
                     $application->registered_relative_passport_no=$request->registered_relative_passport_no;
                     $application->annually_fund_amount=$request->annually_fund_amount;
-                    $application->user_signature=$request->user_signature;
                     $application->declaration_confirm=$request->declaration_confirm;
-                    $application->status='Pending';
+                    $application->status='PENDING';
+
+                    if ($request->user_signature) {
+                        $avatarValidator = Validator::make(
+                            $request->all(),
+                            [
+                                'user_signature' => 'required|mimes:png,jpg,jpeg',]
+                        );
+                        if ($avatarValidator->fails()) {
+                            DB::rollback();
+                            return response()->json([
+                                'status' => 401,
+                                'message' => 'validation error',
+                                'errors' => $avatarValidator->errors()
+                            ], 401);
+                        }
+    
+                        $file = $request->user_signature;
+                        $extension = $file->getClientOriginalExtension();
+                        $filename = getRandomString().'-'.time() . '.' . $extension;
+                        $file->move('uploads/application/signatures/', $filename);
+                        $application->user_signature= config('app.url').'uploads/application/signatures/'. $filename;
+                    }
                     $application->save();
                     DB::commit();
                     return response()->json([
@@ -698,8 +945,6 @@ class ApplicationController extends Controller
             ], 404);
         }
         if ($application) {
-      
-
             return response()->json([
                 'status' => 200,
                 'message' => 'Passport Found',

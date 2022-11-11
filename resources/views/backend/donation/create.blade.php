@@ -24,6 +24,10 @@
                             <form action="{{ route('donation.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label class="required" for="passport_number">Passport Number:</label>
+                                        <input type="text" name="passport_number" id="" class="form-control" placeholder="Passport Number">
+                                    </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="" for="application_id">Application ID:</label>
