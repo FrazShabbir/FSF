@@ -62,7 +62,7 @@ class DonationController extends Controller
             'donor_bank_no' => 'required',
             'fsf_bank_id' => 'required',
             'amount' => 'required',
-   
+
             'receipt' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -137,7 +137,9 @@ class DonationController extends Controller
      */
     public function show($id)
     {
-        //
+        $donation = Donation::find($id);
+        return view('backend.donation.show')
+        ->with('donation', $donation);
     }
 
     /**
@@ -148,7 +150,9 @@ class DonationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $donation = Donation::find($id);
+        return view('backend.donation.edit')
+        ->with('donation', $donation);
     }
 
     /**
@@ -160,7 +164,52 @@ class DonationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'application_id' => 'nullable',
+            'donor_bank_name' => 'required',
+            'donor_bank_no' => 'required',
+            'fsf_bank_id' => 'required',
+            'amount' => 'required',
+            'status' => 'required',
+            'receipt' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        try {
+            DB::beginTransaction();
+            $application = Application::where('application_id', $request->application_id)->first();
+            if ($application) {
+                $application_id = $application->id;
+                $type = 'Application';
+            } else {
+                $application_id = null;
+                $type = 'General';
+            }
+            if ($request->fsf_bank_id) {
+                $account = Account::where('id', $request->fsf_bank_id)->first();
+            }
+            $donation = Donation::find($id);
+            $donation->application_id = $application_id;
+            $donation->donor_bank_name = $request->donor_bank_name;
+            $donation->donor_bank_no = $request->donor_bank_no;
+            $donation->fsf_bank_id =  $account->id ?? null;
+            $donation->fsf_bank_name = $account->name?? null;
+            $donation->fsf_bank_no = $account->account_number??null;
+            $donation->amount = $request->amount;
+            $donation->status = $request->status;
+            if ($request->receipt) {
+                $file = $request->receipt;
+                $extension = $file->getClientOriginalExtension();
+                $filename = getRandomString().'-'.time() . '.' . $extension;
+                $file->move('uploads/donations/receipts/', $filename);
+                $donation->receipt= config('app.url').'uploads/donations/receipts/'. $filename;
+            }
+            $donation->save();
+            DB::commit();
+            alert()->success('Donation Updated Successfully', 'Success');
+            return redirect()->route('donation.index');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            throw $th;
+        }
     }
 
     /**
