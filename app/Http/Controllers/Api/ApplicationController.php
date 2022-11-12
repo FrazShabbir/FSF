@@ -764,10 +764,10 @@ class ApplicationController extends Controller
                 'native_country'=>'required',
                 'native_country_address'=>'required',
 
-                'country'=>'required',
-                'community'=>'required',
-                'province'=>'required',
-                'city'=>'required',
+                'country_id'=>'required',
+                'community_id'=>'required',
+                'province_id'=>'required',
+                'city_id'=>'required',
                 'area'=>'required',
 
                 's_relative_1_name'=>'required',
@@ -850,11 +850,11 @@ class ApplicationController extends Controller
                     $application->dob=$request->dob;
                     $application->native_country=$request->native_country;
                     $application->native_country_address=$request->native_country_address;
-                    $application->country=$request->country;
+                    $application->country_id=$request->country_id;
 
-                    $application->community=$request->community;
-                    $application->province=$request->province;
-                    $application->city=$request->city;
+                    $application->community_id=$request->community_id;
+                    $application->province_id=$request->province_id;
+                    $application->city_id=$request->city_id;
                     $application->area=$request->area;
 
                     $application->s_relative_1_name=$request->s_relative_1_name;
@@ -888,7 +888,6 @@ class ApplicationController extends Controller
                     $application->rep_confirmed=$request->rep_confirmed;
 
                     $application->buried_location=$request->buried_location;
-
 
                     $application->registered_relatives=$request->registered_relatives;
                     $application->registered_relative_passport_no=$request->registered_relative_passport_no;
