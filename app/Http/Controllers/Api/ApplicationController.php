@@ -611,13 +611,7 @@ class ApplicationController extends Controller
                 'message' => 'Application Not Found',
             ], 404);
         }
-        // dd($application->countri->name);
         if ($application) {
-            // $country = Country::where('id', $application->country)->first();
-            // $community = Community::where('id', $application->community)->first();
-            // $province = Province::where('id', $application->province)->first();
-            // $city = City::where('id', $application->city)->first();
-
             return response()->json([
                 'status' => true,
                 'message' => 'Application found',
@@ -706,9 +700,28 @@ class ApplicationController extends Controller
                 ], 404);
         }
     }
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $application = Application::where('application_id', $id)->first();
+        $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->get();
+        if ($user->count()>0) {
+            $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Invalid Request',
+            ], 404);
+        }
+
+        $application = Application::where('application_id', $request->application_id)->where('user_id', $user->id)->get();
+        if ($application->count()>0) {
+            $application = Application::with('comments')->where('application_id', $request->application_id)->where('user_id', $user->id)->first();
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Application Not Found',
+            ], 404);
+        }
+
         if ($application) {
             $countries = Country::all();
             return response()->json([
@@ -732,14 +745,14 @@ class ApplicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $validateApplicationRequest = Validator::make(
             $request->all(),
             [
                 'user_id' => 'required',
                 'passport_number' => 'required',
-                // 'email'=>'required',
+                'application_id'=>'required',
                 'nie' => 'required',
                 'native_id'=>'required',
                 'full_name'=>'required',
@@ -805,7 +818,25 @@ class ApplicationController extends Controller
         } else {
             try {
                 DB::beginTransaction();
-                $application = Application::where('application_id', $id)->first();
+                $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->get();
+                if ($user->count()>0) {
+                    $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
+                } else {
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Invalid Request',
+                    ], 404);
+                }
+
+                $application = Application::where('application_id', $request->application_id)->where('user_id', $user->id)->get();
+                if ($application->count()>0) {
+                    $application = Application::with('comments')->where('application_id', $request->application_id)->where('user_id', $user->id)->first();
+                } else {
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Application Not Found',
+                    ], 404);
+                }
                 if ($application) {
                     $application->passport_number = $request->passport_number;
                     $application->nie = $request->nie;
@@ -879,7 +910,7 @@ class ApplicationController extends Controller
                                 'errors' => $avatarValidator->errors()
                             ], 401);
                         }
-    
+
                         $file = $request->user_signature;
                         $extension = $file->getClientOriginalExtension();
                         $filename = getRandomString().'-'.time() . '.' . $extension;

@@ -40,18 +40,13 @@ Route::post('/auth/logout', [AuthController::class, 'logout']); // login
     // Route::apiResource('application', ApplicationController::class);// application
 Route::get('application/create', [ApplicationController::class, 'create']); // application status
 Route::get('application/renew/', [ApplicationController::class, 'renew']); // application status
-
-
 Route::post('application/store', [ApplicationController::class, 'store']); // application status
-
 Route::get('application/{id}/{user}/{token}', [ApplicationController::class, 'show']);
+// application Editing Mode
+Route::get('application/edit', [ApplicationController::class, 'edit']); // application Editing Mode
+Route::post('application/update', [ApplicationController::class, 'update']); // application update Mode
 
 Route::get('get_passport/info/{id}/{user}/{token}', [ApplicationController::class, 'passportInfo']);
- // application Editing Mode
-Route::get('application/{id}/edit', [ApplicationController::class, 'edit']); // application Editing Mode
-
-Route::put('application/{id}/update', [ApplicationController::class, 'update']); // application update Mode
-
 
 
 Route::get('myprofile/{id}/{token}', [GeneralController::class, 'myprofile']); // application status
