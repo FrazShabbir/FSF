@@ -542,7 +542,7 @@ class ApplicationController extends Controller
                     $avatarValidator = Validator::make(
                         $request->all(),
                         [
-                            'avatar' => 'requred|mimes:png,jpg,jpeg',]
+                            'avatar' => 'required|mimes:png,jpg,jpeg',]
                     );
                     if ($avatarValidator->fails()) {
                         DB::rollback();
@@ -917,12 +917,12 @@ class ApplicationController extends Controller
                         $file->move('uploads/application/signatures/', $filename);
                         $application->user_signature= config('app.url').'uploads/application/signatures/'. $filename;
                     }
-                    
+
                     if ($request->avatar) {
                         $avatarValidator = Validator::make(
                             $request->all(),
                             [
-                                'avatar' => 'requred|mimes:png,jpg,jpeg',]
+                                'avatar' => 'required|mimes:png,jpg,jpeg',]
                         );
                         if ($avatarValidator->fails()) {
                             DB::rollback();
@@ -953,7 +953,7 @@ class ApplicationController extends Controller
                 return response()->json([
                     'status' => 500,
                     'message' => 'Something went wrong',
-                    'error' => $th
+                    'error' => $th->getMessage().'dsdsds'
                 ], 500);
             }
         }
