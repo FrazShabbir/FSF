@@ -700,6 +700,7 @@ class ApplicationController extends Controller
                 ], 404);
         }
     }
+
     public function edit(Request $request)
     {
         $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->get();
@@ -916,6 +917,28 @@ class ApplicationController extends Controller
                         $file->move('uploads/application/signatures/', $filename);
                         $application->user_signature= config('app.url').'uploads/application/signatures/'. $filename;
                     }
+                    
+                    if ($request->avatar) {
+                        $avatarValidator = Validator::make(
+                            $request->all(),
+                            [
+                                'avatar' => 'requred|mimes:png,jpg,jpeg',]
+                        );
+                        if ($avatarValidator->fails()) {
+                            DB::rollback();
+                            return response()->json([
+                                'status' => false,
+                                'message' => 'validation error',
+                                'errors' => $avatarValidator->errors()
+                            ], 401);
+                        }
+                        $file = $request->avatar;
+                        $extension = $file->getClientOriginalExtension();
+                        $filename = getRandomString().'-'.time() . '.' . $extension;
+                        $file->move('uploads/application/avatars/', $filename);
+                        $application->avatar= config('app.url').'uploads/application/avatars/'. $filename;
+                    }
+
                     $application->save();
                     DB::commit();
                     return response()->json([
@@ -928,7 +951,7 @@ class ApplicationController extends Controller
                 //throw $th;
                 DB::rollback();
                 return response()->json([
-                    'status' => false,
+                    'status' => 500,
                     'message' => 'Something went wrong',
                     'error' => $th
                 ], 500);
