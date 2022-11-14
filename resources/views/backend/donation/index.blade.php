@@ -49,7 +49,7 @@
                                                 <th>
                                                     <img id="uploadedImage_data_{{ $donation->id }}"
                                                     class="img-preview img_modal" 
-                                                    src="{{ asset($donation->reeipt ??fromSettings('logo') ?? 'backend/images/fs_logo.png') }}"
+                                                    src="{{ $donation->receipt ?? asset(fromSettings('logo') ?? 'backend/images/fs_logo.png') }}"
                                                     alt="" accept="image/png, image/jpeg">
 
                                                 </th>

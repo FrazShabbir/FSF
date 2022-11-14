@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
+            $table->string('donation_code')->unique();
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('application_id')->unsigned()->nullable();
+            $table->string('passport_number')->nullable();
 
             $table->string('donor_bank_name')->nullable();
             $table->string('donor_bank_no')->nullable();

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Account;
 use App\Models\Donation;
 use App\Models\Application;
+use App\Models\AccountTransaction;
 
 class DonationController extends Controller
 {
@@ -125,8 +126,10 @@ class DonationController extends Controller
                 }
 
                 $donation = Donation::create([
+                    'donation_code'=> 'D-'.date('YmdHis'),
                     'user_id' => $request->user_id,
                     'application_id' => $application_id,
+                    'passport_number' => $application->passport_number,
                     'donor_bank_name' => $request->donor_bank_name,
                     'donor_bank_no' => $request->donor_bank_no,
                     'fsf_bank_id' => $account->id ?? null,
@@ -145,6 +148,21 @@ class DonationController extends Controller
                     $donation->receipt= config('app.url').'uploads/donations/receipts/'. $filename;
                     $donation->save();
                 }
+
+                $transaction = AccountTransaction::create([
+                    'tranasction_id' => $donation->id,
+                    'type' => 'Credit',
+                    'user_id'=> $request->user_id,
+                    'account_id' => $account->id,
+                    'donation_id' => $donation->id,
+                    'application_id' => $application_id,
+                    'debit'=>0,
+                    'credit'=>$request->amount,
+                    'balance'=>$account->balance + $request->amount,
+                    'summary'=>'Donation',
+    
+                ]);
+
                 DB::commit();
                 return response()->json([
                     'donation' => $donation,

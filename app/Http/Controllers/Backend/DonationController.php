@@ -8,6 +8,7 @@ use App\Models\Donation;
 use App\Models\Account;
 use App\Models\User;
 use App\Models\Application;
+use App\Models\AccountTransaction;
 use Illuminate\Support\Facades\DB;
 
 class DonationController extends Controller
@@ -70,7 +71,7 @@ class DonationController extends Controller
             //code...
 
             DB::beginTransaction();
-            $application = Application::where('application_id', $request->application_id)->first();
+            $application = Application::where('application_id', $request->application_id)->orWhere('passport_number',$request->passport_number)->first();
             if ($application) {
                 $application_id = $application->id;
                 $type = 'Application';
@@ -81,9 +82,12 @@ class DonationController extends Controller
             if ($request->fsf_bank_id) {
                 $account = Account::where('id', $request->fsf_bank_id)->first();
             }
+
             $donation = Donation::create([
-                'user_id' => $request->user_id,
+                'donation_code'=> 'D-'.date('YmdHis'),
+                'user_id' => $application->user_id,
                 'application_id' => $application_id,
+                'passport_number' => $request->passport_number,
                 'donor_bank_name' => $request->donor_bank_name,
                 'donor_bank_no' => $request->donor_bank_no,
                 'fsf_bank_id' => $account->id ?? null,
@@ -106,7 +110,7 @@ class DonationController extends Controller
             $transaction = AccountTransaction::create([
                 'tranasction_id' => $donation->id,
                 'type' => 'Credit',
-                'user_id'=> $request->user_id,
+                'user_id'=> $donation->user_id,
                 'account_id' => $account->id,
                 'donation_id' => $donation->id,
                 'application_id' => $application_id,
@@ -151,7 +155,9 @@ class DonationController extends Controller
     public function edit($id)
     {
         $donation = Donation::find($id);
+        $accounts = Account::all();
         return view('backend.donation.edit')
+        ->with('accounts', $accounts)
         ->with('donation', $donation);
     }
 
