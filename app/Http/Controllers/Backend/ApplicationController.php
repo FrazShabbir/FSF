@@ -57,7 +57,6 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        //  dd($request->all());
         $request->validate([
             'email'=>'required|email|unique:users,email',
             'passport_number' => 'required',
@@ -236,7 +235,6 @@ class ApplicationController extends Controller
     public function show($id)
     {
         $application = Application::where('application_id',$id)->firstOrFail();
-// dd($application);
         return view('backend.applications.show')
             ->with('application', $application);
     }
