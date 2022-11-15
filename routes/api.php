@@ -38,6 +38,8 @@ Route::post('/auth/logout', [AuthController::class, 'logout']); // login
 
 // Route::group( function () {
     // Route::apiResource('application', ApplicationController::class);// application
+Route::get('application/myapplication', [ApplicationController::class, 'index']); // application status
+
 Route::get('application/create', [ApplicationController::class, 'create']); // application status
 Route::get('application/renew/', [ApplicationController::class, 'renew']); // application status
 Route::post('application/store', [ApplicationController::class, 'store']); // application status
@@ -61,6 +63,8 @@ Route::post('donation/store', [DonationController::class, 'store']); // applicat
 Route::post('getprovinces', [ApplicationController::class, 'getProvinces']); // application status
 Route::post('getcities', [ApplicationController::class, 'getCities']); // application status
 Route::post('getCommunities', [ApplicationController::class, 'getCommunities']); // application status
+
+Route::get('nearest-offices/all', [GeneralController::class, 'nearOffice']); // application status
 
 
 // });

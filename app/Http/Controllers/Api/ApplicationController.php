@@ -23,9 +23,21 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return "hello";
+       if(User::where('id',$request->user_id)->where('api_token',$request->api_token)->first()){
+            $applications = Application::where('user_id',$request->user_id)->get();
+            return response()->json([
+                'status' => 200,
+                'message' => 'All Applications Fetched',
+                'applications' => $applications,
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found',
+            ], 404);
+        }
     }
 
     public function create(Request $request)

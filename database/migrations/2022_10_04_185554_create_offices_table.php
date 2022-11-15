@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone');
-            $table->string('state');
-            $table->string('city');
+            $table->integer('city_id')->unsigned();
             $table->string('area');
             $table->string('street');
             $table->integer('officehead')->unsigned();

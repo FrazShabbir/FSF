@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Application;
+use App\Models\Office;
 use Illuminate\Support\Facades\Validator;
 
 class GeneralController extends Controller
@@ -97,6 +99,22 @@ class GeneralController extends Controller
                 'status' => 404,
                 'message' => 'User Not Found',
 
+            ], 404);
+        }
+    }
+    public function nearOffice(Request $request){
+        $application = Application::where('user_id', $request->user_id)->first();  
+        if($application){
+            $office = Office::where('city_id', $application->city_id)->first();
+            return response()->json([
+                'office' => $office,
+                'status' => 200,
+                'message' => 'Office Found',
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'Application Not Found.',
             ], 404);
         }
     }
