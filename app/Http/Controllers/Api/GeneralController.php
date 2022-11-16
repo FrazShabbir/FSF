@@ -105,11 +105,11 @@ class GeneralController extends Controller
     public function nearOffice(Request $request){
         $application = Application::where('user_id', $request->user_id)->first();  
         if($application){
-            $office = Office::where('city_id', $application->city_id)->first();
+            $offices = Office::where('city_id', $application->city_id)->get();
             return response()->json([
-                'office' => $office,
+                'offices' => $offices,
                 'status' => 200,
-                'message' => 'Office Found',
+                'message' => 'Office(s) Found',
             ], 200);
         }else{
             return response()->json([
