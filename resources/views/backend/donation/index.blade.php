@@ -34,6 +34,7 @@
                                             <th>Mode</th>
                                             <th>receipt</th>
                                             <th>Amount</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -51,22 +52,25 @@
                                                     class="img-preview img_modal" 
                                                     src="{{ $donation->receipt ?? asset(fromSettings('logo') ?? 'backend/images/fs_logo.png') }}"
                                                     alt="" accept="image/png, image/jpeg">
-
                                                 </th>
 
                                                 <td><span class="font-weight-bold mr-1">€</span>{{ $donation->amount }}</td>
+                                                <td><span class="badge badge-{{ $donation->status }}">{{ $donation->status }}</span></td>
                                              <td>
-                                                    <form action="{{ route('donation.destroy', $donation->id) }}" method="post">
+                                                    <form action="{{ route('donation.destroy', $donation->donation_code) }}" method="post">
                                                         <div class="flex align-items-center list-user-action">
                                                             <a class="iq-bg-primary" data-toggle="tooltip"
                                                                 data-placement="top" title=""
-                                                                data-original-title="Show" href="{{route('donation.show', $donation->id)}}"><i
+                                                                data-original-title="Show" href="{{route('donation.show', $donation->donation_code)}}"><i
                                                                     class="lar la-eye"></i></a>
-                                                            <a class="iq-bg-primary" data-toggle="tooltip"
-                                                                data-placement="top" title=""
-                                                                data-original-title="Edit"
-                                                                href="{{ route('donation.edit', $donation->id) }}"><i
-                                                                    class="ri-pencil-line"></i></a>
+                                                             @if ($donation->status == 'PENDING')
+                                                             <a class="iq-bg-primary" data-toggle="tooltip"
+                                                             data-placement="top" title=""
+                                                             data-original-title="Edit"
+                                                             href="{{ route('donation.edit', $donation->donation_code) }}"><i
+                                                                 class="ri-pencil-line"></i></a>
+                                                             @endif       
+                                                       
                                                         
                                                                 @csrf
                                                                 {{ method_field('Delete') }}

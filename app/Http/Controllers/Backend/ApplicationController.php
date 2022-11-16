@@ -198,6 +198,7 @@ class ApplicationController extends Controller
                 'annually_fund_amount'=>$request->annually_fund_amount,
                 'user_signature'=>$request->user_signature??'DONE BY OPERATOR',
                 'declaration_confirm'=>$request->declaration_confirm??'0',
+                'avatar'=>config('app.url').'/placeholder.png',
 
             ]);
 

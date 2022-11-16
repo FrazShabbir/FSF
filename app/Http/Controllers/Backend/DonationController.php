@@ -63,7 +63,7 @@ class DonationController extends Controller
             'donor_bank_no' => 'required',
             'fsf_bank_id' => 'required',
             'amount' => 'required',
-
+            'passport_number' => 'required',
             'receipt' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -75,9 +75,11 @@ class DonationController extends Controller
             if ($application) {
                 $application_id = $application->id;
                 $type = 'Application';
+                $passport = $application->passport_number;                
             } else {
                 $application_id = null;
                 $type = 'General';
+                $passport = $request->passport_number;
             }
             if ($request->fsf_bank_id) {
                 $account = Account::where('id', $request->fsf_bank_id)->first();
@@ -87,7 +89,7 @@ class DonationController extends Controller
                 'donation_code'=> 'D-'.date('YmdHis'),
                 'user_id' => $application->user_id,
                 'application_id' => $application_id,
-                'passport_number' => $request->passport_number,
+                'passport_number' => $passport,
                 'donor_bank_name' => $request->donor_bank_name,
                 'donor_bank_no' => $request->donor_bank_no,
                 'fsf_bank_id' => $account->id ?? null,
@@ -141,7 +143,7 @@ class DonationController extends Controller
      */
     public function show($id)
     {
-        $donation = Donation::find($id);
+        $donation = Donation::where('donation_code', $id)->firstOrFail();
         return view('backend.donation.show')
         ->with('donation', $donation);
     }
@@ -154,8 +156,12 @@ class DonationController extends Controller
      */
     public function edit($id)
     {
-        $donation = Donation::find($id);
+        $donation = Donation::where('donation_code', $id)->firstOrFail();
         $accounts = Account::all();
+        if($donation->status == 'APPROVED' or $donation->status == 'REJECTED'){
+            alert()->info('Donation Already '.$donation->status, 'Error');
+            return redirect()->route('donation.show', $donation->donaton_code);
+        }
         return view('backend.donation.edit')
         ->with('accounts', $accounts)
         ->with('donation', $donation);
@@ -171,10 +177,11 @@ class DonationController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'application_id' => 'nullable',
+            // 'application_id' => 'nullable',
             'donor_bank_name' => 'required',
             'donor_bank_no' => 'required',
             'fsf_bank_id' => 'required',
+            'passport_number' => 'required',
             'amount' => 'required',
             'status' => 'required',
             'receipt' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -192,8 +199,9 @@ class DonationController extends Controller
             if ($request->fsf_bank_id) {
                 $account = Account::where('id', $request->fsf_bank_id)->first();
             }
-            $donation = Donation::find($id);
-            $donation->application_id = $application_id;
+            $donation = Donation::where('donation_code', $id)->first();
+            // $donation->application_id = $application_id;
+            // $donation->passport_number = $request->passport_number;
             $donation->donor_bank_name = $request->donor_bank_name;
             $donation->donor_bank_no = $request->donor_bank_no;
             $donation->fsf_bank_id =  $account->id ?? null;

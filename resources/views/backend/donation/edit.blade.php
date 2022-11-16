@@ -23,15 +23,16 @@
                         <div class="iq-card-body px-4">
                             <form action="{{ route('donation.update',$donation->donation_code) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="passport_number">Passport Number:</label>
-                                        <input type="text" name="passport_number" id="" class="form-control" placeholder="Passport Number" value="{{$donation->passport_number}}">
+                                        <input type="text" name="passport_number" readonly id="" class="form-control" placeholder="Passport Number" value="{{$donation->passport_number}}">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="" for="application_id">Application ID:</label>
-                                        <input type="text" name="application_id" id="" class="form-control" placeholder="W-App-778767" value="{{$donation->application_id}}">
+                                        <input type="text" name="application_id" readonly id="" class="form-control" placeholder="W-App-778767" value="{{$donation->application->application_id}}">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
@@ -55,11 +56,23 @@
 
                                     </div>
 
+                                    
+
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="amount">Amount:</label>
                                         <input type="number" step="0.01" name="amount" id="" class="form-control" placeholder="90" required value="{{$donation->amount}}">
                                     </div>
 
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label for="status" class="required">Status</label>
+
+                                        <select name="status" id="" class="form-control" required>
+                                            <option value="APPROVED" {{$donation->status=='APPROVED'?'selected':''}}>APPROVED</option>
+                                            <option value="PENDING" {{$donation->status=='PENDING'?'selected':''}}>PENDING</option>
+                                            <option value="REJECTED" {{$donation->status=='REJECTED'?'selected':''}}>REJECTED/REFUNDED</option>
+                                        </select>
+
+                                    </div>
                              
 
                                     
@@ -78,11 +91,7 @@
 
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 mb-3">
-                                        <img src="{{$donation->receipt}}" alt="{{$donation->donation_code}}">
-                                    </div>
-                                </div>
+                              
 
                                 <button type="submit" class="btn btn-primary mr-3">Update Donation</button>
                                 <a href="{{ route('province.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
@@ -91,6 +100,28 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Donation Receipt ({{$donation->donation_code}})</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body px-4">
+                            
+
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 mb-3">
+                                        <img src="{{$donation->receipt}}" alt="{{$donation->donation_code}}" class="img-fluid">
+                                    </div>
+                                </div>
+
+                             
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

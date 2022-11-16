@@ -143,7 +143,7 @@
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
                                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
-                                                    required name="avatar" />
+                                                     name="avatar"  />
                                                 <label for="imageUpload"></label>
                                             </div>
                                             <div class="avatar-preview">
@@ -1143,7 +1143,9 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
         $("#imageUpload").change(function() {
+
             readURL(this);
         });
     </script>
