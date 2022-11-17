@@ -207,7 +207,7 @@ class ApplicationController extends Controller
                     'avatar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 ]);
 
-               
+
                 $file = $request->avatar;
                 $extension = $file->getClientOriginalExtension();
                 $filename = getRandomString().'-'.time() . '.' . $extension;
@@ -235,7 +235,7 @@ class ApplicationController extends Controller
      */
     public function show($id)
     {
-        $application = Application::where('application_id',$id)->firstOrFail();
+        $application = Application::where('application_id', $id)->firstOrFail();
         return view('backend.applications.show')
             ->with('application', $application);
     }
@@ -248,7 +248,12 @@ class ApplicationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $application = Application::where('application_id', $id)->firstOrFail();
+        $countries = Country::where('status', 1)->get();
+
+        return view('backend.applications.edit')
+            ->with('application', $application)
+            ->with('countries', $countries);
     }
 
     /**

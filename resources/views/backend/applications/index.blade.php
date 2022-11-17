@@ -49,7 +49,7 @@
                                                         data-original-title="Show" href="{{route('application.show',$application->application_id)}}"><i class="lar la-eye"></i></a>
                                                     <a class="iq-bg-primary" data-toggle="tooltip"
                                                         data-placement="top" title=""
-                                                        data-original-title="Edit" href=""><i
+                                                        data-original-title="Edit" href="{{route('application.edit',$application->application_id)}}"><i
                                                             class="ri-pencil-line"></i></a>
                                                   
                                                         @csrf
