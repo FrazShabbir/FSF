@@ -518,7 +518,7 @@ class ApplicationController extends Controller
                 $application->rep_passport_no=$request->rep_passport_no;
                 $application->rep_phone=$request->rep_phone;
                 $application->rep_address=$request->rep_address;
-                $application->rep_confirmed=$request->rep_confirmed;
+                $application->rep_confirmed=$request->rep_confirmed??1;
 
                 $application->buried_location=$request->buried_location;
 
@@ -526,7 +526,7 @@ class ApplicationController extends Controller
                 $application->registered_relatives=$request->registered_relatives;
                 $application->registered_relative_passport_no=$request->registered_relative_passport_no;
                 $application->annually_fund_amount=$request->annually_fund_amount;
-                $application->declaration_confirm=$request->declaration_confirm;
+                $application->declaration_confirm=$request->declaration_confirm??1;
 
                 if ($request->user_signature) {
                     $avatarValidator = Validator::make(

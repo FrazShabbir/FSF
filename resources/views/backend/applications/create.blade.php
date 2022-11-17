@@ -859,7 +859,7 @@
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" id="rep_confirmed"
-                                                name="rep_confirmed" value="1">
+                                                name="rep_confirmed" value="1" required readonly checked disabled>
                                             <label class="custom-control-label" for="rep_confirmed">Have you
                                                 informed him that you are appointing this person as your
                                                 Representative in FSF and this person will be authorized to
@@ -944,38 +944,38 @@
                                                 not give any amount annually </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="amount_anual_30" name="annually_fund_amount"
+                                            <input type="radio" id="amount_anual_30" name="annually_fund_amount_fixed"
                                                 class="custom-control-input" value="30">
                                             <label class="custom-control-label" for="amount_anual_30"> € 30
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="amount_anual_50" name="annually_fund_amount"
+                                            <input type="radio" id="amount_anual_50" name="annually_fund_amount_fixed"
                                                 class="custom-control-input" value="50">
                                             <label class="custom-control-label" for="amount_anual_50"> € 50
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="amount_anual_70" name="annually_fund_amount"
+                                            <input type="radio" id="amount_anual_70" name="annually_fund_amount_fixed"
                                                 class="custom-control-input" value="70">
                                             <label class="custom-control-label" for="amount_anual_70"> € 70
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="amount_anual_90" name="annually_fund_amount"
+                                            <input type="radio" id="amount_anual_90" name="annually_fund_amount_fixed"
                                                 class="custom-control-input" value="90">
                                             <label class="custom-control-label" for="amount_anual_90"> € 90
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="amount_anual_100" name="annually_fund_amount"
+                                            <input type="radio" id="amount_anual_100" name="annually_fund_amount_fixed"
                                                 class="custom-control-input" value="100" checked>
                                             <label class="custom-control-label" for="amount_anual_100"> € 100
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
                                             <input type="radio" id="amount_anual_other" value="other"
-                                                name="annually_fund_amount" class="custom-control-input">
+                                                name="annually_fund_amount_fixed" class="custom-control-input">
                                             <label class="custom-control-label" for="amount_anual_other">
                                                 Other </label>
                                         </div>
@@ -987,7 +987,7 @@
                                                     <div class="col-sm-12">
                                                         <input type="text" class="form-control"
                                                             id="other_annually_fund_amount"
-                                                            name="other_annually_fund_amount"
+                                                            name="annually_fund_amount"
                                                             placeholder="Enter Anually Fund Amount">
                                                     </div>
                                                 </div>
@@ -1009,7 +1009,7 @@
                                     </div>
                                 </div>
                                 <div class="row setup-content px-3" id="confirm-data" style="display: none;">
-                                    <div class="col-12 mb-4">
+                                    {{-- <div class="col-12 mb-4">
                                         <div id="signature">
                                             <canvas width="500" height="200"></canvas>
                                             <div class="controls">
@@ -1017,11 +1017,11 @@
                                                     Signature</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" id="declaration_confirm"
-                                                name="declaration_confirm" value="1">
+                                                name="declaration_confirm" value="1" required checked readonly>
                                             <label class="custom-control-label" for="declaration_confirm">Have you
                                                 read carefully to all the conditions and regulations of this
                                                 funeral service fund?</label>
@@ -1068,18 +1068,21 @@
     {{-- Anual Amount Others --}}
     <script>
         $(document).ready(function() {
-            $('input[type=radio][name=annually_fund_amount]').change(function() {
+            $('input[type=radio][name=annually_fund_amount_fixed]').change(function() {
                 if (this.value == 'other') {
                     $("#other_amount").removeClass('d-none');
+                    var amount  = $('input[type=radio][name="annually_fund_amount_fixed"]:checked').val();
+                    $('#other_annually_fund_amount').val(100);
                     $('#other_annually_fund_amount').prop('required', true);
-
-
                 } else {
                     $("#other_amount").addClass('d-none');
+                    var amount  = $('input[type=radio][name="annually_fund_amount_fixed"]:checked').val();
+                    $('#other_annually_fund_amount').val(amount);
                     $('#other_annually_fund_amount').prop('required', false);
 
                 }
             });
+
         });
     </script>
     {{-- Signature Pad JS --}}

@@ -189,7 +189,7 @@ class ApplicationController extends Controller
                 'rep_passport_no'=>$request->rep_passport_no,
                 'rep_phone'=>$request->rep_phone,
                 'rep_address'=>$request->rep_address,
-                'rep_confirmed'=>$request->rep_confirmed,
+                'rep_confirmed'=>$request->rep_confirmed??'1',
 
                 'buried_location'=>$request->buried_location,
 
@@ -197,7 +197,7 @@ class ApplicationController extends Controller
                 'registered_relative_passport_no'=>$request->registered_relative_passport_no,
                 'annually_fund_amount'=>$request->annually_fund_amount,
                 'user_signature'=>$request->user_signature??'DONE BY OPERATOR',
-                'declaration_confirm'=>$request->declaration_confirm??'0',
+                'declaration_confirm'=>$request->declaration_confirm??'1',
                 'avatar'=>config('app.url').'/placeholder.png',
 
             ]);
@@ -265,7 +265,143 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $application = Application::where('application_id', $id)->firstOrFail();
+        $user = User::where('id', $application->user_id)->firstOrFail();
+
+        $request->validate([
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'passport_number' => 'required',
+            'nie' => 'required',
+            'native_id'=>'required',
+            'full_name'=>'required',
+            'father_name'=>'required',
+            'surname'=>'required',
+            'gender'=>'required',
+            'phone'=>'required',
+            'dob'=>'required',
+            'native_country'=>'required',
+            'native_country_address'=>'required',
+            'country'=>'required',
+            'community'=>'required',
+            'province'=>'required',
+            'city'=>'required',
+            'area'=>'required',
+
+            's_relative_1_name'=>'required',
+            's_relative_1_relation'=>'required',
+            's_relative_1_phone'=>'required',
+            's_relative_1_address'=>'required',
+
+            's_relative_2_name'=>'required',
+            's_relative_2_relation'=>'required',
+            's_relative_2_phone'=>'required',
+            's_relative_2_address'=>'required',
+
+            'n_relative_1_name'=>'required',
+            'n_relative_1_relation'=>'required',
+            'n_relative_1_phone'=>'required',
+            'n_relative_1_address'=>'required',
+
+
+            'n_relative_2_name'=>'required',
+            'n_relative_2_relation'=>'required',
+            'n_relative_2_phone'=>'required',
+            'n_relative_2_address'=>'required',
+
+            'rep_name'=>'required',
+            'rep_surname'=>'required',
+            'rep_passport_no'=>'required',
+            'rep_phone'=>'required',
+            'rep_address'=>'required',
+            'rep_confirmed'=>'required',
+
+            'buried_location'=>'required',
+
+            'registered_relatives'=>'required',
+            'registered_relative_passport_no'=>'nullable',
+
+            'annually_fund_amount'=>'required',
+            // 'user_signature'=>'required',
+            'declaration_confirm'=>'required',
+        ]);
+
+        try {
+            db::beginTransaction();
+            
+            $user->full_name = $request->full_name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->passport_number = $request->passport_number;
+            $user->save();
+        
+            $application->passport_number = $request->passport_number;
+            $application->nie = $request->nie;
+            $application->native_id=$request->native_id;
+            $application->full_name=$request->full_name;
+            $application->father_name=$request->father_name;
+            $application->surname=$request->surname;
+
+            $application->gender=$request->gender;
+            $application->phone=$request->phone;
+            $application->dob=$request->dob;
+            $application->native_country=$request->native_country;
+            $application->native_country_address=$request->native_country_address;
+            $application->country_id=$request->country;
+
+            $application->community_id=$request->community;
+            $application->province_id=$request->province;
+            $application->city_id=$request->city;
+            $application->area=$request->area;
+
+            $application->s_relative_1_name=$request->s_relative_1_name;
+            $application->s_relative_1_relation=$request->s_relative_1_relation;
+            $application->s_relative_1_phone=$request->s_relative_1_phone;
+            $application->s_relative_1_address=$request->s_relative_1_address;
+
+            $application->s_relative_2_name=$request->s_relative_2_name;
+            $application->s_relative_2_relation=$request->s_relative_2_relation;
+            $application->s_relative_2_phone=$request->s_relative_2_phone;
+            $application->s_relative_2_address=$request->s_relative_2_address;
+
+
+            $application->n_relative_1_name=$request->n_relative_1_name;
+            $application->n_relative_1_relation=$request->n_relative_1_relation;
+            $application->n_relative_1_phone=$request->n_relative_1_phone;
+            $application->n_relative_1_address=$request->n_relative_1_address;
+
+            $application->n_relative_2_name=$request->n_relative_2_name;
+            $application->n_relative_2_relation=$request->n_relative_2_relation;
+            $application->n_relative_2_phone=$request->n_relative_2_phone;
+            $application->n_relative_2_address=$request->n_relative_2_address;
+
+
+
+            $application->rep_name=$request->rep_name;
+            $application->rep_surname=$request->rep_surname;
+            $application->rep_passport_no=$request->rep_passport_no;
+            $application->rep_phone=$request->rep_phone;
+            $application->rep_address=$request->rep_address;
+            $application->rep_confirmed=$request->rep_confirmed??'1';
+
+            $application->buried_location=$request->buried_location;
+
+            $application->registered_relatives='1';
+            $application->registered_relative_passport_no=$request->registered_relative_passport_no;
+            $application->annually_fund_amount=$request->annually_fund_amount;
+            $application->user_signature=$request->user_signature??'DONE BY OPERATOR';
+            $application->declaration_confirm=$request->declaration_confirm??'1';
+            $application->save();
+
+            db::commit();
+            alert()->success('Success', 'Application Updated Successfully');
+            return redirect()->route('application.show', $application->application_id);
+        } catch (\Throwable $th) {
+            db::rollback();
+            alert()->error('Error', $th->getMessage());
+            return redirect()->back();
+            //throw $th;
+        }
     }
 
     /**

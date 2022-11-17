@@ -136,8 +136,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <form class="form" action="{{ route('application.store') }}" method="POST" enctype="multipart/form-data">
+                            <form class="form" action="{{ route('application.update',$application->application_id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="row setup-content px-3" id="user-detail" style="display: flex;">
                                     <div class="col-12">
                                         <div class="avatar-upload">
@@ -283,7 +284,7 @@
                                                 <select name="native_country" id="native_country" class="form-control"
                                                     required>
                                                     <option value="" selected disabled>Choose Your Native  Country</option>
-                                                    <option value="{{$application->country->id}}" selected>{{$application->country->name}}</option>
+                                                    <option value="{{$application->nativecountry->id}}" selected>{{$application->country->name}}</option>
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country->id }}">
                                                             {{ $country->name }}</option>
@@ -374,8 +375,8 @@
                                                 for="country">Country</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="country" id="country_id" required>
-                                                    <option selected value="" disabled>Select Your Country
-                                                    </option>
+                                                  
+                                                    <option value="{{$application->country->id}}">{{$application->country->name}}</option>
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country->id }}">
                                                             {{ $country->name }}</option>
@@ -396,7 +397,7 @@
                                                 for="community">Community</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="community" id="community">
-                                                    <option selected value="dsds">Select Your Community</option>
+                                                    <option value="{{$application->community->id}}">{{$application->community->name}}</option>
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -412,9 +413,8 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="province">Province</label>
                                             <div class="col-sm-12">
-                                                <select class="form-control" name="province" id="province_id" required
-                                                    value="{{ old('full_name') }}">
-                                                    <option selected value="">Select Your </option>
+                                                <select class="form-control" name="province" id="province_id" required>
+                                                    <option value="{{$application->province->id}}">{{$application->province->name}}</option>
 
                                                 </select>
                                                 <div class="valid-feedback">
@@ -432,9 +432,8 @@
                                                 for="city">City</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="city" id="city_id" required>
-                                                    <option selected value="">Select Your
-                                                        City
-                                                    </option>
+                                                    <option value="{{$application->city->id}}">{{$application->city->name}}</option>
+
 
                                                 </select>
                                                 <div class="valid-feedback">
@@ -453,7 +452,7 @@
                                                 / Street / House No.</label>
                                             <div class="col-sm-12">
                                                 <textarea class="form-control" name="area" id="area" placeholder="Enter Your  Area / Street / House No."
-                                                    required> {{$application->full_name }}</textarea>
+                                                    required> {{$application->area }}</textarea>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -483,7 +482,7 @@
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_1_name"
                                                     name="s_relative_1_name" placeholder="Enter Relative Full Name"
-                                                    required value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    required value="{{$application->s_relative_1_name ??old('s_relative_1_name') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -499,7 +498,7 @@
                                                 for="s_relative_1_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_1_relation"
-                                                    name="s_relative_1_relation" placeholder="Enter Your Realtion" value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="s_relative_1_relation" placeholder="Enter Your Realtion" value="{{$application->s_relative_1_name ??old('s_relative_1_name') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -515,7 +514,7 @@
                                                 for="s_relative_1_phone">Cell No.</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_1_phone"
-                                                    name="s_relative_1_phone" placeholder="Enter Relative Cell No." value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="s_relative_1_phone" placeholder="Enter Relative Cell No." value="{{$application->s_relative_1_phone ??old('s_relative_1_phone') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -531,7 +530,7 @@
                                                 for="s_relative_1_address">Complete Address</label>
                                             <div class="col-sm-12">
                                                 <textarea class="form-control" name="s_relative_1_address" id="s_relative_1_address"
-                                                    placeholder="Enter Relative Complete Address">{{$application->full_name ??old('s_relative_1_name') }}</textarea>
+                                                    placeholder="Enter Relative Complete Address">{{$application->s_relative_1_address ??old('s_relative_1_address') }}</textarea>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -552,7 +551,7 @@
                                                 for="s_relative_2_name">Full Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_2_name"
-                                                    name="s_relative_2_name" placeholder="Enter Relative Full Name" value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="s_relative_2_name" placeholder="Enter Relative Full Name" value="{{$application->s_relative_2_name ??old('s_relative_2_name') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -568,7 +567,7 @@
                                                 for="s_relative_2_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_2_relation"
-                                                    name="s_relative_2_relation" placeholder="Enter Your Realtion" value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="s_relative_2_relation" placeholder="Enter Your Realtion" value="{{$application->s_relative_2_relation ??old('s_relative_2_relation') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -584,7 +583,7 @@
                                                 for="s_relative_2_phone">Cell No.</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_2_phone"
-                                                    name="s_relative_2_phone" placeholder="Enter Relative Cell No." value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="s_relative_2_phone" placeholder="Enter Relative Cell No." value="{{$application->s_relative_2_phone ??old('s_relative_2_phone') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -600,7 +599,7 @@
                                                 for="s_relative_2_address">Complete Address</label>
                                             <div class="col-sm-12">
                                                 <textarea class="form-control" name="s_relative_2_address" id="s_relative_2_address"
-                                                    placeholder="Enter Relative Complete Address">{{$application->full_name ??old('s_relative_1_name') }}
+                                                    placeholder="Enter Relative Complete Address">{{$application->s_relative_2_address ??old('s_relative_2_address') }}
                                                             </textarea>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -630,7 +629,7 @@
                                                 for="n_relative_1_name">Full Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="n_relative_1_name"
-                                                    name="n_relative_1_name" placeholder="Enter Relative Full Name" value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="n_relative_1_name" placeholder="Enter Relative Full Name" value="{{$application->n_relative_1_name ??old('n_relative_1_name') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -646,7 +645,7 @@
                                                 for="n_relative_1_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="n_relative_1_relation"
-                                                    name="n_relative_1_relation" placeholder="Enter Your Realtion" value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="n_relative_1_relation" placeholder="Enter Your Realtion" value="{{$application->n_relative_1_relation ??old('n_relative_1_relation') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -662,7 +661,7 @@
                                                 for="n_relative_1_phone">Cell No.</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="n_relative_1_phone"
-                                                    name="n_relative_1_phone" placeholder="Enter Relative Cell No." value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="n_relative_1_phone" placeholder="Enter Relative Cell No." value="{{$application->n_relative_1_phone ??old('n_relative_1_phone') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -678,7 +677,7 @@
                                                 for="n_relative_1_address">Complete Address</label>
                                             <div class="col-sm-12">
                                                 <textarea class="form-control" name="n_relative_1_address" id="n_relative_1_address"
-                                                    placeholder="Enter Relative Complete Address">{{$application->full_name ??old('s_relative_1_name') }}
+                                                    placeholder="Enter Relative Complete Address">{{$application->n_relative_1_address ??old('n_relative_1_address') }}
                                                             </textarea>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -700,7 +699,7 @@
                                                 for="n_relative_2_name">Full Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="n_relative_2_name"
-                                                    name="n_relative_2_name" placeholder="Enter Relative Full Name" value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="n_relative_2_name" placeholder="Enter Relative Full Name" value="{{$application->n_relative_2_name ??old('n_relative_2_name') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -716,7 +715,7 @@
                                                 for="n_relative_2_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="n_relative_2_relation"
-                                                    name="n_relative_2_relation" placeholder="Enter Your Realtion" value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="n_relative_2_relation" placeholder="Enter Your Realtion" value="{{$application->n_relative_2_relation ??old('n_relative_2_relation') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -732,7 +731,7 @@
                                                 for="n_relative_2_phone">Cell No.</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="n_relative_2_phone"
-                                                    name="n_relative_2_phone" placeholder="Enter Relative Cell No." value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="n_relative_2_phone" placeholder="Enter Relative Cell No." value="{{$application->n_relative_2_phone ??old('n_relative_2_phone') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -748,7 +747,7 @@
                                                 for="n_relative_2_address">Complete Address</label>
                                             <div class="col-sm-12">
                                                 <textarea class="form-control" name="n_relative_2_address" id="n_relative_2_address"
-                                                    placeholder="Enter Relative Complete Address">{{$application->full_name ??old('s_relative_1_name') }}
+                                                    placeholder="Enter Relative Complete Address">{{$application->n_relative_2_address ??old('n_relative_2_address') }}
                                                             </textarea>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -779,7 +778,7 @@
                                                 Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="rep_name"
-                                                    name="rep_name" placeholder="Enter Representative Full Name"  value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="rep_name" placeholder="Enter Representative Full Name"  value="{{$application->rep_name ??old('rep_name') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -796,7 +795,7 @@
                                                 Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="rep_surname"
-                                                    name="rep_surname" placeholder="Enter Representative Sur Name" value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="rep_surname" placeholder="Enter Representative Sur Name" value="{{$application->rep_surname ??old('rep_surname') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -813,7 +812,7 @@
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="rep_passport_no"
                                                     name="rep_passport_no"
-                                                    placeholder="Enter Representative Passport No." value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    placeholder="Enter Representative Passport No." value="{{$application->rep_passport_no ??old('rep_passport_no') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -830,7 +829,7 @@
                                                 No.</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="rep_phone"
-                                                    name="rep_phone" placeholder="Enter Representative Cell No." value="{{$application->full_name ??old('s_relative_1_name') }}">
+                                                    name="rep_phone" placeholder="Enter Representative Cell No." value="{{$application->rep_phone ??old('rep_phone') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -847,7 +846,7 @@
                                             <div class="col-sm-12">
                                                 <textarea class="form-control" name="rep_address" id="rep_address"
                                                     placeholder="Enter Representative Complete Address">
-                                                    {{$application->full_name ??old('s_relative_1_name') }}</textarea>
+                                                    {{$application->rep_address ??old('rep_address') }}</textarea>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -861,7 +860,7 @@
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" id="rep_confirmed"
-                                                name="rep_confirmed" value="1">
+                                                name="rep_confirmed" value="1" {{$application->rep_confirmed==1?'checked':''}} required readonly>
                                             <label class="custom-control-label" for="rep_confirmed">Have you
                                                 informed him that you are appointing this person as your
                                                 Representative in FSF and this person will be authorized to
@@ -880,13 +879,13 @@
                                         <p>Where do you want to be buried?</p>
                                         <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="residential" name="buried_location"
-                                                class="custom-control-input" value="Spain" checked>
+                                                class="custom-control-input" value="Spain" {{$application->buried_location=='Spain'?'checked':''}}>
                                             <label class="custom-control-label" for="residential"> Spain
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="native" name="buried_location"
-                                                class="custom-control-input" value="Native Country">
+                                                class="custom-control-input" value="Native Country" {{$application->buried_location=='Native Country'?'checked':''}}>
                                             <label class="custom-control-label" for="native"> Native Country
                                             </label>
                                         </div>
@@ -901,12 +900,12 @@
                                         <p>Do you have any relatives registered in this fund?</p>
                                         <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="registed_relative_yes" value="Yes"
-                                                name="registered_relatives" class="custom-control-input">
+                                                name="registered_relatives" class="custom-control-input" {{$application->registered_relatives=='1'?'checked':''}}>
                                             <label class="custom-control-label" for="registed_relative_yes">Yes</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="registed_relative_no" value="No"
-                                                name="registered_relatives" class="custom-control-input" checked>
+                                                name="registered_relatives" class="custom-control-input" {{$application->registered_relatives=='0'?'checked':''}}>
                                             <label class="custom-control-label" for="registed_relative_no">No</label>
                                         </div>
                                         <div class="valid-feedback">
@@ -926,7 +925,7 @@
                                                     <input type="text" class="form-control"
                                                         id="registered_relative_passport_no"
                                                         name="registered_relative_passport_no"
-                                                        placeholder="Enter Registered Relative Passport No.">
+                                                        placeholder="Enter Registered Relative Passport No." value="{{$application->registered_relative_passport_no??''}}">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
@@ -940,44 +939,44 @@
                                     <div class="col-12 mb-4">
                                         <p>How much will you pay annually into this fund?</p>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="no_amount_anual" name="annually_fund_amount"
+                                            <input type="radio" id="no_amount_anual" name="annually_fund_amount_fixed"
                                                 class="custom-control-input">
                                             <label class="custom-control-label" for="no_amount_anual"> I will
                                                 not give any amount annually </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="amount_anual_30" name="annually_fund_amount"
-                                                class="custom-control-input" value="30">
+                                            <input type="radio" id="amount_anual_30" name="annually_fund_amount_fixed"
+                                                class="custom-control-input" value="30" {{$application->annually_fund_amount=='30'?'checked':''}}>
                                             <label class="custom-control-label" for="amount_anual_30"> € 30
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="amount_anual_50" name="annually_fund_amount"
-                                                class="custom-control-input" value="50">
+                                            <input type="radio" id="amount_anual_50" name="annually_fund_amount_fixed"
+                                                class="custom-control-input" value="50" {{$application->annually_fund_amount=='50'?'checked':''}}>
                                             <label class="custom-control-label" for="amount_anual_50"> € 50
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="amount_anual_70" name="annually_fund_amount"
-                                                class="custom-control-input" value="70">
+                                            <input type="radio" id="amount_anual_70" name="annually_fund_amount_fixed"
+                                                class="custom-control-input" value="70" {{$application->annually_fund_amount=='70'?'checked':''}}>
                                             <label class="custom-control-label" for="amount_anual_70"> € 70
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="amount_anual_90" name="annually_fund_amount"
-                                                class="custom-control-input" value="90">
+                                            <input type="radio" id="amount_anual_90" name="annually_fund_amount_fixed"
+                                                class="custom-control-input" value="90" {{$application->annually_fund_amount=='90'?'checked':''}}>
                                             <label class="custom-control-label" for="amount_anual_90"> € 90
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="amount_anual_100" name="annually_fund_amount"
-                                                class="custom-control-input" value="100" checked>
+                                            <input type="radio" id="amount_anual_100" name="annually_fund_amount_fixed"
+                                                class="custom-control-input" value="100" {{$application->annually_fund_amount=='100'?'checked':''}}>
                                             <label class="custom-control-label" for="amount_anual_100"> € 100
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio mb-3">
                                             <input type="radio" id="amount_anual_other" value="other"
-                                                name="annually_fund_amount" class="custom-control-input">
+                                                name="annually_fund_amount_fixed" class="custom-control-input">
                                             <label class="custom-control-label" for="amount_anual_other">
                                                 Other </label>
                                         </div>
@@ -987,10 +986,10 @@
                                                     <label class="control-label col-sm-12 align-self-center mb-0"
                                                         for="other_annually_fund_amount">Enter Other Amount</label>
                                                     <div class="col-sm-12">
-                                                        <input type="text" class="form-control"
+                                                        <input type="number" class="form-control" step="0.01"
                                                             id="other_annually_fund_amount"
-                                                            name="other_annually_fund_amount"
-                                                            placeholder="Enter Anually Fund Amount">
+                                                            name="annually_fund_amount"
+                                                            placeholder="Enter Anually Fund Amount" value="{{$application->annually_fund_amount}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1011,7 +1010,7 @@
                                     </div>
                                 </div>
                                 <div class="row setup-content px-3" id="confirm-data" style="display: none;">
-                                    <div class="col-12 mb-4">
+                                    {{-- <div class="col-12 mb-4">
                                         <div id="signature">
                                             <canvas width="500" height="200"></canvas>
                                             <div class="controls">
@@ -1019,11 +1018,11 @@
                                                     Signature</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" id="declaration_confirm"
-                                                name="declaration_confirm" value="1">
+                                                name="declaration_confirm" value="1" required {{$application->declaration_confirm==1?'checked':''}} readonly>
                                             <label class="custom-control-label" for="declaration_confirm">Have you
                                                 read carefully to all the conditions and regulations of this
                                                 funeral service fund?</label>
@@ -1070,20 +1069,24 @@
     {{-- Anual Amount Others --}}
     <script>
         $(document).ready(function() {
-            $('input[type=radio][name=annually_fund_amount]').change(function() {
+            $('input[type=radio][name=annually_fund_amount_fixed]').change(function() {
                 if (this.value == 'other') {
                     $("#other_amount").removeClass('d-none');
+                    var amount  = $('input[type=radio][name="annually_fund_amount_fixed"]:checked').val();
+                    $('#other_annually_fund_amount').val(100);
                     $('#other_annually_fund_amount').prop('required', true);
-
-
                 } else {
                     $("#other_amount").addClass('d-none');
+                    var amount  = $('input[type=radio][name="annually_fund_amount_fixed"]:checked').val();
+                    $('#other_annually_fund_amount').val(amount);
                     $('#other_annually_fund_amount').prop('required', false);
 
                 }
             });
+
         });
     </script>
+
     {{-- Signature Pad JS --}}
     {{-- <script>
         var color = "#000000";
