@@ -210,11 +210,9 @@
                                                 for="gender">Gender</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="gender" id="gender" required>
-                                                    <option selected value="">Select
-                                                        Gender
-                                                    </option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
+                                                    <option  value="" disabled>Select Gender </option>
+                                                    <option value="Male" {{$application->gender=='Male'?'selected':''}}>Male</option>
+                                                    <option value="Female" {{$application->gender=='Female'?'selected':''}}>Female</option>
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -915,7 +913,7 @@
                                             Please select anr one of these
                                         </div>
                                     </div>
-                                    <div id="reg_relative_passport_no" class="d-none w-100">
+                                    <div id="reg_relative_passport_no" class="@if($application->registered_relatives=='0')d-none @endif w-100">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group row mb-4">
                                                 <label class="control-label col-sm-12 align-self-center mb-0"
@@ -925,7 +923,7 @@
                                                     <input type="text" class="form-control"
                                                         id="registered_relative_passport_no"
                                                         name="registered_relative_passport_no"
-                                                        placeholder="Enter Registered Relative Passport No." value="{{$application->registered_relative_passport_no??''}}">
+                                                        placeholder="Enter Registered Relative Passport No." value="{{$application->registered_relative_passport_no??''}}" @if($application->registered_relatives=='1')d-none @endif>
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
