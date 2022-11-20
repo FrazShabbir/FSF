@@ -897,12 +897,12 @@
                                     <div class="col-12 mb-4">
                                         <p>Do you have any relatives registered in this fund?</p>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="registed_relative_yes" value="Yes"
+                                            <input type="radio" id="registed_relative_yes" value="1"
                                                 name="registered_relatives" class="custom-control-input" {{$application->registered_relatives=='1'?'checked':''}}>
                                             <label class="custom-control-label" for="registed_relative_yes">Yes</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="registed_relative_no" value="No"
+                                            <input type="radio" id="registed_relative_no" value="0"
                                                 name="registered_relatives" class="custom-control-input" {{$application->registered_relatives=='0'?'checked':''}}>
                                             <label class="custom-control-label" for="registed_relative_no">No</label>
                                         </div>
@@ -923,7 +923,7 @@
                                                     <input type="text" class="form-control"
                                                         id="registered_relative_passport_no"
                                                         name="registered_relative_passport_no"
-                                                        placeholder="Enter Registered Relative Passport No." value="{{$application->registered_relative_passport_no??''}}" @if($application->registered_relatives=='1')d-none @endif>
+                                                        placeholder="Enter Registered Relative Passport No." value="{{$application->registered_relative_passport_no??''}}" @if($application->registered_relatives=='1') required @endif>
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>

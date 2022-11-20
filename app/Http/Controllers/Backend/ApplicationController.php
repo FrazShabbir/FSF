@@ -135,6 +135,13 @@ class ApplicationController extends Controller
             $user->assignRole('member');
             event(new Registered($user));
 
+            $find_relative = Application::where('passport_number', $request->registered_relative_passport_no)->first();
+            $registered = 0;
+            if ($find_relative) {
+                $registered = 1;
+                $passport_number = $find_relative->passport_number;
+            }
+
             $application = Application::create([
                 'application_id'=>'W-App-'.getRandomString(10),
                 'user_id'=>$user->id,
@@ -193,8 +200,8 @@ class ApplicationController extends Controller
 
                 'buried_location'=>$request->buried_location,
 
-                'registered_relatives'=>'1',
-                'registered_relative_passport_no'=>$request->registered_relative_passport_no,
+                'registered_relatives'=>$registered,
+                'registered_relative_passport_no'=>$passport_number??null,
                 'annually_fund_amount'=>$request->annually_fund_amount,
                 'user_signature'=>$request->user_signature??'DONE BY OPERATOR',
                 'declaration_confirm'=>$request->declaration_confirm??'1',
@@ -329,6 +336,14 @@ class ApplicationController extends Controller
         try {
             db::beginTransaction();
             
+            $find_relative = Application::where('passport_number', $request->registered_relative_passport_no)->first();
+            $registered = 0;
+            if ($find_relative) {
+                $registered = 1;
+                $passport_number = $find_relative->passport_number;
+            }
+           
+
             $user->full_name = $request->full_name;
             $user->email = $request->email;
             $user->phone = $request->phone;
@@ -386,8 +401,9 @@ class ApplicationController extends Controller
 
             $application->buried_location=$request->buried_location;
 
-            $application->registered_relatives='1';
-            $application->registered_relative_passport_no=$request->registered_relative_passport_no;
+            $application->registered_relatives=$registered;
+            $application->registered_relative_passport_no=$passport_number??null;
+
             $application->annually_fund_amount=$request->annually_fund_amount;
             $application->user_signature=$request->user_signature??'DONE BY OPERATOR';
             $application->declaration_confirm=$request->declaration_confirm??'1';

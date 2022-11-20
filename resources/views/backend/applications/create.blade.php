@@ -358,7 +358,7 @@
                                                         Looks good!
                                                     </div>
                                             <div class="invalid-feedback">
-                                                Please enter your REmail.
+                                                Please enter your Email.
                                             </div>
                                         </div>
                                     </div>
@@ -374,8 +374,7 @@
                                                 for="country">Country</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" name="country" id="country_id" required>
-                                                    <option selected value="" disabled>Select Your Country
-                                                    </option>
+                                                    <option selected value="" disabled>Select Your Country </option>
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country->id }}">
                                                             {{ $country->name }}</option>
@@ -898,12 +897,12 @@
                                     <div class="col-12 mb-4">
                                         <p>Do you have any relatives registered in this fund?</p>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="registed_relative_yes" value="Yes"
+                                            <input type="radio" id="registed_relative_yes" value="1"
                                                 name="registered_relatives" class="custom-control-input">
                                             <label class="custom-control-label" for="registed_relative_yes">Yes</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="registed_relative_no" value="No"
+                                            <input type="radio" id="registed_relative_no" value="0"
                                                 name="registered_relatives" class="custom-control-input" checked>
                                             <label class="custom-control-label" for="registed_relative_no">No</label>
                                         </div>
