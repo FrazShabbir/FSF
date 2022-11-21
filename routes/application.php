@@ -15,6 +15,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::put('application/{id}/update', [ApplicationController::class, 'update'])->name('application.update')->middleware(['can:Update Applications']);
     Route::delete('application/{id}', [ApplicationController::class, 'destroy'])->name('application.destroy')->middleware(['can:Delete Applications']);
 
+    Route::post('application/comment/{id}', [ApplicationController::class, 'commentStore'])->name('application.commentStore')->middleware(['can:Update Applications']);
+
 
     Route::get('donations', [DonationController::class, 'index'])->name('donation.index')->middleware(['can:Read Donations']);
     Route::get('donation/create', [DonationController::class, 'create'])->name('donation.create')->middleware(['can:Create Donations']);

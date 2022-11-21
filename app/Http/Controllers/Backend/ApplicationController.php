@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\Community;
 use App\Models\Province;
 use App\Models\City;
+use App\Models\ApplicationComment;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Validator;
@@ -454,5 +455,38 @@ class ApplicationController extends Controller
         ->get(["name", "id"]);
 
         return response()->json($data);
+    }
+
+
+    public function commentStore(Request $request, $id)
+    {
+        $request->validate([
+            'comment'=>'required',
+            'status'=>'required',
+        ]);
+        try {
+            DB::beginTransaction();
+            $application = Application::where('application_id',$id)->first();
+            $comment = ApplicationComment::create([
+                'application_id'=>$application->id,
+                'comment'=>$request->comment,
+                'status'=>$request->status,
+                'receiver_id'=>auth()->user()->id,
+            ]);
+            $application->status = $request->status;
+            $application->save();
+            DB::commit();
+            alert()->success('Success', 'Comment Added Successfully');
+            return redirect()->back();
+            
+        } catch (\Throwable $th) {
+            DB::rollback();
+            alert()->error('Error', $th->getMessage());
+            return redirect()->back();
+
+           
+        }
+       
+        return redirect()->back();
     }
 }

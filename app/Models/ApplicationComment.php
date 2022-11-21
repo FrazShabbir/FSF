@@ -10,4 +10,6 @@ class ApplicationComment extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
+
 }
