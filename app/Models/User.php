@@ -55,5 +55,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    function application(){
+        return $this->hasOne(Application::class);
+    }
   
+    function donations(){
+        return $this->hasMany(Donation::class)->orderBy('created_at', 'desc');
+    }
 }

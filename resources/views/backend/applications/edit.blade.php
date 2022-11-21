@@ -141,6 +141,9 @@
                             <div class="iq-header-title">
                                 <h4 class="card-title">Validate Wizard</h4>
                             </div>
+                            <div class="iq-header-title">
+                                <a href="" class="btn btn-primary">View User Profile</a>
+                            </div>
                         </div>
                         <div class="iq-card-body">
                             <div class="stepwizard mt-4">
@@ -1118,6 +1121,50 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Application Tree</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="table-responsive">
+                               
+                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
+                                    aria-describedby="user-list-page-info">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th>Comments</th>
+                                            <th>Status</th>
+                                            <th>Done By</th>
+                                            <th>Date</th>
+                                            
+                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                                        @foreach($application->comments as $comment)
+                                        <tr>
+                                            <td>{{$comment->comment}}</td>
+                                            <td>{{$comment->status}}</td>
+                                            <td>{{$comment->user->full_name ?? $application->user->full_name}}</td>
+                                            <td>{{date('d-M-Y',strtotime($comment->created_at))}}</td>
+                                            
+                                        </tr>
+                              
+                                        @endforeach
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                   
                         </div>
                     </div>
                 </div>

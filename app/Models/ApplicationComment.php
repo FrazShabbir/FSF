@@ -11,5 +11,8 @@ class ApplicationComment extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+    function user(){
+        return $this->belongsTo(User::class,'receiver_id');
+    }
 
 }

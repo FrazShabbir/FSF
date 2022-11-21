@@ -19,6 +19,9 @@
                    <div class="iq-header-title">
                       <h4 class="card-title">User Detail</h4>
                    </div>
+                   <div class="iq-header-title">
+                    <a href="" class="btn btn-primary">User Application</a>
+                 </div>
                 </div>
                 <div class="iq-card-body px-4">
                    
@@ -104,6 +107,80 @@
                 </div>
              </div>
           </div>
+
+          <div class="col-sm-12">
+            <div class="iq-card">
+                <div class="iq-card-header d-flex justify-content-between">
+                    <div class="iq-header-title">
+                        <h4 class="card-title">User List</h4>
+                    </div>
+                </div>
+                <div class="iq-card-body">
+                    <div class="table-responsive">
+                      
+                        <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
+                            aria-describedby="user-list-page-info">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Donation ID</th>
+                                    <th>Application ID</th>
+                                    <th>Applicant Bank</th>
+                                    <th>FSF BANK</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+                                @foreach ($user->donations as $donation)
+                                    <tr>
+                                        <td>{{ $donation->donation_code }}</td>
+                                        <td>{{ $donation->application->application_id }}</td>
+                                        <td>{{ $donation->donor_bank_name }} -{{ $donation->donor_bank_no }}  </td>
+                                        <td>{{ $donation->fsf_bank_name }}-{{ $donation->fsf_bank_no }}</td>
+                                        <td class="font-weight-bold"><span class="font-weight-bold mr-1">€</span>{{ $donation->amount }}</td>
+                                        <td><span class="badge badge-{{$donation->status}}">{{ $donation->status }}</span></td>
+
+                                        <td>
+                                            <form action="{{ route('donation.destroy', $donation->id) }}" method="post">
+                                                <div class="flex align-items-center list-donation-action">
+                                                    <a class="iq-bg-primary" data-toggle="tooltip"
+                                                        data-placement="top" title=""
+                                                        data-original-title="Show" href="{{route('donation.show', $donation->id)}}"><i
+                                                            class="lar la-eye"></i></a>
+                                                    <a class="iq-bg-primary" data-toggle="tooltip"
+                                                        data-placement="top" title=""
+                                                        data-original-title="Edit"
+                                                        href="{{ route('donation.edit', $donation->id) }}"><i
+                                                            class="ri-pencil-line"></i></a>
+                                                        @csrf
+                                                        {{ method_field('Delete') }}
+                                                        <button
+                                                            onclick="return confirm('Are you sure you want to delete?')"
+                                                            type="submit" class="iq-bg-primary border-0 rounded"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="" data-original-title="Delete">
+                                                            <i class="las la-trash"></i>
+                                                        </button>
+
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                 
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+
        </div>
     </div>
  </div>

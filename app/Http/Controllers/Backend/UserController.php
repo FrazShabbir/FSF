@@ -152,8 +152,8 @@ class UserController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => 'required|email|unique:users,email,'.$user->id,
-            // 'username' => 'required|unique:users,username,'.$user->id,
-            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                // 'username' => 'required|unique:users,username,'.$user->id,
+                // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user->first_name = $request->first_name;

@@ -145,7 +145,7 @@ class DonationController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/donations/receipts/', $filename);
-                    $donation->receipt= config('app.url').'uploads/donations/receipts/'. $filename;
+                    $donation->receipt= env('APP_URL.url').'uploads/donations/receipts/'. $filename;
                     $donation->save();
                 }
 

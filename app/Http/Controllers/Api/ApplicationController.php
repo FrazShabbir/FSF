@@ -248,7 +248,7 @@ class ApplicationController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/application/avatars/', $filename);
-                    $application->avatar= config('app.url').'uploads/application/avatars/'. $filename;
+                    $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
                 }
 
                 $application->save();
@@ -284,7 +284,7 @@ class ApplicationController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/application/signatures/', $filename);
-                    $applicationRenewal->user_signature= config('app.url').'uploads/application/signatures/'. $filename;
+                    $applicationRenewal->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
                     $applicationRenewal->save();
                 }
                 $application->save();
@@ -547,7 +547,7 @@ class ApplicationController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/application/signatures/', $filename);
-                    $application->user_signature= config('app.url').'uploads/application/signatures/'. $filename;
+                    $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
                 }
 
                 if ($request->avatar) {
@@ -568,7 +568,7 @@ class ApplicationController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/application/avatars/', $filename);
-                    $application->avatar= config('app.url').'uploads/application/avatars/'. $filename;
+                    $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
                 }
 
                 $application->save();
@@ -927,7 +927,7 @@ class ApplicationController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = getRandomString().'-'.time() . '.' . $extension;
                         $file->move('uploads/application/signatures/', $filename);
-                        $application->user_signature= config('app.url').'uploads/application/signatures/'. $filename;
+                        $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
                     }
 
                     if ($request->avatar) {
@@ -939,7 +939,7 @@ class ApplicationController extends Controller
                         if ($avatarValidator->fails()) {
                             DB::rollback();
                             return response()->json([
-                                'status' => false,
+                                'status' => 401,
                                 'message' => 'validation error',
                                 'errors' => $avatarValidator->errors()
                             ], 401);
@@ -948,13 +948,13 @@ class ApplicationController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = getRandomString().'-'.time() . '.' . $extension;
                         $file->move('uploads/application/avatars/', $filename);
-                        $application->avatar= config('app.url').'uploads/application/avatars/'. $filename;
+                        $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
                     }
 
                     $application->save();
                     DB::commit();
                     return response()->json([
-                        'status' => true,
+                        'status' => 200,
                         'message' => 'Application updated successfully',
                         'application' => $application
                     ], 200);

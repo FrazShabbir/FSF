@@ -13,7 +13,7 @@ class Application extends Model
     protected $guarded = [];
 
     function comments(){
-        return $this->hasMany('App\Models\ApplicationComment');
+        return $this->hasMany('App\Models\ApplicationComment')->orderBy('created_at', 'desc');
     }
     function user(){
         return $this->belongsTo('App\Models\User');
