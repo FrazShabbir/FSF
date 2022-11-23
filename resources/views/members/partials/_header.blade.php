@@ -12,7 +12,7 @@
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <!-- CSS Files -->
 <link href="{{ asset('members/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('members/assets/css/now-ui-dashboard.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('members/assets/css/now-ui-dashboard.css') }}" rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="{{ asset('members/assets/demo/demo.css') }}" rel="stylesheet" />
 
