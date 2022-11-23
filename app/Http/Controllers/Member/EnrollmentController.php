@@ -47,7 +47,7 @@ class EnrollmentController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('members.pages.application.show');
     }
 
     /**

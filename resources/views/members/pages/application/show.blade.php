@@ -74,7 +74,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Registration Form</h4>
+          <h4 class="card-title">Registration Form</h4>
         </div>
         <div class="card-body">
           <div class="container">
@@ -108,151 +108,199 @@
                 </div>
               </div>
 
-              <form role="form" action="" method="post">
+              <div>
                 <div class="row setup-content" id="step-1">
                   <div class="col-xs-6 col-md-offset-3">
                     <div class="col-md-12">
                       <h3>Personal Info</h3>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="name" id="name" placeholder="Muhammad Ahmad">
+                          <div class="">
+                            <h6>
+                              Full Name
+                            </h6>
+                            <p class="lead">
+                              Muhammad Ahmad
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Father Name</label>
-                            <input type="text" required class="form-control" name="father_name" id="father_name" placeholder="Muhammad Akbar">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Sur Name</label>
-                            <input type="text" required class="form-control" name="sur_name" id="name" placeholder="Khokhar">
-                          </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Gender</label>
-                            <select class="custom-select form-control" required name="gender">
-                              <option selected disabled>Select your gender</option>
-                              <option value="male">Male</option>
-                              <option value="female">Female</option>
-                            </select>
+                          <div class="">
+                            <h6>
+                              Father Name
+                            </h6>
+                            <p class="lead">
+                              Muhammad Akbar
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Date of Birth</label>
-                            <input type="date" required class="form-control" name="dob" id="dob">
+                          <div class="">
+                            <h6>
+                              Sur Name
+                            </h6>
+                            <p class="lead">
+                              Khokhar
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Passport No.</label>
-                            <input type="text" required class="form-control" name="passport_no" id="passport_no" placeholder="EZ785699">
+                          <div class="">
+                            <h6>
+                              Gender
+                            </h6>
+                            <p class="lead">
+                              Male
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">European Residence Card No.</label>
-                            <input type="text" required class="form-control" name="eurp_residence_no" id="eurp_residence_no" placeholder="3857H858">
+                          <div class="">
+                            <h6>
+                              Date of Birth
+                            </h6>
+                            <p class="lead">
+                              12-12-1998
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="Cell_no" id="Cell_no" placeholder="+34032032090932">
+                          <div class="">
+                            <h6>
+                              Passport No.
+                            </h6>
+                            <p class="lead">
+                              EZ785699
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                          <div class="">
+                            <h6>
+                              European Residence Card No.
+                            </h6>
+                            <p class="lead">
+                              3857H858
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                          <div class="">
+                            <h6>
+                              Cell No.
+                            </h6>
+                            <p class="lead">
+                              +34032032090932
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row mb-5">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Email Address</label>
-                            <input type="mail" required class="form-control" name="email" id="email" placeholder="dummy@gmail.com">
+                          <div class="">
+                            <h6>
+                              Email Address
+                            </h6>
+                            <p class="lead">
+                              dummy@gmail.com
+                            </p>
                           </div>
                         </div>
                       </div>
                       <h6>Complete Residential Address</h6>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Country</label>
-                            <select class="custom-select form-control" required name="country">
-                              <option selected disabled>Select your Country</option>
-                              <option value="spain">Spain</option>
-                              <option value="ilty">Itly</option>
-                            </select>
+                          <div class="">
+                            <h6>
+                              Country
+                            </h6>
+                            <p class="lead">
+                              Spain
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Community</label>
-                            <select class="custom-select form-control" required name="community">
-                              <option selected disabled>Select your Community</option>
-                              <option value="dummy">Dummy</option>
-                              <option value="dummy1">Dummy1</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Province</label>
-                            <select class="custom-select form-control" required name="province">
-                              <option selected disabled>Select your Province</option>
-                              <option value="dummy">Dummy</option>
-                              <option value="dummy1">Dummy1</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">City</label>
-                            <select class="custom-select form-control" required name="city">
-                              <option selected disabled>Select your City</option>
-                              <option value="dummy">Dummy</option>
-                              <option value="dummy1">Dummy1</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mb-5">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Area / Street / House No.</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="detailed_address" id="detailed_address" placeholder="Address"></textarea>
+                          <div class="">
+                            <h6>
+                              Community
+                            </h6>
+                            <p class="lead">
+                              Dummy
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Native Country:</label>
-                            <input type="text" required class="form-control" name="native_country:" id="native_country:" placeholder="Pakistan">
+                          <div class="">
+                            <h6>
+                              Province
+                            </h6>
+                            <p class="lead">
+                              Dummy
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">ID Card No. (Native Country)</label>
-                            <input type="text" required class="form-control" name="id_no" id="id_no" placeholder="3400000000000">
+                          <div class="">
+                            <h6>
+                              City
+                            </h6>
+                            <p class="lead">
+                              Dummy
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row mb-5">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Complete Address (Native Country)</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="detailed_address_native" id="detailed_address_native" placeholder="Address"></textarea>
+                          <div class="">
+                            <h6>
+                              Area / Street / House No.
+                            </h6>
+                            <p class="lead">
+                              Dummy St.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                          <div class="">
+                            <h6>
+                              Native Country:
+                            </h6>
+                            <p class="lead">
+                              Pakistan
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                          <div class="">
+                            <h6>
+                              ID Card No. (Native Country)
+                            </h6>
+                            <p class="lead">
+                              3400000000000
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-5">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                          <div class="">
+                            <h6>
+                              Complete Address (Native Country)
+                            </h6>
+                            <p class="lead">
+                              Dummy Str.
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -267,58 +315,90 @@
                       <h6>1st Relative</h6>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="residential_rel_one_name" id="residential_rel_one_name" placeholder="Muhammad Ahmad">
+                          <div class="">
+                            <h6>
+                              Full Name
+                            </h6>
+                            <p class="lead">
+                              Muhammad Ahmad
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Realtion</label>
-                            <input type="text" required class="form-control" name="residential_rel_one_realtion" id="residential_rel_one_realtion" placeholder="Father">
+                          <div class="">
+                            <h6>
+                              Realtion
+                            </h6>
+                            <p class="lead">
+                              Father
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row mb-5">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="residential_rel_one_cell_no" id="residential_rel_one_cell_no" placeholder="Muhammad Ahmad">
+                          <div class="">
+                            <h6>
+                              Cell No.
+                            </h6>
+                            <p class="lead">
+                              +3908409874
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="residential_rel_one_address" id="residential_rel_one_address" placeholder="Address"></textarea>
+                          <div class="">
+                            <h6>
+                              Complete Address
+                            </h6>
+                            <p class="lead">
+                              Dummy Str.
+                            </p>
                           </div>
                         </div>
                       </div>
                       <h6>2st Relative</h6>
                       <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="residential_rel_two_name" id="residential_rel_two_name" placeholder="Muhammad Ahmad">
-                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="">
+                              <h6>
+                                Full Name
+                              </h6>
+                              <p class="lead">
+                                Muhammad Ahmad
+                              </p>
+                            </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Realtion</label>
-                            <input type="text" required class="form-control" name="residential_rel_two_realtion" id="residential_rel_two_realtion" placeholder="Father">
+                          <div class="">
+                            <h6>
+                              Realtion
+                            </h6>
+                            <p class="lead">
+                              Father
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row mb-5">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="residential_rel_two_cell_no" id="residential_rel_two_cell_no" placeholder="Muhammad Ahmad">
+                          <div class="">
+                            <h6>
+                              Cell No.
+                            </h6>
+                            <p class="lead">
+                              +3908409874
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="residential_rel_two_address" id="residential_rel_two_address" placeholder="Address"></textarea>
+                          <div class="">
+                            <h6>
+                              Complete Address
+                            </h6>
+                            <p class="lead">
+                              Dummy Str.
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -333,58 +413,90 @@
                       <h6>1st Relative</h6>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="native_rel_one_name" id="native_rel_one_name" placeholder="Muhammad Ahmad">
+                          <div class="">
+                            <h6>
+                              Full Name
+                            </h6>
+                            <p class="lead">
+                              Muhammad Ahmad
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Realtion</label>
-                            <input type="text" required class="form-control" name="native_rel_one_realtion" id="native_rel_one_realtion" placeholder="Father">
+                          <div class="">
+                            <h6>
+                              Realtion
+                            </h6>
+                            <p class="lead">
+                              Father
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row mb-5">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="native_rel_one_cell_no" id="native_rel_one_cell_no" placeholder="Muhammad Ahmad">
+                          <div class="">
+                            <h6>
+                              Cell No.
+                            </h6>
+                            <p class="lead">
+                              +3908409874
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="native_rel_one_address" id="native_rel_one_address" placeholder="Address"></textarea>
+                          <div class="">
+                            <h6>
+                              Complete Address
+                            </h6>
+                            <p class="lead">
+                              Dummy Str.
+                            </p>
                           </div>
                         </div>
                       </div>
                       <h6>2st Relative</h6>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="native_rel_two_name" id="native_rel_two_name" placeholder="Muhammad Ahmad">
+                          <div class="">
+                            <h6>
+                              Full Name
+                            </h6>
+                            <p class="lead">
+                              Muhammad Ahmad
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Realtion</label>
-                            <input type="text" required class="form-control" name="native_rel_two_realtion" id="native_rel_two_realtion" placeholder="Father">
+                          <div class="">
+                            <h6>
+                              Realtion
+                            </h6>
+                            <p class="lead">
+                              Father
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row mb-5">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="native_rel_two_cell_no" id="native_rel_two_cell_no" placeholder="Muhammad Ahmad">
+                          <div class="">
+                            <h6>
+                              Cell No.
+                            </h6>
+                            <p class="lead">
+                              +3908409874
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="native_rel_two_address" id="native_rel_two_address" placeholder="Address"></textarea>
+                          <div class="">
+                            <h6>
+                              Complete Address
+                            </h6>
+                            <p class="lead">
+                              Dummy Str.
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -397,38 +509,63 @@
                     <div class="col-md-12">
                       <h3>Representative Info</h3>
                       <div class="row">
+                        <!-- <div class="col-12">
+                          <div class="alert alert-danger" role="alert">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>You did not have access to edit Representative's Information
+                          </div>
+                        </div> -->
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="representative_name" id="representative_name" placeholder="Muhammad Ahmad">
+                          <div class="">
+                            <h6>
+                              Full Name
+                            </h6>
+                            <p class="lead">
+                              Muhammad Ahmad
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Sur Name</label>
-                            <input type="text" required class="form-control" name="representative_surname" id="representative_surname" placeholder="Khokhar">
+                          <div class="">
+                            <h6>
+                              Sur Name
+                            </h6>
+                            <p class="lead">
+                              Khokhar
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Passport No.</label>
-                            <input type="text" required class="form-control" name="representative_passport_no" id="representative_passport_no" placeholder="4545HG6J">
+                          <div class="">
+                            <h6>
+                              Passport No.
+                            </h6>
+                            <p class="lead">
+                              4545HG6J
+                            </p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="representative_cell_no" id="representative_cell_no" placeholder="+34032032090932">
+                          <div class="">
+                            <h6>
+                              Cell No.
+                            </h6>
+                            <p class="lead">
+                              +3908409874
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="representative_address" id="representative_address" placeholder="Address"></textarea>
+                          <div class="">
+                            <h6>
+                              Complete Address
+                            </h6>
+                            <p class="lead">
+                              Dummy Str.
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -436,7 +573,7 @@
                         <div class="col-lg-8 col-md-8 col-sm-12">
                           <div class="form-check mt-3">
                             <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox">
+                            <input class="form-check-input" checked disabled type="checkbox">
                             <span class="form-check-sign"></span>
                             Have you informed him that you are appointing this person as your Representative in FSF and this person will be authorized to collect your remaining amount?
 
@@ -454,55 +591,41 @@
                       <h3>Supplymentary Info</h3>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <p>Where do you want to be buried?</p>
-                          <div class="d-flex mb-4">
-                            <div class="form-check mr-4">
-                              <input class="form-check-input" type="radio" name="burried_place" id="native_country" value="option1" checked>
-                              <label class="form-check-label pl-0" for="native_country">
-                                Native country
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="burried_place" id="residential_country" value="option2">
-                              <label class="form-check-label pl-0" for="residential_country">
-                                Residential country
-                              </label>
-                            </div>
+                          <div class="">
+                            <h6>
+                              Where do you want to be buried?
+                            </h6>
+                            <p class="lead">
+                              Native country
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <p>Do you have any relatives registered in this fund?</p>
-                          <div class="d-flex mb-4">
-                            <div class="form-check mr-4">
-                              <input class="form-check-input" type="radio" name="registered_relative" id="yes" value="realtive_input">
-                              <label class="form-check-label pl-0" for="yes">
-                                Yes
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="registered_relative" id="no" value="option2" checked>
-                              <label class="form-check-label pl-0" for="no">
-                                No
-                              </label>
-                            </div>
+                          <div class="">
+                            <h6>
+                              Do you have any relatives registered in this fund?
+                            </h6>
+                            <p class="lead">
+                              Yes
+                            </p>
                           </div>
-                          <div class="realtive_input relative_input_div mt-3">
-                            <div class="row mb-3">
-                              <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                  <label class="control-label">Passport No.</label>
-                                  <input type="text" required class="form-control" name="representative_passport_no" id="representative_passport_no" placeholder="4545HG6J">
-                                </div>
-                              </div>
-                            </div>
+                          <div class="realtive_input  mt-3">
                             <div class="row mb-5">
                               <div class="col-12">
                                 <div>
                                   <div class="table-responsive">
                                     <table class="table small">
                                       <tbody>
+                                        <tr>
+                                          <th>
+                                            Passport No.
+                                          </th>
+                                          <td class="text-right">
+                                            4545HG6J
+                                          </td>
+                                        </tr>
                                         <tr>
                                           <th>
                                             Name
@@ -548,65 +671,13 @@
                       </div>
                       <div class="row mb-5">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                          <p>How much will you pay annually into this fund?</p>
-                          <div class="mb-4">
-                            <div class="form-check mr-4">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="zero" value="option1" checked>
-                              <label class="form-check-label pl-0" for="zero">
-                                I will not give any amount annually
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="30" value="option2">
-                              <label class="form-check-label pl-0" for="30">
-                                € 30
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="50" value="option3">
-                              <label class="form-check-label pl-0" for="50">
-                                € 50
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="70" value="option4">
-                              <label class="form-check-label pl-0" for="70">
-                                € 70
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="90" value="option5">
-                              <label class="form-check-label pl-0" for="90">
-                                € 90
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="100" value="option6">
-                              <label class="form-check-label pl-0" for="100">
-                                € 100
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="others" value="others">
-                              <label class="form-check-label pl-0" for="others">
-                                Others
-                              </label>
-                            </div>
-                          <div class="others other_amount mt-3">
-                            <div class="row">
-                              <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                  <label class="control-label">Enter Amount</label>
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">$</span>
-                                    </div>
-                                    <input type="number" required class="form-control" name="otheramount" id="otheramount" placeholder="75">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <div class="">
+                            <h6>
+                              How much will you pay annually into this fund?
+                            </h6>
+                            <p class="lead">
+                              € 30
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -617,38 +688,19 @@
                 <div class="row setup-content" id="step-6">
                   <div class="col-xs-6 col-md-offset-3">
                     <div class="col-md-12">
-                      <h3>Signature</h3>
-                      <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div>
-                            <p>Sign Here</p>
-                            <canvas id="sig-canvas" width="620" height="160">
-                              Get a better browser.
-                            </canvas>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <button type="button" class="btn btn-primary" id="sig-submitBtn">Submit Signature</button>
-                              <button type="button" class="btn btn-default" id="sig-clearBtn">Clear Signature</button>
-                            </div>
-                          </div>
-                          <div class="row d-none">
-                            <div class="col-md-12">
-                              <textarea id="sig-dataUrl" class="form-control" rows="5">Data URL for your signature will go here!</textarea>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <img id="sig-image" src="" alt="Your signature will go here!"/>
-                            </div>
-                          </div>
-                        </div>
+                      <div class="">
+                        <h6 class="mb-3">
+                          Signature
+                        </h6>
+                        <p class="lead">
+                          <img width="300px" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Jon_Kirsch%27s_Signature.png" alt="sign">
+                        </p>
                       </div>
                       <div class="row mb-5">
                         <div class="col-lg-8 col-md-8 col-sm-12">
                           <div class="form-check mt-3">
                             <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox">
+                            <input class="form-check-input" disabled checked type="checkbox">
                             <span class="form-check-sign"></span>
                             Have you read carefully to all the conditions and regulations of this funeral service fund?
 
@@ -660,7 +712,7 @@
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
 
             </div>
         </div>

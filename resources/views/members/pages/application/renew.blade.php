@@ -74,7 +74,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Registration Form</h4>
+          <h4 class="card-title">Renew Registration Form</h4>
         </div>
         <div class="card-body">
           <div class="container">
@@ -137,7 +137,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Gender</label>
-                            <select class="custom-select form-control" required name="gender">
+                            <select class="custom-select form-control" disabled name="gender">
                               <option selected disabled>Select your gender</option>
                               <option value="male">Male</option>
                               <option value="female">Female</option>
@@ -149,13 +149,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Date of Birth</label>
-                            <input type="date" required class="form-control" name="dob" id="dob">
+                            <input type="date" disabled class="form-control" name="dob" id="dob">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Passport No.</label>
-                            <input type="text" required class="form-control" name="passport_no" id="passport_no" placeholder="EZ785699">
+                            <input type="text" disabled class="form-control" name="passport_no" id="passport_no" placeholder="EZ785699">
                           </div>
                         </div>
                       </div>
@@ -163,7 +163,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">European Residence Card No.</label>
-                            <input type="text" required class="form-control" name="eurp_residence_no" id="eurp_residence_no" placeholder="3857H858">
+                            <input type="text" disabled class="form-control" name="eurp_residence_no" id="eurp_residence_no" placeholder="3857H858">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -238,13 +238,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Native Country:</label>
-                            <input type="text" required class="form-control" name="native_country:" id="native_country:" placeholder="Pakistan">
+                            <input type="text" disabled class="form-control" name="native_country:" id="native_country:" placeholder="Pakistan">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">ID Card No. (Native Country)</label>
-                            <input type="text" required class="form-control" name="id_no" id="id_no" placeholder="3400000000000">
+                            <input type="text" disabled class="form-control" name="id_no" id="id_no" placeholder="3400000000000">
                           </div>
                         </div>
                       </div>
@@ -397,16 +397,21 @@
                     <div class="col-md-12">
                       <h3>Representative Info</h3>
                       <div class="row">
+                        <div class="col-12">
+                          <div class="alert alert-danger" role="alert">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>You did not have access to edit Representative's Information
+                          </div>
+                        </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="representative_name" id="representative_name" placeholder="Muhammad Ahmad">
+                            <input type="text" disabled class="form-control" name="representative_name" id="representative_name" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Sur Name</label>
-                            <input type="text" required class="form-control" name="representative_surname" id="representative_surname" placeholder="Khokhar">
+                            <input type="text" disabled class="form-control" name="representative_surname" id="representative_surname" placeholder="Khokhar">
                           </div>
                         </div>
                       </div>
@@ -414,13 +419,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Passport No.</label>
-                            <input type="text" required class="form-control" name="representative_passport_no" id="representative_passport_no" placeholder="4545HG6J">
+                            <input type="text" disabled class="form-control" name="representative_passport_no" id="representative_passport_no" placeholder="4545HG6J">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="representative_cell_no" id="representative_cell_no" placeholder="+34032032090932">
+                            <input type="text" disabled class="form-control" name="representative_cell_no" id="representative_cell_no" placeholder="+34032032090932">
                           </div>
                         </div>
                       </div>
@@ -428,7 +433,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="representative_address" id="representative_address" placeholder="Address"></textarea>
+                            <textarea type="mail" disabled class="form-control border rounded-pill" name="representative_address" id="representative_address" placeholder="Address"></textarea>
                           </div>
                         </div>
                       </div>
@@ -436,7 +441,7 @@
                         <div class="col-lg-8 col-md-8 col-sm-12">
                           <div class="form-check mt-3">
                             <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox">
+                            <input class="form-check-input" disabled type="checkbox">
                             <span class="form-check-sign"></span>
                             Have you informed him that you are appointing this person as your Representative in FSF and this person will be authorized to collect your remaining amount?
 
@@ -656,7 +661,7 @@
                             </div>
                         </div>
                       </div>
-                      <button class="btn btn-success rounded-pill mb-5 pull-right" type="submit">Submit</button>
+                      <button class="btn btn-success rounded-pill btn-lg pull-right" type="submit">Submit</button>
                     </div>
                   </div>
                 </div>
