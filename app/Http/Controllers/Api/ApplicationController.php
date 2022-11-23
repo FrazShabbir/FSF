@@ -1017,6 +1017,7 @@ class ApplicationController extends Controller
                     'full_name' => $application->full_name,
                     'father_name' => $application->father_name,
                     'surname' => $application->surname,
+                    'address'=>$application->area.','.$application->city->name.','.$application->province->name.','.$application->community->name.','.$application->country->name
                 ]
             ], 200);
         } else {
