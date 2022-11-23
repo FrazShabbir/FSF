@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'full_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
 
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -48,15 +48,17 @@ class RegisteredUserController extends Controller
             $username = $username.'-'.str_random(2);
         }
         $user = User::create([
-            'full_name' => $request->full_name,
+            'full_name' => $request->first_name,
             'username' => $username,
             'status' => $request->status,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'status'=>1,
         ]);
-        $user->assignRole('member');
+        $user->assignRole('Member');
         event(new Registered($user));
         Auth::login($user);
+
         return redirect(RouteServiceProvider::HOME);
     }
 }

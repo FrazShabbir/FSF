@@ -1,8 +1,8 @@
 <nav class="iq-sidebar-menu">
     <ul id="iq-sidebar-toggle" class="iq-menu">
         <li @if (in_array(request()->route()->getName(),
-            ['dashboard'])) class="active" @endif>
-            <a href="{{ route('dashboard') }}" class="iq-waves-effect"><i
+            ['admin.dashboard'])) class="active" @endif>
+            <a href="{{ route('admin.dashboard') }}" class="iq-waves-effect"><i
                     class="las la-home iq-arrow-left"></i><span>Dashboard</span></a>
         </li>
 

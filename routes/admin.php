@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\GeneralController;
 use App\Http\Controllers\Backend\Application;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,9 @@ use App\Http\Controllers\Backend\Application;
 
 
 
-Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
+Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function () {
 
-    Route::get('/', [GeneralController::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
 
     // Route::resource('users', UserController::class);
     Route::get('users', [UserController::class, 'index'])->name('users.index')->middleware(['can:Read Users']);

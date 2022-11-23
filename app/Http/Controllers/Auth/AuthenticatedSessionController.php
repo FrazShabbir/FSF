@@ -28,10 +28,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+
         $request->authenticate();
         if (Auth::user()->status == 1 ) {
-            $request->session()->regenerate();
-            return redirect()->intended(RouteServiceProvider::HOME);
+            if(Auth::user()->hasRole('Member')){
+                $request->session()->regenerate();
+                return redirect()->route('member.dashboard');
+            }else{
+                $request->session()->regenerate();
+                return redirect()->route('admin.dashboard');
+            }
+          
+
         } elseif(Auth::user()->status == 0 ) {
             Auth::guard('web')->logout();
             $request->session()->invalidate();
@@ -39,6 +47,18 @@ class AuthenticatedSessionController extends Controller
             return view('backend.auth.login');
 
         }
+
+        // $request->authenticate();
+        // if (Auth::user()->status == 1 ) {
+        //     $request->session()->regenerate();
+        //     return redirect()->intended(RouteServiceProvider::HOME);
+        // } elseif(Auth::user()->status == 0 ) {
+        //     Auth::guard('web')->logout();
+        //     $request->session()->invalidate();
+        //     Session::flash('error','Your Account is not Active. Please Contact Admin');
+        //     return view('backend.auth.login');
+
+        // }
     }
 
     /**

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\ApplicationController;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,17 @@ use App\Http\Controllers\Home\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class,'index'])->name('index');
+Route::get('/', function(){
+    if(auth()->check()){
+        return redirect()->route('dashboard');
+    }else{
+        return redirect()->route('login');
+    }
+})->name('index');
 
-
-
-
-
-
+Route::group(['middleware' => ['auth']],function () {
+    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+});
 
 Route::post('get-communities', [ApplicationController::class, 'getCommunities'])->name('get.communities');
 Route::post('get-provinces', [ApplicationController::class, 'getProvinces'])->name('get.provinces');
