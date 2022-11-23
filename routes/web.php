@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\ApplicationController;
-
+use App\Http\Controllers\Home\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,18 +15,15 @@ use App\Http\Controllers\Backend\ApplicationController;
 |
 */
 
-Route::get('/', function () {
-    if (auth()->check()) {
-        return redirect(url('/dashboard'));
-    } else {
-        return redirect('/login');
-    }
-});
+Route::get('/', [HomeController::class,'index'])->name('index');
+
+
+
+
+
 
 
 Route::post('get-communities', [ApplicationController::class, 'getCommunities'])->name('get.communities');
 Route::post('get-provinces', [ApplicationController::class, 'getProvinces'])->name('get.provinces');
 Route::post('get-cities', [ApplicationController::class, 'getCities'])->name('get.cities');
-
-
 require __DIR__.'/auth.php';
