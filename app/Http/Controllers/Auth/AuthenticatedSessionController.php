@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Twilio\Rest\Client;
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -17,6 +18,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+ 
+        // $account_sid = env("TWILIO_SID");
+        // $auth_token = env("TWILIO_TOKEN");
+        // $twilio_number = env("TWILIO_FROM");
+
+        // $client = new Client($account_sid, $auth_token);
+        // $client->messages->create('+923342851998', [
+        //     'from' => $twilio_number, 
+        //     'body' => 'Testing Service']);
+
+        // dd('SMS Sent Successfully.');
+        
         return view('backend.auth.login');
     }
 
