@@ -937,8 +937,8 @@
                                     <div class="col-12 mb-4">
                                         <p>How much will you pay annually into this fund?</p>
                                         <div class="custom-control custom-radio mb-3">
-                                            <input type="radio" id="no_amount_anual" name="annually_fund_amount"
-                                                class="custom-control-input">
+                                            <input type="radio" id="no_amount_anual" name="annually_fund_amount_fixed"
+                                                class="custom-control-input" value="0">
                                             <label class="custom-control-label" for="no_amount_anual"> I will
                                                 not give any amount annually </label>
                                         </div>

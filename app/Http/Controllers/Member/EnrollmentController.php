@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Application;
+use App\Models\Country;
+use App\Models\Community;
+use App\Models\Province;
+use App\Models\City;
 
 class EnrollmentController extends Controller
 {
@@ -29,8 +33,10 @@ class EnrollmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('members.pages.application.create');
+    {        $countries = Country::where('status', 1)->get();
+
+        return view('members.pages.application.create')
+        ->with('countries',$countries);
     }
 
     /**
@@ -41,7 +47,7 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       dd($request->all());
     }
 
     /**

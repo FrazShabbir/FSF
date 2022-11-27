@@ -108,7 +108,8 @@
                 </div>
               </div>
 
-              <form role="form" action="" method="post">
+              <form role="form" action="{{route('enrollment.store')}}" method="post">
+                @csrf
                 <div class="row setup-content" id="step-1">
                   <div class="col-xs-6 col-md-offset-3">
                     <div class="col-md-12">
@@ -186,20 +187,20 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Country</label>
-                            <select class="custom-select form-control" required  name="country_id">
+                            <select class="custom-select form-control" required  name="country" id="country_id">
                               <option selected disabled>Select your Country</option>
-                              <option value="spain">Spain</option>
-                              <option value="ilty">Itly</option>
+                      @foreach ($countries as $country )
+                        <option value="{{$country->id}}">{{$country->name}}</option>
+                      @endforeach
                             </select>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Community</label>
-                            <select class="custom-select form-control" required name="community_id">
+                            <select class="custom-select form-control" required name="community" id="community">
                               <option selected disabled>Select your Community</option>
-                              <option value="dummy">Dummy</option>
-                              <option value="dummy1">Dummy1</option>
+                       
                             </select>
                           </div>
                         </div>
@@ -208,20 +209,18 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Province</label>
-                            <select class="custom-select form-control" required name="province_id">
+                            <select class="custom-select form-control" required name="province" id="province_id">
                               <option selected disabled>Select your Province</option>
-                              <option value="dummy">Dummy</option>
-                              <option value="dummy1">Dummy1</option>
+                    
                             </select>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">City</label>
-                            <select class="custom-select form-control" required name="city_id">
+                            <select class="custom-select form-control" required name="city" id="city_id">
                               <option selected disabled>Select your City</option>
-                              <option value="dummy">Dummy</option>
-                              <option value="dummy1">Dummy1</option>
+                         
                             </select>
                           </div>
                         </div>
@@ -436,7 +435,7 @@
                         <div class="col-lg-8 col-md-8 col-sm-12">
                           <div class="form-check mt-3">
                             <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="rep_confirmed" value="1">
+                            <input class="form-check-input" type="checkbox" name="rep_confirmed" value="1" checked readonly>
                             <span class="form-check-sign"></span>
                             Have you informed him that you are appointing this person as your Representative in FSF and this person will be authorized to collect your remaining amount?
 
@@ -482,22 +481,22 @@
                               </label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="registered_relative" id="no" value="0" checked>
+                              <input class="form-check-input" type="radio" name="registered_relatives" id="no" value="0" checked>
                               <label class="form-check-label pl-0" for="no">
                                 No
                               </label>
                             </div>
                           </div>
-                          <div class="realtive_input relative_input_div mt-3">
+                          <div id="reg_relative_passport_no"  class="d-none  mt-3">
                             <div class="row mb-3">
                               <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                   <label class="control-label">Passport No.</label>
-                                  <input type="text" required class="form-control" value="{{old('registered_relative_passport_no')}}" name="registered_relative_passport_no" id="registered_relative_passport_no" placeholder="4545HG6J">
+                                  <input type="text"  class="form-control" value="" name="registered_relative_passport_no" id="registered_relative_passport_no_input" placeholder="4545HG6J">
                                 </div>
                               </div>
                             </div>
-                            
+
                             <div class="row mb-5">
                               <div class="col-12">
                                 <div>
@@ -553,57 +552,58 @@
                           <p>How much will you pay annually into this fund?</p>
                           <div class="mb-4">
                             <div class="form-check mr-4">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="zero" value="option1" checked>
+                              <input class="form-check-input" type="radio" name="annually_fund_amount_fixed" id="zero" value="0" >
                               <label class="form-check-label pl-0" for="zero">
                                 I will not give any amount annually
                               </label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="30" value="option2">
+                              <input class="form-check-input" type="radio" name="annually_fund_amount_fixed" id="30" value="30">
                               <label class="form-check-label pl-0" for="30">
                                 € 30
                               </label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="50" value="option3">
+                              <input class="form-check-input" type="radio" name="annually_fund_amount_fixed" id="50" value="50" >
                               <label class="form-check-label pl-0" for="50">
                                 € 50
                               </label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="70" value="option4">
+                              <input class="form-check-input" type="radio" name="annually_fund_amount_fixed" id="70" value="70">
                               <label class="form-check-label pl-0" for="70">
                                 € 70
                               </label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="90" value="option5">
+                              <input class="form-check-input" type="radio" name="annually_fund_amount_fixed" id="90" value="90" >
                               <label class="form-check-label pl-0" for="90">
                                 € 90
                               </label>
+                              
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="100" value="option6">
+                              <input class="form-check-input" type="radio" name="annually_fund_amount_fixed" id="100" value="100" checked>
                               <label class="form-check-label pl-0" for="100">
                                 € 100
                               </label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="annual_amount" id="others" value="others">
-                              <label class="form-check-label pl-0" for="others">
+                              <input class="form-check-input" type="radio" name="annually_fund_amount_fixed" id="other" value="other">
+                              <label class="form-check-label pl-0" for="other">
                                 Others
                               </label>
                             </div>
-                          <div class="others other_amount mt-3">
+                          <div class="d-none mt-3" id="other_amount">
                             <div class="row">
                               <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                   <label class="control-label">Enter Amount</label>
                                   <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
+                                    {{-- <div class="input-group-prepend">
                                       <span class="input-group-text">$</span>
-                                    </div>
-                                    <input type="number" required class="form-control" name="otheramount" id="otheramount" placeholder="75">
+                                    </div> --}}
+                                    <input type="text" class="form-control" name="annually_fund_amount" id="other_annually_fund_amount" placeholder="75">
                                   </div>
                                 </div>
                               </div>
@@ -636,7 +636,7 @@
                           </div>
                           <div class="row d-none">
                             <div class="col-md-12">
-                              <textarea id="sig-dataUrl" class="form-control" rows="5">Data URL for your signature will go here!</textarea>
+                              <textarea id="sig-dataUrl" name="user_signature" class="form-control" rows="5">Data URL for your signature will go here!</textarea>
                             </div>
                           </div>
                           <div class="row">
@@ -650,7 +650,7 @@
                         <div class="col-lg-8 col-md-8 col-sm-12">
                           <div class="form-check mt-3">
                             <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox">
+                            <input class="form-check-input" type="checkbox" name="declaration_confirm" value="1" checked readonly>
                             <span class="form-check-sign"></span>
                             Have you read carefully to all the conditions and regulations of this funeral service fund?
                             </label>
@@ -702,7 +702,7 @@
         var curStep = $(this).closest(".setup-content"),
             curStepBtn = curStep.attr("id"),
             nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            curInputs = curStep.find("input[type='text'],input[type='email'],input[type='password'],input[type='url'],textarea"),
             isValid = true;
 
         $(".form-group").removeClass("has-error");
@@ -859,22 +859,136 @@
 })();
   </script>
 
+
 <script>
-  $(document).ready(function(){
-      $('input[name="annual_amount"]').click(function(){
-          var inputValue = $(this).attr("value");
-          var targetBox = $("." + inputValue);
-          $(".other_amount").not(targetBox).hide();
-          $(targetBox).show();
+  $(document).ready(function() {
+      $('input[type=radio][name=annually_fund_amount_fixed]').change(function() {
+          if (this.value == 'other') {
+              $("#other_amount").removeClass('d-none');
+              var amount  = $('input[type=radio][name="annually_fund_amount_fixed"]:checked').val();
+              $('#other_annually_fund_amount').val(100);
+              $('#other_annually_fund_amount').prop('required', true);
+          } else {
+              $("#other_amount").addClass('d-none');
+              var amount  = $('input[type=radio][name="annually_fund_amount_fixed"]:checked').val();
+              $('#other_annually_fund_amount').val(amount);
+              $('#other_annually_fund_amount').prop('required', true);
+
+          }
       });
+
   });
-  $(document).ready(function(){
-      $('input[name="registered_relative"]').click(function(){
-          var inputValue = $(this).attr("value");
-          var targetBox = $("." + inputValue);
-          $(".relative_input_div").not(targetBox).hide();
-          $(targetBox).show();
-      });
-  });
+</script>
+<script>
+
+  // $(document).ready(function(){
+  //     $('input[name="annual_amount"]').click(function(){
+  //         var inputValue = $(this).attr("value");
+  //         var targetBox = $("." + inputValue);
+  //         $(".other_amount").not(targetBox).hide();
+  //         $(targetBox).show();
+  //     });
+  // });
+
+
   </script>
+
+      <script>
+        $(document).ready(function() {
+            $('input[type=radio][name=registered_relatives]').change(function() {
+                if (this.value == '1') {
+                    $("#reg_relative_passport_no").removeClass('d-none');
+                    $('#registered_relative_passport_no_input').prop('required', true);
+                    // document.getElementById("reg_relative_passport_no").attributes["required"] = "";
+
+                } else if (this.value == '0') {
+                    $("#reg_relative_passport_no").addClass('d-none');
+                    $('#registered_relative_passport_no_input').prop('required', false);
+
+                }
+            });
+        });
+    </script>
+
+
+<script>
+  $(document).ready(function() {
+      $('#country_id').on('change', function() {
+
+          var country_id = this.value;
+          $("#community").html('');
+          $.ajax({
+              url: "{{ route('get.communities') }}",
+              type: "POST",
+              data: {
+                  country_id: country_id,
+                  _token: '{{ csrf_token() }}'
+              },
+              dataType: 'json',
+              success: function(result) {
+                  $('#community').html(
+                      '<option value="">-- Select community --</option>');
+                  $.each(result.community, function(key, value) {
+                      $("#community").append('<option value="' + value
+                          .id + '">' + value.name + '</option>');
+                  });
+              }
+          });
+      });
+
+      /*------------------------------------------
+      --------------------------------------------
+      Center Dropdown Change Event
+      --------------------------------------------
+      --------------------------------------------*/
+      $('#community').on('change', function() {
+          var community_id = this.value;
+          $("#province_id").html('');
+          $.ajax({
+              url: "{{ route('get.provinces') }}",
+              type: "POST",
+              data: {
+                  community_id: community_id,
+                  _token: '{{ csrf_token() }}'
+              },
+              dataType: 'json',
+              success: function(result) {
+                  $('#province_id').html(
+                      '<option value="">-- Select Province --</option>');
+                  $.each(result.provinces, function(key, value) {
+                      $("#province_id").append('<option value="' + value
+                          .id + '">' + value.name + '</option>');
+                  });
+              }
+          });
+      });
+
+
+      $('#province_id').on('change', function() {
+          var province_id = this.value;
+          $("#city_id").html('');
+          $.ajax({
+              url: "{{ route('get.cities') }}",
+              type: "POST",
+              data: {
+                  province_id: province_id,
+                  _token: '{{ csrf_token() }}'
+              },
+              dataType: 'json',
+              success: function(result) {
+                  $('#city_id').html('<option value="">-- Select Province --</option>');
+                  $.each(result.cities, function(key, value) {
+                      $("#city_id").append('<option value="' + value
+                          .id + '">' + value.name + '</option>');
+                  });
+              }
+          });
+      });
+
+
+  });
+
+
+  
+</script>
 @endpush
