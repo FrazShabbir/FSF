@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Application;
 
 class EnrollmentController extends Controller
 {
@@ -14,7 +15,12 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        //
+        $application = Application::where('user_id', auth()->user()->id)->first();
+        if ($application) {
+            return redirect()->route('enrollment.show', $application->application_id);
+        } else {
+            return redirect()->route('enrollment.create');
+        }
     }
 
     /**
@@ -25,7 +31,6 @@ class EnrollmentController extends Controller
     public function create()
     {
         return view('members.pages.application.create');
-
     }
 
     /**

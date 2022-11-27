@@ -117,13 +117,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="name" id="name" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" name="name" value="{{old('names')}}" id="name" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Father Name</label>
-                            <input type="text" required class="form-control" name="father_name" id="father_name" placeholder="Muhammad Akbar">
+                            <input type="text" required class="form-control" value="{{old('father_name')}}" name="father_name" id="father_name" placeholder="Muhammad Akbar">
                           </div>
                         </div>
                       </div>
@@ -131,7 +131,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Sur Name</label>
-                            <input type="text" required class="form-control" name="sur_name" id="name" placeholder="Khokhar">
+                            <input type="text" required class="form-control" value="{{old('surname')}}" name="surname" id="surname" placeholder="Khokhar">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -149,13 +149,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Date of Birth</label>
-                            <input type="date" required class="form-control" name="dob" id="dob">
+                            <input type="date" required class="form-control" value="{{old('dob')}}" name="dob" id="dob">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Passport No.</label>
-                            <input type="text" required class="form-control" name="passport_no" id="passport_no" placeholder="EZ785699">
+                            <input type="text" required class="form-control" value="{{old('passport_number')}}" name="passport_number" id="passport_number" placeholder="EZ785699">
                           </div>
                         </div>
                       </div>
@@ -163,13 +163,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">European Residence Card No.</label>
-                            <input type="text" required class="form-control" name="eurp_residence_no" id="eurp_residence_no" placeholder="3857H858">
+                            <input type="text" required class="form-control" value="{{old('nie')}}" name="nie" id="nie" placeholder="3857H858">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="Cell_no" id="Cell_no" placeholder="+34032032090932">
+                            <input type="text" required class="form-control" value="{{old('phone')}}" name="phone" id="phone" placeholder="+34032032090932">
                           </div>
                         </div>
                       </div>
@@ -177,7 +177,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Email Address</label>
-                            <input type="mail" required class="form-control" name="email" id="email" placeholder="dummy@gmail.com">
+                            <input type="email" required class="form-control" value="{{auth()->user()->email??old('email')}}" name="email" id="email" placeholder="dummy@gmail.com">
                           </div>
                         </div>
                       </div>
@@ -186,7 +186,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Country</label>
-                            <select class="custom-select form-control" required name="country">
+                            <select class="custom-select form-control" required  name="country_id">
                               <option selected disabled>Select your Country</option>
                               <option value="spain">Spain</option>
                               <option value="ilty">Itly</option>
@@ -196,7 +196,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Community</label>
-                            <select class="custom-select form-control" required name="community">
+                            <select class="custom-select form-control" required name="community_id">
                               <option selected disabled>Select your Community</option>
                               <option value="dummy">Dummy</option>
                               <option value="dummy1">Dummy1</option>
@@ -208,7 +208,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Province</label>
-                            <select class="custom-select form-control" required name="province">
+                            <select class="custom-select form-control" required name="province_id">
                               <option selected disabled>Select your Province</option>
                               <option value="dummy">Dummy</option>
                               <option value="dummy1">Dummy1</option>
@@ -218,7 +218,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">City</label>
-                            <select class="custom-select form-control" required name="city">
+                            <select class="custom-select form-control" required name="city_id">
                               <option selected disabled>Select your City</option>
                               <option value="dummy">Dummy</option>
                               <option value="dummy1">Dummy1</option>
@@ -230,7 +230,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Area / Street / House No.</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="detailed_address" id="detailed_address" placeholder="Address"></textarea>
+                            <textarea required value="{{old('area')}}" class="form-control border rounded-pill" name="area" id="area" placeholder="Address"></textarea>
                           </div>
                         </div>
                       </div>
@@ -238,13 +238,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Native Country:</label>
-                            <input type="text" required class="form-control" name="native_country:" id="native_country:" placeholder="Pakistan">
+                            <input type="text" required value="{{old('native_country')}}" class="form-control" name="native_country:" id="native_country:" placeholder="Pakistan">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">ID Card No. (Native Country)</label>
-                            <input type="text" required class="form-control" name="id_no" id="id_no" placeholder="3400000000000">
+                            <input type="text" required value="{{old('native_id')}}" class="form-control" name="native_id" id="native_id" placeholder="3400000000000">
                           </div>
                         </div>
                       </div>
@@ -252,7 +252,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Complete Address (Native Country)</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="detailed_address_native" id="detailed_address_native" placeholder="Address"></textarea>
+                            <textarea  value="{{old('native_country_address')}}" required class="form-control border rounded-pill" name="native_country_address" id="native_country_address" placeholder="Native Address"></textarea>
                           </div>
                         </div>
                       </div>
@@ -269,13 +269,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="residential_rel_one_name" id="residential_rel_one_name" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" value="{{old('s_relative_1_name')}}" name="s_relative_1_name" id="s_relative_1_name" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
-                            <label class="control-label">Realtion</label>
-                            <input type="text" required class="form-control" name="residential_rel_one_realtion" id="residential_rel_one_realtion" placeholder="Father">
+                            <label class="control-label">Relation</label>
+                            <input type="text" required class="form-control" value="{{old('s_relative_1_relation')}}" name="s_relative_1_relation" id="s_relative_1_relation" placeholder="Father">
                           </div>
                         </div>
                       </div>
@@ -283,13 +283,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="residential_rel_one_cell_no" id="residential_rel_one_cell_no" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" value="{{old('s_relative_1_phone')}}" name="s_relative_1_phone" id="s_relative_1_phone" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="residential_rel_one_address" id="residential_rel_one_address" placeholder="Address"></textarea>
+                            <textarea type="mail" required class="form-control border rounded-pill" value="{{old('s_relative_1_address')}}" name="s_relative_1_address" id="s_relative_1_address" placeholder="Address"></textarea>
                           </div>
                         </div>
                       </div>
@@ -298,13 +298,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="residential_rel_two_name" id="residential_rel_two_name" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" value="{{old('s_relative_2_name')}}" name="s_relative_2_name" id="s_relative_2_name" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
-                            <label class="control-label">Realtion</label>
-                            <input type="text" required class="form-control" name="residential_rel_two_realtion" id="residential_rel_two_realtion" placeholder="Father">
+                            <label class="control-label">Relation</label>
+                            <input type="text" required class="form-control" value="{{old('s_relative_2_relation')}}" name="s_relative_2_relation" id="s_relative_2_relation" placeholder="Father">
                           </div>
                         </div>
                       </div>
@@ -312,13 +312,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="residential_rel_two_cell_no" id="residential_rel_two_cell_no" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" value="{{old('s_relative_2_phone')}}" name="s_relative_2_phone" id="s_relative_2_phone" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="residential_rel_two_address" id="residential_rel_two_address" placeholder="Address"></textarea>
+                            <textarea type="mail" required class="form-control border rounded-pill" value="{{old('s_relative_2_address')}}" name="s_relative_2_address" id="s_relative_2_address" placeholder="Address"></textarea>
                           </div>
                         </div>
                       </div>
@@ -335,13 +335,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="native_rel_one_name" id="native_rel_one_name" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" value="{{old('n_relative_1_name')}}" name="n_relative_1_name" id="n_relative_1_name" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
-                            <label class="control-label">Realtion</label>
-                            <input type="text" required class="form-control" name="native_rel_one_realtion" id="native_rel_one_realtion" placeholder="Father">
+                            <label class="control-label">Relation</label>
+                            <input type="text" required class="form-control" value="{{old('n_relative_1_relation')}}" name="n_relative_1_relation" id="n_relative_1_relation" placeholder="Father">
                           </div>
                         </div>
                       </div>
@@ -349,13 +349,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="native_rel_one_cell_no" id="native_rel_one_cell_no" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" value="{{old('n_relative_1_phone')}}" name="n_relative_1_phone" id="n_relative_1_phone" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="native_rel_one_address" id="native_rel_one_address" placeholder="Address"></textarea>
+                            <textarea type="mail" required class="form-control border rounded-pill" value="{{old('n_relative_1_address')}}" name="n_relative_1_address" id="n_relative_1_address" placeholder="Address"></textarea>
                           </div>
                         </div>
                       </div>
@@ -364,13 +364,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="native_rel_two_name" id="native_rel_two_name" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" value="{{old('n_relative_2_name')}}" name="n_relative_2_name" id="n_relative_2_name" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
-                            <label class="control-label">Realtion</label>
-                            <input type="text" required class="form-control" name="native_rel_two_realtion" id="native_rel_two_realtion" placeholder="Father">
+                            <label class="control-label">Relation</label>
+                            <input type="text" required class="form-control" value="{{old('n_relative_2_relation')}}" name="n_relative_2_relation" id="n_relative_2_relation" placeholder="Father">
                           </div>
                         </div>
                       </div>
@@ -378,13 +378,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="native_rel_two_cell_no" id="native_rel_two_cell_no" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" value="{{old('n_relative_2_phone')}}" name="n_relative_2_phone" id="n_relative_2_phone" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="native_rel_two_address" id="native_rel_two_address" placeholder="Address"></textarea>
+                            <textarea type="mail" required class="form-control border rounded-pill" value="{{old('n_relative_2_address')}}" name="n_relative_2_address" id="n_relative_2_address" placeholder="Address"></textarea>
                           </div>
                         </div>
                       </div>
@@ -400,13 +400,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="representative_name" id="representative_name" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" value="{{old('rep_name')}}" name="rep_name" id="rep_name" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Sur Name</label>
-                            <input type="text" required class="form-control" name="representative_surname" id="representative_surname" placeholder="Khokhar">
+                            <input type="text" required class="form-control" value="{{old('rep_surname')}}" name="rep_surname" id="rep_surname" placeholder="Khokhar">
                           </div>
                         </div>
                       </div>
@@ -414,13 +414,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Passport No.</label>
-                            <input type="text" required class="form-control" name="representative_passport_no" id="representative_passport_no" placeholder="4545HG6J">
+                            <input type="text" required class="form-control" value="{{old('rep_passport_no')}}" name="rep_passport_no" id="rep_passport_no" placeholder="4545HG6J">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Cell No.</label>
-                            <input type="text" required class="form-control" name="representative_cell_no" id="representative_cell_no" placeholder="+34032032090932">
+                            <input type="text" required class="form-control" value="{{old('rep_phone')}}" name="rep_phone" id="rep_phone" placeholder="+34032032090932">
                           </div>
                         </div>
                       </div>
@@ -428,7 +428,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Complete Address</label>
-                            <textarea type="mail" required class="form-control border rounded-pill" name="representative_address" id="representative_address" placeholder="Address"></textarea>
+                            <textarea type="mail" required class="form-control border rounded-pill" value="{{old('rep_address')}}" name="rep_address" id="rep_address" placeholder="Address"></textarea>
                           </div>
                         </div>
                       </div>
@@ -436,7 +436,7 @@
                         <div class="col-lg-8 col-md-8 col-sm-12">
                           <div class="form-check mt-3">
                             <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox">
+                            <input class="form-check-input" type="checkbox" name="rep_confirmed" value="1">
                             <span class="form-check-sign"></span>
                             Have you informed him that you are appointing this person as your Representative in FSF and this person will be authorized to collect your remaining amount?
 
@@ -457,13 +457,13 @@
                           <p>Where do you want to be buried?</p>
                           <div class="d-flex mb-4">
                             <div class="form-check mr-4">
-                              <input class="form-check-input" type="radio" name="burried_place" id="native_country" value="option1" checked>
+                              <input class="form-check-input" type="radio"  name="buried_location" id="native_country" value="NATIVE" checked>
                               <label class="form-check-label pl-0" for="native_country">
                                 Native country
                               </label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="burried_place" id="residential_country" value="option2">
+                              <input class="form-check-input" type="radio"  name="buried_location" id="residential_country" value="RESIDENTIAL">
                               <label class="form-check-label pl-0" for="residential_country">
                                 Residential country
                               </label>
@@ -476,13 +476,13 @@
                           <p>Do you have any relatives registered in this fund?</p>
                           <div class="d-flex mb-4">
                             <div class="form-check mr-4">
-                              <input class="form-check-input" type="radio" name="registered_relative" id="yes" value="realtive_input">
+                              <input class="form-check-input" type="radio" name="registered_relatives" id="yes" value="1">
                               <label class="form-check-label pl-0" for="yes">
                                 Yes
                               </label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="registered_relative" id="no" value="option2" checked>
+                              <input class="form-check-input" type="radio" name="registered_relative" id="no" value="0" checked>
                               <label class="form-check-label pl-0" for="no">
                                 No
                               </label>
@@ -493,10 +493,11 @@
                               <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                   <label class="control-label">Passport No.</label>
-                                  <input type="text" required class="form-control" name="representative_passport_no" id="representative_passport_no" placeholder="4545HG6J">
+                                  <input type="text" required class="form-control" value="{{old('registered_relative_passport_no')}}" name="registered_relative_passport_no" id="registered_relative_passport_no" placeholder="4545HG6J">
                                 </div>
                               </div>
                             </div>
+                            
                             <div class="row mb-5">
                               <div class="col-12">
                                 <div>
@@ -543,6 +544,7 @@
                                 </div>
                               </div>
                             </div>
+
                           </div>
                         </div>
                       </div>
@@ -651,7 +653,6 @@
                             <input class="form-check-input" type="checkbox">
                             <span class="form-check-sign"></span>
                             Have you read carefully to all the conditions and regulations of this funeral service fund?
-
                             </label>
                             </div>
                         </div>
