@@ -86,23 +86,23 @@
                     <p>Personal Info</p>
                   </div>
                   <div class="stepwizard-step">
-                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                    <a href="#step-2" type="button" class="btn btn-default btn-circle" >2</a>
                     <p>Relative Info (Residential)</p>
                   </div>
                   <div class="stepwizard-step">
-                    <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                    <a href="#step-3" type="button" class="btn btn-default btn-circle" >3</a>
                     <p>Relative Info (Native)</p>
                   </div>
                   <div class="stepwizard-step">
-                    <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                    <a href="#step-4" type="button" class="btn btn-default btn-circle" >4</a>
                     <p>Representative Info</p>
                   </div>
                   <div class="stepwizard-step">
-                    <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+                    <a href="#step-5" type="button" class="btn btn-default btn-circle" >5</a>
                     <p>Supplymentary</p>
                   </div>
                   <div class="stepwizard-step">
-                    <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                    <a href="#step-6" type="button" class="btn btn-default btn-circle" >6</a>
                     <p>Sing Page</p>
                   </div>
                 </div>
@@ -120,7 +120,7 @@
                               Full Name
                             </h6>
                             <p class="lead">
-                              Muhammad Ahmad
+                              {{$application->full_name}}
                             </p>
                           </div>
                         </div>
@@ -130,7 +130,7 @@
                               Father Name
                             </h6>
                             <p class="lead">
-                              Muhammad Akbar
+                              {{$application->father_name}}
                             </p>
                           </div>
                         </div>
@@ -142,7 +142,7 @@
                               Sur Name
                             </h6>
                             <p class="lead">
-                              Khokhar
+                              {{$application->surname}}
                             </p>
                           </div>
                         </div>
@@ -152,7 +152,7 @@
                               Gender
                             </h6>
                             <p class="lead">
-                              Male
+                              {{$application->gender}}
                             </p>
                           </div>
                         </div>
@@ -164,7 +164,7 @@
                               Date of Birth
                             </h6>
                             <p class="lead">
-                              12-12-1998
+                              {{date('d-M-Y', strtotime($application->dob))}}
                             </p>
                           </div>
                         </div>
@@ -174,7 +174,7 @@
                               Passport No.
                             </h6>
                             <p class="lead">
-                              EZ785699
+                              {{$application->passport_number}}
                             </p>
                           </div>
                         </div>
@@ -186,7 +186,7 @@
                               European Residence Card No.
                             </h6>
                             <p class="lead">
-                              3857H858
+                              {{$application->nie}}
                             </p>
                           </div>
                         </div>
@@ -196,7 +196,7 @@
                               Cell No.
                             </h6>
                             <p class="lead">
-                              +34032032090932
+                              {{$application->phone}}
                             </p>
                           </div>
                         </div>
@@ -208,7 +208,7 @@
                               Email Address
                             </h6>
                             <p class="lead">
-                              dummy@gmail.com
+                              {{$application->user->email}}
                             </p>
                           </div>
                         </div>
@@ -221,7 +221,7 @@
                               Country
                             </h6>
                             <p class="lead">
-                              Spain
+                              {{$application->country->name}}
                             </p>
                           </div>
                         </div>
@@ -231,7 +231,7 @@
                               Community
                             </h6>
                             <p class="lead">
-                              Dummy
+                              {{$application->community->name}}
                             </p>
                           </div>
                         </div>
@@ -243,7 +243,7 @@
                               Province
                             </h6>
                             <p class="lead">
-                              Dummy
+                              {{$application->province->name}}
                             </p>
                           </div>
                         </div>
@@ -253,7 +253,7 @@
                               City
                             </h6>
                             <p class="lead">
-                              Dummy
+                              {{$application->city->name}}
                             </p>
                           </div>
                         </div>
@@ -265,7 +265,7 @@
                               Area / Street / House No.
                             </h6>
                             <p class="lead">
-                              Dummy St.
+                             {{$application->area}}
                             </p>
                           </div>
                         </div>
@@ -277,7 +277,7 @@
                               Native Country:
                             </h6>
                             <p class="lead">
-                              Pakistan
+                              {{$application->native_country}}
                             </p>
                           </div>
                         </div>
@@ -287,7 +287,8 @@
                               ID Card No. (Native Country)
                             </h6>
                             <p class="lead">
-                              3400000000000
+                              {{$application->native_id}}
+
                             </p>
                           </div>
                         </div>
@@ -299,7 +300,7 @@
                               Complete Address (Native Country)
                             </h6>
                             <p class="lead">
-                              Dummy Str.
+                              {{$application->native_country_address}}
                             </p>
                           </div>
                         </div>
@@ -320,7 +321,7 @@
                               Full Name
                             </h6>
                             <p class="lead">
-                              Muhammad Ahmad
+                              {{$application->s_relative_1_name}}
                             </p>
                           </div>
                         </div>
@@ -330,7 +331,7 @@
                               Realtion
                             </h6>
                             <p class="lead">
-                              Father
+                              {{$application->s_relative_1_relation}}
                             </p>
                           </div>
                         </div>
@@ -342,7 +343,7 @@
                               Cell No.
                             </h6>
                             <p class="lead">
-                              +3908409874
+                              {{$application->s_relative_1_phone}}
                             </p>
                           </div>
                         </div>
@@ -352,7 +353,7 @@
                               Complete Address
                             </h6>
                             <p class="lead">
-                              Dummy Str.
+                              {{$application->s_relative_1_address}}
                             </p>
                           </div>
                         </div>
@@ -365,7 +366,7 @@
                                 Full Name
                               </h6>
                               <p class="lead">
-                                Muhammad Ahmad
+                                {{$application->s_relative_2_name}}
                               </p>
                             </div>
                         </div>
@@ -375,7 +376,7 @@
                               Realtion
                             </h6>
                             <p class="lead">
-                              Father
+                              {{$application->s_relative_2_relation}}
                             </p>
                           </div>
                         </div>
@@ -387,7 +388,7 @@
                               Cell No.
                             </h6>
                             <p class="lead">
-                              +3908409874
+                              {{$application->s_relative_2_phone}}
                             </p>
                           </div>
                         </div>
@@ -397,7 +398,7 @@
                               Complete Address
                             </h6>
                             <p class="lead">
-                              Dummy Str.
+                              {{$application->s_relative_2_address}}
                             </p>
                           </div>
                         </div>
@@ -418,7 +419,7 @@
                               Full Name
                             </h6>
                             <p class="lead">
-                              Muhammad Ahmad
+                              {{$application->n_relative_1_name}}
                             </p>
                           </div>
                         </div>
@@ -428,7 +429,7 @@
                               Realtion
                             </h6>
                             <p class="lead">
-                              Father
+                              {{$application->n_relative_1_relation}}
                             </p>
                           </div>
                         </div>
@@ -440,7 +441,7 @@
                               Cell No.
                             </h6>
                             <p class="lead">
-                              +3908409874
+                              {{$application->n_relative_1_phone}}
                             </p>
                           </div>
                         </div>
@@ -450,7 +451,7 @@
                               Complete Address
                             </h6>
                             <p class="lead">
-                              Dummy Str.
+                              {{$application->n_relative_1_address}}
                             </p>
                           </div>
                         </div>
@@ -463,7 +464,7 @@
                               Full Name
                             </h6>
                             <p class="lead">
-                              Muhammad Ahmad
+                              {{$application->n_relative_2_name}}
                             </p>
                           </div>
                         </div>
@@ -473,7 +474,7 @@
                               Realtion
                             </h6>
                             <p class="lead">
-                              Father
+                              {{$application->n_relative_2_relation}}
                             </p>
                           </div>
                         </div>
@@ -485,7 +486,7 @@
                               Cell No.
                             </h6>
                             <p class="lead">
-                              +3908409874
+                              {{$application->n_relative_2_phone}}
                             </p>
                           </div>
                         </div>
@@ -495,7 +496,7 @@
                               Complete Address
                             </h6>
                             <p class="lead">
-                              Dummy Str.
+                              {{$application->n_relative_2_address}}
                             </p>
                           </div>
                         </div>
@@ -503,6 +504,7 @@
                       <button class="btn btn-primary rounded-pill nextBtn mb-5 pull-right" type="button" >Next</button>
                     </div>
                   </div>
+                  
                 </div>
                 <div class="row setup-content" id="step-4">
                   <div class="col-xs-6 col-md-offset-3">
@@ -520,7 +522,7 @@
                               Full Name
                             </h6>
                             <p class="lead">
-                              Muhammad Ahmad
+                            {{$application->rep_name}}
                             </p>
                           </div>
                         </div>
@@ -530,7 +532,7 @@
                               Sur Name
                             </h6>
                             <p class="lead">
-                              Khokhar
+                              {{$application->rep_surname}}
                             </p>
                           </div>
                         </div>
@@ -542,7 +544,7 @@
                               Passport No.
                             </h6>
                             <p class="lead">
-                              4545HG6J
+                              {{$application->rep_passport_no}}
                             </p>
                           </div>
                         </div>
@@ -552,7 +554,7 @@
                               Cell No.
                             </h6>
                             <p class="lead">
-                              +3908409874
+                              {{$application->rep_phone}}
                             </p>
                           </div>
                         </div>
@@ -564,7 +566,7 @@
                               Complete Address
                             </h6>
                             <p class="lead">
-                              Dummy Str.
+                              {{$application->rep_address}}
                             </p>
                           </div>
                         </div>
@@ -596,7 +598,7 @@
                               Where do you want to be buried?
                             </h6>
                             <p class="lead">
-                              Native country
+                            {{$application->buried_location}}
                             </p>
                           </div>
                         </div>
@@ -608,7 +610,7 @@
                               Do you have any relatives registered in this fund?
                             </h6>
                             <p class="lead">
-                              Yes
+                              {{$application->registered_relatives==1?'Yes':'No'}}
                             </p>
                           </div>
                           <div class="realtive_input  mt-3">
@@ -676,7 +678,7 @@
                               How much will you pay annually into this fund?
                             </h6>
                             <p class="lead">
-                              € 30
+                              € {{$application->annually_fund_amount}}
                             </p>
                           </div>
                         </div>
@@ -693,7 +695,7 @@
                           Signature
                         </h6>
                         <p class="lead">
-                          <img width="300px" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Jon_Kirsch%27s_Signature.png" alt="sign">
+                          <img width="300px" src="{{$application->user_signature}}" alt="sign">
                         </p>
                       </div>
                       <div class="row mb-5">

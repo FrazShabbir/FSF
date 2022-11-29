@@ -200,7 +200,8 @@ return [
         //Sweet Alert
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         // Logger to discord
-        MarvinLabs\DiscordLogger\ServiceProvider::class
+        MarvinLabs\DiscordLogger\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
 
 
     ],
@@ -218,6 +219,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Image' => Intervention\Image\Facades\Image::class
+
     ])->toArray(),
 
 ];

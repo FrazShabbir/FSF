@@ -12,7 +12,7 @@ use App\Models\Province;
 use App\Models\City;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use Image;
 class EnrollmentController extends Controller
 {
     /**
@@ -171,6 +171,7 @@ class EnrollmentController extends Controller
         $application->user_signature=$request->user_signature;
 
         // if ($request->user_signature) {
+            
         //     $request->validate([
 
         //         'user_signature' => 'required|mimes:png,jpg,jpeg'
@@ -181,6 +182,7 @@ class EnrollmentController extends Controller
         //     $file->move('uploads/application/signatures/', $filename);
         //     $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
         // }
+    
 
         if ($request->avatar) {
             $request->validate([
@@ -220,7 +222,9 @@ class EnrollmentController extends Controller
      */
     public function show($id)
     {
-        return view('members.pages.application.show');
+        $application = Application::where('application_id',$id)->firstOrfail();
+        return view('members.pages.application.show')
+        ->with('application', $application);
     }
 
     /**
