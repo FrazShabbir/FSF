@@ -149,6 +149,12 @@
             {{-- Heirarchy END --}}
         @endif
 
+        @can('Update Settings')
+        <li class="{{ request()->route()->getName() == 'notification.create'? 'active': '' }}">
+            <a href="{{ route('notification.create') }}" class="iq-waves-effect"><i
+                    class="las la-tools iq-arrow-left"></i><span>Send Notificatons</span></a>
+        </li>
+    @endcan
     </ul>
 </nav>
 <div class="p-3"></div>

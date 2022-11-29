@@ -33,10 +33,10 @@ class EnrollmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        $countries = Country::where('status', 1)->get();
-
+    {
+        $countries = Country::where('status', 1)->get();
         return view('members.pages.application.create')
-        ->with('countries',$countries);
+        ->with('countries', $countries);
     }
 
     /**
@@ -47,7 +47,162 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-       dd($request->all());
+        dd($request->all());
+        $request->validate([
+         'passport_number' => 'required',
+         'nie' => 'required',
+         'native_id'=>'required',
+         'full_name'=>'required',
+         'father_name'=>'required',
+         'surname'=>'required',
+         'gender'=>'required',
+         'phone'=>'required',
+         'dob'=>'required',
+         'native_country'=>'required',
+         'native_country_address'=>'required',
+         'country_id'=>'required',
+         'community_id'=>'required',
+         'province_id'=>'required',
+         'city_id'=>'required',
+         'area'=>'required',
+
+         's_relative_1_name'=>'required',
+         's_relative_1_relation'=>'required',
+         's_relative_1_phone'=>'required',
+         's_relative_1_address'=>'required',
+
+         's_relative_2_name'=>'required',
+         's_relative_2_relation'=>'required',
+         's_relative_2_phone'=>'required',
+         's_relative_2_address'=>'required',
+
+         'n_relative_1_name'=>'required',
+         'n_relative_1_relation'=>'required',
+         'n_relative_1_phone'=>'required',
+         'n_relative_1_address'=>'required',
+
+
+         'n_relative_2_name'=>'required',
+         'n_relative_2_relation'=>'required',
+         'n_relative_2_phone'=>'required',
+         'n_relative_2_address'=>'required',
+
+         'rep_name'=>'required',
+         'rep_surname'=>'required',
+         'rep_passport_no'=>'required',
+         'rep_phone'=>'required',
+         'rep_address'=>'required',
+         'rep_confirmed'=>'required',
+
+         'buried_location'=>'required',
+
+         'registered_relatives'=>'required',
+         'registered_relative_passport_no'=>'nullable',
+
+         'annually_fund_amount'=>'required',
+         'user_signature'=>'required',
+         'declaration_confirm'=>'required',
+        ]);
+
+        try {
+            //code...
+        DB::beginTransaction();
+        $application = new Application();
+        $application->application_id= 'W-App-'.getRandomString(10);
+        $application->user_id = auth()->user()->id;
+        $application->passport_number = $request->passport_number;
+        $application->nie = $request->nie;
+        $application->native_id = $request->native_id;
+        $application->full_name = $request->full_name;
+        $application->father_name = $request->father_name;
+        $application->surname = $request->surname;
+        $application->gender=$request->gender;
+        $application->phone=$request->phone;
+        $application->dob=$request->dob;
+        $application->native_country=$request->native_country;
+        $application->native_country_address=$request->native_country_address;
+        $application->country_id=$request->country_id;
+
+        $application->community_id=$request->community_id;
+        $application->province_id=$request->province_id;
+        $application->city_id=$request->city_id;
+        $application->area=$request->area;
+
+        $application->s_relative_1_name=$request->s_relative_1_name;
+        $application->s_relative_1_relation=$request->s_relative_1_relation;
+        $application->s_relative_1_phone=$request->s_relative_1_phone;
+        $application->s_relative_1_address=$request->s_relative_1_address;
+
+        $application->s_relative_2_name=$request->s_relative_2_name;
+        $application->s_relative_2_relation=$request->s_relative_2_relation;
+        $application->s_relative_2_phone=$request->s_relative_2_phone;
+        $application->s_relative_2_address=$request->s_relative_2_address;
+
+
+        $application->n_relative_1_name=$request->n_relative_1_name;
+        $application->n_relative_1_relation=$request->n_relative_1_relation;
+        $application->n_relative_1_phone=$request->n_relative_1_phone;
+        $application->n_relative_1_address=$request->n_relative_1_address;
+
+        $application->n_relative_2_name=$request->n_relative_2_name;
+        $application->n_relative_2_relation=$request->n_relative_2_relation;
+        $application->n_relative_2_phone=$request->n_relative_2_phone;
+        $application->n_relative_2_address=$request->n_relative_2_address;
+
+
+
+        $application->rep_name=$request->rep_name;
+        $application->rep_surname=$request->rep_surname;
+        $application->rep_passport_no=$request->rep_passport_no;
+        $application->rep_phone=$request->rep_phone;
+        $application->rep_address=$request->rep_address;
+        $application->rep_confirmed=$request->rep_confirmed??1;
+
+        $application->buried_location=$request->buried_location;
+
+
+        $application->registered_relatives=$request->registered_relatives;
+        $application->registered_relative_passport_no=$request->registered_relative_passport_no;
+        $application->annually_fund_amount=$request->annually_fund_amount;
+        $application->declaration_confirm=$request->declaration_confirm??1;
+
+        if ($request->user_signature) {
+            $request->validate([
+
+                'user_signature' => 'required|mimes:png,jpg,jpeg'
+            ]);
+            $file = $request->user_signature;
+            $extension = $file->getClientOriginalExtension();
+            $filename = getRandomString().'-'.time() . '.' . $extension;
+            $file->move('uploads/application/signatures/', $filename);
+            $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
+        }
+
+        if ($request->avatar) {
+            $request->validate([
+
+                'avatar' => 'required|mimes:png,jpg,jpeg'
+            ]);
+            $file = $request->avatar;
+            $extension = $file->getClientOriginalExtension();
+            $filename = getRandomString().'-'.time() . '.' . $extension;
+            $file->move('uploads/application/avatars/', $filename);
+            $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
+        }
+
+        $application->save();
+        $comment = new ApplicationComment();
+        $comment->application_id = $application->id;
+        $comment->comment = 'Application Submitted Successfully';
+        $comment->status = 'SUBMITTED';
+        $comment->save();
+        DB::commit();
+    } catch (\Throwable $th) {
+        DB::rollback();
+        alert()->error('Error', $th->getMessage());
+        return redirect()->back();
+        //throw $th;
+    }
     }
 
     /**

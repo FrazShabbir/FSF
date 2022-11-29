@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\GeneralController;
-use App\Http\Controllers\Backend\Application;
+use App\Http\Controllers\Backend\NotificationController;
 use App\Http\Controllers\DashboardController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,7 +48,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
     Route::post('/site-settings-save', [GeneralController::class, 'save_general_settings'])->name('site_settings_save');
     
     
-
-    
+    Route::get('create/notification', [NotificationController::class, 'create'])->name('notification.create');
+    Route::post('/save-token', [NotificationController::class, 'saveToken'])->name('save-token');
+    Route::post('/send-notification', [NotificationController::class, 'sendNotification'])->name('send.notification');
 });
 require __DIR__.'/auth.php';

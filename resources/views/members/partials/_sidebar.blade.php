@@ -37,7 +37,12 @@
           </a>
         </li>
 
-     
+        <li>
+          <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"role="button">
+            <i class="now-ui-icons media-1_button-power"></i>
+            <p>Logout</p>
+          </a>
+        </li>
        
     
         <li class="active-pro">
@@ -47,5 +52,12 @@
           </a>
         </li>
       </ul>
+
+
+                           
+   
     </div>
   </div>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
