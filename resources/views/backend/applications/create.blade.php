@@ -280,7 +280,11 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="native_country">Native Country</label>
                                             <div class="col-sm-12">
-                                                <select name="native_country" id="native_country" class="form-control"
+                                                <input type="text" class="form-control" name="native_country" id="native_country"
+                                                placeholder="Englain" required
+                                                value="{{ old('native_country') }}">
+
+                                                {{-- <select name="native_country" id="native_country" class="form-control"
                                                     required>
                                                     <option value=""  disabled>Choose Your Native
                                                         Country</option>
@@ -288,7 +292,8 @@
                                                         <option value="{{ $country->id }}">
                                                             {{ $country->name }}</option>
                                                     @endforeach
-                                                </select>
+                                                </select> --}}
+
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -858,7 +863,7 @@
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" id="rep_confirmed"
-                                                name="rep_confirmed" value="1" required readonly checked disabled>
+                                                name="rep_confirmed" value="1" required readonly checked>
                                             <label class="custom-control-label" for="rep_confirmed">Have you
                                                 informed him that you are appointing this person as your
                                                 Representative in FSF and this person will be authorized to

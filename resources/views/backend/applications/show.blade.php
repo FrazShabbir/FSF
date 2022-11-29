@@ -215,7 +215,7 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->nativecountry->name }}</p>
+                                                                    {{ $application->native_country }}</p>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -329,7 +329,11 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="native_country">Native Country</label>
                                             <div class="col-sm-12">
-                                                <select name="native_country" id="native_country" class="form-control"
+                                                <input type="text" class="form-control" name="native_country" id="native_country"
+                                                placeholder="Englain" required
+                                                value="{{ old('native_country') }}">
+
+                                                {{-- <select name="native_country" id="native_country" class="form-control"
                                                     required>
                                                     <option value="" selected disabled>Choose Your Native Country
                                                     </option>
@@ -339,7 +343,7 @@
                                                         <option value="{{ $country->id }}">
                                                             {{ $country->name }}</option>
                                                     @endforeach
-                                                </select>
+                                                </select> --}}
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>

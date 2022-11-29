@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Application;
+use App\Models\ApplicationComment;
 use App\Models\Country;
 use App\Models\Community;
 use App\Models\Province;
 use App\Models\City;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class EnrollmentController extends Controller
 {
@@ -47,7 +50,7 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
          'passport_number' => 'required',
          'nie' => 'required',
@@ -60,10 +63,10 @@ class EnrollmentController extends Controller
          'dob'=>'required',
          'native_country'=>'required',
          'native_country_address'=>'required',
-         'country_id'=>'required',
-         'community_id'=>'required',
-         'province_id'=>'required',
-         'city_id'=>'required',
+         'country'=>'required',
+         'community'=>'required',
+         'province'=>'required',
+         'city'=>'required',
          'area'=>'required',
 
          's_relative_1_name'=>'required',
@@ -121,11 +124,11 @@ class EnrollmentController extends Controller
         $application->dob=$request->dob;
         $application->native_country=$request->native_country;
         $application->native_country_address=$request->native_country_address;
-        $application->country_id=$request->country_id;
+        $application->country_id=$request->country;
 
-        $application->community_id=$request->community_id;
-        $application->province_id=$request->province_id;
-        $application->city_id=$request->city_id;
+        $application->community_id=$request->community;
+        $application->province_id=$request->province;
+        $application->city_id=$request->city;
         $application->area=$request->area;
 
         $application->s_relative_1_name=$request->s_relative_1_name;
@@ -165,18 +168,19 @@ class EnrollmentController extends Controller
         $application->registered_relative_passport_no=$request->registered_relative_passport_no;
         $application->annually_fund_amount=$request->annually_fund_amount;
         $application->declaration_confirm=$request->declaration_confirm??1;
+        $application->user_signature=$request->user_signature;
 
-        if ($request->user_signature) {
-            $request->validate([
+        // if ($request->user_signature) {
+        //     $request->validate([
 
-                'user_signature' => 'required|mimes:png,jpg,jpeg'
-            ]);
-            $file = $request->user_signature;
-            $extension = $file->getClientOriginalExtension();
-            $filename = getRandomString().'-'.time() . '.' . $extension;
-            $file->move('uploads/application/signatures/', $filename);
-            $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
-        }
+        //         'user_signature' => 'required|mimes:png,jpg,jpeg'
+        //     ]);
+        //     $file = $request->user_signature;
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = getRandomString().'-'.time() . '.' . $extension;
+        //     $file->move('uploads/application/signatures/', $filename);
+        //     $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
+        // }
 
         if ($request->avatar) {
             $request->validate([
@@ -197,8 +201,11 @@ class EnrollmentController extends Controller
         $comment->status = 'SUBMITTED';
         $comment->save();
         DB::commit();
+        alert()->success('Application Submitted Successfully');
+        return redirect()->route('enrollment.index');
     } catch (\Throwable $th) {
         DB::rollback();
+        dd($th);
         alert()->error('Error', $th->getMessage());
         return redirect()->back();
         //throw $th;

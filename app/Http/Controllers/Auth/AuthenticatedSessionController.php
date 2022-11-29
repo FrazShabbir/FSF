@@ -26,7 +26,7 @@ class AuthenticatedSessionController extends Controller
         // $client = new Client($account_sid, $auth_token);
         // $client->messages->create('+923342851998', [
         //     'from' => $twilio_number, 
-        //     'body' => 'Testing Service']);
+        //     'body' => 'Testing Service hello i am a a']);
 
         // dd('SMS Sent Successfully.');
         
@@ -51,8 +51,6 @@ class AuthenticatedSessionController extends Controller
                 $request->session()->regenerate();
                 return redirect()->route('admin.dashboard');
             }
-          
-
         } elseif(Auth::user()->status == 0 ) {
             Auth::guard('web')->logout();
             $request->session()->invalidate();

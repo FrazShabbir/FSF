@@ -118,7 +118,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Full Name</label>
-                            <input type="text" required class="form-control" name="name" value="{{old('names')}}" id="name" placeholder="Muhammad Ahmad">
+                            <input type="text" required class="form-control" name="full_name" value="{{old('names')}}" id="name" placeholder="Muhammad Ahmad">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -237,7 +237,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="form-group">
                             <label class="control-label">Native Country:</label>
-                            <input type="text" required value="{{old('native_country')}}" class="form-control" name="native_country:" id="native_country:" placeholder="Pakistan">
+                            <input type="text" required value="{{old('native_country')}}" class="form-control" name="native_country" id="native_country:" placeholder="Pakistan">
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -603,7 +603,7 @@
                                     {{-- <div class="input-group-prepend">
                                       <span class="input-group-text">$</span>
                                     </div> --}}
-                                    <input type="text" class="form-control" name="annually_fund_amount" id="other_annually_fund_amount" placeholder="75">
+                                    <input type="text" class="form-control" name="annually_fund_amount" id="other_annually_fund_amount" placeholder="75" value="100">
                                   </div>
                                 </div>
                               </div>

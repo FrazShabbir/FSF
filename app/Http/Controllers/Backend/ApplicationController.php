@@ -103,7 +103,6 @@ class ApplicationController extends Controller
             'rep_passport_no'=>'required',
             'rep_phone'=>'required',
             'rep_address'=>'required',
-            'rep_confirmed'=>'required',
 
             'buried_location'=>'required',
 
@@ -131,7 +130,7 @@ class ApplicationController extends Controller
                 'email'=>$request->email,
                 'passport_number'=>$request->passport_number,
                 'status'=>'1',
-                'password'=>Hash::make('12345678'),
+                'password'=>Hash::make($request->passport_number),
             ]);
             $user->assignRole('member');
             event(new Registered($user));
@@ -322,7 +321,6 @@ class ApplicationController extends Controller
             'rep_passport_no'=>'required',
             'rep_phone'=>'required',
             'rep_address'=>'required',
-            'rep_confirmed'=>'required',
 
             'buried_location'=>'required',
 
