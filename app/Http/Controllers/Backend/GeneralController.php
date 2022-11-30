@@ -44,6 +44,16 @@ class GeneralController extends Controller
             $file->move('uploads/pdf', $filename);
             setSettings('terms_pdf', 'uploads/pdf/'.$filename);
         }
+        if ($request->hasFile('terms_pdf_urdu')) {
+            $request->validate([
+                'terms_pdf_urdu' => 'mimes:pdf|max:1024',
+            ]);
+            $file = $request->file('terms_pdf_urdu');
+            $extension = $file->getClientOriginalExtension();
+            $filename = getRandomString().'-'.time() . '.' . $extension;
+            $file->move('uploads/pdf', $filename);
+            setSettings('terms_pdf_urdu', 'uploads/pdf/'.$filename);
+        }
 
 
         if ($request->hasFile('logo')) {

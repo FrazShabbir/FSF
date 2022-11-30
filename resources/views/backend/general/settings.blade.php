@@ -175,6 +175,25 @@
                                         </div>
                                         @endif
                                      
+
+                                        <div class="col-md-12 col-sm-12 mb-3">
+                                            <label for="terms">Upload File (Urdu)</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="terms_pdf_urdu"
+                                                    id="terms_pdf_urdu"  accept=".pdf">
+                                                <label class="custom-file-label" for="terms_pdf_urdu">Choose PDF
+                                                    (.pdf)</label>
+                                            </div>
+
+                                           
+                                        </div>
+                                        @if (fromSettings('terms_pdf_urdu'))
+                                        <div class="col-md-12 col-sm-12 mb-3">
+                                            <a for="terms" download href="{{asset(fromSettings('terms_pdf_urdu'))}}"><i class="las la-arrow-down"></i> Dowonload Terms and Conditions </a>
+                                        </div>
+                                        @endif
+
+                                        
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-3">Submit</button>
                                     <button type="button" class="btn iq-bg-danger">Cancel</button>

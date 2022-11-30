@@ -139,10 +139,12 @@ class GeneralController extends Controller
     }
     public function termsdownload()
     {
-        $terms = GeneralSetting::where('key', 'terms_pdf')->first();
-        if ($terms) {;
+        $eng_terms = GeneralSetting::where('key', 'terms_pdf')->first();
+        $urd_terms = GeneralSetting::where('key', 'terms_pdf_urdu')->first();
+        if ($eng_terms and $urd_terms ) {;
             return response()->json([
-                'file' => env('APP_URL').$terms->value,
+                'english' => env('APP_URL').$eng_terms->value,
+                'urdu' => env('APP_URL').$urd_terms->value,
                 'status' => 200,
                 'message' => 'Pdf Found',
             ], 200);
