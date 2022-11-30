@@ -30,6 +30,16 @@
                                     aria-controls="contact" aria-selected="false">Contact Information</a>
                             </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link" id="terms-tab" data-toggle="tab" href="#terms" role="tab"
+                                    aria-controls="terms" aria-selected="false">Terms and Conditions</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="cookies-tab" data-toggle="tab" href="#cookies" role="tab"
+                                    aria-controls="cookies" aria-selected="false">Cookies Policies</a>
+                            </li>
+
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="general_setting" role="tabpanel"
@@ -108,7 +118,7 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-3">Submit</button>
-                                    <button type="submit" class="btn iq-bg-danger">Cancel</button>
+                                    <button type="button" class="btn iq-bg-danger">Cancel</button>
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -133,10 +143,38 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-3">Submit</button>
-                                    <button type="submit" class="btn iq-bg-danger">Cancel</button>
+                                    <button type="button" class="btn iq-bg-danger">Cancel</button>
                                 </form>
                             </div>
 
+                            <div class="tab-pane fade" id="terms" role="tabpanel" aria-labelledby="terms-tab">
+                                <form action="{{ route('site_settings_save') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 mb-3">
+                                            <label for="terms">Terms</label>
+                                            <textarea type="text" class="form-control" id="terms"
+                                                placeholder="Write your Policies" name="terms" >{{fromSettings('terms')}}</textarea>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 mb-3">
+                                            <label for="terms">Upload File</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="terms_pdf"
+                                                    id="terms_pdf"  accept=".pdf">
+                                                <label class="custom-file-label" for="terms_pdf">Choose PDF
+                                                    (.pdf)</label>
+                                            </div>
+
+                                           
+                                        </div>
+
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mr-3">Submit</button>
+                                    <button type="button" class="btn iq-bg-danger">Cancel</button>
+                                </form>
+                            </div>
 
 
                         </div>

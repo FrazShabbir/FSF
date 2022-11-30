@@ -170,10 +170,8 @@ class EnrollmentController extends Controller
         $application->declaration_confirm=$request->declaration_confirm??1;
         $application->user_signature=$request->user_signature;
 
-        // if ($request->user_signature) {
-            
+        // if ($request->user_signature) { 
         //     $request->validate([
-
         //         'user_signature' => 'required|mimes:png,jpg,jpeg'
         //     ]);
         //     $file = $request->user_signature;

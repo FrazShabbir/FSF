@@ -29,6 +29,22 @@ class GeneralController extends Controller
             setSettings('copyrights', request('copyrights'));
         }
         
+        if ($request->terms) {
+            setSettings('terms', request('terms'));
+        }
+     
+        if ($request->hasFile('terms_pdf')) {
+
+            $request->validate([
+                'terms_pdf' => 'image|mimes:pdf|max:1024',
+            ]);
+            $file = $request->file('terms_pdf');
+            $extension = $file->getClientOriginalExtension();
+            $filename = getRandomString().'-'.time() . '.' . $extension;
+            $file->move('uploads/pdf', $filename);
+            setSettings('terms_pdf', 'uploads/pdf/'.$filename);
+        }
+
 
         if ($request->hasFile('logo')) {
 
