@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Application;
 use App\Models\Office;
+use App\Models\GeneralSetting;
 use Illuminate\Support\Facades\Validator;
 
 class GeneralController extends Controller
@@ -102,20 +103,55 @@ class GeneralController extends Controller
             ], 404);
         }
     }
-    public function nearOffice(Request $request){
-        $application = Application::where('user_id', $request->user_id)->first();  
-        if($application){
+    public function nearOffice(Request $request)
+    {
+        $application = Application::where('user_id', $request->user_id)->first();
+        if ($application) {
             $offices = Office::where('city_id', $application->city_id)->get();
             return response()->json([
                 'offices' => $offices,
                 'status' => 200,
                 'message' => 'Office(s) Found',
             ], 200);
-        }else{
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'Application Not Found.',
             ], 404);
         }
+    }
+    public function terms()
+    {
+        $terms = GeneralSetting::where('key', 'terms')->first();
+        if ($terms) {
+            return response()->json([
+                'terms' => $terms,
+                'status' => 200,
+                'message' => 'Terms Found',
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'Terms Not Found',
+            ], 404);
+        }
+     
+    }
+    public function termsdownload()
+    {
+        $terms = GeneralSetting::where('key', 'terms_pdf')->first();
+        if ($terms) {;
+            return response()->json([
+                'file' => env('APP_URL').$terms->value,
+                'status' => 200,
+                'message' => 'Pdf Found',
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'PDf Not Found',
+            ], 404);
+        }
+     
     }
 }

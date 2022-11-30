@@ -65,6 +65,8 @@ Route::post('getcities', [ApplicationController::class, 'getCities']); // applic
 Route::post('getCommunities', [ApplicationController::class, 'getCommunities']); // application status
 
 Route::get('nearest-offices/all', [GeneralController::class, 'nearOffice']); // application status
+Route::get('terms-and-conditions', [GeneralController::class, 'terms']); // application status
+Route::get('terms-and-conditions/download', [GeneralController::class, 'termsdownload']); // application status
 
 
 // });

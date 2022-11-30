@@ -27,6 +27,11 @@ class GeneralSettingSeeder extends Seeder
             'key'=>'copyrights',
             'value'=>'All Rights Reserved'
         ]);
+        GeneralSetting::create([
+            'key'=>'terms',
+            'value'=>'terms and conditions'
+        ]);
+
         Account::create([
             'code'=>'001',
             'name'=>'Cash',

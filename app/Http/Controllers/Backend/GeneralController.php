@@ -36,7 +36,7 @@ class GeneralController extends Controller
         if ($request->hasFile('terms_pdf')) {
 
             $request->validate([
-                'terms_pdf' => 'image|mimes:pdf|max:1024',
+                'terms_pdf' => 'mimes:pdf|max:1024',
             ]);
             $file = $request->file('terms_pdf');
             $extension = $file->getClientOriginalExtension();

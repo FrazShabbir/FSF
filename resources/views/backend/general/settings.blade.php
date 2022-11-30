@@ -31,7 +31,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" id="terms-tab" data-toggle="tab" href="#terms" role="tab"
+                                <a class="nav-link" id="terms-tab" data-toggle="tab" href="#terms_tab" role="tab"
                                     aria-controls="terms" aria-selected="false">Terms and Conditions</a>
                             </li>
 
@@ -147,7 +147,7 @@
                                 </form>
                             </div>
 
-                            <div class="tab-pane fade" id="terms" role="tabpanel" aria-labelledby="terms-tab">
+                            <div class="tab-pane fade" id="terms_tab" role="tabpanel" aria-labelledby="terms-tab">
                                 <form action="{{ route('site_settings_save') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
@@ -169,7 +169,12 @@
 
                                            
                                         </div>
-
+                                        @if (fromSettings('terms_pdf'))
+                                        <div class="col-md-12 col-sm-12 mb-3">
+                                            <a for="terms" download href="{{asset(fromSettings('terms_pdf'))}}"><i class="las la-arrow-down"></i> Dowonload Terms and Conditions </a>
+                                        </div>
+                                        @endif
+                                     
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-3">Submit</button>
                                     <button type="button" class="btn iq-bg-danger">Cancel</button>
@@ -215,4 +220,10 @@
             parentEle.removeChild(ele);
         }
     </script>
+
+<script src="https://cdn.ckeditor.com/4.20.0/basic/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('terms');
+</script>
+
 @endpush
