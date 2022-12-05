@@ -24,7 +24,7 @@ class MemberDonationController extends Controller
      */
     public function create()
     {
-        //
+        return view('members.pages.donation.create');
     }
 
     /**

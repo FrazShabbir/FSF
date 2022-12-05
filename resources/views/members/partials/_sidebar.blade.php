@@ -24,7 +24,7 @@
           </a>
         </li>
         <li>
-          <a href="./icons.html">
+          <a href="{{route('donation.create')}}">
             <i class="now-ui-icons education_atom"></i>
             <p>My Donations</p>
           </a>

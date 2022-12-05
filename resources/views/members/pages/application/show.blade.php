@@ -74,7 +74,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Registration Form</h4>
+          <h4 class="card-title">APPLICATION : <b>{{$application->application_id}}</b> <span class="badge badge-{{$application->status}}">{{$application->status}}</span></h4> 
         </div>
         <div class="card-body">
           <div class="container">
@@ -305,7 +305,10 @@
                           </div>
                         </div>
                       </div>
+                      <a class="btn btn-danger rounded-pill btnEdit  mb-5 pull-right ml-3" href="{{route('enrollment.edit',$application->application_id)}}" >EDIT</a>
+
                       <button class="btn btn-primary rounded-pill nextBtn mb-5 pull-right" type="button" >Next</button>
+                      
                     </div>
                   </div>
                 </div>
@@ -403,6 +406,7 @@
                           </div>
                         </div>
                       </div>
+                      <a class="btn btn-danger rounded-pill btnEdit  mb-5 pull-right ml-3" href="{{route('enrollment.edit',$application->application_id)}}" >EDIT</a>
                       <button class="btn btn-primary rounded-pill nextBtn mb-5 pull-right" type="button" >Next</button>
                     </div>
                   </div>
@@ -501,6 +505,8 @@
                           </div>
                         </div>
                       </div>
+                      <a class="btn btn-danger rounded-pill btnEdit  mb-5 pull-right ml-3" href="{{route('enrollment.edit',$application->application_id)}}" >EDIT</a>
+
                       <button class="btn btn-primary rounded-pill nextBtn mb-5 pull-right" type="button" >Next</button>
                     </div>
                   </div>
@@ -583,6 +589,7 @@
                             </div>
                         </div>
                       </div>
+                      <a class="btn btn-danger rounded-pill btnEdit  mb-5 pull-right ml-3" href="{{route('enrollment.edit',$application->application_id)}}" >EDIT</a>
                       <button class="btn btn-primary rounded-pill nextBtn mb-5 pull-right" type="button" >Next</button>
                     </div>
                   </div>
@@ -683,6 +690,7 @@
                           </div>
                         </div>
                       </div>
+                      <a class="btn btn-danger rounded-pill btnEdit  mb-5 pull-right ml-3" href="{{route('enrollment.edit',$application->application_id)}}" >EDIT</a>
                       <button class="btn btn-primary rounded-pill nextBtn mb-5 pull-right" type="button" >Next</button>
                     </div>
                   </div>
