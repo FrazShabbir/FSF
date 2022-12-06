@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'member'],function () {
 
 
     Route::get('member/donations', [MemberDonationController::class, 'index'])->name('donation.index');//->middleware(['can:Read enrollments']);
-    Route::get('member/donation/start', [MemberDonationController::class, 'create'])->name('donation.create');//->middleware(['can:Create enrollments']);
+    Route::get('member/donation/add', [MemberDonationController::class, 'create'])->name('donation.create');//->middleware(['can:Create enrollments']);
     Route::post('member/donation/create/save', [MemberDonationController::class, 'store'])->name('donation.store');//->middleware(['can:Create enrollments']);
     Route::get('member/donation/{id}', [MemberDonationController::class, 'show'])->name('donation.show');//->middleware(['can:Read enrollments']);
     Route::get('member/donation/{id}/edit', [MemberDonationController::class, 'edit'])->name('donation.edit');//->middleware(['can:Update enrollments']);

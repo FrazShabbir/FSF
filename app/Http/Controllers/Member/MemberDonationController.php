@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Account;
 class MemberDonationController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class MemberDonationController extends Controller
      */
     public function index()
     {
-        //
+        return view('members.pages.donation.index');
     }
 
     /**
@@ -24,7 +24,9 @@ class MemberDonationController extends Controller
      */
     public function create()
     {
-        return view('members.pages.donation.create');
+        $accounts = Account::all();
+        return view('members.pages.donation.create')
+            ->with('accounts', $accounts);
     }
 
     /**
@@ -46,7 +48,8 @@ class MemberDonationController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('members.pages.donation.show');
+
     }
 
     /**
@@ -57,7 +60,8 @@ class MemberDonationController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('members.pages.donation.edit');
+
     }
 
     /**
