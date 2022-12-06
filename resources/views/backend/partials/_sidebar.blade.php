@@ -44,6 +44,9 @@
                                     <li>
                                         <a href="{{ route('users.index') }}"> <i class="las la-th-list"></i>All Users</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('users.closed.accounts') }}"> <i class="las la-th-list"></i>Closed Accounts</a>
+                                    </li>
                                 @endcan
                             </ul>
                             <a href="#roles" class="iq-waves-effect collapsed" data-toggle="collapse"

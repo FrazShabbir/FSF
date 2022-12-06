@@ -79,6 +79,19 @@ return new class () extends Migration {
             $table->string('status')->default('PENDING');
 
             $table->integer('receiver_id')->unsigned()->nullable();
+
+
+
+            $table->string('total_donations')->nullable();
+            $table->string('total_expense')->nullable();
+            $table->string('rep_received_amount')->nullable(); //yes or no
+            $table->date('deceased_at')->nullable();
+            $table->date('process_start_at')->nullable();
+            $table->date('process_ends_at')->nullable();
+            $table->date('application_closed_at')->nullable();
+            $table->integer('application_closed_by')->unsigned()->nullable();
+
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
 

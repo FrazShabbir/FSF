@@ -73,22 +73,33 @@
                             </table>
 
                             <div class="mb-5">
-                                <form method="" action="">
+                                <form action="{{route('member.donation.store')}}" method="POST" enctype="multipart/form-data">
+                                    {{-- @method('POST') --}}
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-6 pl-5">
                                             <div class="form-group">
                                                 <label>FSF account:</label>
-                                                <select name="" id="" class="form-control">
+                                                <select name="fsf_bank_id" id="" class="form-control">
                                                     @foreach ($accounts as $account)
-                                                        <option value="{{ $account->id }}" meta-name="{{ $account->name }}"  meta-bank="{{ $account->bank }}" meta-city="{{ $account->city }}" meta-account_number="{{ $account->account_number }}" >
-                                                            {{ $account->name }} -  {{ $account->account_number }}
-                                                        </option> 
-                                                        
+                                                        <option value="{{ $account->id }}" meta-name="{{ $account->name }}"
+                                                            meta-bank="{{ $account->bank }}"
+                                                            meta-city="{{ $account->city }}"
+                                                            meta-account_number="{{ $account->account_number }}">
+                                                            {{ $account->name }} - {{ $account->account_number }}
+                                                        </option>
                                                     @endforeach
-                                                  
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 pr-5">
+                                            <div class="form-group">
+                                                <label>Application ID</label>
+                                                <input type="text" class="form-control" name="application_id"
+                                                    placeholder="Application ID" readonly value="{{auth()->user()->application->application_id}}">
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="row">
 
@@ -96,15 +107,15 @@
                                         <div class="col-md-6 pl-5">
                                             <div class="form-group">
                                                 <label>Doner Bank Name:</label>
-                                                <input type="text" class="form-control" name="doner_bnank_name"
-                                                    placeholder="Funeral Servies Anual Donation">
+                                                <input type="text" class="form-control" name="donor_bank_name"
+                                                    placeholder="Funeral Servies Anual Donation" value="{{old('donor_bank_name')}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6 pr-5">
                                             <div class="form-group">
                                                 <label>Doner Bank AC No.</label>
-                                                <input type="text" class="form-control" name="donner_bank_acc_no"
-                                                    placeholder="2374983274890">
+                                                <input type="text" class="form-control" name="donor_bank_no"
+                                                    placeholder="2374983274890" value="{{old('donor_bank_no')}}">
                                             </div>
                                         </div>
                                     </div>
@@ -115,14 +126,14 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">€</span>
                                                 </div>
-                                                <input type="text" class="form-control" name="amount" placeholder="250">
+                                                <input type="number" step="0.01" class="form-control" name="amount" placeholder="250" value="{{old('amount')}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6 pr-5">
                                             <div class="form-group">
                                                 <label>Donation Date:</label>
                                                 <input type="date" class="form-control" name="date"
-                                                    placeholder="22-12-2022">
+                                                    placeholder="22-12-2022" value="{{old('donor_bank_no')}}">
                                             </div>
                                         </div>
                                     </div>

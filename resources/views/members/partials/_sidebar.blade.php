@@ -24,7 +24,7 @@
           </a>
         </li>
         <li>
-          <a href="{{route('donation.create')}}">
+          <a href="{{route('member.donation.index')}}">
             <i class="now-ui-icons education_atom"></i>
             <p>My Donations</p>
           </a>

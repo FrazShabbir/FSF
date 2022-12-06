@@ -1192,7 +1192,7 @@ cursor: pointer;
     background-color: #0C6EFD;
     color: #fff;
 }
-.badge-REJECTED{
+.badge-REJECTED, .badge-3, .badge-4{
     background-color: #DC3444;
     color: #fff;
 }
@@ -1212,7 +1212,7 @@ cursor: pointer;
     background-color: #DC3444;
     color: #fff;
 }
-.badge-1{
+.badge-1, .badge-SUCCESS{
     background-color: #198753;
     color: #fff;
 }

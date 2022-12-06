@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Password;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 use Illuminate\Support\Str;
-
+use App\Models\Application;
 class UserController extends Controller
 {
     /**
@@ -29,6 +30,24 @@ class UserController extends Controller
             abort(403);
         }
         $users= User::all();
+        return view('backend.users.index')
+        ->withUsers($users);
+    }
+    public function closedAccounts()
+    {
+        if (! auth()->user()->hasPermissionTo('Read Users')) {
+            abort(403);
+        }
+        $users= User::where('status', '4')->get();
+        return view('backend.users.index')
+        ->withUsers($users);
+    }
+    public function semiclosedAccounts()
+    {
+        if (! auth()->user()->hasPermissionTo('Read Users')) {
+            abort(403);
+        }
+        $users= User::where('status', '3')->get();
         return view('backend.users.index')
         ->withUsers($users);
     }
@@ -85,9 +104,8 @@ class UserController extends Controller
 
         if (isset($request->roles)) {
             $user->assignRole($request->roles);
-           
         }
-        
+
         $user->save();
         Password::sendResetLink($request->only(['email']));
         alert()->success('New User Added');
@@ -202,5 +220,56 @@ class UserController extends Controller
         Password::sendResetLink(['email' => $user->email]);
         alert()->info('Password Reset Link Sent', ['email' => $user->email]);
         return redirect()->route('users.index');
+    }
+
+    public function closeAccount($id)
+    {
+        $user = User::findOrFail($id);
+        return view('backend.users.closeAccount')
+        ->with('user', $user);
+    }
+    public function closeAccountSave(Request $request, $id){
+
+        // dd($request->all());
+        $request->validate([
+            'deceased_at' => 'required',
+            'process_start_at' => 'required',
+            'process_ends_at' => 'required',
+            'amount_used' => 'required',
+            'status' => 'required',
+            'amount_to_rep' => 'required'
+            
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $user = User::findOrFail($id);
+            $user->status = $request->status;
+            $user->save();
+            $application  = Application::where('user_id', $user->id)->first();
+            // dd($user->totaldonations->sum('amount'));
+    
+            $application->deceased_at = $request->deceased_at;
+            $application->process_start_at = $request->process_start_at;
+            $application->process_ends_at = $request->process_ends_at;
+            $application->total_donations = $user->totaldonations->sum('amount');
+            $application->amount_used = $request->amount_used;
+    
+            $application->rep_received_amount = $request->rep_received_amount;
+            $application->status = $request->status;
+            $application->amount_to_rep = $request->amount_to_rep;
+            $application->application_closed_by = Auth::user()->id;
+            $application->application_closed_at= Carbon::now();
+            
+            $application->save();
+            DB::commit();
+            alert()->success('Account Closed');
+            return redirect()->route('users.index');
+            //code...
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            //throw $th;
+        }
+       
     }
 }

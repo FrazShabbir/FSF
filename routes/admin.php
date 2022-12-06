@@ -25,12 +25,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
 
     // Route::resource('users', UserController::class);
     Route::get('users', [UserController::class, 'index'])->name('users.index')->middleware(['can:Read Users']);
+    Route::get('users/closed-accounts', [UserController::class, 'closedAccounts'])->name('users.closed.accounts')->middleware(['can:Read Users']);
     Route::get('user/create', [UserController::class, 'create'])->name('users.create')->middleware(['can:Create Users']);
     Route::post('user/create/save', [UserController::class, 'store'])->name('users.store')->middleware(['can:Create Users']);
     Route::get('user/{id}', [UserController::class, 'show'])->name('users.show')->middleware(['can:Read Users']);
     Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware(['can:Update Users']);
     Route::put('user/{id}/update', [UserController::class, 'update'])->name('users.update')->middleware(['can:Update Users']);
     Route::delete('user/{id}', [UserController::class, 'destroy'])->name('users.destroy')->middleware(['can:Delete Users']);
+    Route::get('close-account/user/{id}/', [UserController::class, 'closeAccount'])->name('user.close.account')->middleware(['can:Update Users']);
+    Route::post('close-account/user/{id}/save', [UserController::class, 'closeAccountSave'])->name('user.close.account.save')->middleware(['can:Update Users']);
 
     // Route::resource('roles', RoleController::class);
     Route::get('roles', [RoleController::class, 'index'])->name('roles.index')->middleware(['can:Read Roles']);

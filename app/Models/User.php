@@ -63,4 +63,17 @@ class User extends Authenticatable
     function donations(){
         return $this->hasMany(Donation::class)->orderBy('created_at', 'desc');
     }
+    // function alldonations(){
+    //     return $this->hasMany(Donation::class,'user_id');
+    // }
+    function totaldonations(){
+        return $this->hasMany(Donation::class)->where('status', 'APPROVED');
+    }
+    function rejecteddonations(){
+        return $this->hasMany(Donation::class)->where('status', 'REJECTED');
+    }
+    function pendingdonations(){
+        return $this->hasMany(Donation::class)->where('status', 'PENDING');
+    }
+
 }

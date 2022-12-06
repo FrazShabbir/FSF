@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\GeneralSetting;
+use App\Models\Application;
 
 if (! function_exists('fromSettings')) {
     function fromSettings(string $key, $alternative = null)
@@ -51,12 +52,21 @@ if (! function_exists('getUserStatus')) {
         $user = User::find($id);
         if ($user->status==1) {
             return 'Active';
-        } else {
+        } elseif ($user->status==0) {
             return 'In Active';
+        } elseif ($user->status==3) {
+            return 'In Closing Process, Person DECEASED.';
         }
+         elseif ($user->status==4) {
+            return 'Permanent Closed, Person DECEASED.';
+        } else {
+            return 'Contact Support';
+        }
+
+       
     }
 }
-// make a function that will print 15 char random string 
+// make a function that will print 15 char random string
 if (! function_exists('getRandomString')) {
     function getRandomString($length = 15)
     {
@@ -108,7 +118,7 @@ if (! function_exists('generateNumeric')) {
         $random1 = rand(100, 999);
         $random2 = rand(100, 999);
         $random3 = rand(100, 999);
- 
+
 
         $alphanumeric = $random1.$random2.$random3;
         return $alphanumeric;
@@ -134,6 +144,11 @@ if (! function_exists('getStatus')) {
             return 'Active';
         } elseif ($num==0) {
             return 'In Active';
+        } elseif ($num==3) {
+            return 'In Closing Process, Person DECEASED.';
+        }
+         elseif ($num==4) {
+            return 'Permanent Closed, Person DECEASED.';
         } else {
             return 'Contact Support';
         }
@@ -144,5 +159,17 @@ if (! function_exists('loadCountries')) {
     function loadCountries()
     {
         return  config('countries.countries');
+    }
+}
+if (! function_exists('getAddress')) {
+    function getAddress($id)
+    {
+        $application =Application::where('user_id', $id)->first();
+        $country = $application->country->name;
+        $community = $application->community->name;
+        $province = $application->province->name;
+        $city = $application->country->name;
+        $address = $application->area;
+        return $address.', '.$city.', '.$province.', '.$community.', '.$country;
     }
 }
