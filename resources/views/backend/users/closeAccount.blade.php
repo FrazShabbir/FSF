@@ -89,7 +89,41 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <h3>FSF payable amount: <span id="expense">0</span></h3>
+                                        <div class="table-responsive">
+                        
+                                            <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
+                                                aria-describedby="user-list-page-info">
+                                                <thead>
+                                                    <tr>
+                                                      
+                                                        <th>Key</th>
+                                                        <th>Value</th>
+                                                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                  
+                                                        <tr>
+                                                           
+                                                            <td>User Donations</td>
+                                                            <td>{{ $user->totaldonations->sum('amount') }}</td>
+                                                
+                                                        </tr>
+                                                        <tr>                                   
+                                                            <td>Amount Used in Process</td>
+                                                            <td id="processAmount">0</td>
+                                                        </tr>
+                                                        <tr>                                   
+                                                            <td>FSF payable amount</td>
+                                                            <td id="expense">0</td>
+                                                        </tr>
+                                                   
+            
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
                                     </div>
                                 </div>
 
@@ -155,7 +189,29 @@
     </div>
 
 
-
+    <div class="modal fade" id="CloseAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-warning" id="exampleModalLabel">Attention</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-danger">ACCOUNT CLOSING Process started</h4>
+                    <hr>
+                    <h4 class="text-primary">
+                        As per your action the account closing of this Member is started and you will not be able to edit.
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger closebtn">OK.</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -167,13 +223,26 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            $('#amountUsed').change(function() {
+            $('#amountUsed').keyup(function() {
                 var totalDonations = $('#totalDonations').val();
                 var amountUsed = $('#amountUsed').val();
                 var calculations = totalDonations - amountUsed;
+                $('#processAmount').text(amountUsed);
                 $('#expense').text(calculations);
             });
 
         });
     </script>
+    <script>
+        $(document).ready(function(){
+            $("#CloseAccount").modal('show');
+        });
+        $(document).ready(function(){
+            $('.closebtn').click(function(){
+                $("#CloseAccount").modal('hide');
+            });
+          
+        });
+    </script>
+
 @endpush

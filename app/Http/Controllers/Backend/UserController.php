@@ -225,6 +225,8 @@ class UserController extends Controller
     public function closeAccount($id)
     {
         $user = User::findOrFail($id);
+        $user->status = 3;
+        $user->save();
         return view('backend.users.closeAccount')
         ->with('user', $user);
     }

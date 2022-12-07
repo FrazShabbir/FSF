@@ -50,8 +50,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
     Route::get('site-settings', [GeneralController::class, 'siteSettings'])->name('site.siteSettings');
     Route::post('/site-settings-save', [GeneralController::class, 'save_general_settings'])->name('site_settings_save');
     
-    
-    Route::get('create/notification', [NotificationController::class, 'create'])->name('notification.create');
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notification.index');
+    Route::get('notification/create', [NotificationController::class, 'create'])->name('notification.create');
+    Route::get('notification/{id}', [NotificationController::class, 'show'])->name('notification.show');
+    Route::post('notification/save', [NotificationController::class, 'store'])->name('notification.store');
+
     Route::post('/save-token', [NotificationController::class, 'saveToken'])->name('save-token');
     Route::post('/send-notification', [NotificationController::class, 'sendNotification'])->name('send.notification');
 });

@@ -125,7 +125,7 @@
                                             <div class="" id="personal_info">
                                                 <div class="mb-4">
                                                     <h3>
-                                                        Personal Information
+                                                        Personal Information <span class="badge badge-info"><small><a href="{{route('users.show',$application->user_id)}}">View User</a></small></span>
                                                     </h3>
                                                     <div class="heading-bottom-line"></div>
                                                 </div>

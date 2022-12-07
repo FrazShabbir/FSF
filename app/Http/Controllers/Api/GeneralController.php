@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Application;
 use App\Models\Office;
 use App\Models\GeneralSetting;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Validator;
 
 class GeneralController extends Controller
@@ -156,4 +157,38 @@ class GeneralController extends Controller
         }
      
     }
+
+    public function notifications()
+    {
+        $arr=[];
+        $notifications = Notification::all();
+        if ($notifications) {
+            return response()->json([
+                'notifications' => $notifications,
+                'status' => true,
+                'message' => 'notifications Found',
+            ], 200);
+        } else {
+            $arr['status'] = 404;
+            $arr['message'] = 'notifications Not Found';
+            return response()->json($arr, 404);
+        }
+    }
+    public function notificationsDetail($id)
+    {
+        $arr=[];
+        $notification = Notification::where('id',$id)->first();
+        if ($notification) {
+            return response()->json([
+                'notification' => $notification,
+                'status' => true,
+                'message' => 'notification Found',
+            ], 200);
+        } else {
+            $arr['status'] = 404;
+            $arr['message'] = 'notification Not Found';
+            return response()->json($arr, 404);
+        }
+    }
+
 }

@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Add New Community | FSF')
+@section('title', 'Add New Notification | FSF')
 
 @section('styles')
 @endsection
@@ -17,22 +17,12 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">Add Community</h4>
+                                <h4 class="card-title">Notification</h4>
                             </div>
                         </div>
                         <div class="iq-card-body px-4">
-                            <form action="{{ route('send.notification') }}" method="POST">
+                            <form action="{{ route('notification.store') }}" method="POST">
                                 @csrf
-                                <center>
-                                    <button id="btn-nft-enable" onclick="initFirebaseMessagingRegistration()"
-                                        class="btn btn-danger btn-xs btn-flat">Allow for Notification</button>
-                                </center>
-
-                                @if (session('status'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
 
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">
@@ -40,20 +30,24 @@
                                         <input type="text" class="form-control" name="title" placeholder="e.g. Spain"
                                             value="{{ old('title') }}">
                                     </div>
-
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="details" class="required">Details</label>
-                                        <input type="text" class="form-control" name="details" placeholder="e.g. Spain"
-                                            value="{{ old('details') }}">
+                                        <label for="short_description" class="required">Short Description</label>
+                                        <input type="text" class="form-control" name="short_description" placeholder="e.g. Spain"
+                                            value="{{ old('short_description') }}">
                                     </div>
 
+                                    <div class="col-md-12 col-sm-12 mb-3">
+                                        <label for="description" class="required">Details</label>
+                                        <textarea type="text" class="form-control" name="description" placeholder="e.g. Spain"
+                                            value="{{ old('description') }}"></textarea>
+                                    </div>
                                 </div>
-
+                          
 
 
 
                                 <button type="submit" class="btn btn-primary mr-3">Send Notification</button>
-                                <a href="{{ route('dashboard') }}" class="btn iq-bg-danger mr-3">Cancel</a>
+                                <a href="{{ route('city.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
 
                             </form>
                         </div>
@@ -69,63 +63,4 @@
 @endsection
 
 @push('js')
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyDcEGUO3mXCzfrLlEzQxBbAwuLFMyr_aJg",
-            authDomain: "funeral-services-funds.firebaseapp.com",
-            projectId: "funeral-services-funds",
-            storageBucket: "funeral-services-funds.appspot.com",
-            messagingSenderId: "57676434068",
-            appId: "1:57676434068:web:ced9f4f39e37b45fe08281",
-            measurementId: "G-H5XZVX3TDV"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const messaging = firebase.messaging();
-
-        function initFirebaseMessagingRegistration() {
-            messaging
-                .requestPermission()
-                .then(function() {
-                    return messaging.getToken()
-                })
-                .then(function(token) {
-                    console.log(token);
-
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    $.ajax({
-                        url: '{{ route('save-token') }}',
-                        type: 'POST',
-                        data: {
-                            token: token
-                        },
-                        dataType: 'JSON',
-                        success: function(response) {
-                            alert('Token saved successfully.');
-                        },
-                        error: function(err) {
-                            console.log('User Chat Token Error' + err);
-                        },
-                    });
-
-                }).catch(function(err) {
-                    console.log('User Chat Token Error' + err);
-                });
-        }
-
-        messaging.onMessage(function(payload) {
-            const noteTitle = payload.notification.title;
-            const noteOptions = {
-                body: payload.notification.body,
-                icon: payload.notification.icon,
-            };
-            new Notification(noteTitle, noteOptions);
-        });
-    </script>
 @endpush
