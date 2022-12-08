@@ -23,12 +23,15 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        $application = Application::where('user_id', auth()->user()->id)->first();
-        if ($application) {
-            return redirect()->route('enrollment.show', $application->application_id);
-        } else {
-            return redirect()->route('enrollment.create');
-        }
+        $applications = Application::where('user_id', auth()->user()->id)->get();
+        return view('members.pages.application.index')
+        ->with('applications', $applications);
+        // $application = Application::where('user_id', auth()->user()->id)->first();
+        // if ($application) {
+        //     return redirect()->route('enrollment.show', $application->application_id);
+        // } else {
+        //     return redirect()->route('enrollment.create');
+        // }
     }
 
     /**
@@ -55,6 +58,7 @@ class EnrollmentController extends Controller
         $request->validate([
          'passport_number' => 'required',
          'nie' => 'required',
+         'email' => 'required',
          'native_id'=>'required',
          'full_name'=>'required',
          'father_name'=>'required',
@@ -116,6 +120,7 @@ class EnrollmentController extends Controller
             $application->user_id = auth()->user()->id;
             $application->passport_number = $request->passport_number;
             $application->nie = $request->nie;
+            $application->email = $request->email;
             $application->native_id = $request->native_id;
             $application->full_name = $request->full_name;
             $application->father_name = $request->father_name;

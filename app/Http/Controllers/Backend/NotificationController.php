@@ -9,11 +9,11 @@ use App\Models\Notification;
 
 class NotificationController extends Controller
 {
- /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /**
+        * Display a listing of the resource.
+        *
+        * @return \Illuminate\Http\Response
+        */
     public function index()
     {
         $notifications = Notification::all();
@@ -52,13 +52,24 @@ class NotificationController extends Controller
             'description'=>$request->description,
             'sent_by'=>auth()->user()->id,
         ]);
+
+        $user = User::where('id', 1)->first();
+
+
+        $type = "basic";
+
+        $res = send_notification_FCM(1, $notification->title, $notification->short_description, $user->id,$type);
+        if ($res == 1) {
+            dd('Done');
+        } else {
+            dd('unDone');
+        }
+
         alert()->success('Notification sent successfully', 'Success');
         return redirect()->route('notification.index');
-
-        
     }
 
-        /**
+     /**
          * Write code on Method
          *
          * @return response()

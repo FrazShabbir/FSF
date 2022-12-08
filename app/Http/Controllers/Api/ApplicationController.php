@@ -26,7 +26,7 @@ class ApplicationController extends Controller
     public function index(Request $request)
     {
        if(User::where('id',$request->user_id)->where('api_token',$request->api_token)->first()){
-            $applications = Application::where('user_id',$request->user_id)->get();
+            $applications = Application::where('user_id',$request->user_id)->get(['id','application_id','passport_number','full_name','status']);
             return response()->json([
                 'status' => 200,
                 'message' => 'All Applications Fetched',
@@ -405,6 +405,7 @@ class ApplicationController extends Controller
                     'surname'=>'required',
                     'gender'=>'required',
                     'phone'=>'required',
+                    'email'=>'required',
                     'dob'=>'required',
                     'native_country'=>'required',
                     'native_country_address'=>'required',
@@ -474,6 +475,7 @@ class ApplicationController extends Controller
                 $application->user_id = $request->user_id;
                 $application->passport_number = $request->passport_number;
                 $application->nie = $request->nie;
+                $application->email = $request->email;
                 $application->native_id = $request->native_id;
                 $application->full_name = $request->full_name;
                 $application->father_name = $request->father_name;
@@ -640,10 +642,7 @@ class ApplicationController extends Controller
                     'gender'=>$application->gender,
                     'phone'=>$application->phone,
                     'dob'=>$application->dob,
-                    'native_country'=>[
-                        'id'=>$application->nativecountry->id,
-                        'name'=>$application->nativecountry->name
-                    ],
+                    'native_country'=>$application->native_country,
                     'native_country_address'=>$application->native_country_address,
                     'country'=>[
                         'id'=>$application->country->id,

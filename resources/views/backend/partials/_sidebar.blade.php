@@ -153,9 +153,9 @@
         @endif
 
         @can('Update Settings')
-        <li class="{{ request()->route()->getName() == 'notification.create'? 'active': '' }}">
-            <a href="{{ route('notification.create') }}" class="iq-waves-effect"><i
-                    class="las la-tools iq-arrow-left"></i><span>Send Notificatons</span></a>
+        <li class="bg-primary  {{ request()->route()->getName() == 'notification.create'? 'active': '' }}">
+            <a href="{{ route('notification.create') }}" class="iq-waves-effect text-light"><i
+                    class="las la-bell iq-arrow-left"></i><span>Send Notificatons</span></a>
         </li>
     @endcan
     </ul>

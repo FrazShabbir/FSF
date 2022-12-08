@@ -30,8 +30,10 @@ class MemberDonationController extends Controller
     public function create()
     {
         $accounts = Account::all();
+        $applications = Application::where('user_id', auth()->user()->id)->get();
         return view('members.pages.donation.create')
-            ->with('accounts', $accounts);
+            ->with('accounts', $accounts)
+            ->with('applications', $applications);
     }
 
     /**

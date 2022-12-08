@@ -21,14 +21,18 @@
                             </div>
                             <div class="iq-header-title">
                                 <span class="badge badge-{{ $user->status }}">{{ getStatus($user->status) }}</span>
+                                @if ($user->application)
                                 <a href="{{ route('application.show', $user->application->application_id) }}"
                                     class="btn btn-primary">User Application</a>
+                               
+                    
 
 
                                 <button type="button" class="btn btn-danger" data-toggle="modal"
                                     data-target="#CloseAccount">
                                     Close Account
                                 </button>
+                                @endif
                             </div>
                         </div>
                         <div class="iq-card-body px-4">
@@ -57,7 +61,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 mb-3">
                                     <label for="username">Address:</label>
-                                    <textarea type="text" class="form-control" id="username" name="username" disabled>{{ getAddress($user->id) }}</textarea>
+                                    <textarea type="text" class="form-control" id="username" name="username" disabled>{{ getAddress($user->id) ?? ''}}</textarea>
                                 </div>
 
                             </div>
@@ -131,15 +135,18 @@
                         </div>
                     </div>
                 </div>
+                @if ($user->application)
+                    
+               
                 @include('backend.users.partials._donation_stats')
 
                 @include('backend.users.partials._rep_info')
-
+                @endif
                 <div class="col-sm-12">
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">User List</h4>
+                                <h4 class="card-title">User Donations</h4>
                             </div>
                         </div>
                         <div class="iq-card-body">

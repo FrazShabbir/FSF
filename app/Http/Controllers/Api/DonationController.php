@@ -17,10 +17,12 @@ class DonationController extends Controller
     public function create(Request $request)
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
-            $accounts = Account::all();
+            $accounts = Account::where('status',1)->get(['id', 'name', 'account_number','bank','city']);
+            $applications = Application::where('user_id', $request->user_id)->get(['id', 'application_id', 'passport_number','full_name']);
             return response()->json([
                 'status' => 200,
-                'message' => 'All accounts Fetched',
+                'message' => 'All data Fetched',
+                'applications' => $applications,
                 'accounts' => $accounts,
             ], 200);
         } else {

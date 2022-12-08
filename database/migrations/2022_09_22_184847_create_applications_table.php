@@ -28,6 +28,7 @@ return new class () extends Migration {
             $table->string('surname');
             $table->enum('gender',['Male','Female']);
             $table->string('phone');
+            $table->string('email');
             $table->date('dob');
             $table->string('native_country');
             $table->string('native_country_address');

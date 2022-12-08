@@ -673,6 +673,7 @@
                                                 @php
                                                     $relative = App\Models\Application::where('passport_number', $application->registered_relative_passport_no)->first();
                                                 @endphp
+                                                
                                                 <div class="" id="relative_registers">
                                                     <div class="mb-4">
                                                         <h3>

@@ -24,6 +24,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         if (! auth()->user()->hasPermissionTo('Read Users')) {
@@ -224,11 +225,20 @@ class UserController extends Controller
 
     public function closeAccount($id)
     {
-        $user = User::findOrFail($id);
-        $user->status = 3;
-        $user->save();
-        return view('backend.users.closeAccount')
-        ->with('user', $user);
+        try {
+           DB::beginTransaction();
+           $user = User::findOrFail($id);
+           $user->status = 3;
+           $user->save();
+           DB::commit();
+           return view('backend.users.closeAccount')
+           ->with('user', $user);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            alert()->error('Error', $th->getMessage());
+            //throw $th;
+        }
+       
     }
     public function closeAccountSave(Request $request, $id){
 

@@ -206,8 +206,8 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Email Address</label>
                                                         <input type="email" required class="form-control"
-                                                            value="{{ auth()->user()->email ?? old('email') }}"
-                                                            name="email" id="email" placeholder="dummy@gmail.com" disabled>
+                                                            value="{{old('email') }}"
+                                                            name="email" id="email" placeholder="dummy@gmail.com">
                                                     </div>
                                                 </div>
                                             </div>
