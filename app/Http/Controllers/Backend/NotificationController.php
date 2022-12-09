@@ -53,17 +53,17 @@ class NotificationController extends Controller
             'sent_by'=>auth()->user()->id,
         ]);
 
-        $user = User::where('id', 1)->first();
+        // $user = User::where('id', 1)->first();
 
 
-        $type = "basic";
+        // $type = "basic";
 
-        $res = send_notification_FCM(1, $notification->title, $notification->short_description, $user->id,$type);
-        if ($res == 1) {
-            dd('Done');
-        } else {
-            dd('unDone');
-        }
+        // $res = send_notification_FCM(1, $notification->title, $notification->short_description, $user->id,$type);
+        // if ($res == 1) {
+        //     dd('Done');
+        // } else {
+        //     dd('unDone');
+        // }
 
         alert()->success('Notification sent successfully', 'Success');
         return redirect()->route('notification.index');
