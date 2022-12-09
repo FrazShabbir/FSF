@@ -159,6 +159,17 @@
                                         </div>
 
                                         <div class="col-md-12 col-sm-12 mb-3">
+                                            <label for="about">About</label>
+                                            <textarea type="text" class="form-control" id="about"
+                                                placeholder="Write your About" name="about" >{{fromSettings('about')}}</textarea>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 mb-3">
+                                            <label for="privacy">privacy</label>
+                                            <textarea type="text" class="form-control" id="privacy"
+                                                placeholder="Write your Policies" name="privacy" >{{fromSettings('privacy')}}</textarea>
+                                        </div>
+                                        
+                                        <div class="col-md-12 col-sm-12 mb-3">
                                             <label for="terms">Upload File</label>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="terms_pdf"
@@ -243,6 +254,8 @@
 <script src="https://cdn.ckeditor.com/4.20.0/basic/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('terms');
+    CKEDITOR.replace('privacy');
+    CKEDITOR.replace('about');
 </script>
 
 @endpush

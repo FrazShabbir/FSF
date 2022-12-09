@@ -138,6 +138,44 @@ class GeneralController extends Controller
         }
      
     }
+
+    public function about()
+    {
+        $about = GeneralSetting::where('key', 'about')->first();
+        if ($about) {
+            return response()->json([
+                'About' => $about,
+                'status' => 200,
+                'message' => 'About Found',
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'About Not Found',
+            ], 404);
+        }
+     
+    }
+
+    public function privacy()
+    {
+        $privacy = GeneralSetting::where('key', 'privacy')->first();
+        if ($privacy) {
+            return response()->json([
+                'privacy' => $privacy,
+                'status' => 200,
+                'message' => 'Privacy Found',
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'Privacy Not Found',
+            ], 404);
+        }
+     
+    }
+
+
     public function termsdownload()
     {
         $eng_terms = GeneralSetting::where('key', 'terms_pdf')->first();

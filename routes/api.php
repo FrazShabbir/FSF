@@ -66,6 +66,8 @@ Route::post('getCommunities', [ApplicationController::class, 'getCommunities']);
 
 Route::get('nearest-offices/all', [GeneralController::class, 'nearOffice']); // application status
 Route::get('terms-and-conditions', [GeneralController::class, 'terms']); // application status
+Route::get('about', [GeneralController::class, 'about']); // application status
+Route::get('privacy', [GeneralController::class, 'privacy']); // application status
 Route::get('terms-and-conditions/download', [GeneralController::class, 'termsdownload']); // application status
 Route::get('notifications', [GeneralController::class, 'notifications']); // application status
 Route::get('notification/{id}', [GeneralController::class, 'notificationsDetail']); // application status

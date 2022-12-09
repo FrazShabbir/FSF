@@ -397,7 +397,7 @@ class ApplicationController extends Controller
                 [
                     'api_token' => 'required',
                     'user_id' => 'required',
-                    'passport_number' => 'required',
+                    'passport_number' => 'required|unique:applications',
                     'nie' => 'required',
                     'native_id'=>'required',
                     'full_name'=>'required',
@@ -405,7 +405,7 @@ class ApplicationController extends Controller
                     'surname'=>'required',
                     'gender'=>'required',
                     'phone'=>'required',
-                    'email'=>'required',
+                    'email'=>'required|unique:applications',
                     'dob'=>'required',
                     'native_country'=>'required',
                     'native_country_address'=>'required',

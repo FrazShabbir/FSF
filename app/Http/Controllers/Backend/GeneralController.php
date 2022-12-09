@@ -33,6 +33,13 @@ class GeneralController extends Controller
             setSettings('terms', request('terms'));
         }
      
+        if ($request->about) {
+            setSettings('about', request('about'));
+        }
+        if ($request->privacy) {
+            setSettings('privacy', request('privacy'));
+        }
+
         if ($request->hasFile('terms_pdf')) {
 
             $request->validate([
