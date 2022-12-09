@@ -72,5 +72,6 @@ Route::get('terms-and-conditions/download', [GeneralController::class, 'termsdow
 Route::get('notifications', [GeneralController::class, 'notifications']); // application status
 Route::get('notification/{id}', [GeneralController::class, 'notificationsDetail']); // application status
 
+Route::get('check/notifications', [GeneralController::class, 'notificationsCheck']); // application status
 
 // });

@@ -229,4 +229,26 @@ class GeneralController extends Controller
         }
     }
 
+    public function notificationsCheck()
+    {
+        $arr=[];
+        $icon = GeneralSetting::where('key', 'notification_icon')->first();
+
+        if ($icon) {
+            return response()->json([
+                'icon' => 1,
+                'status' => 200,
+                'message' => 'Data Found',
+            ], 200);
+        } else {
+          
+            return  response()->json([
+                'icon' => 0,
+                'status' => 404,
+                'message' => 'Do not show',
+            ], 404);
+        }
+    }
+    
+
 }

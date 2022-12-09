@@ -98,6 +98,10 @@ class GeneralController extends Controller
             setSettings('address', request('address'));
         }
 
+        if ($request->notification_icon) {
+            setSettings('notification_icon', request('notification_icon'));
+        }
+
         return redirect()->back();
     }
 
