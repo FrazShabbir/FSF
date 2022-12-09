@@ -196,6 +196,26 @@ class GeneralController extends Controller
      
     }
 
+    public function manualdownload()
+    {
+        $manual = GeneralSetting::where('key', 'manual')->first();
+        if ($manual  ) {;
+            return response()->json([
+                'manual' => env('APP_URL').$manual->value,
+                'status' => 200,
+                'message' => 'Pdf Found',
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'PDf Not Found',
+            ], 404);
+        }
+     
+    }
+
+
+    
     public function notifications()
     {
         $arr=[];

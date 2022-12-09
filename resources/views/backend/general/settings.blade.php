@@ -215,6 +215,26 @@
                                                     </div>
                                                 @endif
 
+
+                                                <div class="col-md-12 col-sm-12 mb-3">
+                                                    <label for="terms">Upload File (About Manual)</label>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input"
+                                                            name="manual" id="manual" accept=".pdf">
+                                                        <label class="custom-file-label" for="manual">Choose PDF
+                                                            (.pdf)</label>
+                                                    </div>
+
+
+                                                </div>
+                                                @if (fromSettings('manual'))
+                                                    <div class="col-md-12 col-sm-12 mb-3">
+                                                        <a for="terms" download
+                                                            href="{{ asset(fromSettings('manual')) }}"><i
+                                                                class="las la-arrow-down"></i> Download Manual </a>
+                                                    </div>
+                                                @endif
+
                                                 <div class="col-md-12 col-sm-12 mb-3">
                                                     <label for="privacy">Show Notification Icon</label>
                                                     <select name="notification_icon" id="" class="form-control">
