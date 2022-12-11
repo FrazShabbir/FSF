@@ -25,14 +25,14 @@ class ApplicationController extends Controller
      */
     public function index(Request $request)
     {
-       if(User::where('id',$request->user_id)->where('api_token',$request->api_token)->first()){
-            $applications = Application::where('user_id',$request->user_id)->get(['id','application_id','passport_number','full_name','status']);
+        if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
+            $applications = Application::where('user_id', $request->user_id)->get(['id','application_id','passport_number','full_name','status']);
             return response()->json([
                 'status' => 200,
                 'message' => 'All Applications Fetched',
                 'applications' => $applications,
             ], 200);
-        }else{
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'User Not Found',
@@ -1027,30 +1027,40 @@ class ApplicationController extends Controller
                 ], 404);
         }
     }
-    public function getStatus(Request $request){
-       
-    $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->get();
-    if ($user->count()>0) {
-        $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
-    } else {
-        return response()->json([
-            'status' => 400,
-            'message' => 'Invalid Request',
-        ], 404);
+    public function getStatus(Request $request)
+    {
+        $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->get();
+        if ($user->count()>0) {
+            $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Invalid Request',
+            ], 404);
+        }
+        $applications = Application::where('user_id', $user->id)->get(['application_id','full_name','status']);
+        $total = $applications->count();
+        $approved_application  = Application::where('user_id', $user->id)->where('status', 'APPROVED')->get(['application_id','full_name','status']);
+        $approved_total = $approved_application->count();
+        $renewable_application  = Application::where('user_id', $user->id)->where('status', 'RENEWABLE')->get(['application_id','full_name','status']);
+        $renewable_total = $renewable_application->count();
+        if ($applications->count()>0) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Applications Found',
+                'total' => $total,
+                'applications' => $applications,
+                'approved'=>$approved_application,
+                'approved_total'=>$approved_total,
+                'renewable_application'=>$renewable_application,
+                'renewable_total'=>$renewable_total
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'No Applications Found',
+                'applications' => null
+            ], 404);
+        }
     }
-    $applications = Application::where('user_id', $user->id)->get(['application_id','full_name','status']);
-    if ($applications->count()>0) {
-        return response()->json([
-            'status' => 200,
-            'message' => 'Applications Found',
-            'applications' => $applications
-        ], 200);
-    } else {
-        return response()->json([
-            'status' => 404,
-            'message' => 'No Applications Found',
-            'applications' => null
-        ], 404);
-    }
-}
 }
