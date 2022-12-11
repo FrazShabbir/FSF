@@ -40,9 +40,13 @@ Route::post('/auth/logout', [AuthController::class, 'logout']); // login
     // Route::apiResource('application', ApplicationController::class);// application
 Route::get('application/myapplication', [ApplicationController::class, 'index']); // application status
 
-Route::get('application/create', [ApplicationController::class, 'create']); // application status
-Route::get('application/renew/', [ApplicationController::class, 'renew']); // application status
-Route::post('application/store', [ApplicationController::class, 'store']); // application status
+Route::get('application/create', [ApplicationController::class, 'create']); 
+
+Route::get('application/renew/', [ApplicationController::class, 'renew']); 
+
+Route::post('renew/application/save', [ApplicationController::class, 'storeRenewApplication']); 
+
+Route::post('application/store', [ApplicationController::class, 'store']); 
 Route::get('application/{id}/{user}/{token}', [ApplicationController::class, 'show']);
 // application Editing Mode
 Route::get('application/edit', [ApplicationController::class, 'edit']); // application Editing Mode
@@ -51,10 +55,10 @@ Route::post('application/update', [ApplicationController::class, 'update']); // 
 Route::get('get_passport/info/{id}/{user}/{token}', [ApplicationController::class, 'passportInfo']);
 
 
-Route::get('myprofile/{id}/{token}', [GeneralController::class, 'myprofile']); // application status
-Route::post('myprofile/{id}/update', [GeneralController::class, 'updateProfile']); // application status
+Route::get('myprofile/{id}/{token}', [GeneralController::class, 'myprofile']); 
+Route::post('myprofile/{id}/update', [GeneralController::class, 'updateProfile']); 
 
-Route::get('donation/create', [DonationController::class, 'create']); // application status
+Route::get('donation/create', [DonationController::class, 'create']); 
 Route::get('donations/all', [DonationController::class, 'allDonation']); // application status
 Route::post('donation/store', [DonationController::class, 'store']); // application status
 

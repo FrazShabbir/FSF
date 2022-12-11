@@ -14,6 +14,7 @@ use App\Models\City;
 use App\Models\Application;
 use App\Models\ApplicationComment;
 use App\Models\User;
+use App\Models\RenewApplication;
 use App\Models\Country;
 
 class ApplicationController extends Controller
@@ -88,7 +89,7 @@ class ApplicationController extends Controller
             ]);
         }
     }
-    public function storeRenewApplication(Request $request, $id)
+    public function storeRenewApplication(Request $request)
     {
         try {
             DB::beginTransaction();
@@ -99,6 +100,7 @@ class ApplicationController extends Controller
                     'user_id' => 'required',
                     'passport_number' => 'required',
                     'nie' => 'required',
+                    'email' => 'required',
                     'native_id'=>'required',
                     'full_name'=>'required',
                     'father_name'=>'required',
@@ -261,7 +263,7 @@ class ApplicationController extends Controller
                 $applicationRenewal = RenewApplication::create([
                     'application_id' => $application->id,
                     'annually_fund_amount' => $user->id,
-
+                    'user_signature' => env('APP_URL.url').'placeholder',
                     'declaration_confirm' => $request->declaration_confirm,
                 ]);
 
