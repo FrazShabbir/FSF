@@ -31,7 +31,7 @@
         </li>
 
         <li>
-          <a href="./map.html">
+          <a href="{{route('member.profile',auth()->user()->username)}}">
             <i class="now-ui-icons users_single-02"></i>
             <p>My Profile</p>
           </a>

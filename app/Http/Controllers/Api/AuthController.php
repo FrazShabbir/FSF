@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -136,10 +137,12 @@ class AuthController extends Controller
             }
             $user->api_token = Str::random(60);
             $user->save();
+            $applications = Application::where('user_id', $user->id)->get(['application_id','full_name','status']);
             return response()->json([
                 'status' => 200,
                 'message' => 'User Logged In Successfully',
                 'user'=> $user,
+                'applications'=>$applications,
                 'token' =>$user->api_token
             ], 200);
         } catch (\Throwable $th) {

@@ -10,7 +10,11 @@
 @section('content')
 <div class="panel-header panel-header-sm">
 </div>
+
 <div class="content">
+  <form action="{{route('member.profile.update',auth()->user()->username)}}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
   <div class="row">
     <div class="col-md-8">
       <div class="card">
@@ -18,7 +22,7 @@
           <h5 class="title">Edit Profile</h5>
         </div>
         <div class="card-body">
-          <form>
+     
             <div class="row">
               <!-- <div class="col-md-5 pr-1">
                 <div class="form-group">
@@ -29,110 +33,66 @@
               <div class="col-md-6 pr-1">
                 <div class="form-group">
                   <label>First Name</label>
-                  <input type="text" class="form-control" placeholder="First Name" value="Saad">
+                  <input type="text" class="form-control" placeholder="First Name" value="{{auth()->user()->full_name}}" name="full_name">
                 </div>
               </div>
-              <div class="col-md-6 pl-1">
+             <div class="col-md-6 pl-1">
                 <div class="form-group">
-                  <label>Last Name</label>
-                  <input type="text" class="form-control" placeholder="Last Name" value="Ahmad">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" placeholder="+92300 12312312" value="{{auth()->user()->phone}}" name="phone">
                 </div>
-              </div>
+              </div> 
+
             </div>
             <div class="row">
-              <div class="col-md-12 px-3">
+              <div class="col-md-6 px-3">
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="email" class="form-control" placeholder="Company" value="saad@email.com">
+                  <input type="email" class="form-control" placeholder="Company" value="{{auth()->user()->email}}" name="email">
                 </div>
               </div>
-              <!-- <div class="col-md-6 pl-1">
+              <div class="col-md-6 px-3">
                 <div class="form-group">
-                  <label>Last Name</label>
-                  <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
-                </div>
-              </div> -->
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Address</label>
-                  <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                  <label>Passport Number</label>
+                  <input type="text" class="form-control" placeholder="PN233878" value="{{auth()->user()->passport_number}}" name="passport_number">
                 </div>
               </div>
             </div>
-            <div class="row mb-3">
-              <div class="col-md-4 pr-1">
-                <div class="form-group">
-                  <label>City</label>
-                  <input type="text" class="form-control" placeholder="City" value="Mike">
-                </div>
-              </div>
-              <div class="col-md-4 px-1">
-                <div class="form-group">
-                  <label>Country</label>
-                  <input type="text" class="form-control" placeholder="Country" value="Andrew">
-                </div>
-              </div>
-              <div class="col-md-4 pl-1">
-                <div class="form-group">
-                  <label>Phone Number</label>
-                  <input type="tel" class="form-control" placeholder="1234567890">
-                </div>
-              </div>
-            </div>
-            <!-- <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>About Me</label>
-                  <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
-                </div>
-              </div>
-            </div> -->
-          </form>
+     
+         
+        
         </div>
       </div>
     </div>
     <div class="col-md-4">
       <div class="card card-user">
         <div class="image">
-          <img src="../assets/img/bg5.jpg" alt="...">
+          <img src="{{asset('members/assets/img/bg5.jpg')}}" alt="...">
         </div>
         <div class="card-body">
           <div class="author">
             <a href="#">
-              <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
-              <h5 class="title">Mike Andrew</h5>
+              <img class="avatar border-gray" src="{{asset('members/assets/img/mike.jpg')}}" alt="...">
+              <h5 class="title">{{auth()->user()->full_name}}</h5>
             </a>
             <p class="description font-weight-bold">
-              <span class="badge badge-pill badge-success">Active</span>
+              <span class="badge badge-pill badge-{{auth()->user()->status}}">{{getStatus(auth()->user()->status)}}</span>
             </p>
           </div>
-          <!-- <p class="description text-center">
-            "Lamborghini Mercy <br>
-            Your chick she so thirsty <br>
-            I'm in that two seat Lambo"
-          </p> -->
+      
         </div>
         <hr>
         <div class="button-container">
-          <button type="button" class="btn btn-primary rounded-pill">
-            Logout
-          </button>
-          <!-- <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fab fa-facebook-f"></i>
-          </button>
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fab fa-twitter"></i>
-          </button>
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fab fa-google-plus-g"></i>
-          </button> -->
+          <input type="file" class="btn btn-primary rounded-pill" placeholder="Profile Pic">
+          
+
         </div>
       </div>
     </div>
   </div>
+</form>
 </div>
+
 @endsection
 
 

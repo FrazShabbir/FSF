@@ -1027,4 +1027,30 @@ class ApplicationController extends Controller
                 ], 404);
         }
     }
+    public function getStatus(Request $request){
+       
+    $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->get();
+    if ($user->count()>0) {
+        $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
+    } else {
+        return response()->json([
+            'status' => 400,
+            'message' => 'Invalid Request',
+        ], 404);
+    }
+    $applications = Application::where('user_id', $user->id)->get(['application_id','full_name','status']);
+    if ($applications->count()>0) {
+        return response()->json([
+            'status' => 200,
+            'message' => 'Applications Found',
+            'applications' => $applications
+        ], 200);
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'No Applications Found',
+            'applications' => null
+        ], 404);
+    }
+}
 }

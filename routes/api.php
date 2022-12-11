@@ -75,4 +75,7 @@ Route::get('notification/{id}', [GeneralController::class, 'notificationsDetail'
 
 Route::get('check/notifications', [GeneralController::class, 'notificationsCheck']); // application status
 
+
+Route::post('application/myapplication/status', [ApplicationController::class, 'getStatus']); // application status
+
 // });
