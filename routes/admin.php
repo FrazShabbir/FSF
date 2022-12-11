@@ -6,6 +6,8 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\GeneralController;
 use App\Http\Controllers\Backend\NotificationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Backend\ReportController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,5 +59,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
 
     Route::post('/save-token', [NotificationController::class, 'saveToken'])->name('save-token');
     Route::post('/send-notification', [NotificationController::class, 'sendNotification'])->name('send.notification');
+
+    Route::get('reports/countries', [ReportController::class, 'reportCountries'])->name('report.countries');
+    Route::get('reports/communities', [ReportController::class, 'reportCommunities'])->name('report.communities');
+    Route::get('reports/provinces', [ReportController::class, 'reportProvinces'])->name('report.provinces');
+    Route::get('reports/cities', [ReportController::class, 'reportCities'])->name('report.cities');
+
 });
 require __DIR__.'/auth.php';

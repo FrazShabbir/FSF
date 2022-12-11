@@ -21,10 +21,17 @@ return new class extends Migration
             $table->integer('account_id')->unsigned();
             $table->integer('donation_id')->unsigned();
             $table->integer('application_id')->unsigned()->nullable();
+
+            $table->integer('country_id')->unsigned()->nullable();
+            $table->integer('community_id')->unsigned()->nullable();
+            $table->integer('province_id')->unsigned()->nullable();
+            $table->integer('city_id')->unsigned()->nullable();
+
             $table->string('debit')->default('0');
             $table->string('credit')->default('0');
             $table->string('balance')->default('0');
             $table->string('summary')->nullable();
+            $table->date('donation_date')->nullable();
             $table->timestamps();
         });
     }

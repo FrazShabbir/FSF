@@ -152,6 +152,23 @@
             {{-- Heirarchy END --}}
         @endif
 
+        @if (getuser()->hasRole('Super Admin'))
+        {{-- Heirarchy ONLY FOR SUPER ADMIN --}}
+        <li>
+            <a href="#reports" class="iq-waves-effect collapsed" data-toggle="collapse"><i
+                    class="las la-chart-bar iq-arrow-left"></i><span>Reports</span><i
+                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+            <ul id="reports" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                <li class=""><a href="{{route('report.countries')}}"><i class="las la-city"></i>Countries</a></li>
+                <li class=""><a href="{{route('report.communities')}}"><i class="ri-database-line"></i>Communities</a></li>
+                <li class=""><a href="{{route('report.provinces')}}"><i class="las la-building"></i>Provinces</a></li>
+                <li class=""><a href="{{route('report.cities')}}"><i class="las la-map-marker-alt"></i>Cities</a></li>
+
+            </ul>
+        </li>
+        {{-- Heirarchy END --}}
+    @endif
+
         @can('Update Settings')
         <li class="bg-primary  {{ request()->route()->getName() == 'notification.create'? 'active': '' }}">
             <a href="{{ route('notification.create') }}" class="iq-waves-effect text-light"><i

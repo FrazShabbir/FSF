@@ -116,7 +116,7 @@ class EnrollmentController extends Controller
             //code...
             DB::beginTransaction();
             $application = new Application();
-            $application->application_id= 'W-App-'.getRandomString(10);
+            $application->application_id= 'W-App-'.date('YmdHis');
             $application->user_id = auth()->user()->id;
             $application->passport_number = $request->passport_number;
             $application->nie = $request->nie;

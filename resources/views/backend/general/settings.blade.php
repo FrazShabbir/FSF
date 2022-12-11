@@ -54,20 +54,20 @@
                                                 <div class="col-md-6 col-sm-12 mb-3">
                                                     <label for="role_name">Site Title</label>
                                                     <input type="text" class="form-control" id="site_title"
-                                                        placeholder="FDD" name="site_title"
+                                                        placeholder="FSF" name="site_title"
                                                         value="{{ fromSettings('site_title') ?? old('site_title') }}">
                                                 </div>
                                                 <div class="col-md-6 col-sm-12 mb-3">
                                                     <label for="short_title">Short Title</label>
                                                     <input type="text" class="form-control" id="short_title"
-                                                        placeholder="FDD" name="short_title"
+                                                        placeholder="FSF" name="short_title"
                                                         value="{{ fromSettings('short_title') ?? old('short_title') }}">
                                                 </div>
 
                                                 <div class="col-md-6 col-sm-12 mb-3">
                                                     <label for="role_name">Copyrights text</label>
                                                     <input type="text" class="form-control" id="copyrights"
-                                                        placeholder="Copyright 2022 Finance FDD" name="copyrights"
+                                                        placeholder="Copyright 2022 Finance FSF" name="copyrights"
                                                         value="{{ fromSettings('copyrights') ?? old('copyrights') }}">
                                                 </div>
 

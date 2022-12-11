@@ -30,7 +30,7 @@
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
-                            <table id="fdd-table" class="table table-striped table-bordered mt-4" role="grid"
+                            <table id="FSF-table" class="table table-striped table-bordered mt-4" role="grid"
                                 aria-describedby="user-list-page-info">
                                 <thead>
                                     <tr>
@@ -203,7 +203,7 @@
 @push('js')
 <script>
     $(document).ready( function () {
-        $('#fdd-table').DataTable({
+        $('#FSF-table').DataTable({
             dom: 'Bfrtip',
             buttons: [
             {
@@ -232,7 +232,7 @@
             "lengthChange": false,
 
         });
-        $('#fdd-table_paginate ul').addClass("pagination-sm");
+        $('#FSF-table_paginate ul').addClass("pagination-sm");
 
     } );
 </script>

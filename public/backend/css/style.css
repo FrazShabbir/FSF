@@ -1,5 +1,5 @@
 /*
-Template: FDD - Responsive Bootstrap 4 Admin Dashboard Template
+Template: FSF - Responsive Bootstrap 4 Admin Dashboard Template
 Author: TeamEssential
 Design and Developed by: EssentialSofts
 NOTE: This file contains the styling for responsive Template.
@@ -1055,7 +1055,7 @@ Privacy Policy Page
 User List Page
 -----------------------------------------------------------------------*/
 .list-user-action a { font-size: 16px; height: 25px; width: 25px; text-align: center; line-height: 25px; margin: 0 3px; display: inline-block; border-radius: 5px; }
-#fdd-table.table td { vertical-align: middle; }
+#FSF-table.table td { vertical-align: middle; }
 .user-list-files a { padding: 10px 15px; margin: 0 0 0 10px; border-radius: 5px; line-height: normal; }
 .table-responsive #exampleInputSearch { width: auto; }
 
@@ -1142,7 +1142,7 @@ border: 1px solid black;
 .page-link {
 color: black !important;
 }
-#fdd-table_paginate{
+#FSF-table_paginate{
 /* border: 1px solid #000; */
 /* padding: 0px; */
 padding-top: 10px;
@@ -1152,7 +1152,7 @@ padding-left: 0;
 list-style: none;
 border-radius: 0.25rem;
 }
-#fdd-table_paginate a{
+#FSF-table_paginate a{
 /* border: 1px solid #000; */
 position: relative;
 display: block;
@@ -1165,7 +1165,7 @@ border: 1px solid #dee2e6;
 cursor: pointer;
 }
 
-#fdd-table_paginate span{
+#FSF-table_paginate span{
     display: flex!important;
 }
 

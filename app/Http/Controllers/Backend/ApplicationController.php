@@ -144,7 +144,7 @@ class ApplicationController extends Controller
             }
 
             $application = Application::create([
-                'application_id'=>'W-App-'.getRandomString(10),
+                'application_id'=>'W-App-'.date('YmdHis'),
                 'user_id'=>$user->id,
                 'passport_number' => $request->passport_number,
                 'nie' => $request->nie,

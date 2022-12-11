@@ -57,7 +57,7 @@ class User extends Authenticatable
     ];
 
     function application(){
-        return $this->hasOne(Application::class);
+        return $this->hasMany(Application::class);
     }
   
     function donations(){

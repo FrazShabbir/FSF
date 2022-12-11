@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Country '.$country->name.' - FDD')
+@section('title', 'Country '.$country->name.' - FSF')
 
 @section('styles')
 @endsection

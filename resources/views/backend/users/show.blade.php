@@ -1,10 +1,11 @@
 @extends('backend.main')
-@section('title', 'User - FDD')
+@section('title', $user->full_name . ' - FSF')
 
 @section('styles')
 @endsection
 
 @push('css')
+
 @endpush
 
 
@@ -22,16 +23,12 @@
                             <div class="iq-header-title">
                                 <span class="badge badge-{{ $user->status }}">{{ getStatus($user->status) }}</span>
                                 @if ($user->application)
-                                <a href="{{ route('application.show', $user->application->application_id) }}"
-                                    class="btn btn-primary">User Application</a>
-                               
-                    
-
-
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#CloseAccount">
-                                    Close Account
-                                </button>
+                                    {{-- <a href="{{ route('application.show', $user->application->application_id) }}"
+                                    class="btn btn-primary">User Application</a> --}}
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#CloseAccount">
+                                        Close Account
+                                    </button>
                                 @endif
                             </div>
                         </div>
@@ -61,7 +58,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 mb-3">
                                     <label for="username">Address:</label>
-                                    <textarea type="text" class="form-control" id="username" name="username" disabled>{{ getAddress($user->id) ?? ''}}</textarea>
+                                    <textarea type="text" class="form-control" id="username" name="username" disabled>{{ getAddress($user->id) ?? '' }}</textarea>
                                 </div>
 
                             </div>
@@ -91,6 +88,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="mt-5 mb-4">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-12">
@@ -120,7 +118,7 @@
                                     </div>
                                     <div class="col-md-3 col-sm-12">
                                         <div class="form-group">
-                                            <img src="{{ asset($user->avatar) }}" alt="">
+                                            <img src="{{ asset($user->avatar) }}" alt="" class="'img-fluid w-100">
                                         </div>
                                     </div>
                                 </div>
@@ -135,12 +133,11 @@
                         </div>
                     </div>
                 </div>
-                @if ($user->application)
-                    
-               
-                @include('backend.users.partials._donation_stats')
 
-                @include('backend.users.partials._rep_info')
+                @if ($user->application)
+                    @include('backend.users.partials._applications')
+                    @include('backend.users.partials._donation_stats')
+                    {{-- @include('backend.users.partials._rep_info') --}}
                 @endif
                 <div class="col-sm-12">
                     <div class="iq-card">
@@ -233,10 +230,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h4 class="text-danger">ACCOUNT CLOSING WARNING</h4>
+                    <h4 class="text-danger">Application CLOSING WARNING</h4>
                     <hr>
                     <h4 class="text-primary">
-                        Are Your Sure you want to close account of this user ({{ $user->full_name }})?
+                        Are Your Sure you want to close application from this user ({{ $user->full_name }})?
                     </h4>
                 </div>
                 <div class="modal-footer">
