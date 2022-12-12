@@ -71,7 +71,7 @@
 </div>
 <div class="content">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-9">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">APPLICATION : <b>{{$application->application_id}}</b> <span class="badge badge-{{$application->status}}">{{$application->status}}</span></h4> 
@@ -87,15 +87,15 @@
                   </div>
                   <div class="stepwizard-step">
                     <a href="#step-2" type="button" class="btn btn-default btn-circle" >2</a>
-                    <p>Relative Info (Residential)</p>
+                    <p>Relative  (Residential)</p>
                   </div>
                   <div class="stepwizard-step">
                     <a href="#step-3" type="button" class="btn btn-default btn-circle" >3</a>
-                    <p>Relative Info (Native)</p>
+                    <p>Relative  (Native)</p>
                   </div>
                   <div class="stepwizard-step">
                     <a href="#step-4" type="button" class="btn btn-default btn-circle" >4</a>
-                    <p>Representative Info</p>
+                    <p>Rep Info</p>
                   </div>
                   <div class="stepwizard-step">
                     <a href="#step-5" type="button" class="btn btn-default btn-circle" >5</a>
@@ -103,7 +103,7 @@
                   </div>
                   <div class="stepwizard-step">
                     <a href="#step-6" type="button" class="btn btn-default btn-circle" >6</a>
-                    <p>Sing Page</p>
+                    <p>Sign</p>
                   </div>
                 </div>
               </div>
@@ -728,6 +728,23 @@
         </div>
       </div>
     </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Status</b> </h4> 
+        </div>
+        <div class="card-body">
+          <div class="container">
+            @foreach ($application->comments as $status )
+            <div class="row pb-3">
+              <div class="col-12"><span class="badge badge-{{$status->status}}">{{$status->status}}</span></div>
+              <div class="col-12">{{$status->comment}}</div>
+              <div class="col-12">{{date('d-M-y',strtotime($status->created_at))}}</div>
+            </div>
+            @endforeach
+         
+          </div>
+        </div></div></div>
   </div>
 </div>
 @endsection

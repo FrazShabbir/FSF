@@ -99,7 +99,7 @@ class MemberDonationController extends Controller
             }
             // Create Transaction
             $transaction = AccountTransaction::create([
-                'tranasction_id' => $donation->id,
+                'transaction_id' => 'T-'.date('YmdHis'),
                 'type' => 'Credit',
                 'user_id'=> auth()->user()->id,
                 'account_id' => $account->id,

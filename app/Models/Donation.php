@@ -23,4 +23,10 @@ class Donation extends Model
     {
         return $this->belongsTo(Account::class,'fsf_bank_id');
     }
+    
+    function city()
+    {
+        return $this->belongsTo(City::class,'city_id');
+    }
+
 }

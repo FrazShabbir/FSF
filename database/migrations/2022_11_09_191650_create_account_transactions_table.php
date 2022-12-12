@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('account_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('tranasction_id')->unique();
+            $table->string('transaction_id')->unique();
             $table->string('type'); // Income or Expense
             $table->integer('user_id')->unsigned();
             $table->integer('account_id')->unsigned();
