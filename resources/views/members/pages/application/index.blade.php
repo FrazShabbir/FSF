@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="mt-2">
-                            <h6 class="mb-0 mt-1">Type:{{$application->type}} - Application: {{$application->application_id}}</h6>
+                            <h6 class="mb-0 mt-1"><a href="{{route('enrollment.show',$application->application_id)}}">{{$application->full_name}} - Application: {{$application->application_id}}</a></h6>
                             <p class="mb-0">{{date('d-M-y',strtotime($application->created_at))}}</p>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="text-right">
                         <span class="badge badge-{{$application->status}} rounded-pill mt-2">{{$application->status}}</span>
-                        <p class="mb-0 font-weight-bold">€ {{$application->amount}}</p>
+                        <p class="mb-0 font-weight-bold">€ {{$application->annually_fund_amount}}</p>
                     </div>
                 </div>
                 <div class="offset-lg-2 col-lg-8 col-md-6 col-sm-12">

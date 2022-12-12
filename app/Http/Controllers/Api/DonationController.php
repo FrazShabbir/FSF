@@ -18,7 +18,7 @@ class DonationController extends Controller
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
             $accounts = Account::where('status',1)->get(['id', 'name', 'account_number','bank','city']);
-            $applications = Application::where('user_id', $request->user_id)->get(['id', 'application_id', 'passport_number','full_name']);
+            $applications = Application::where('user_id', $request->user_id)->where('status','APPROVED')->get(['id', 'application_id', 'passport_number','full_name']);
             return response()->json([
                 'status' => 200,
                 'message' => 'All data Fetched',
@@ -92,7 +92,7 @@ class DonationController extends Controller
                     'user_id' => 'required',
                     'api_token' => 'required',
 
-                    'application_id' => 'nullable',
+                    'application_id' => 'required',
                     'donor_bank_name' => 'required',
                     'donor_bank_no' => 'required',
                     'fsf_bank_id' => 'required',
@@ -158,11 +158,17 @@ class DonationController extends Controller
                     'account_id' => $account->id,
                     'donation_id' => $donation->id,
                     'application_id' => $application_id,
+                  
+                    
+                    'country_id' => $application->country_id,
+                    'community_id' => $application->community_id,
+                    'province_id' => $application->province_id,
+                    'city_id' => $application->city_id,
+
                     'debit'=>0,
                     'credit'=>$request->amount,
                     'balance'=>$account->balance + $request->amount,
                     'summary'=>'Donation',
-    
                 ]);
 
                 DB::commit();

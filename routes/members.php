@@ -31,6 +31,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'member'],function () {
     Route::get('enrollment/{id}/edit', [EnrollmentController::class, 'edit'])->name('enrollment.edit');//->middleware(['can:Update enrollments']);
     Route::put('enrollment/{id}/update', [EnrollmentController::class, 'update'])->name('enrollment.update');//->middleware(['can:Update enrollments']);
 
+    Route::get('enrollments/renewable', [EnrollmentController::class, 'renewableIndex'])->name('enrollment.renewableIndex');//->middleware(['can:Create enrollments']);
+    Route::get('enrollments/renewable/{id}/edit', [EnrollmentController::class, 'renewableEdit'])->name('enrollment.renewableEdit');//->middleware(['can:Create enrollments']);
+    Route::put('enrollments/renewed/{id}/submit', [EnrollmentController::class, 'renewableUpdate'])->name('enrollment.renewableUpdate');//->middleware(['can:Create enrollments']);
 
 
     Route::get('member/donations', [MemberDonationController::class, 'index'])->name('member.donation.index');//->middleware(['can:Read enrollments']);

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Application;
+use App\Models\Donation;
 class DashboardController extends Controller
 {
    
@@ -21,7 +22,11 @@ class DashboardController extends Controller
 
     public function memberDashboard()
     {
-       return view('members.pages.index');
+        $applications = Application::where('user_id', auth()->user()->id)->get();
+        $donations = Donation::where('user_id', auth()->user()->id)->get();
+       return view('members.pages.index')
+            ->with('applications', $applications)
+            ->with('donations', $donations);
     }
      
     public function adminDashboard()

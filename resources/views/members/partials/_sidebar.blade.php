@@ -1,17 +1,17 @@
 <div class="sidebar" data-color="orange">
     <!--Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"-->
     <div class="logo">
-      <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+      <a href="{{route('dashboard')}}" class="simple-text logo-mini">
         FSF
       </a>
-      <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+      <a href="{{route('dashboard')}}" class="simple-text logo-normal">
         Funreal Services
       </a>
     </div>
     <div class="sidebar-wrapper" id="sidebar-wrapper">
       <ul class="nav">
         <li class="active ">
-          <a href="./dashboard.html">
+          <a href="{{route('dashboard')}}">
             <i class="now-ui-icons design_app"></i>
             <p>Dashboard</p>
           </a>
@@ -21,6 +21,12 @@
           <a href="{{route('enrollment.index')}}">
             <i class="now-ui-icons design_app"></i>
             <p>My Application</p>
+          </a>
+        </li>
+        <li class="">
+          <a href="{{route('enrollment.renewableIndex')}}">
+            <i class="now-ui-icons design_app"></i>
+            <p>Renewable Applications</p>
           </a>
         </li>
         <li>

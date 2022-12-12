@@ -59,9 +59,16 @@
               </div>
             </div>
      
-         
+            <div class="row">
+              <div class="offset-6 col-md-6 px-3 text-right">
+                <div class="form-group">
+                <button class="btn btn-primary" type="submit">Update</button>
+                </div>
+              </div>
+            </div>
         
         </div>
+    
       </div>
     </div>
     <div class="col-md-4">
@@ -72,7 +79,7 @@
         <div class="card-body">
           <div class="author">
             <a href="#">
-              <img class="avatar border-gray" src="{{asset('members/assets/img/mike.jpg')}}" alt="...">
+              <img class="avatar border-gray" src="{{asset(auth()->user()->avatar??'members/assets/img/mike.jpg')}}" alt="...">
               <h5 class="title">{{auth()->user()->full_name}}</h5>
             </a>
             <p class="description font-weight-bold">
@@ -83,7 +90,7 @@
         </div>
         <hr>
         <div class="button-container">
-          <input type="file" class="btn btn-primary rounded-pill" placeholder="Profile Pic">
+          <input type="file" class="btn btn-primary rounded-pill" placeholder="Profile Pic" name="avatar">
           
 
         </div>

@@ -19,4 +19,8 @@ class Donation extends Model
     {
         return $this->belongsTo(User::class);
     }
+    function account()
+    {
+        return $this->belongsTo(Account::class,'fsf_bank_id');
+    }
 }

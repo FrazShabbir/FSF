@@ -97,7 +97,7 @@
                                                 <label>Application ID</label>
                                                 <select name="application_id" id="" class="form-control">
                                                     @foreach ($applications as $application)
-                                                        <option value="{{ $application->id }}"> {{ $application->full_name }} - {{ $application->application_id }} - {{ $application->passport_number }}
+                                                        <option value="{{ $application->application_id }}"> {{ $application->full_name }} - {{ $application->application_id }} - {{ $application->passport_number }}
                                                         </option>
                                                     @endforeach
                                                 </select>

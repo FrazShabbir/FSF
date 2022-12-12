@@ -5,7 +5,7 @@
  =========================================================
 
  * Product Page: site.link_tim
- * Copyright site.year Creative Tim (http://www.creative-tim.com)
+ * Copyright site.year Creative Tim ()
 
  * Designed by www.invisionapp.com Coded by www.creative-tim.com
 
@@ -22,7 +22,7 @@
  =========================================================
 
  * Product Page: https://www.creative-tim.com/product/now-ui-dashboard
- * Copyright 2019 Creative Tim (http://www.creative-tim.com)
+ * Copyright 2019 Creative Tim ()
 
  * Designed by www.invisionapp.com Coded by www.creative-tim.com
 

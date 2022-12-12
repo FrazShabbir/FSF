@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Account;
 use App\Models\Application;
 use App\Models\Donation;
+use Illuminate\Support\Facades\DB;
+use App\Models\AccountTransaction;
 
 class MemberDonationController extends Controller
 {
@@ -30,7 +32,7 @@ class MemberDonationController extends Controller
     public function create()
     {
         $accounts = Account::all();
-        $applications = Application::where('user_id', auth()->user()->id)->get();
+        $applications = Application::where('user_id', auth()->user()->id)->where('status','APPROVED')->get();
         return view('members.pages.donation.create')
             ->with('accounts', $accounts)
             ->with('applications', $applications);
@@ -44,8 +46,9 @@ class MemberDonationController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
-            'application_id' => 'nullable',
+            'application_id' => 'required',
             'donor_bank_name' => 'required',
             'donor_bank_no' => 'required',
             'fsf_bank_id' => 'required',
@@ -66,35 +69,66 @@ class MemberDonationController extends Controller
             $account = Account::where('id', $request->fsf_bank_id)->first();
         }
 
-        $donation = Donation::create([
-            'donation_code'=> 'D-'.date('YmdHis'),
-            'user_id' => auth()->user()->id,
-            'application_id' => $application_id,
-            'passport_number' => $application->passport_number,
-            'donor_bank_name' => $request->donor_bank_name,
-            'donor_bank_no' => $request->donor_bank_no,
-            'fsf_bank_id' => $account->id ?? null,
-            'fsf_bank_name' => $account->name?? null,
-            'fsf_bank_no' => $account->account_number??null,
-            'amount' => $request->amount,
-            'type' => $type,
-            'mode' => 'W-Online',
-        ]);
-        if ($request->receipt) {
-            $request->validate([
-
-                'receipt' => 'required|mimes:png,jpg,jpeg|max:2048'
+        try {
+            DB::beginTransaction();
+            $donation = Donation::create([
+                'donation_code'=> 'D-'.date('YmdHis'),
+                'user_id' => auth()->user()->id,
+                'application_id' => $application_id,
+                'passport_number' => $application->passport_number,
+                'donor_bank_name' => $request->donor_bank_name,
+                'donor_bank_no' => $request->donor_bank_no,
+                'fsf_bank_id' => $account->id ?? null,
+                'fsf_bank_name' => $account->name?? null,
+                'fsf_bank_no' => $account->account_number??null,
+                'amount' => $request->amount,
+                'type' => $type,
+                'mode' => 'W-Online',
             ]);
-            $file = $request->receipt;
-            $extension = $file->getClientOriginalExtension();
-            $filename = getRandomString().'-'.time() . '.' . $extension;
-            $file->move('uploads/application/receipts/', $filename);
-            $donation->receipt= env('APP_URL.url').'uploads/application/receipts/'. $filename;
-            $donation->save();
+            if ($request->receipt) {
+                $request->validate([
+    
+                    'receipt' => 'required|mimes:png,jpg,jpeg|max:2048'
+                ]);
+                $file = $request->receipt;
+                $extension = $file->getClientOriginalExtension();
+                $filename = getRandomString().'-'.time() . '.' . $extension;
+                $file->move('uploads/application/receipts/', $filename);
+                $donation->receipt= env('APP_URL.url').'uploads/application/receipts/'. $filename;
+                $donation->save();
+            }
+            // Create Transaction
+            $transaction = AccountTransaction::create([
+                'tranasction_id' => $donation->id,
+                'type' => 'Credit',
+                'user_id'=> auth()->user()->id,
+                'account_id' => $account->id,
+                'donation_id' => $donation->id,
+                'application_id' => $application_id,
+              
+                
+                'country_id' => $application->country_id,
+                'community_id' => $application->community_id,
+                'province_id' => $application->province_id,
+                'city_id' => $application->city_id,
+
+                'debit'=>0,
+                'credit'=>$request->amount,
+                'balance'=>$account->balance + $request->amount,
+                'summary'=>'Donation',
+            ]);
+            //end transaction
+            DB::commit();
+            alert()->success('Donation Created Successfully', 'Success');
+            return redirect()->route('member.donation.index');
+        
+          
+        } catch (\Throwable $th) {
+            DB::rollback();
+            alert()->error('Donation Creation Failed', $th->getMessage());
+            return redirect()->back();
         }
-        alert()->success('Donation Created Successfully', 'Success');
-        return redirect()->route('member.donation.index');
-    }
+       }
 
     /**
      * Display the specified resource.
