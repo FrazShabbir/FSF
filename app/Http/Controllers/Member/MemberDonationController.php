@@ -119,6 +119,9 @@ class MemberDonationController extends Controller
             // ]);
             //end transaction
             DB::commit();
+            $donation_message = 'Dear '.$application->full_name.', Your Donation of '.$request->amount.' has been received and in processing. Team '.env('APP_NAME').'.';
+            SendMessage($application->phone,$donation_message);
+
             alert()->success('Donation Created Successfully', 'Success');
             return redirect()->route('member.donation.index');
         
@@ -149,6 +152,7 @@ class MemberDonationController extends Controller
      */
     public function edit($id)
     {
+        
         return view('members.pages.donation.edit');
     }
 

@@ -100,7 +100,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 mb-3">
-                                        <img src="{{$donation->receipt}}" alt="{{$donation->donation_code}}" class="img-fluid">
+                                        <img src="{{asset($donation->receipt)}}" alt="{{$donation->donation_code}}" class="img-fluid">
                                     </div>
                                 </div>
 

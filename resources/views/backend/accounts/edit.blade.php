@@ -58,8 +58,8 @@
                         <div class="col-6 mb-3">
                            <label for="cityr" class="required">Status</label>
                            <select name="status" id="" class="form-control">
-                              <option value="Active" {{$account->status=='Active'?'selected':''}}>Active</option>
-                              <option value="InActive" {{$account->status=='InActive'?'selected':''}}>InActive</option>
+                              <option value="ACTIVE" {{$account->status=='ACTIVE'?'selected':''}}>Active</option>
+                              <option value="INACTIVE" {{$account->status=='INACTIVE'?'selected':''}}>InActive</option>
                            </select>
                        </div>
                      </div>

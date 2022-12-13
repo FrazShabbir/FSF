@@ -33,13 +33,13 @@
               <div class="col-md-6 pr-1">
                 <div class="form-group">
                   <label>First Name</label>
-                  <input type="text" class="form-control" placeholder="First Name" value="{{auth()->user()->full_name}}" name="full_name">
+                  <input required type="text" class="form-control" placeholder="First Name" value="{{auth()->user()->full_name}}" name="full_name">
                 </div>
               </div>
              <div class="col-md-6 pl-1">
                 <div class="form-group">
                   <label>Phone</label>
-                  <input type="text" class="form-control" placeholder="+92300 12312312" value="{{auth()->user()->phone}}" name="phone">
+                  <input required type="text" class="form-control" placeholder="+92300 12312312" value="{{auth()->user()->phone}}" name="phone">
                 </div>
               </div> 
 
@@ -48,13 +48,13 @@
               <div class="col-md-6 px-3">
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="email" class="form-control" placeholder="Company" value="{{auth()->user()->email}}" name="email">
+                  <input required type="email" class="form-control" placeholder="Company" value="{{auth()->user()->email}}" name="email">
                 </div>
               </div>
               <div class="col-md-6 px-3">
                 <div class="form-group">
                   <label>Passport Number</label>
-                  <input type="text" class="form-control" placeholder="PN233878" value="{{auth()->user()->passport_number}}" name="passport_number">
+                  <input required type="text" class="form-control" placeholder="PN233878" value="{{auth()->user()->passport_number}}" name="passport_number">
                 </div>
               </div>
             </div>

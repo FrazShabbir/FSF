@@ -76,7 +76,7 @@
                                   </div>
                                   <div class="sign-info text-center">
                                       <button type="submit" class="btn btn-primary d-block w-100 mb-2">Sign in</button>
-                                      {{-- <span class="text-dark dark-color d-inline-block line-height-2">Don't have an account? <a href="{{route('register')}}">Sign up</a></span> --}}
+                                      <span class="text-dark dark-color d-inline-block line-height-2">Don't have an account? <a href="{{route('register')}}">Sign up</a></span>
                                   </div>
                               </form>
                           </div>
@@ -101,6 +101,7 @@
                                       <h4 class="mb-1 text-white">Create new events</h4>
                                       <p>It is a long established fact that a reader will be distracted by the readable content.</p>
                                   </div> --}}
+                               
                               </div>
                           </div>
                       </div>

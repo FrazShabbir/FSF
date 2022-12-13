@@ -473,7 +473,7 @@ class ApplicationController extends Controller
 
                 DB::beginTransaction();
                 $application = new Application();
-                $application->application_id= 'M-App-'.date('YmdHis');
+                $application->application_id= 'M-'.rand('11, 99').'-'.rand('111, 999').rand('11, 99');
                 $application->user_id = $request->user_id;
                 $application->passport_number = $request->passport_number;
                 $application->nie = $request->nie;

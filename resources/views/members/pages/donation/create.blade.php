@@ -80,7 +80,7 @@
                                         <div class="col-md-6 pl-5">
                                             <div class="form-group">
                                                 <label>FSF account:</label>
-                                                <select name="fsf_bank_id" id="" class="form-control">
+                                                <select name="fsf_bank_id" id="" class="form-control" required>
                                                     @foreach ($accounts as $account)
                                                         <option value="{{ $account->id }}" meta-name="{{ $account->name }}"
                                                             meta-bank="{{ $account->bank }}"
@@ -95,7 +95,7 @@
                                         <div class="col-md-6 pr-5">
                                             <div class="form-group">
                                                 <label>Application ID</label>
-                                                <select name="application_id" id="" class="form-control">
+                                                <select name="application_id" id="" class="form-control" required>
                                                     @foreach ($applications as $application)
                                                         <option value="{{ $application->application_id }}"> {{ $application->full_name }} - {{ $application->application_id }} - {{ $application->passport_number }}
                                                         </option>
@@ -116,14 +116,14 @@
                                             <div class="form-group">
                                                 <label>Doner Bank Name:</label>
                                                 <input type="text" class="form-control" name="donor_bank_name"
-                                                    placeholder="Funeral Servies Anual Donation" value="{{old('donor_bank_name')}}">
+                                                    placeholder="Funeral Servies Anual Donation" value="{{old('donor_bank_name')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6 pr-5">
                                             <div class="form-group">
                                                 <label>Doner Bank AC No.</label>
                                                 <input type="text" class="form-control" name="donor_bank_no"
-                                                    placeholder="2374983274890" value="{{old('donor_bank_no')}}">
+                                                    placeholder="2374983274890" value="{{old('donor_bank_no')}}" required>
                                             </div>
                                         </div>
                                     </div>
@@ -134,14 +134,14 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">€</span>
                                                 </div>
-                                                <input type="number" step="0.01" class="form-control" name="amount" placeholder="250" value="{{old('amount')}}">
+                                                <input type="number" step="0.01" class="form-control" name="amount" placeholder="250" value="{{old('amount')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6 pr-5">
                                             <div class="form-group">
                                                 <label>Donation Date:</label>
                                                 <input type="date" class="form-control" name="date"
-                                                    placeholder="22-12-2022" value="{{old('donor_bank_no')}}">
+                                                    placeholder="22-12-2022" value="{{old('donor_bank_no')}}" required>
                                             </div>
                                         </div>
                                     </div>
@@ -150,7 +150,7 @@
                                             <div class="form-group">
                                                 <label for="">Upload Receipt</label>
                                                 <input type="file" id="image-input" name="receipt"
-                                                    accept="image/jpeg, image/png, image/jpg">
+                                                    accept="image/jpeg, image/png, image/jpg" required>
                                                 <div id="display-image"></div>
                                             </div>
                                         </div>

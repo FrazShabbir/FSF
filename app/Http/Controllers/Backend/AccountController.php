@@ -40,14 +40,14 @@ class AccountController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'required',
+         
             'name' => 'required',
             'account_number' => 'required',
             'bank' => 'required',
             'type' => 'required',
             'city' => 'required',
-            'balance' => 'required',
-            'status' => 'required',
+           
+           
         ]);
         $account = new Account();
         $account->code = 'Acc-'.rand(100,999);
@@ -56,9 +56,9 @@ class AccountController extends Controller
         $account->bank = $request->bank;
         $account->type = $request->type;
         $account->city = $request->city;
-        $account->status = $request->status;
+        $account->status = 'ACTIVE';
         $account->save();
-        return redirect()->route('accounts.index');
+        return redirect()->route('account.index');
         
     }
 

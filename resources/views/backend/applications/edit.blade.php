@@ -154,27 +154,27 @@
                                         </a>
                                     </div>
                                     <div id="user" class="wizard-step">
-                                        <a href="#document-detail" class="btn btn-default disabled active">
+                                        <a href="#document-detail" class="btn btn-default active">
                                             <i class="text-primary">2.</i><span>Relative Info (spain)</span>
                                         </a>
                                     </div>
                                     <div id="user" class="wizard-step">
-                                        <a href="#bank-detail" class="btn btn-default disabled active">
+                                        <a href="#bank-detail" class="btn btn-default active">
                                             <i class="text-primary">3.</i><span>Relative Info (Native)</span>
                                         </a>
                                     </div>
                                     <div id="user" class="wizard-step">
-                                        <a href="#representative" class="btn btn-default disabled active">
+                                        <a href="#representative" class="btn btn-default active">
                                             <i class="text-primary">4.</i><span>Representative Info</span>
                                         </a>
                                     </div>
                                     <div id="user" class="wizard-step">
-                                        <a href="#suplementery" class="btn btn-default disabled active">
+                                        <a href="#suplementery" class="btn btn-default active">
                                             <i class="text-primary">5.</i><span>Suplementary</span>
                                         </a>
                                     </div>
                                     <div id="user" class="wizard-step">
-                                        <a href="#confirm-data" class="btn btn-default disabled active">
+                                        <a href="#confirm-data" class="btn btn-default active">
                                             <i class="text-primary">6.</i><span>Sign page</span>
                                         </a>
                                     </div>
@@ -330,8 +330,8 @@
                                                 for="native_country">Native Country</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" name="native_country" id="native_country"
-                                                placeholder="Englain" required
-                                                value="{{ old('native_country') }}">
+                                                placeholder="England" required
+                                                value="{{ $application->native_country??old('native_country') }}">
 
                                                 {{-- <select name="native_country" id="native_country" class="form-control"
                                                     required>
@@ -1107,6 +1107,27 @@
                                             </div>
                                         </div>
                                     </div> --}}
+                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                        <div class="form-group row mb-4">
+                                            <label class="control-label col-sm-12 align-self-center mb-0"
+                                                for="country">Status</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" name="status" id="status" required>
+                                                    <option value="APPROVED" {{$application->status=='APPROVED'?'selected':''}} >APPROVED</option>
+                                                    <option value="REJECTED" {{$application->status=='REJECTED'?'selected':''}} >REJECTED</option>
+                                                    <option value="PENDING" {{$application->status=='PENDING'?'selected':''}} >PENDING</option>
+                                                    <option value="REVISION REQUESTED" {{$application->status=='REVISION REQUESTED'?'selected':''}} >REVISION REQUESTED</option>
+                                                </select>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please enter your residential country
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" id="declaration_confirm"
@@ -1116,7 +1137,11 @@
                                                 read carefully to all the conditions and regulations of this
                                                 funeral service fund?</label>
                                         </div>
+
+
                                     </div>
+                                  
+
                                     <div class="col-12">
                                         <div class="text-right">
                                             <button class="btn btn-primary nextBtn btn-lg pull-right"

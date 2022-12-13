@@ -30,7 +30,7 @@
           <div>
             @foreach ($donations as $donation)
             <div class="row py-3">
-                <div class="offset-lg-2 col-lg-4 col-md-6 col-sm-12">
+                <div class="offset-lg-2 col-lg-5 col-md-6 col-sm-12">
                     <div class="d-flex">
                         <div class="mr-3">
                             <div class="icon_gradient_background">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="text-right">
                         <span class="badge badge-{{$donation->status}} rounded-pill mt-2">{{$donation->status}}</span>
                         <p class="mb-0 font-weight-bold">€ {{$donation->amount}}</p>

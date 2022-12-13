@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\GeneralSetting;
 use App\Models\Application;
+use Twilio\Rest\Client;
 
 if (! function_exists('fromSettings')) {
     function fromSettings(string $key, $alternative = null)
@@ -56,14 +57,11 @@ if (! function_exists('getUserStatus')) {
             return 'In Active';
         } elseif ($user->status==3) {
             return 'In Closing Process, Person DECEASED.';
-        }
-         elseif ($user->status==4) {
+        } elseif ($user->status==4) {
             return 'Permanent Closed, Person DECEASED.';
         } else {
             return 'Contact Support';
         }
-
-       
     }
 }
 // make a function that will print 15 char random string
@@ -146,8 +144,7 @@ if (! function_exists('getStatus')) {
             return 'In Active';
         } elseif ($num==3) {
             return 'In Closing Process, Person DECEASED.';
-        }
-         elseif ($num==4) {
+        } elseif ($num==4) {
             return 'Permanent Closed, Person DECEASED.';
         } else {
             return 'Contact Support';
@@ -176,66 +173,23 @@ if (! function_exists('getAddress')) {
 
 
 
- // $notification_id, $title, $message, $id,$type
-function send_notification_FCM($notification_id, $title, $message, $id,$type)
- {
-     $notification_id =1;
-     $title = 'test';
-     $message = 'test';
-     $id = 1;
-     $type = 'test';
-     $accesstoken = config('fcm.token');
 
-     $URL = 'https://fcm.googleapis.com/fcm/send';
+if (! function_exists('SendMessage')) {
+    function SendMessage($number, $message)
+    {
+        try {
+            $account_sid = env("TWILIO_SID");
+            $auth_token = env("TWILIO_TOKEN");
+            $twilio_number = env("TWILIO_FROM");
 
-
-     $post_data = '{
-             "to" : "' . $notification_id . '",
-             "data" : {
-               "body" : "",
-               "title" : "' . $title . '",
-               "type" : "' . $type . '",
-               "id" : "' . $id . '",
-               "message" : "' . $message . '",
-             },
-             "notification" : {
-                  "body" : "' . $message . '",
-                  "title" : "' . $title . '",
-                   "type" : "' . $type . '",
-                  "id" : "' . $id . '",
-                  "message" : "' . $message . '",
-                 "icon" : "new",
-                 "sound" : "default"
-                 },
-  
-           }';
-     // print_r($post_data);die;
-
-     $crl = curl_init();
-
-     $headr = array();
-     $headr[] = 'Content-type: application/json';
-     $headr[] = 'Authorization: ' . $accesstoken;
-     curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, false);
-
-     curl_setopt($crl, CURLOPT_URL, $URL);
-     curl_setopt($crl, CURLOPT_HTTPHEADER, $headr);
-
-     curl_setopt($crl, CURLOPT_POST, true);
-     curl_setopt($crl, CURLOPT_POSTFIELDS, $post_data);
-     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
-
-     $rest = curl_exec($crl);
-
-     if ($rest === false) {
-         // throw new Exception('Curl error: ' . curl_error($crl));
-         //print_r('Curl error: ' . curl_error($crl));
-         $result_noti = 0;
-     } else {
-         $result_noti = 1;
-     }
-
-     //curl_close($crl);
-     //print_r($result_noti);die;
-     return $result_noti;
- }
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create($number, [
+                'from' => $twilio_number,
+                'body' => $message
+                // 'body' => 'Your Application at ' . env('APP_NAME') . ' has been submitted successfully. Your Application ID is ' . $application->application_id . '.'
+                ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+}

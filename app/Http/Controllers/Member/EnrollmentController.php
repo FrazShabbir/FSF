@@ -13,6 +13,7 @@ use App\Models\City;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Image;
+use Twilio\Rest\Client;
 
 class EnrollmentController extends Controller
 {
@@ -116,7 +117,7 @@ class EnrollmentController extends Controller
             //code...
             DB::beginTransaction();
             $application = new Application();
-            $application->application_id= 'W-App-'.date('YmdHis');
+            $application->application_id= 'U-'.rand(11, 99).'-'.rand(111, 999).'-'.rand(11, 99);
             $application->user_id = auth()->user()->id;
             $application->passport_number = $request->passport_number;
             $application->nie = $request->nie;
@@ -206,12 +207,22 @@ class EnrollmentController extends Controller
             $comment->comment = 'Application Submitted Successfully';
             $comment->status = 'SUBMITTED';
             $comment->save();
+
+            
             DB::commit();
+
+            $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been submitted successfully with Application ID  ' . $application->application_id . '. You will be notified once your application is approved.';
+            $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
+            
+            
+            SendMessage($application->phone,$applicant_message);
+            SendMessage($application->rep_phone,$rep_messsage);
+            
             alert()->success('Application Submitted Successfully');
             return redirect()->route('enrollment.show', $application->application_id);
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
+            dd($th->getMessage());
             alert()->error('Error', $th->getMessage());
             return redirect()->back();
             //throw $th;
@@ -321,6 +332,9 @@ class EnrollmentController extends Controller
             //code...
             DB::beginTransaction();
             $application = Application::where('application_id', $id)->firstOrfail();
+            $old_rep_name = $application->rep_name;
+            $old_rep_phone = $application->rep_phone;
+
             $application->passport_number = $request->passport_number;
             $application->nie = $request->nie;
             $application->native_id = $request->native_id;
@@ -409,11 +423,20 @@ class EnrollmentController extends Controller
             $comment->status = 'UPDATED';
             $comment->save();
             DB::commit();
+
+            $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been updated and submitted successfully with Application ID  ' . $application->application_id . '. You will be notified once your application is approved.';
+            $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
+
+            SendMessage($application->phone,$applicant_message);
+            if($application->rep_phone != $old_rep_phone and $old_rep_name != $application->rep_name){
+                SendMessage($application->rep_phone,$rep_messsage);
+            }
+            
             alert()->success('Application Submitted Successfully');
             return redirect()->route('enrollment.index');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
+            
             alert()->error('Error', $th->getMessage());
             return redirect()->back();
             //throw $th;
@@ -431,12 +454,14 @@ class EnrollmentController extends Controller
         //
     }
 
-    public function renewableIndex(){
+    public function renewableIndex()
+    {
         $applications = Application::where('status', 'RENEWABLE')->get();
         return view('members.pages.application.renew.index')
         ->with('applications', $applications);
     }
-    public function renewableEdit($id){
+    public function renewableEdit($id)
+    {
         $countries = Country::where('status', 1)->get();
 
         $application = Application::where('application_id', $id)->firstOrfail();
@@ -449,7 +474,7 @@ class EnrollmentController extends Controller
         ->with('application', $application)
         ->with('countries', $countries);
     }
-    public function renewableUpdate(Request $request,$id)
+    public function renewableUpdate(Request $request, $id)
     {
         $request->validate([
             'passport_number' => 'required',

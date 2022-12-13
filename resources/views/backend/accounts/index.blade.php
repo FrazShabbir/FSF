@@ -32,6 +32,7 @@
                                         <th>Account Type</th>
                                         <th>Bank Name</th>
                                         <th>Balance</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -47,6 +48,7 @@
                                         <td>{{$acc->type}}</td>
                                         <td>{{$acc->bank}}</td>
                                         <td><span class="font-weight-bold">€</span> {{$acc->balance}}</td>
+                                        <td><span class="badge badge-{{$acc->status}}">{{$acc->status}}</span></td>
                                         <td class="width_100px">
 
                                             <form action="{{route('account.destroy',$acc->code)}}" method="post">
