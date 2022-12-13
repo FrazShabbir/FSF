@@ -5,6 +5,20 @@
             <a href="{{ route('admin.dashboard') }}" class="iq-waves-effect"><i
                     class="las la-home iq-arrow-left"></i><span>Dashboard</span></a>
         </li>
+        @if (getuser()->hasRole('Super Admin'))
+        {{-- Heirarchy ONLY FOR SUPER ADMIN --}}
+        <li>
+            <a href="#accounts" class="iq-waves-effect collapsed" data-toggle="collapse"><i
+                    class="las la-cash-register iq-arrow-left"></i><span>Accounts</span><i
+                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+            <ul id="accounts" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                <li class=""><a href="{{route('account.index')}}"><i class="las la-money-bill-wave"></i>All Accounts</a></li>
+                <li class=""><a href="{{route('account.create')}}"><i class="las la-money-bill-wave"></i>Add New Account</a></li>
+
+            </ul>
+        </li>
+        {{-- Heirarchy END --}}
+    @endif
 
 
         <li @if (in_array(request()->route()->getName(),
@@ -152,6 +166,7 @@
             {{-- Heirarchy END --}}
         @endif
 
+   
         @if (getuser()->hasRole('Super Admin'))
         {{-- Heirarchy ONLY FOR SUPER ADMIN --}}
         <li>
@@ -174,7 +189,7 @@
             <a href="{{ route('notification.create') }}" class="iq-waves-effect text-light"><i
                     class="las la-bell iq-arrow-left"></i><span>Send Notificatons</span></a>
         </li>
-    @endcan
+        @endcan
     </ul>
 </nav>
 <div class="p-3"></div>

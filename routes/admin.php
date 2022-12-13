@@ -7,6 +7,8 @@ use App\Http\Controllers\Backend\GeneralController;
 use App\Http\Controllers\Backend\NotificationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\AccountController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
     Route::get('role/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit')->middleware(['can:Update Roles']);
     Route::put('role/{id}/update', [RoleController::class, 'update'])->name('roles.update')->middleware(['can:Update Roles']);
     Route::delete('role/{id}', [RoleController::class, 'destroy'])->name('roles.destroy')->middleware(['can:Delete Roles']);
+
+
+    Route::get('accounts', [AccountController::class, 'index'])->name('account.index')->middleware(['can:Read Accounts']);
+    Route::get('account/create', [AccountController::class, 'create'])->name('account.create')->middleware(['can:Create Accounts']);
+    Route::post('account/create/save', [AccountController::class, 'store'])->name('account.store')->middleware(['can:Create Accounts']);
+    Route::get('account/{id}', [AccountController::class, 'show'])->name('account.show')->middleware(['can:Read Accounts']);
+    Route::get('account/{id}/edit', [AccountController::class, 'edit'])->name('account.edit')->middleware(['can:Update Accounts']);
+    Route::put('account/{id}/update', [AccountController::class, 'update'])->name('account.update')->middleware(['can:Update Accounts']);
+    Route::delete('account/{id}', [AccountController::class, 'destroy'])->name('account.destroy')->middleware(['can:Delete Accounts']);
+
 
 
     Route::get('reset-password/{user}', [UserController::class, 'reset_password'])->name('users.reset_password');

@@ -151,25 +151,25 @@ class DonationController extends Controller
                     $donation->save();
                 }
 
-                $transaction = AccountTransaction::create([
-                    'transaction_id' => 'T-'.date('YmdHis'),
-                    'type' => 'Credit',
-                    'user_id'=> $request->user_id,
-                    'account_id' => $account->id,
-                    'donation_id' => $donation->id,
-                    'application_id' => $application_id,
+                // $transaction = AccountTransaction::create([
+                //     'transaction_id' => 'T-'.date('YmdHis'),
+                //     'type' => 'Credit',
+                //     'user_id'=> $request->user_id,
+                //     'account_id' => $account->id,
+                //     'donation_id' => $donation->id,
+                //     'application_id' => $application_id,
                   
                     
-                    'country_id' => $application->country_id,
-                    'community_id' => $application->community_id,
-                    'province_id' => $application->province_id,
-                    'city_id' => $application->city_id,
+                //     'country_id' => $application->country_id,
+                //     'community_id' => $application->community_id,
+                //     'province_id' => $application->province_id,
+                //     'city_id' => $application->city_id,
 
-                    'debit'=>0,
-                    'credit'=>$request->amount,
-                    'balance'=>$account->balance + $request->amount,
-                    'summary'=>'Donation',
-                ]);
+                //     'debit'=>0,
+                //     'credit'=>$request->amount,
+                //     'balance'=>$account->balance + $request->amount,
+                //     'summary'=>'Donation',
+                // ]);
 
                 DB::commit();
                 return response()->json([

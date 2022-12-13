@@ -37,6 +37,7 @@ class GeneralSettingSeeder extends Seeder
             'name'=>'Cash',
             'account_number'=>'001',
             'bank'=>'Cash',
+            'type'=>'Cash',
             'city'=>'Cash',
             'balance'=>0,
             'status'=>1
@@ -46,6 +47,7 @@ class GeneralSettingSeeder extends Seeder
             'name'=>'Bank',
             'account_number'=>'002',
             'bank'=>'Bank',
+            'type'=>'Bank',
             'city'=>'Bank',
             'balance'=>0,
             'status'=>1

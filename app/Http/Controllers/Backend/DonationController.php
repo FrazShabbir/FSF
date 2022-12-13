@@ -71,6 +71,7 @@ class DonationController extends Controller
             //code...
 
             DB::beginTransaction();
+
             $application = Application::where('application_id', $request->application_id)->orWhere('passport_number',$request->passport_number)->first();
             if ($application) {
                 $application_id = $application->id;
@@ -109,23 +110,6 @@ class DonationController extends Controller
                 $donation->save();
             }
 
-            $transaction = AccountTransaction::create([
-                'transaction_id' => 'T-'.date('YmdHis'),
-                'type' => 'Credit',
-                'user_id'=> $donation->user_id,
-                'account_id' => $account->id,
-                'donation_id' => $donation->id,
-                'application_id' => $application_id,
-                'debit'=>0,
-                'credit'=>$request->amount,
-                'balance'=>$account->balance + $request->amount,
-                'summary'=>'Donation',
-
-            ]);
-
-
-
-
             DB::commit();
             alert()->success('Donation Created Successfully', 'Success');
             return redirect()->route('donation.index');
@@ -157,6 +141,12 @@ class DonationController extends Controller
     public function edit($id)
     {
         $donation = Donation::where('donation_code', $id)->firstOrFail();
+        
+        if($donation->status == 'APPROVED' or $donation->status == 'REJECTED'){
+            alert()->info('Donation Already '.$donation->status, 'Error');
+            return redirect()->route('donation.show', $donation->donaton_code);
+        }
+
         $accounts = Account::all();
         if($donation->status == 'APPROVED' or $donation->status == 'REJECTED'){
             alert()->info('Donation Already '.$donation->status, 'Error');
@@ -217,6 +207,23 @@ class DonationController extends Controller
                 $donation->receipt= config('app.url').'uploads/donations/receipts/'. $filename;
             }
             $donation->save();
+
+            if($donation->status == 'APPROVED'){
+                $transaction = AccountTransaction::create([
+                'transaction_id' => 'T-'.date('YmdHis'),
+                'type' => 'Credit',
+                'user_id'=> $donation->user_id,
+                'account_id' => $account->id,
+                'donation_id' => $donation->id,
+                'application_id' => $application_id,
+                'debit'=>0,
+                'credit'=>$request->amount,
+                'balance'=>$account->balance + $request->amount,
+                'summary'=>'Donation',
+
+            ]);
+
+            }
             DB::commit();
             alert()->success('Donation Updated Successfully', 'Success');
             return redirect()->route('donation.index');

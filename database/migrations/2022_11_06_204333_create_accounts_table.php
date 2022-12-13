@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('account_number');
             $table->string('bank');
+            $table->string('type');
             $table->string('city');
             $table->string('balance')->default(0);
             $table->string('status')->default(1);

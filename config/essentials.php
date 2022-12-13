@@ -33,8 +33,13 @@ return [
             'Delete Donations',
             'Export Donations',
         ],
-
-
+        'Accounts' => [
+            'Create Accounts',
+            'Update Accounts',
+            'Read Accounts',
+            'Delete Accounts',
+            'Export Accounts',
+        ],
         'Settings' => [
             'Update Settings',
         ],
