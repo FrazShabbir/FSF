@@ -269,7 +269,7 @@ class ApplicationController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/application/avatars/', $filename);
-                    $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
+                    $application->avatar= env('APP_URL').'uploads/application/avatars/'. $filename;
                 }
                 $application->save();
 
@@ -284,7 +284,7 @@ class ApplicationController extends Controller
                 $applicationRenewal = RenewApplication::create([
                     'application_id' => $application->id,
                     'annually_fund_amount' => $request->annually_fund_amount,
-                    'user_signature' => env('APP_URL.url').'placeholder',
+                    'user_signature' => env('APP_URL').'placeholder',
                     'rep_confirmed' => $request->rep_confirmed??1,
                     'declaration_confirm' => $request->declaration_confirm??1,
                 ]);
@@ -307,8 +307,8 @@ class ApplicationController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/application/signatures/', $filename);
-                    $applicationRenewal->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
-                    $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
+                    $applicationRenewal->user_signature= env('APP_URL').'uploads/application/signatures/'. $filename;
+                    $application->user_signature= env('APP_URL').'uploads/application/signatures/'. $filename;
                     $application->save();
                     $applicationRenewal->save();
                 }
@@ -575,7 +575,7 @@ class ApplicationController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/application/signatures/', $filename);
-                    $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
+                    $application->user_signature= env('APP_URL').'uploads/application/signatures/'. $filename;
                 }
 
                 if ($request->avatar) {
@@ -596,7 +596,7 @@ class ApplicationController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/application/avatars/', $filename);
-                    $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
+                    $application->avatar= env('APP_URL').'uploads/application/avatars/'. $filename;
                 }
 
                 $application->save();
@@ -961,7 +961,7 @@ class ApplicationController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = getRandomString().'-'.time() . '.' . $extension;
                         $file->move('uploads/application/signatures/', $filename);
-                        $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
+                        $application->user_signature= env('APP_URL').'uploads/application/signatures/'. $filename;
                     }
 
                     if ($request->avatar) {
@@ -982,7 +982,7 @@ class ApplicationController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = getRandomString().'-'.time() . '.' . $extension;
                         $file->move('uploads/application/avatars/', $filename);
-                        $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
+                        $application->avatar= env('APP_URL').'uploads/application/avatars/'. $filename;
                     }
 
                     $application->save();

@@ -17,8 +17,8 @@ class DonationController extends Controller
     public function create(Request $request)
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
-            $accounts = Account::where('status',1)->get(['id', 'name', 'account_number','bank','city']);
-            $applications = Application::where('user_id', $request->user_id)->where('status','APPROVED')->get(['id', 'application_id', 'passport_number','full_name']);
+            $accounts = Account::where('status', 1)->get(['id', 'name', 'account_number','bank','city']);
+            $applications = Application::where('user_id', $request->user_id)->where('status', 'APPROVED')->get(['id', 'application_id', 'passport_number','full_name']);
             return response()->json([
                 'status' => 200,
                 'message' => 'All data Fetched',
@@ -68,7 +68,7 @@ class DonationController extends Controller
                 ->orderBy('id', 'ASC')
                 ->get();
 
-                
+
                 return response()->json([
                     'donations' => $donations,
                     'status' => true,
@@ -138,6 +138,7 @@ class DonationController extends Controller
                     'fsf_bank_name' => $account->name?? null,
                     'fsf_bank_no' => $account->account_number??null,
                     'amount' => $request->amount,
+                    'donation_date'=>$request->donation_date,
                     'type' => $type,
                     'mode' => 'M-Online',
                 ]);
@@ -147,7 +148,7 @@ class DonationController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/donations/receipts/', $filename);
-                    $donation->receipt= env('APP_URL.url').'uploads/donations/receipts/'. $filename;
+                    $donation->receipt= env('APP_URL').'uploads/donations/receipts/'. $filename;
                     $donation->save();
                 }
 
@@ -158,8 +159,8 @@ class DonationController extends Controller
                 //     'account_id' => $account->id,
                 //     'donation_id' => $donation->id,
                 //     'application_id' => $application_id,
-                  
-                    
+
+
                 //     'country_id' => $application->country_id,
                 //     'community_id' => $application->community_id,
                 //     'province_id' => $application->province_id,
@@ -184,11 +185,51 @@ class DonationController extends Controller
                     'message' => 'User Not Found',
                 ], 404);
             }
-            DB::commit();
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollback();
             throw $th;
+        }
+    }
+
+
+    public function show($id, $user_id, $token)
+    {
+        $user = User::where('id', $user_id)->where('api_token', $token)->get();
+        if ($user->count()>0) {
+            $user = User::where('id', $user_id)->where('api_token', $token)->first();
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Invalid Request',
+            ], 404);
+        }
+        $donation = Donation::where('donation_code', $id)->where('user_id', $user_id)->first();
+        if ($donation) {
+            $info = [
+                'full_name'=>$donation->user->full_name,
+                'application'=>$donation->application->application_id,
+                'passport_number'=>$donation->application->passport_number,
+                'donor_bank_name'=>$donation->donor_bank_name,
+                'donor_bank_no'=>$donation->donor_bank_no,
+                'fsf_bank_name'=>$donation->fsf_bank_name,
+                'fsf_bank_no'=>$donation->fsf_bank_no,
+                'amount'=>$donation->amount,
+                'status'=>$donation->status,
+                'donation_date'=>$donation->donation_date,
+                'created_at'=>$donation->created_at,
+                'receipt'=>$donation->receipt,
+            ];
+            return response()->json([
+                'donation' => $info,
+                'status' => 200,
+                'message' => 'Donation Found',
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'Donation Not Found',
+            ], 404);
         }
     }
 }

@@ -61,6 +61,7 @@ Route::post('myprofile/{id}/update', [GeneralController::class, 'updateProfile']
 Route::get('donation/create', [DonationController::class, 'create']); 
 Route::get('donations/all', [DonationController::class, 'allDonation']); // application status
 Route::post('donation/store', [DonationController::class, 'store']); // application status
+Route::get('donation/{id}/{user}/{token}', [DonationController::class, 'show']);
 
 
 

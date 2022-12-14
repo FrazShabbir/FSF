@@ -185,7 +185,7 @@ class EnrollmentController extends Controller
         //     $extension = $file->getClientOriginalExtension();
         //     $filename = getRandomString().'-'.time() . '.' . $extension;
         //     $file->move('uploads/application/signatures/', $filename);
-        //     $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
+        //     $application->user_signature= env('APP_URL').'uploads/application/signatures/'. $filename;
             // }
 
 
@@ -198,7 +198,7 @@ class EnrollmentController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename = getRandomString().'-'.time() . '.' . $extension;
                 $file->move('uploads/application/avatars/', $filename);
-                $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
+                $application->avatar= env('APP_URL').'uploads/application/avatars/'. $filename;
             }
 
             $application->save();
@@ -400,7 +400,7 @@ class EnrollmentController extends Controller
         //     $extension = $file->getClientOriginalExtension();
         //     $filename = getRandomString().'-'.time() . '.' . $extension;
         //     $file->move('uploads/application/signatures/', $filename);
-        //     $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
+        //     $application->user_signature= env('APP_URL').'uploads/application/signatures/'. $filename;
             // }
 
 
@@ -413,7 +413,7 @@ class EnrollmentController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename = getRandomString().'-'.time() . '.' . $extension;
                 $file->move('uploads/application/avatars/', $filename);
-                $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
+                $application->avatar= env('APP_URL').'uploads/application/avatars/'. $filename;
             }
 
             $application->save();
@@ -602,7 +602,7 @@ class EnrollmentController extends Controller
         //     $extension = $file->getClientOriginalExtension();
         //     $filename = getRandomString().'-'.time() . '.' . $extension;
         //     $file->move('uploads/application/signatures/', $filename);
-        //     $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
+        //     $application->user_signature= env('APP_URL').'uploads/application/signatures/'. $filename;
             // }
 
 
@@ -615,7 +615,7 @@ class EnrollmentController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename = getRandomString().'-'.time() . '.' . $extension;
                 $file->move('uploads/application/avatars/', $filename);
-                $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
+                $application->avatar= env('APP_URL').'uploads/application/avatars/'. $filename;
             }
 
             $application->save();
