@@ -273,7 +273,7 @@ class ApplicationController extends Controller
                 }
                 $application->save();
 
-                $comment = ApplicationComment([
+                $comment = ApplicationComment::create([
                 'application_id' => $application->id,
                 'comment' => 'Application Submitted for Renewal.',
                 'status' => 'PENDING',
