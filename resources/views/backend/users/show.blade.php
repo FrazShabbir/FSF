@@ -136,7 +136,7 @@
 
                 @if ($user->application)
                     @include('backend.users.partials._applications')
-                    @include('backend.users.partials._donation_stats')
+                    @include('backend.partials.common._donation_stats',['data'=>$user])
                     {{-- @include('backend.users.partials._rep_info') --}}
                 @endif
                 <div class="col-sm-12">

@@ -118,7 +118,7 @@
                                             <th>Donation ID</th>
                                             <th>Person Name</th>
 
-                                            <th>Created at</th>
+                                           
                                             <th>Debit</th>
                                             <th>Credit</th>
                                             <th>Balance</th>
@@ -133,11 +133,11 @@
                                         @endphp
                                         @foreach ($account->transactions as $trans)
                                             <tr>
-                                                <td><a href="{{route('donation.show',$trans->id)}}">{{$trans->donation->id}}</a></td>
-                                                <td><a href="{{route('donation.show',$trans->id)}}">{{ $trans->donation->user->full_name }}</a></td>
-                                                <td><a href="{{route('donation.show',$trans->id)}}">dd</a></td>
-                                                <td><a href="{{route('users.show',$trans->donation->user->username)}}">d</a></td>
-                                                <td>{{ $trans->created_at }}</td>
+                                                <td>%</td>
+                                                <td><a href="{{route('donation.show',$trans->donation->donation_code)}}">{{$trans->donation->donation_code}}</a></td>
+                                                <td><a href="{{route('users.show',$trans->user->id)}}">{{ $trans->donation->user->full_name }}</a></td>
+
+                                              
                                                 <td> <span class="font-weight-bold">€</span> {{ $trans->debit }}</td>
                                                 <td> <span class="font-weight-bold">€</span> {{ $trans->credit }}</td>
                                                 <td> <span class="font-weight-bold">€</span> {{ $trans->balance }}</td>
@@ -156,21 +156,21 @@
                                             $closing_balance = $credit - $debit;
                                         @endphp
                                         <tr>
-                                            <td colspan="8"></td>
+                                            <td colspan="6"></td>
 
                                         </tr>
                                         <tr>
-                                            <td colspan="6"></td>
+                                            <td colspan="4"></td>
                                             <td colspan=""><b>Total Debit</b></td>
                                             <td> <span class="font-weight-bold">€</span> {{ $debit }}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6"></td>
+                                            <td colspan="4"></td>
                                             <td colspan=""><b>Total Credit</b></td>
                                             <td> <span class="font-weight-bold">€</span> {{ $credit }}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6"></td>
+                                            <td colspan="4"></td>
                                             <td colspan=""><b>Closing Balance</b></td>
                                             <td> <span class="font-weight-bold">€</span> {{ $account->balance }}</td>
                                         </tr>

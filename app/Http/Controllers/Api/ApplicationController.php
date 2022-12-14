@@ -74,6 +74,24 @@ class ApplicationController extends Controller
                     'status'=>'200',
                     'countries' => $countries,
                     'application'=>$application,
+                    'location'=>[
+                        'country'=>[
+                            'id'=>$application->country->id,
+                            'name'=>$application->country->name
+                        ],
+                        'community'=>[
+                                    'id'=>$application->community->id,
+                                    'name'=>$application->community->name
+                        ],
+                        'province'=>[
+                            'id'=>$application->province->id,
+                            'name'=>$application->province->name
+                        ],
+                        'city'=>[
+                            'id'=>$application->city->id,
+                            'name'=>$application->city->name
+                        ],
+                    ],
                     'message'=>'Application Fetched',
                 ]);
             } else {

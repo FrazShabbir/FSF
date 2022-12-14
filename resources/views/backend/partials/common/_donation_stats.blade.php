@@ -24,7 +24,7 @@
                         <tr class="bg-secondary text-light">
                             <td>1</td>
                             <td>Total Donations</td>
-                            <td>{{ $user->donations->sum('amount') }}</td>
+                            <td>{{ $data->donations->sum('amount') }}</td>
 
 
                         </tr>
@@ -32,18 +32,18 @@
                         <tr class="bg-success text-dark">
                             <td>2</td>
                             <td>Approved Donations</td>
-                            <td>{{ $user->totaldonations->sum('amount') }}</td>
+                            <td>{{ $data->totaldonations->sum('amount') }}</td>
                         </tr>
 
                         <tr class="bg-primary text-light">
                             <td>3</td>
                             <td>Pending Donations</td>
-                            <td>{{ $user->pendingdonations->sum('amount') }}</td>
+                            <td>{{ $data->pendingdonations->sum('amount') }}</td>
                         </tr>
                         <tr class="bg-danger text-light">
                             <td>4</td>
                             <td>Rejected Donations</td>
-                            <td>{{ $user->rejecteddonations->sum('amount') }}</td>
+                            <td>{{ $data->rejecteddonations->sum('amount') }}</td>
                         </tr>
 
 

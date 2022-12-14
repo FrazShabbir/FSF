@@ -17,7 +17,7 @@
                             <th>Application ID</th>
                             <th>Applicant Name</th>
                             <th>Applicant Status</th>
-                  
+                            
                             <th>Action</th>
                             <th>Close Application</th>
                         </tr>
@@ -29,9 +29,6 @@
                                 <td>{{ $application->application_id }}</td>
                                 <td>{{ $application->full_name }} </td>
                                 <td><span class="badge badge-{{ $application->status }}">{{ $application->status }}</span></td>
-
-                             
-
                                 <td>
                                     <form action=""
                                         method="post">

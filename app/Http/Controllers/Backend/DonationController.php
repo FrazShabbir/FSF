@@ -222,7 +222,9 @@ class DonationController extends Controller
                 'summary'=>'Donation',
 
             ]);
-
+            
+            $account->balance = $account->balance + $request->amount;
+            $account->save();
             }
             DB::commit();
             alert()->success('Donation Updated Successfully', 'Success');

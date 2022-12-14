@@ -750,6 +750,9 @@
                         </div>
                     </div>
                 </div>
+                @if ($application->donations)
+                @include('backend.partials.common._donation_stats',['data'=>$application])
+                @endif
             </div>
         </div>
     </div>
