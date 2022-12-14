@@ -25,10 +25,7 @@
                                 @if ($user->application)
                                     {{-- <a href="{{ route('application.show', $user->application->application_id) }}"
                                     class="btn btn-primary">User Application</a> --}}
-                                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#CloseAccount">
-                                        Close Account
-                                    </button>
+                                  
                                 @endif
                             </div>
                         </div>
@@ -238,7 +235,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, It was a Mistake</button>
-                    <a href="{{ route('user.close.account', $user->id) }}"class="btn btn-danger">Yes, I am sure.</a>
+                    <a href=""class="btn btn-danger changeLINK">Yes, I am sure.</a>
                 </div>
             </div>
         </div>
@@ -247,6 +244,15 @@
 
 
 @section('scripts')
+<script>
+    $(document).ready(function () {
+        const application_id = {{$user->id}};
+        $('.openModal').click(function(){
+            alert($(this).data('link'));
+            $('#CloseAccount').modal('show');
+        });
+    });
+</script>
 @endsection
 
 @push('js')

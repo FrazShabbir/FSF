@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('annually_fund_amount')->default(0);
             $table->text('user_signature');
             $table->boolean('declaration_confirm')->default(false);
+            $table->boolean('rep_confirmed')->default(false);
             $table->timestamps();
         });
     }

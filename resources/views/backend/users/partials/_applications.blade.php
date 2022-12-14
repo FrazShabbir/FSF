@@ -57,8 +57,8 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#CloseAccount">
+                                    <button type="button" class="btn btn-danger openModal"
+                                     data-id="{{$application->application_id}}" data-link="{{ route('user.close.account', $user->id) }}">
                                     Close Account
                                 </button>
                                 </td>

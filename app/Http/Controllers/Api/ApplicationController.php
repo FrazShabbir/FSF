@@ -250,11 +250,12 @@ class ApplicationController extends Controller
                 $application->annually_fund_amount=$request->annually_fund_amount;
                 $application->declaration_confirm=$request->declaration_confirm;
                 $application->status='PENDING';
+
                 if ($request->avatar) {
                     $avatarValidator = Validator::make(
                         $request->all(),
                         [
-                            'avatar' => 'requred|mimes:png,jpg,jpeg',]
+                            'avatar' => 'requred|mimes:png,jpg,jpeg|max:2000',]
                     );
                     if ($avatarValidator->fails()) {
                         DB::rollback();
@@ -270,19 +271,22 @@ class ApplicationController extends Controller
                     $file->move('uploads/application/avatars/', $filename);
                     $application->avatar= env('APP_URL.url').'uploads/application/avatars/'. $filename;
                 }
-
                 $application->save();
-                $comment = new ApplicationComment();
-                $comment->application_id = $application->id;
-                $comment->comment = 'Application Submitted for Renewal.';
-                $comment->status = 'PENDING';
-                $comment->save();
+
+                $comment = ApplicationComment([
+                'application_id' => $application->id,
+                'comment' => 'Application Submitted for Renewal.',
+                'status' => 'PENDING',
+                ]);
+
+
 
                 $applicationRenewal = RenewApplication::create([
                     'application_id' => $application->id,
-                    'annually_fund_amount' => $user->id,
+                    'annually_fund_amount' => $request->annually_fund_amount,
                     'user_signature' => env('APP_URL.url').'placeholder',
-                    'declaration_confirm' => $request->declaration_confirm,
+                    'rep_confirmed' => $request->rep_confirmed??1,
+                    'declaration_confirm' => $request->declaration_confirm??1,
                 ]);
 
                 if ($request->user_signature) {
@@ -299,12 +303,13 @@ class ApplicationController extends Controller
                             'errors' => $avatarValidator->errors()
                         ], 401);
                     }
-
                     $file = $request->user_signature;
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
                     $file->move('uploads/application/signatures/', $filename);
                     $applicationRenewal->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
+                    $application->user_signature= env('APP_URL.url').'uploads/application/signatures/'. $filename;
+                    $application->save();
                     $applicationRenewal->save();
                 }
                 $application->save();
@@ -312,7 +317,8 @@ class ApplicationController extends Controller
                 return response()->json([
                     'status' => 200,
                     'message' => 'Application Submitted Successfully.',
-                    'data' => $application
+                    'data' => $application,
+                    'renew_data' => $applicationRenewal
                 ], 200);
             }
         } catch (\Throwable $th) {
@@ -599,6 +605,15 @@ class ApplicationController extends Controller
                 $comment->comment = 'Application Submitted Successfully';
                 $comment->status = 'SUBMITTED';
                 $comment->save();
+
+                $applicationRenewal = RenewApplication::create([
+                    'application_id' => $application->id,
+                    'annually_fund_amount' =>$request->annually_fund_amount,
+                    'user_signature' => $application->user_signature,
+                    'rep_confirmed' => $request->rep_confirmed??1,
+                    'declaration_confirm' => $request->declaration_confirm??1,
+                ]);
+
                 DB::commit();
                 return response()->json([
                     'status' => true,
