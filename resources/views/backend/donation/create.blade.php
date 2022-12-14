@@ -59,7 +59,10 @@
                                         <label class="required" for="amount">Amount:</label>
                                         <input type="number" step="0.01" name="amount" id="" class="form-control" placeholder="90" required>
                                     </div>
-
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label class="required" for="donation_date">Donation Date:</label>
+                                        <input type="date" name="donation_date" id="" class="form-control"  required>
+                                    </div>
                              
 
                                     

@@ -140,8 +140,8 @@
                                         <div class="col-md-6 pr-5">
                                             <div class="form-group">
                                                 <label>Donation Date:</label>
-                                                <input type="date" class="form-control" name="date"
-                                                    placeholder="22-12-2022" value="{{old('donor_bank_no')}}" required>
+                                                <input type="date" class="form-control" name="donation_date"
+                                                    placeholder="22-12-2022" value="{{old('donation_date')}}" required>
                                             </div>
                                         </div>
                                     </div>

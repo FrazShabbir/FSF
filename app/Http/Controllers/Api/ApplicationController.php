@@ -155,12 +155,12 @@ class ApplicationController extends Controller
                     'n_relative_2_phone'=>'required',
                     'n_relative_2_address'=>'required',
 
-                    'rep_name'=>'required',
-                    'rep_surname'=>'required',
-                    'rep_passport_no'=>'required',
-                    'rep_phone'=>'required',
-                    'rep_address'=>'required',
-                    'rep_confirmed'=>'required',
+                    // 'rep_name'=>'required',
+                    // 'rep_surname'=>'required',
+                    // 'rep_passport_no'=>'required',
+                    // 'rep_phone'=>'required',
+                    // 'rep_address'=>'required',
+                    // 'rep_confirmed'=>'required',
 
                     'buried_location'=>'required',
 
@@ -235,11 +235,11 @@ class ApplicationController extends Controller
 
 
 
-                $application->rep_name=$request->rep_name;
-                $application->rep_surname=$request->rep_surname;
-                $application->rep_passport_no=$request->rep_passport_no;
-                $application->rep_phone=$request->rep_phone;
-                $application->rep_address=$request->rep_address;
+                // $application->rep_name=$request->rep_name;
+                // $application->rep_surname=$request->rep_surname;
+                // $application->rep_passport_no=$request->rep_passport_no;
+                // $application->rep_phone=$request->rep_phone;
+                // $application->rep_address=$request->rep_address;
                 $application->rep_confirmed=$request->rep_confirmed;
 
                 $application->buried_location=$request->buried_location;
@@ -838,12 +838,12 @@ class ApplicationController extends Controller
                 'n_relative_2_phone'=>'required',
                 'n_relative_2_address'=>'required',
 
-                'rep_name'=>'required',
-                'rep_surname'=>'required',
-                'rep_passport_no'=>'required',
-                'rep_phone'=>'required',
-                'rep_address'=>'required',
-                'rep_confirmed'=>'required',
+                // 'rep_name'=>'required',
+                // 'rep_surname'=>'required',
+                // 'rep_passport_no'=>'required',
+                // 'rep_phone'=>'required',
+                // 'rep_address'=>'required',
+                // 'rep_confirmed'=>'required',
 
                 'buried_location'=>'required',
 
@@ -927,12 +927,12 @@ class ApplicationController extends Controller
 
 
 
-                    $application->rep_name=$request->rep_name;
-                    $application->rep_surname=$request->rep_surname;
-                    $application->rep_passport_no=$request->rep_passport_no;
-                    $application->rep_phone=$request->rep_phone;
-                    $application->rep_address=$request->rep_address;
-                    $application->rep_confirmed=$request->rep_confirmed;
+                    // $application->rep_name=$request->rep_name;
+                    // $application->rep_surname=$request->rep_surname;
+                    // $application->rep_passport_no=$request->rep_passport_no;
+                    // $application->rep_phone=$request->rep_phone;
+                    // $application->rep_address=$request->rep_address;
+                    // $application->rep_confirmed=$request->rep_confirmed;
 
                     $application->buried_location=$request->buried_location;
 

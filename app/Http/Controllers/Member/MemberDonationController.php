@@ -82,6 +82,7 @@ class MemberDonationController extends Controller
                 'fsf_bank_name' => $account->name?? null,
                 'fsf_bank_no' => $account->account_number??null,
                 'amount' => $request->amount,
+                'donation_date' => $request->donation_date,
                 'type' => $type,
                 'mode' => 'W-Online',
             ]);

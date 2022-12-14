@@ -280,7 +280,7 @@
                                                 <input type="date" class="form-control" name="dob" id="dob"
                                                     placeholder="Enter Your Date of Birth" max="{{ date('Y-m-d') }}"
                                                     value="{{ date('Y-m-d', strtotime($application->dob)) ?? old('dob') }}"
-                                                    required>
+                                                    >
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -955,15 +955,15 @@
                                         <p>Where do you want to be buried?</p>
                                         <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="residential" name="buried_location"
-                                                class="custom-control-input" value="Spain"
-                                                {{ $application->buried_location == 'Spain' ? 'checked' : '' }}>
+                                                class="custom-control-input" value="RESIDENTIAL"
+                                                {{ $application->buried_location == 'RESIDENTIAL' ? 'checked' : '' }}>
                                             <label class="custom-control-label" for="residential"> Spain
                                             </label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="native" name="buried_location"
-                                                class="custom-control-input" value="Native Country"
-                                                {{ $application->buried_location == 'Native Country' ? 'checked' : '' }}>
+                                                class="custom-control-input" value="NATIVE"
+                                                {{ $application->buried_location == 'NATIVE' ? 'checked' : '' }}>
                                             <label class="custom-control-label" for="native"> Native Country
                                             </label>
                                         </div>
@@ -1107,7 +1107,7 @@
                                             </div>
                                         </div>
                                     </div> --}}
-                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    {{-- <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                         <div class="form-group row mb-4">
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="country">Status</label>
@@ -1126,7 +1126,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">

@@ -97,6 +97,7 @@ class DonationController extends Controller
                 'fsf_bank_name' => $account->name?? null,
                 'fsf_bank_no' => $account->account_number??null,
                 'amount' => $request->amount,
+                'donation_date'=>$request->donation_date,
                 'type' => $type,
                 'mode' => 'W-Online-Manual',
             ]);
@@ -199,6 +200,8 @@ class DonationController extends Controller
             $donation->fsf_bank_no = $account->account_number??null;
             $donation->amount = $request->amount;
             $donation->status = $request->status;
+            $donation->donation_date=$request->donation_date;
+            
             if ($request->receipt) {
                 $file = $request->receipt;
                 $extension = $file->getClientOriginalExtension();

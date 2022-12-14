@@ -60,7 +60,10 @@
                                         <label class="required" for="amount">Amount:</label>
                                         <input type="number" step="0.01" name="amount" id="" disabled class="form-control" placeholder="90" required value="{{$donation->amount}}">
                                     </div>
-
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label class="required" for="donation_date">Donation Date:</label>
+                                        <input type="date" name="donation_date" id="" disabled class="form-control" value="{{$donation->donation_date}}"  required>
+                                    </div>
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="status" class="required">Status</label>
                                         <input type="text"  id="" disabled class="form-control" placeholder="Bank-90979" required value="{{$donation->status}}">

@@ -64,6 +64,12 @@
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
+                                        <label class="required" for="donation_date">Donation Date:</label>
+                                        <input type="date" name="donation_date" id="" class="form-control" value="{{$donation->donation_date}}"  required>
+                                    </div>
+                             
+
+                                    <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="status" class="required">Status</label>
 
                                         <select name="status" id="" class="form-control" required>
