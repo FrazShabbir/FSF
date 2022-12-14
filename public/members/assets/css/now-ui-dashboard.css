@@ -5992,7 +5992,10 @@ Created using IcoMoon - icomoon.io
   background-color: #a406a4;
   color: #ffffff;
 }
-
+.badge-APPROVED {
+  background-color: #00bfa5;
+  color: #ffffff;
+}
 .badge-SUBMITTED {
   background-color: #057a6b;
   color: #ffffff;

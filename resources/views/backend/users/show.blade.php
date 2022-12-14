@@ -248,7 +248,9 @@
     $(document).ready(function () {
         const application_id = {{$user->id}};
         $('.openModal').click(function(){
-            alert($(this).data('link'));
+            var link = $(this).data('link');
+            $('.changeLINK').attr('href', link);
+           
             $('#CloseAccount').modal('show');
         });
     });

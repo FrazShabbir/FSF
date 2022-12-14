@@ -87,6 +87,7 @@ return new class () extends Migration {
             $table->string('total_expense')->nullable();
             $table->string('rep_received_amount')->nullable(); //yes or no
             $table->date('deceased_at')->nullable();
+            $table->string('reason')->nullable();
             $table->date('process_start_at')->nullable();
             $table->date('process_ends_at')->nullable();
             $table->date('application_closed_at')->nullable();

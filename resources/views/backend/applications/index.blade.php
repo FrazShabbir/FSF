@@ -41,7 +41,7 @@
                                     <tr>
                                         <td>{{$application->application_id}}</td>
                                         <td>{{$application->full_name}}</td>
-                                        <td><span class="badge badge-{{$application->status}}">{{$application->status}}</span></td>
+                                        <td><span class="badge badge-{{$application->status}}">{{getStatus($application->status)}}</span></td>
                                         <td>
                                            
                                             <form action="" method="post">

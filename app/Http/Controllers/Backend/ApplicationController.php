@@ -336,21 +336,21 @@ class ApplicationController extends Controller
 
         try {
             db::beginTransaction();
-            
+
             $find_relative = Application::where('passport_number', $request->registered_relative_passport_no)->first();
             $registered = 0;
             if ($find_relative) {
                 $registered = 1;
                 $passport_number = $find_relative->passport_number;
             }
-           
+
 
             $user->full_name = $request->full_name;
             $user->email = $request->email;
             $user->phone = $request->phone;
             $user->passport_number = $request->passport_number;
             $user->save();
-        
+
             $application->passport_number = $request->passport_number;
             $application->nie = $request->nie;
             $application->native_id=$request->native_id;
@@ -466,7 +466,7 @@ class ApplicationController extends Controller
         ]);
         try {
             DB::beginTransaction();
-            $application = Application::where('application_id',$id)->first();
+            $application = Application::where('application_id', $id)->first();
             $comment = ApplicationComment::create([
                 'application_id'=>$application->id,
                 'comment'=>$request->comment,
@@ -478,15 +478,63 @@ class ApplicationController extends Controller
             DB::commit();
             alert()->success('Success', 'Comment Added Successfully');
             return redirect()->back();
-            
         } catch (\Throwable $th) {
             DB::rollback();
             alert()->error('Error', $th->getMessage());
             return redirect()->back();
-
-           
         }
-       
+
         return redirect()->back();
     }
+
+
+
+    public function closeApplication($id)
+    {
+        try {
+            DB::beginTransaction();
+            $application = Application::where('application_id', $id)->first();
+            $application->status = 3;//'IN-CLOSING-PROCESS';
+            $application->save();
+            $comment = ApplicationComment::create([
+                'application_id'=>$application->id,
+                'comment'=>'Application Closing Started',
+                'status'=>'In Closing Process',
+                'receiver_id'=>auth()->user()->id,
+            ]);
+            DB::commit();
+            return view('backend.applications.closing.closing')
+            ->with('application', $application);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            alert()->error('Error', $th->getMessage());
+            return redirect()->route('application.index');
+            //throw $th;
+        }
+    }
+
+    public function cancelApplicationClosing($id)
+    {
+        try {
+            DB::beginTransaction();
+            $application = Application::where('application_id', $id)->first();
+            $application->status = 2;
+            $application->save();
+            $comment = ApplicationComment::create([
+                'application_id'=>$application->id,
+                'comment'=>'Application Closing Cancelled',
+                'status'=>'PENDING',
+                'receiver_id'=>auth()->user()->id,
+            ]);
+            DB::commit();
+            return redirect()->route('users.show', $application->user_id);
+            
+        } catch (\Throwable $th) {
+            DB::rollback();
+            alert()->error('Error', $th->getMessage());
+            return redirect()->route('application.show', $application->application_id);
+            //throw $th;
+        }
+    }
+
 }

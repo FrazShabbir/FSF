@@ -18,6 +18,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::post('application/comment/{id}', [ApplicationController::class, 'commentStore'])->name('application.commentStore')->middleware(['can:Update Applications']);
 
 
+    Route::get('close-Application/application/{id}/', [ApplicationController::class, 'closeApplication'])->name('user.close.application')->middleware(['can:Update Users']);
+    Route::post('close-Application/application/{id}/save', [ApplicationController::class, 'closeApplicationSave'])->name('user.close.application.save')->middleware(['can:Update Users']);
+    
+    
+    Route::get('close-Application/application/{id}/cancel', [ApplicationController::class, 'cancelApplicationClosing'])->name('user.close.application.cancel')->middleware(['can:Update Users']);
+
     Route::get('donations', [DonationController::class, 'index'])->name('donation.index')->middleware(['can:Read Donations']);
     Route::get('donation/create', [DonationController::class, 'create'])->name('donation.create')->middleware(['can:Create Donations']);
     Route::post('donation/create/save', [DonationController::class, 'store'])->name('donation.store')->middleware(['can:Create Donations']);

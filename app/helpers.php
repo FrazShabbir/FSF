@@ -140,12 +140,14 @@ if (! function_exists('getStatus')) {
     {
         if ($num==1) {
             return 'Active';
+        } elseif ($num=2) {
+            return 'Pending';
         } elseif ($num==0) {
             return 'In Active';
         } elseif ($num==3) {
-            return 'In Closing Process, Person DECEASED.';
+            return 'In Closing Process';
         } elseif ($num==4) {
-            return 'Permanent Closed, Person DECEASED.';
+            return 'Permanent Closed';
         } else {
             return 'Contact Support';
         }

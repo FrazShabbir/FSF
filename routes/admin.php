@@ -36,8 +36,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
     Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware(['can:Update Users']);
     Route::put('user/{id}/update', [UserController::class, 'update'])->name('users.update')->middleware(['can:Update Users']);
     Route::delete('user/{id}', [UserController::class, 'destroy'])->name('users.destroy')->middleware(['can:Delete Users']);
-    Route::get('close-account/user/{id}/', [UserController::class, 'closeAccount'])->name('user.close.account')->middleware(['can:Update Users']);
-    Route::post('close-account/user/{id}/save', [UserController::class, 'closeAccountSave'])->name('user.close.account.save')->middleware(['can:Update Users']);
 
     // Route::resource('roles', RoleController::class);
     Route::get('roles', [RoleController::class, 'index'])->name('roles.index')->middleware(['can:Read Roles']);

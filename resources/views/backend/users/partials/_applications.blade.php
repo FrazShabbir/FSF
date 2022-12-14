@@ -28,7 +28,7 @@
                             <tr>
                                 <td>{{ $application->application_id }}</td>
                                 <td>{{ $application->full_name }} </td>
-                                <td><span class="badge badge-{{ $application->status }}">{{ $application->status }}</span></td>
+                                <td><span class="badge badge-{{ $application->status }}">{{ getStatus($application->status )}}</span></td>
                                 <td>
                                     <form action=""
                                         method="post">
@@ -41,7 +41,7 @@
                                             <a class="iq-bg-primary" data-toggle="tooltip"
                                                 data-placement="top" title=""
                                                 data-original-title="Edit"
-                                                href=""><i
+                                                href="{{route('application.edit',$application->application_id)}}"><i
                                                     class="ri-pencil-line"></i></a>
                                             @csrf
                                             {{ method_field('Delete') }}
@@ -58,7 +58,7 @@
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger openModal"
-                                     data-id="{{$application->application_id}}" data-link="{{ route('user.close.account', $user->id) }}">
+                                     data-id="{{$application->application_id}}" data-link="{{ route('user.close.application', $application->application_id) }}">
                                     Close Account
                                 </button>
                                 </td>
