@@ -107,6 +107,8 @@ class GeneralController extends Controller
     public function nearOffice(Request $request)
     {
         $application = Application::where('user_id', $request->user_id)->first();
+        $offices = Office::all();
+
         if ($application) {
             $offices = Office::where('city_id', $application->city_id)->get();
             return response()->json([
@@ -116,8 +118,9 @@ class GeneralController extends Controller
             ], 200);
         } else {
             return response()->json([
-                'status' => 404,
-                'message' => 'Application Not Found.',
+                'status' => 200,
+                'message' => 'All Office(s) Found',
+                'offices' => $offices,
             ], 404);
         }
     }
