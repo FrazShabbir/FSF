@@ -75,7 +75,7 @@ class ApplicationController extends Controller
             ], 404);
         }
     }
-    
+
     public function allRenewable(Request $request)
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
@@ -717,6 +717,7 @@ class ApplicationController extends Controller
                     'application_id' => $application->application_id,
                     'user_id' => $application->user_id,
                     'passport_number' => $application->passport_number,
+                    'avatar' => $application->avatar,
                     'nie' => $application->nie,
                     'native_id' => $application->native_id,
                     'full_name' => $application->full_name,
