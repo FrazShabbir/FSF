@@ -456,7 +456,7 @@ class EnrollmentController extends Controller
 
     public function renewableIndex()
     {
-        $applications = Application::where('status', 'RENEWABLE')->get();
+        $applications = Application::where('user_id',auth()->user()->id)->where('status', 'RENEWABLE')->get();
         return view('members.pages.application.renew.index')
         ->with('applications', $applications);
     }

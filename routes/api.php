@@ -42,8 +42,11 @@ Route::get('application/myapplication', [ApplicationController::class, 'index'])
 
 Route::get('application/create', [ApplicationController::class, 'create']); 
 
-Route::get('application/renew/', [ApplicationController::class, 'renew']); 
 
+Route::get('application/renew/all', [ApplicationController::class, 'allRenewable']); 
+
+
+Route::get('application/renew/', [ApplicationController::class, 'renew']); 
 Route::post('renew/application/save', [ApplicationController::class, 'storeRenewApplication']); 
 
 Route::post('application/store', [ApplicationController::class, 'store']); 

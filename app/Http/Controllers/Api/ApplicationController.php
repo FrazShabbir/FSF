@@ -30,7 +30,7 @@ class ApplicationController extends Controller
         // dd($request->all());
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
             // $applications = Application::where('user_id', $request->user_id)->get(['id','application_id','passport_number','full_name','status']);
-           
+
             $applications = Application::where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
                 return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
             })
@@ -43,9 +43,9 @@ class ApplicationController extends Controller
             ->orderBy('id', 'ASC')
             ->get(['id','application_id','passport_number','full_name','status','created_at']);
 
-            
-            
-            
+
+
+
             return response()->json([
                 'status' => 200,
                 'message' => 'All Applications Fetched',
@@ -75,6 +75,32 @@ class ApplicationController extends Controller
             ], 404);
         }
     }
+    
+    public function allRenewable(Request $request)
+    {
+        if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
+            $applications = Application::where('user_id', $request->user_id)->where('status', 'RENEWABLE')->get();
+            if ($applications) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'All Applications Fetched',
+                    'applications' => $applications,
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'No Renewable Applications Found',
+
+                ], 200);
+            }
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found',
+            ], 404);
+        }
+    }
+
 
     public function renew(Request $request)
     {
@@ -674,7 +700,7 @@ class ApplicationController extends Controller
         $application = Application::with('comments')->where('application_id', $id)->where('user_id', $user->id)->get();
 
         if ($application->count()>0) {
-            $application = Application::with('comments')->where('application_id', $id)->where('user_id', $user->id)->first();
+            $application = Application::with('comments')->with('donations')->where('application_id', $id)->where('user_id', $user->id)->first();
         } else {
             return response()->json([
                 'status' => 400,
@@ -686,6 +712,7 @@ class ApplicationController extends Controller
                 'status' => true,
                 'message' => 'Application found',
                 'comments'=>$application->comments,
+                'donations'=>$application->donations,
                 'application' => [
                     'application_id' => $application->application_id,
                     'user_id' => $application->user_id,
