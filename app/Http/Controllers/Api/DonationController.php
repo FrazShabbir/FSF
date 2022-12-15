@@ -91,14 +91,13 @@ class DonationController extends Controller
                 [
                     'user_id' => 'required',
                     'api_token' => 'required',
-
                     'application_id' => 'required',
                     'donor_bank_name' => 'required',
                     'donor_bank_no' => 'required',
+                    'donation_date' => 'required',
                     'fsf_bank_id' => 'required',
-                    // 'fsf_bank_no' => 'nullable',
                     'amount' => 'required',
-                    'receipt' => 'required',
+                    'receipt' => 'required|mimes:jpeg,jpg,png,pdf|max:2048',
 
                 ]
             );

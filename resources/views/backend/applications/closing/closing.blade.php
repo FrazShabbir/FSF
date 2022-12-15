@@ -50,7 +50,8 @@
 
                                 <div class="row ">
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="deceased_at" class="required">Application Closing Date/Date of Death</label>
+                                        <label for="deceased_at" class="required">Application Closing Date/Date of
+                                            Death</label>
                                         <input type="date" name="deceased_at" class="form-control" placeholder="e.g. Ali"
                                             value="" required>
                                     </div>
@@ -138,7 +139,7 @@
                                         <div class="col-lg-6 col-md-2 col-sm-12">
                                             <div class="mt-2 mb-3">
                                                 <h4 class="required">
-                                                    Application Status
+                                                    Application Status 
                                                 </h4>
                                             </div>
                                         </div>
@@ -147,17 +148,22 @@
                                                 {{-- <label for="exampleFormControlSelect1">Select Input</label> --}}
                                                 <select class="form-control" id="exampleFormControlSelect1" required
                                                     name="status">
-                                                    <option selected="" disabled="">Select Status</option>
-                                                    <option value="4" {{ $application->status == 4 ? 'selected' : '' }}>
+                                                    <option  disabled value="">Select Status</option>
+                                                    <option value="PERMANENT-CLOSED" {{ $application->status == 'PERMANENT-CLOSED' ? 'selected' : '' }}>
                                                         PERMANENT CLOSE ACCOUNT</option>
-                                                    <option value="1" {{ $application->status == 1 ? 'selected' : '' }}>
-                                                        Active</option>
-                                                        <option value="1" {{ $application->status == 2 ? 'selected' : '' }}>
-                                                            Pending</option>
+                                                        
+                                                    <option value="APPROVED" {{ $application->status == 'APPROVED' ? 'selected' : '' }}>
+                                                        Approved</option>
+                                                    <option value="PENDING"
+                                                        {{ $application->status == 'PENDING' ? 'selected' : '' }}>
+                                                        Pending</option>
 
-                                                    <option value="0" {{ $application->status == 0 ? 'selected' : '' }}>
-                                                        In-Active</option>
-                                                    <option value="3" {{ $application->status == 3 ? 'selected' : '' }}>In
+                                                    <option value="INACTIVE"
+                                                        {{ $application->status == 'INACTIVE' ? 'selected' : '' }}>
+                                                        INACTIVE</option>
+                                                    <option value="CLOSING-PROCESS"
+                                                        {{ $application->status == 'CLOSING-PROCESS' ? 'selected' : '' }}>
+                                                        In
                                                         Closing process</option>
                                                 </select>
                                             </div>

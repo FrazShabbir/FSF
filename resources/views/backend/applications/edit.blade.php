@@ -120,6 +120,7 @@
                                             <option value="REJECTED">REJECTED</option>
                                             <option value="SUBMITTED">SUBMITTED</option>
                                             <option value="APPROVED">APPROVED</option>
+                                            <option value="INACTIVE">IN-ACTIVE</option>
                                         </select>
                                     </div>
                                 </div>

@@ -80,6 +80,7 @@ return new class () extends Migration {
             $table->string('status')->default('PENDING');
 
             $table->integer('receiver_id')->unsigned()->nullable();
+            $table->date('renewal_date')->nullable();
 
 
 

@@ -20,6 +20,9 @@ return new class extends Migration
             $table->text('user_signature');
             $table->boolean('declaration_confirm')->default(false);
             $table->boolean('rep_confirmed')->default(false);
+            $table->date('renewal_date')->nullable();
+            $table->string('status')->default('running');
+
             $table->timestamps();
         });
     }

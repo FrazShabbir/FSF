@@ -148,6 +148,8 @@ if (! function_exists('getStatus')) {
             return 'In Closing Process';
         } elseif ($num==4) {
             return 'Permanent Closed';
+        } elseif ($num==5) {
+            return 'Rejected';
         } else {
             return 'Contact Support';
         }

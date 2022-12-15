@@ -494,7 +494,7 @@ class ApplicationController extends Controller
         try {
             DB::beginTransaction();
             $application = Application::where('application_id', $id)->first();
-            $application->status = 3;//'IN-CLOSING-PROCESS';
+            $application->status = 'CLOSING-PROCESS';//'IN-CLOSING-PROCESS';
             $application->save();
             $comment = ApplicationComment::create([
                 'application_id'=>$application->id,
@@ -518,7 +518,7 @@ class ApplicationController extends Controller
         try {
             DB::beginTransaction();
             $application = Application::where('application_id', $id)->first();
-            $application->status = 2;
+            $application->status = 'PENDING';
             $application->save();
             $comment = ApplicationComment::create([
                 'application_id'=>$application->id,

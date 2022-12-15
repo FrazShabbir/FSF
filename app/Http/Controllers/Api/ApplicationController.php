@@ -16,6 +16,7 @@ use App\Models\ApplicationComment;
 use App\Models\User;
 use App\Models\RenewApplication;
 use App\Models\Country;
+use Carbon\Carbon;
 
 class ApplicationController extends Controller
 {
@@ -266,6 +267,7 @@ class ApplicationController extends Controller
                 $application->registered_relative_passport_no=$request->registered_relative_passport_no;
                 $application->annually_fund_amount=$request->annually_fund_amount;
                 $application->declaration_confirm=$request->declaration_confirm;
+                $application->renewal_date =Carbon::now()->addDays(365)->format('Y-m-d');
                 $application->status='PENDING';
 
                 if ($request->avatar) {
@@ -304,6 +306,7 @@ class ApplicationController extends Controller
                     'user_signature' => env('APP_URL').'placeholder',
                     'rep_confirmed' => $request->rep_confirmed??1,
                     'declaration_confirm' => $request->declaration_confirm??1,
+                    'renewal_date' => Carbon::now()->addDays(365)->format('Y-m-d'),
                 ]);
 
                 if ($request->user_signature) {
@@ -566,7 +569,7 @@ class ApplicationController extends Controller
                 $application->rep_confirmed=$request->rep_confirmed??1;
 
                 $application->buried_location=$request->buried_location;
-
+                $application->renewal_date= Carbon::now()->addDays(365)->format('Y-m-d');
 
                 $application->registered_relatives=$request->registered_relatives;
                 $application->registered_relative_passport_no=$request->registered_relative_passport_no;
@@ -629,6 +632,7 @@ class ApplicationController extends Controller
                     'user_signature' => $application->user_signature,
                     'rep_confirmed' => $request->rep_confirmed??1,
                     'declaration_confirm' => $request->declaration_confirm??1,
+                    'renewal_date' => Carbon::now()->addDays(365)->format('Y-m-d'),
                 ]);
 
                 DB::commit();
@@ -735,7 +739,8 @@ class ApplicationController extends Controller
                     'n_relative_2_phone'=>$application->n_relative_2_phone,
                     'n_relative_2_address'=>$application->n_relative_2_address,
 
-
+                    'expiration_date'=>$application->renewal_date,
+                    'registeration_date'=>Carbon::parse($application->created_at)->format('Y-m-d'),
 
                     'rep_name'=>$application->rep_name,
                     'rep_surname'=>$application->rep_surname,
