@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 use Illuminate\Support\Str;
-
+use Carbon\Carbon;
 class ApplicationController extends Controller
 {
     /**
@@ -38,6 +38,25 @@ class ApplicationController extends Controller
         ->with('applications', $applications);
     }
 
+    public function closedApplications()
+    {
+        if (! auth()->user()->hasPermissionTo('Read Applications')) {
+            abort(403);
+        }
+        $applications = Application::where('status','PERMANENT-CLOSED')->get();
+        return view('backend.applications.index')
+        ->with('applications', $applications);
+    }
+
+    public function pendingApplications()
+    {
+        if (! auth()->user()->hasPermissionTo('Read Applications')) {
+            abort(403);
+        }
+        $applications = Application::where('status','PENDING')->get();
+        return view('backend.applications.index')
+        ->with('applications', $applications);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -225,6 +244,13 @@ class ApplicationController extends Controller
                 $application->save();
             }
 
+            $comment = ApplicationComment::create([
+                'application_id'=>$application->id,
+                'comment'=>'Application submitted by'. auth()->user()->full_name,
+                'status'=>'SUBMITTED',
+                'receiver_id'=>auth()->user()->id,
+            ]);
+
 
             DB::commit();
             alert()->success('Success', 'Application Submitted Successfully');
@@ -258,6 +284,12 @@ class ApplicationController extends Controller
     public function edit($id)
     {
         $application = Application::where('application_id', $id)->firstOrFail();
+
+        if($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED'){
+            alert()->error('Error', 'Application Already Closed/Rejected');
+            return redirect()->back();
+        }
+
         $countries = Country::where('status', 1)->get();
 
         return view('backend.applications.edit')
@@ -276,6 +308,12 @@ class ApplicationController extends Controller
     {
         // dd($request->all());
         $application = Application::where('application_id', $id)->firstOrFail();
+
+        if($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED'){
+            alert()->error('Error', 'Application Already Closed/Rejected');
+            return redirect()->back();
+        }
+
         $user = User::where('id', $application->user_id)->firstOrFail();
 
         $request->validate([
@@ -410,6 +448,13 @@ class ApplicationController extends Controller
             $application->declaration_confirm=$request->declaration_confirm??'1';
             $application->save();
 
+            $comment = ApplicationComment::create([
+                'application_id'=>$application->id,
+                'comment'=>'Application Edited and updated by '. auth()->user()->full_name,
+                'status'=>'PENDING',
+                'receiver_id'=>auth()->user()->id,
+            ]);
+
             db::commit();
             alert()->success('Success', 'Application Updated Successfully');
             return redirect()->route('application.show', $application->application_id);
@@ -467,9 +512,15 @@ class ApplicationController extends Controller
         try {
             DB::beginTransaction();
             $application = Application::where('application_id', $id)->first();
+
+            if($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED'){
+                alert()->error('Error', 'Application Already Closed/Rejected');
+                return redirect()->back();
+            }
+
             $comment = ApplicationComment::create([
                 'application_id'=>$application->id,
-                'comment'=>$request->comment,
+                'comment'=>$request->comment.' by '. auth()->user()->full_name,
                 'status'=>$request->status,
                 'receiver_id'=>auth()->user()->id,
             ]);
@@ -491,17 +542,27 @@ class ApplicationController extends Controller
 
     public function closeApplication($id)
     {
+
         try {
             DB::beginTransaction();
             $application = Application::where('application_id', $id)->first();
-            $application->status = 'CLOSING-PROCESS';//'IN-CLOSING-PROCESS';
-            $application->save();
-            $comment = ApplicationComment::create([
-                'application_id'=>$application->id,
-                'comment'=>'Application Closing Started',
-                'status'=>'In Closing Process',
-                'receiver_id'=>auth()->user()->id,
-            ]);
+
+            if($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED'){
+            alert()->error('Error', 'Application Already Closed/Rejected');
+            return redirect()->back();
+        }
+
+            if($application->status!='CLOSING-PROCESS'){
+                $application->status = 'CLOSING-PROCESS';//'IN-CLOSING-PROCESS';
+                $application->save();
+                $comment = ApplicationComment::create([
+                    'application_id'=>$application->id,
+                    'comment'=>'Application Closing Started by '.auth()->user()->full_name.'.',
+                    'status'=>'In Closing Process',
+                    'receiver_id'=>auth()->user()->id,
+                ]);
+            }
+
             DB::commit();
             return view('backend.applications.closing.closing')
             ->with('application', $application);
@@ -518,11 +579,17 @@ class ApplicationController extends Controller
         try {
             DB::beginTransaction();
             $application = Application::where('application_id', $id)->first();
+
+            if($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED'){
+                alert()->error('Error', 'Application Already Closed/Rejected');
+                return redirect()->back();
+            }
+
             $application->status = 'PENDING';
             $application->save();
             $comment = ApplicationComment::create([
                 'application_id'=>$application->id,
-                'comment'=>'Application Closing Cancelled',
+                'comment'=>'Application Closing Cancelled by '.auth()->user()->full_name.'.',
                 'status'=>'PENDING',
                 'receiver_id'=>auth()->user()->id,
             ]);
@@ -536,5 +603,58 @@ class ApplicationController extends Controller
             //throw $th;
         }
     }
+
+    public function closeApplicationSave(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'deceased_at' => 'required',
+            'process_start_at' => 'required',
+            'process_ends_at' => 'required',
+            'amount_used' => 'required',
+            'status' => 'required',
+            'rep_received_amount' => 'required',
+            'reason' => 'required'
+            
+        ]);
+
+        try {
+            DB::beginTransaction();
+            // $user = User::findOrFail($id);
+            // $user->status = $request->status;
+            // $user->save();
+            $application  = Application::where('application_id', $id)->first();
+            // dd($user->totaldonations->sum('amount'));
+    
+            $application->deceased_at = $request->deceased_at;
+            $application->process_start_at = $request->process_start_at;
+            $application->process_ends_at = $request->process_ends_at;
+            $application->total_donations = $application->totaldonations->sum('amount');
+            $application->total_expense = $request->amount_used;
+    
+            $application->rep_received_amount = $request->rep_received_amount;
+            $application->status = $request->status;
+            $application->reason = $request->reason;
+            $application->rep_received_amount = $request->rep_received_amount;
+            $application->application_closed_by = Auth::user()->id;
+            $application->application_closed_at= Carbon::now();
+            
+            $application->save();
+            DB::commit();
+            alert()->success('Account Closed');
+            return redirect()->route('users.show', $application->user_id);
+            //code...
+        } catch (\Throwable $th) {
+            DB::rollBack();
+             throw $th;
+            alert()->error('Error', $th->getMessage());
+            return redirect()->back();
+           
+        }
+       
+    }
+
+
+  
 
 }

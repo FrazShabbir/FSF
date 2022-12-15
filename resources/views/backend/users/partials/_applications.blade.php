@@ -28,7 +28,7 @@
                             <tr>
                                 <td>{{ $application->application_id }}</td>
                                 <td>{{ $application->full_name }} </td>
-                                <td><span class="badge badge-{{ $application->status }}">{{ getStatus($application->status )}}</span></td>
+                                <td><span class="badge badge-{{ $application->status }}">{{ $application->status}}</span></td>
                                 <td>
                                     <form action=""
                                         method="post">
@@ -57,10 +57,15 @@
                                     </form>
                                 </td>
                                 <td>
+                                    @if ($application->status != 'PERMANENT-CLOSED')
                                     <button type="button" class="btn btn-danger openModal"
-                                     data-id="{{$application->application_id}}" data-link="{{ route('user.close.application', $application->application_id) }}">
-                                    Close Account
-                                </button>
+                                    data-id="{{$application->application_id}}" data-link="{{ route('user.close.application', $application->application_id) }}">
+                                   Close Account
+                                   </button> 
+                                   @else
+                                      <span class="badge badge-danger">Already CLOSED</span>
+                                    @endif
+                                  
                                 </td>
                             </tr>
                         @endforeach

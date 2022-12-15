@@ -8,6 +8,8 @@ use App\Http\Controllers\Backend\DonationController;
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
 
     Route::get('applications', [ApplicationController::class, 'index'])->name('application.index')->middleware(['can:Read Applications']);
+    Route::get('applications/closed-applications', [ApplicationController::class, 'closedApplications'])->name('applications.closed')->middleware(['can:Read Applications']);
+
     Route::get('application/create', [ApplicationController::class, 'create'])->name('application.create')->middleware(['can:Create Applications']);
     Route::post('application/create/save', [ApplicationController::class, 'store'])->name('application.store')->middleware(['can:Create Applications']);
     Route::get('application/{id}', [ApplicationController::class, 'show'])->name('application.show')->middleware(['can:Read Applications']);

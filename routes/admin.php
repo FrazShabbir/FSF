@@ -29,7 +29,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
 
     // Route::resource('users', UserController::class);
     Route::get('users', [UserController::class, 'index'])->name('users.index')->middleware(['can:Read Users']);
-    Route::get('users/closed-accounts', [UserController::class, 'closedAccounts'])->name('users.closed.accounts')->middleware(['can:Read Users']);
     Route::get('user/create', [UserController::class, 'create'])->name('users.create')->middleware(['can:Create Users']);
     Route::post('user/create/save', [UserController::class, 'store'])->name('users.store')->middleware(['can:Create Users']);
     Route::get('user/{id}', [UserController::class, 'show'])->name('users.show')->middleware(['can:Read Users']);

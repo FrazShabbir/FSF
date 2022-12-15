@@ -215,8 +215,8 @@ class EnrollmentController extends Controller
             $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
             
             
-            SendMessage($application->phone,$applicant_message);
-            SendMessage($application->rep_phone,$rep_messsage);
+            // SendMessage($application->phone,$applicant_message);
+            // SendMessage($application->rep_phone,$rep_messsage);
             
             alert()->success('Application Submitted Successfully');
             return redirect()->route('enrollment.show', $application->application_id);

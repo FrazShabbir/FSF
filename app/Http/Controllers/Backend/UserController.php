@@ -34,15 +34,7 @@ class UserController extends Controller
         return view('backend.users.index')
         ->withUsers($users);
     }
-    public function closedAccounts()
-    {
-        if (! auth()->user()->hasPermissionTo('Read Users')) {
-            abort(403);
-        }
-        $users= User::where('status', '4')->get();
-        return view('backend.users.index')
-        ->withUsers($users);
-    }
+   
     public function semiclosedAccounts()
     {
         if (! auth()->user()->hasPermissionTo('Read Users')) {
@@ -240,8 +232,8 @@ class UserController extends Controller
         }
        
     }
-    public function closeAccountSave(Request $request, $id){
-
+    public function closeAccountSave(Request $request, $id)
+    {
         // dd($request->all());
         $request->validate([
             'deceased_at' => 'required',

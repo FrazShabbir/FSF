@@ -1216,6 +1216,15 @@ cursor: pointer;
     background-color: #198753;
     color: #fff;
 }
+.badge-CLOSING-PROCESS{
+    background-color: #cb3d4b;
+    color: #ffff;
+}
+.badge-PERMANENT-CLOSED {
+    background-color: #ff0019;
+    color: #ffffff;
+  }
+
 .badge-2{
     background-color: #FFC007;
     color: #000;
