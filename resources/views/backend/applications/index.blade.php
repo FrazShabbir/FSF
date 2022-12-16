@@ -29,7 +29,9 @@
                                     <tr>
                                         
                                         <th>Application ID</th>
-                                        <th>Applicant</th>
+                                        <th>Applicant (Full Name)</th>
+                                        <th>Father's Name</th>
+                                        <th>Passport Number</th>
                                         <th>Status</th>
                                         
                                         <th>Action</th>
@@ -41,6 +43,8 @@
                                     <tr>
                                         <td>{{$application->application_id}}</td>
                                         <td>{{$application->full_name}}</td>
+                                        <td>{{$application->father_name}}</td>
+                                        <td>{{$application->passport_number}}</td>
                                         <td><span class="badge badge-{{$application->status}}">{{$application->status}}</span></td>
                                         <td>
                                            

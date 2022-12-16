@@ -9,6 +9,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
 
     Route::get('applications', [ApplicationController::class, 'index'])->name('application.index')->middleware(['can:Read Applications']);
     Route::get('applications/closed-applications', [ApplicationController::class, 'closedApplications'])->name('applications.closed')->middleware(['can:Read Applications']);
+    Route::get('applications/pending', [ApplicationController::class, 'pendingApplications'])->name('applications.pending')->middleware(['can:Read Applications']);
+    Route::get('applications/approved', [ApplicationController::class, 'approvedApplications'])->name('applications.approved')->middleware(['can:Read Applications']);
+    Route::get('applications/rejected', [ApplicationController::class, 'rejectedApplications'])->name('applications.rejected')->middleware(['can:Read Applications']);
 
     Route::get('application/create', [ApplicationController::class, 'create'])->name('application.create')->middleware(['can:Create Applications']);
     Route::post('application/create/save', [ApplicationController::class, 'store'])->name('application.store')->middleware(['can:Create Applications']);

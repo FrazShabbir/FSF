@@ -114,6 +114,15 @@
                     <li>
                         <a href="{{ route('applications.closed') }}"> <i class="las la-th-list"></i>Closed Applications</a>
                     </li>
+                    <li>
+                        <a href="{{ route('applications.pending') }}"> <i class="las la-th-list"></i>Pending Applications</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('applications.approved') }}"> <i class="las la-th-list"></i>Approved Applications</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('applications.rejected') }}"> <i class="las la-th-list"></i>Rejected Applications</a>
+                    </li>
                 @endcan
             </ul>
         </li>

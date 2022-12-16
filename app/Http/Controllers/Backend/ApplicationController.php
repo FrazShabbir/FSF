@@ -57,6 +57,27 @@ class ApplicationController extends Controller
         return view('backend.applications.index')
         ->with('applications', $applications);
     }
+
+    public function approvedApplications()
+    {
+        if (! auth()->user()->hasPermissionTo('Read Applications')) {
+            abort(403);
+        }
+        $applications = Application::where('status','APPROVED')->get();
+        return view('backend.applications.index')
+        ->with('applications', $applications);
+    }
+
+    public function rejectedApplications()
+    {
+        if (! auth()->user()->hasPermissionTo('Read Applications')) {
+            abort(403);
+        }
+        $applications = Application::where('status','REJECTED')->get();
+        return view('backend.applications.index')
+        ->with('applications', $applications);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -640,7 +661,27 @@ class ApplicationController extends Controller
             $application->application_closed_at= Carbon::now();
             
             $application->save();
+
+            $comment = ApplicationComment::create([
+                'application_id'=>$application->id,
+                'comment'=>'Application Permanent Closed by '.auth()->user()->full_name.'.',
+                'status'=>'PERMANENT-CLOSED',
+                'receiver_id'=>auth()->user()->id,
+            ]);
+
+            // $account_transaction = AccountTransaction::create([
+            //     'application_id'=>$application->id,
+            //     'amount'=>$application->rep_received_amount,
+            //     'type'=>'CREDIT',
+            //     'status'=>'SUCCESS',
+            //     'transaction_id'=>Str::random(10),
+            //     'transaction_type'=>'APPLICATION-CLOSED',
+            //     'transaction_date'=>Carbon::now(),
+            //     'transaction_by'=>Auth::user()->id,
+            // ]);
+
             DB::commit();
+
             alert()->success('Account Closed');
             return redirect()->route('users.show', $application->user_id);
             //code...

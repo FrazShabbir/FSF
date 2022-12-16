@@ -4,6 +4,7 @@
             <div class="iq-header-title">
                 <h4 class="card-title">User Applications</h4>
             </div>
+            <button class="btn btn-primary">Add Application</button>
         </div>
         <div class="iq-card-body">
             <div class="table-responsive">
