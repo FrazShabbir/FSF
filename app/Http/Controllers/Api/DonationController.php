@@ -56,7 +56,9 @@ class DonationController extends Controller
             $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
             if ($user) {
                 // $donations = Donation::where('user_id', $request->user_id)->get();
-                $donations = Donation::where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
+                $donations = Donation::with(['application' => function ($query) {
+                    $query->select('id', 'application_id','passport_number','full_name');
+                }])->where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
                     return $q->whereBetween('created_at', [date(request()->date_from), date(request()->date_to)]);
                 })
                 ->when(!empty(request()->input('date_from')), function ($q) {
@@ -221,6 +223,12 @@ class DonationController extends Controller
             ];
             return response()->json([
                 'donation' => $info,
+                'donor'=>[
+                    'full_name'=>$donation->application->full_name,
+                    'father_name'=>$donation->application->father_name,
+                    'application_id'=>$donation->application->application_id,
+                ],
+
                 'status' => 200,
                 'message' => 'Donation Found',
             ], 200);
