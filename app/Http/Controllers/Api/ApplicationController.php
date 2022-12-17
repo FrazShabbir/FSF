@@ -718,6 +718,8 @@ class ApplicationController extends Controller
                     'user_id' => $application->user_id,
                     'passport_number' => $application->passport_number,
                     'avatar' => $application->avatar,
+                    'expiration_date'=>$application->renewal_date,
+                    'registeration_date'=>$application->created_at,
                     'nie' => $application->nie,
                     'native_id' => $application->native_id,
                     'full_name' => $application->full_name,
@@ -785,6 +787,7 @@ class ApplicationController extends Controller
                     'user_signature'=>$application->user_signature,
                     // 'declaration_confirm'=>$application->declaration_confirm,
                     'status'=>$application->status,
+                  
 
                 ]
             ], 200);
