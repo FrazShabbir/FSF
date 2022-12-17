@@ -105,9 +105,13 @@ class ApplicationController extends Controller
     public function renew(Request $request)
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
-            $supplementory = [];
+            $supplementory = [
+                's'=>'s'
+            ];
             $application = Application::where('application_id', $request->application_id)->first();
+           
             if ($application) {
+               
                 if ($application->user_id != $request->user_id) {
                     return response()->json([
                         'status' => 403,
