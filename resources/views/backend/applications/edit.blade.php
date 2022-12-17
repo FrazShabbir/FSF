@@ -116,11 +116,12 @@
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="status">Status:</label>
                                         <select type="text" name="status" id="" class="form-control">
-                                            <option value="PENDING">PENDING</option>
-                                            <option value="REJECTED">REJECTED</option>
-                                            <option value="SUBMITTED">SUBMITTED</option>
-                                            <option value="APPROVED">APPROVED</option>
-                                            <option value="INACTIVE">IN-ACTIVE</option>
+                                            <option value="PENDING" {{$application->status=='PENDING'?'selected':''}} >PENDING</option>
+                                            <option value="RENEWABLE" {{$application->status=='RENEWABLE'?'selected':''}} >RENEWABLE</option>
+                                            <option value="REJECTED" {{$application->status=='REJECTED'?'selected':''}}>REJECTED</option>
+                                            <option value="SUBMITTED" {{$application->status=='SUBMITTED'?'selected':''}}>SUBMITTED</option>
+                                            <option value="APPROVED" {{$application->status=='APPROVED'?'selected':''}}>APPROVED</option>
+                                            <option value="INACTIVE" {{$application->status=='INACTIVE'?'selected':''}}>IN-ACTIVE</option>
                                         </select>
                                     </div>
                                 </div>
