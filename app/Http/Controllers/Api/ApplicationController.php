@@ -1101,10 +1101,16 @@ class ApplicationController extends Controller
                 'status' => 200,
                 'message' => 'Passport Found',
                 'user' => [
+                    'registeration_number' => $application->application_id,
                     'full_name' => $application->full_name,
                     'father_name' => $application->father_name,
                     'surname' => $application->surname,
-                    'address'=>$application->area.','.$application->city->name.','.$application->province->name.','.$application->community->name.','.$application->country->name
+                    'city' => $application->city->name,
+                    'province' => $application->province->name,
+                    'country' => $application->country->name,
+                    'community' => $application->community->name,
+                    'area' => $application->area,
+                    // 'address'=>$application->area.','.$application->city->name.','.$application->province->name.','.$application->community->name.','.$application->country->name
                 ]
             ], 200);
         } else {
