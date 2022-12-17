@@ -701,10 +701,184 @@ class ApplicationController extends Controller
     public function addUserApplication($id){
         $user = User::where('username',$id)->firstOrFail();
         $countries = Country::where('status', 1)->get();
-
         return view('backend.applications.user.addApplication')
         ->with('user', $user)
         ->with('countries', $countries);
+    }
+
+
+        /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeAddUserApplication(Request $request,$id)
+    {
+        $request->validate([
+            'email'=>'required|email|unique:users,email',
+            'passport_number' => 'required',
+            'nie' => 'required',
+            'email'=>'required|email',
+            'native_id'=>'required',
+            'full_name'=>'required',
+            'father_name'=>'required',
+            'surname'=>'required',
+            'gender'=>'required',
+            'phone'=>'required',
+            'dob'=>'required',
+            'native_country'=>'required',
+            'native_country_address'=>'required',
+            'country'=>'required',
+            'community'=>'required',
+            'province'=>'required',
+            'city'=>'required',
+            'area'=>'required',
+
+            's_relative_1_name'=>'required',
+            's_relative_1_relation'=>'required',
+            's_relative_1_phone'=>'required',
+            's_relative_1_address'=>'required',
+
+            's_relative_2_name'=>'required',
+            's_relative_2_relation'=>'required',
+            's_relative_2_phone'=>'required',
+            's_relative_2_address'=>'required',
+
+            'n_relative_1_name'=>'required',
+            'n_relative_1_relation'=>'required',
+            'n_relative_1_phone'=>'required',
+            'n_relative_1_address'=>'required',
+
+
+            'n_relative_2_name'=>'required',
+            'n_relative_2_relation'=>'required',
+            'n_relative_2_phone'=>'required',
+            'n_relative_2_address'=>'required',
+
+            'rep_name'=>'required',
+            'rep_surname'=>'required',
+            'rep_passport_no'=>'required',
+            'rep_phone'=>'required',
+            'rep_address'=>'required',
+
+            'buried_location'=>'required',
+
+            'registered_relatives'=>'required',
+            'registered_relative_passport_no'=>'nullable',
+
+            'annually_fund_amount'=>'required',
+         
+            'declaration_confirm'=>'required',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $user = User::where('username',$id)->firstOrFail();
+            $find_relative = Application::where('passport_number', $request->registered_relative_passport_no)->first();
+            $registered = 0;
+            if ($find_relative) {
+                $registered = 1;
+                $passport_number = $find_relative->passport_number;
+            }
+            $application = Application::create([
+                'application_id'=>'W-'.rand('11, 99').'-'.rand('111, 999').rand('11, 99'),
+                'user_id'=>$user->id,
+                'passport_number' => $request->passport_number,
+                'nie' => $request->nie,
+                'email'=>$request->email,
+                'native_id'=>$request->native_id,
+                'full_name'=>$request->full_name,
+                'father_name'=>$request->father_name,
+                'surname'=>$request->surname,
+
+                'gender'=>$request->gender,
+                'phone'=>$request->phone,
+                'dob'=>$request->dob,
+                'native_country'=>$request->native_country,
+                'native_country_address'=>$request->native_country_address,
+                'country_id'=>$request->country,
+
+                'community_id'=>$request->community,
+                'province_id'=>$request->province,
+                'city_id'=>$request->city,
+                'area'=>$request->area,
+
+
+
+
+
+                's_relative_1_name'=>$request->s_relative_1_name,
+                's_relative_1_relation'=>$request->s_relative_1_relation,
+                's_relative_1_phone'=>$request->s_relative_1_phone,
+                's_relative_1_address'=>$request->s_relative_1_address,
+
+                's_relative_2_name'=>$request->s_relative_2_name,
+                's_relative_2_relation'=>$request->s_relative_2_relation,
+                's_relative_2_phone'=>$request->s_relative_2_phone,
+                's_relative_2_address'=>$request->s_relative_2_address,
+
+
+                'n_relative_1_name'=>$request->n_relative_1_name,
+                'n_relative_1_relation'=>$request->n_relative_1_relation,
+                'n_relative_1_phone'=>$request->n_relative_1_phone,
+                'n_relative_1_address'=>$request->n_relative_1_address,
+
+                'n_relative_2_name'=>$request->n_relative_2_name,
+                'n_relative_2_relation'=>$request->n_relative_2_relation,
+                'n_relative_2_phone'=>$request->n_relative_2_phone,
+                'n_relative_2_address'=>$request->n_relative_2_address,
+
+
+
+                'rep_name'=>$request->rep_name,
+                'rep_surname'=>$request->rep_surname,
+                'rep_passport_no'=>$request->rep_passport_no,
+                'rep_phone'=>$request->rep_phone,
+                'rep_address'=>$request->rep_address,
+                'rep_confirmed'=>$request->rep_confirmed??'1',
+
+                'buried_location'=>$request->buried_location,
+
+                'registered_relatives'=>$registered,
+                'registered_relative_passport_no'=>$passport_number??null,
+                'annually_fund_amount'=>$request->annually_fund_amount,
+                'user_signature'=>$request->user_signature??'DONE BY OPERATOR',
+                'declaration_confirm'=>$request->declaration_confirm??'1',
+                'avatar'=>config('app.url').'/placeholder.png',
+
+            ]);
+
+            if ($request->avatar) {
+                $request->validate([
+                    'avatar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                ]);
+
+
+                $file = $request->avatar;
+                $extension = $file->getClientOriginalExtension();
+                $filename = getRandomString().'-'.time() . '.' . $extension;
+                $file->move('uploads/application/avatars/', $filename);
+                $application->avatar= config('app.url').'uploads/application/avatars/'. $filename;
+                $application->save();
+            }
+
+            $comment = ApplicationComment::create([
+                'application_id'=>$application->id,
+                'comment'=>'Application submitted in OFFICE by'. auth()->user()->full_name.', Under the Name of'.$user->full_name.'.',
+                'status'=>'SUBMITTED',
+                'receiver_id'=>auth()->user()->id,
+            ]);
+
+
+            DB::commit();
+            alert()->success('Success', 'Application Submitted Successfully');
+            return redirect()->route('application.index');
+            // return response()->json(['success'=>'Application Created Successfully']);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+        }
     }
 
 

@@ -696,11 +696,25 @@ class ApplicationController extends Controller
                 'message' => 'Invalid Request',
             ], 404);
         }
-
+        $supplementory = [];
         $application = Application::with('comments')->where('application_id', $id)->where('user_id', $user->id)->get();
 
         if ($application->count()>0) {
             $application = Application::with('comments')->with('donations')->where('application_id', $id)->where('user_id', $user->id)->first();
+            if($application->registered_relatives==1){
+               
+                $relative = Application::where('passport_number', $application->registered_relative_passport_no)->first();
+                if($relative){
+                    $supplementory = [
+                        'full_name' => $relative->full_name,
+                        'father_name' => $relative->father_name,
+                        'phone' => $relative->phone,
+                        'anual_fund' => $relative->annually_fund_amount,
+                        'address'=>$relative->country->name.' '.$relative->community->name.' '.$relative->province->name.' '.$relative->city->name.' '.$relative->area,
+                    ];
+                }
+
+            }
         } else {
             return response()->json([
                 'status' => 400,
@@ -789,7 +803,8 @@ class ApplicationController extends Controller
                     'status'=>$application->status,
                   
 
-                ]
+                ],
+                'supplementory'=>$supplementory
             ], 200);
         } else {
             return response()->json([
