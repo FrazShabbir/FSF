@@ -194,6 +194,7 @@ class ApplicationController extends Controller
                 'father_name'=>$request->father_name,
                 'surname'=>$request->surname,
 
+
                 'gender'=>$request->gender,
                 'phone'=>$request->phone,
                 'dob'=>$request->dob,
@@ -247,6 +248,7 @@ class ApplicationController extends Controller
                 'annually_fund_amount'=>$request->annually_fund_amount,
                 'user_signature'=>$request->user_signature??'DONE BY OPERATOR',
                 'declaration_confirm'=>$request->declaration_confirm??'1',
+                'renewal_date' =>Carbon::now()->addDays(365)->format('Y-m-d'),
                 'avatar'=>config('app.url').'/placeholder.png',
 
             ]);
@@ -272,6 +274,14 @@ class ApplicationController extends Controller
                 'receiver_id'=>auth()->user()->id,
             ]);
 
+            $applicationRenewal = RenewApplication::create([
+                'application_id' => $application->id,
+                'annually_fund_amount' =>$request->annually_fund_amount,
+                'user_signature' => $application->user_signature,
+                'rep_confirmed' => $request->rep_confirmed??1,
+                'declaration_confirm' => $request->declaration_confirm??1,
+                'renewal_date' => Carbon::now()->addDays(365)->format('Y-m-d'),
+            ]);
 
             DB::commit();
             alert()->success('Success', 'Application Submitted Successfully');
@@ -292,6 +302,8 @@ class ApplicationController extends Controller
     public function show($id)
     {
         $application = Application::where('application_id', $id)->firstOrFail();
+
+        // dd(now()->diffInDays($application->renewal_date));
         return view('backend.applications.show')
             ->with('application', $application);
     }
@@ -845,6 +857,8 @@ class ApplicationController extends Controller
                 'annually_fund_amount'=>$request->annually_fund_amount,
                 'user_signature'=>$request->user_signature??'DONE BY OPERATOR',
                 'declaration_confirm'=>$request->declaration_confirm??'1',
+                'renewal_date' =>Carbon::now()->addDays(365)->format('Y-m-d'),
+
                 'avatar'=>config('app.url').'/placeholder.png',
 
             ]);
@@ -870,6 +884,14 @@ class ApplicationController extends Controller
                 'receiver_id'=>auth()->user()->id,
             ]);
 
+            $applicationRenewal = RenewApplication::create([
+                'application_id' => $application->id,
+                'annually_fund_amount' =>$request->annually_fund_amount,
+                'user_signature' => $application->user_signature,
+                'rep_confirmed' => $request->rep_confirmed??1,
+                'declaration_confirm' => $request->declaration_confirm??1,
+                'renewal_date' => Carbon::now()->addDays(365)->format('Y-m-d'),
+            ]);
 
             DB::commit();
             alert()->success('Success', 'Application Submitted Successfully');
