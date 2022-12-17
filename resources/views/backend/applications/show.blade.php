@@ -62,7 +62,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="text-center">
                                         <p class="mb-0"><i>Funeral Department</i></p>
-                                        <h2 class="mb-0"><u>User Registration Form</u></h2>
+                                        <h2 class="mb-0"><u>Enrollment: {{$application->application_id}}</u></h2>
                                         <p class="text-uppercase mb-0"><b>Dawateislami</b></p>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                             <div class="" id="personal_info">
                                                 <div class="mb-4">
                                                     <h3>
-                                                        Personal Information <span class="badge badge-info"><small><a href="{{route('users.show',$application->user_id)}}">View User</a></small> </span> <span class="badge badge-{{$application->status}}">{{$application->status}}</span>
+                                                        Personal Information <span class="badge badge-info"><small><a href="{{route('users.show',$application->user_id)}}">View User</a></small> </span> <span class="badge badge-{{$application->status}}">{{$application->status}}</span> <a class="badge badge-{{$application->status}}" href="{{route('application.edit',$application->application_id)}}">Edit</a>
                                                     </h3>
                                                     <div class="heading-bottom-line"></div>
                                                 </div>
@@ -746,13 +746,57 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Application Tree</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="table-responsive">
+                               
+                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
+                                    aria-describedby="user-list-page-info">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th>Comments</th>
+                                            <th>Status</th>
+                                            <th>Done By</th>
+                                            <th>Date</th>
+                                            
+                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                                        @foreach($application->comments as $comment)
+                                        <tr>
+                                            <td>{{$comment->comment}}</td>
+                                            <td>{{$comment->status}}</td>
+                                            <td>{{$comment->user->full_name ?? $application->user->full_name}}</td>
+                                            <td>{{date('d-M-Y',strtotime($comment->created_at))}}</td>
+                                            
+                                        </tr>
+                                        @endforeach
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                   
                         </div>
                     </div>
                 </div>
                 @if ($application->donations)
                 @include('backend.partials.common._donation_stats',['data'=>$application])
                 @endif
+                
             </div>
         </div>
     </div>

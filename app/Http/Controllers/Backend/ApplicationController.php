@@ -696,6 +696,18 @@ class ApplicationController extends Controller
     }
 
 
+
+
+    public function addUserApplication($id){
+        $user = User::where('username',$id)->firstOrFail();
+        $countries = Country::where('status', 1)->get();
+
+        return view('backend.applications.user.addApplication')
+        ->with('user', $user)
+        ->with('countries', $countries);
+    }
+
+
   
 
 }

@@ -4,7 +4,7 @@
             <div class="iq-header-title">
                 <h4 class="card-title">User Applications</h4>
             </div>
-            <button class="btn btn-primary">Add Application</button>
+            <a href="{{route('application.create.user',$user->username)}}" class="btn btn-primary">Add Application</a>
         </div>
         <div class="iq-card-body">
             <div class="table-responsive">
