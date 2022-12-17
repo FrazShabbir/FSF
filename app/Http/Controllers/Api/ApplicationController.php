@@ -105,11 +105,17 @@ class ApplicationController extends Controller
     public function renew(Request $request)
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
-            $supplementory = [
-                's'=>'s'
-            ];
-            $application = Application::where('application_id', $request->application_id)->first();
            
+            $application = Application::where('application_id', $request->application_id)->first();
+            
+            if($application->status!='RENEWABLE'){
+                return response()->json([
+                    'status' => 403,
+                    'message' => 'Application Not Renewable',
+                ], 403);
+            }
+
+            $supplementory = [];
             if ($application) {
                
                 if ($application->user_id != $request->user_id) {
@@ -117,27 +123,33 @@ class ApplicationController extends Controller
                         'status' => 403,
                         'message' => 'Unauthorized Access',
                     ], 403);
-                    if($application->registered_relatives==1){
-               
-                        $relative = Application::where('passport_number', $application->registered_relative_passport_no)->first();
-                        if($relative){
-                            $supplementory = [
-                                'full_name' => $relative->full_name,
-                                'father_name' => $relative->father_name,
-                                'phone' => $relative->phone,
-                                'anual_fund' => $relative->annually_fund_amount,
-                                'address'=>$relative->country->name.' '.$relative->community->name.' '.$relative->province->name.' '.$relative->city->name.' '.$relative->area,
-                            ];
-                        }
-        
-                    }
+                   
+                    
                 }
+               
+                if($application->registered_relatives==1){
+                      
+                    $relative = Application::where('passport_number', $application->registered_relative_passport_no)->first();
+                    if($relative){
+                      
+                        $supplementory = [
+                            'full_name' => $relative->full_name,
+                            'father_name' => $relative->father_name,
+                            'phone' => $relative->phone,
+                            'anual_fund' => $relative->annually_fund_amount,
+                            'address'=>$relative->country->name.' '.$relative->community->name.' '.$relative->province->name.' '.$relative->city->name.' '.$relative->area,
+                        ];
+                    }
+    
+                }
+
                 $countries = Country::all();
                 return response()->json([
                     'status'=>'200',
+                    'supplementory'=>$supplementory,
                     'countries' => $countries,
                     'application'=>$application,
-                    'supplementory'=>$supplementory,
+                    
                     'location'=>[
                         'country'=>[
                             'id'=>$application->country->id,
@@ -850,6 +862,15 @@ class ApplicationController extends Controller
         $application = Application::where('application_id', $request->application_id)->where('user_id', $user->id)->get();
         if ($application->count()>0) {
             $application = Application::with('comments')->where('application_id', $request->application_id)->where('user_id', $user->id)->first();
+
+
+            if($application->status!='PENDING'){
+                return response()->json([
+                    'status' => 403,
+                    'message' => 'Application Not EDITABLE.',
+                ], 403);
+            }
+
         } else {
             return response()->json([
                 'status' => 400,
@@ -966,6 +987,14 @@ class ApplicationController extends Controller
                 $application = Application::where('application_id', $request->application_id)->where('user_id', $user->id)->get();
                 if ($application->count()>0) {
                     $application = Application::with('comments')->where('application_id', $request->application_id)->where('user_id', $user->id)->first();
+                    
+                    if($application->status!='PENDING'){
+                        return response()->json([
+                            'status' => 403,
+                            'message' => 'Application Not EDITABLE.',
+                        ], 403);
+                    }
+
                 } else {
                     return response()->json([
                         'status' => 400,
