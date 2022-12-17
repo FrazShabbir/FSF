@@ -17,6 +17,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     
     Route::get('create/application-with-user/{id}', [ApplicationController::class, 'addUserApplication'])->name('application.create.user')->middleware(['can:Create Applications']);
     
+    Route::post('application-with-user/{id}/create/save/', [ApplicationController::class, 'storeAddUserApplication'])->name('application.store.user')->middleware(['can:Create Applications']);
+   
     Route::post('application/create/save', [ApplicationController::class, 'store'])->name('application.store')->middleware(['can:Create Applications']);
     Route::get('application/{id}', [ApplicationController::class, 'show'])->name('application.show')->middleware(['can:Read Applications']);
     Route::get('application/{id}/edit', [ApplicationController::class, 'edit'])->name('application.edit')->middleware(['can:Update Applications']);

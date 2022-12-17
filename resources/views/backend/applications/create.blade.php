@@ -143,7 +143,7 @@
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
                                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
-                                                     name="avatar"  required  />
+                                                     name="avatar"/>
                                                 <label for="imageUpload" class=" required"></label>
                                             </div>
                                             <div class="avatar-preview">

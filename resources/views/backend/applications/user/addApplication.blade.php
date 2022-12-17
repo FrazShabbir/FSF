@@ -136,14 +136,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <form class="form" action="{{ route('application.store') }}" method="POST" enctype="multipart/form-data">
+                            <form class="form" action="{{ route('application.store.user',$user->username) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row setup-content px-3" id="user-detail" style="display: flex;">
                                     <div class="col-12">
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
                                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
-                                                     name="avatar"  required  />
+                                                     name="avatar"    />
                                                 <label for="imageUpload" class=" required"></label>
                                             </div>
                                             <div class="avatar-preview">
@@ -992,7 +992,7 @@
                                                         <input type="text" class="form-control"
                                                             id="other_annually_fund_amount"
                                                             name="annually_fund_amount"
-                                                            placeholder="Enter Anually Fund Amount">
+                                                            placeholder="Enter Anually Fund Amount" value="100">
                                                     </div>
                                                 </div>
                                             </div>
