@@ -100,7 +100,7 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">Add Donation</h4>
+                                <h4 class="card-title">Update Status</h4>
                             </div>
                         </div>
                         <div class="iq-card-body px-4">
@@ -110,7 +110,7 @@
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="comment">Comment:</label>
                                         <input type="text" name="comment" id="" class="form-control"
-                                            placeholder="Application Comment">
+                                            placeholder="Application Comment" required>
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
