@@ -41,7 +41,7 @@ class ApplicationController extends Controller
                 return $q->where('created_at', '=', request()->input('date_to'));
             })
             ->orderBy('id', 'ASC')
-            ->get(['id','application_id','passport_number','full_name','status','created_at']);
+            ->get(['id','application_id','passport_number','full_name','status','created_at','renewal_date']);
 
 
 
