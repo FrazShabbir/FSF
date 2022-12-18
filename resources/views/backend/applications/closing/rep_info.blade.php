@@ -27,22 +27,22 @@
                             <td>{{ $application->rep_name}}</td>
                         </tr>
                         <tr class="">
-                            <td>1</td>
+                            <td>2</td>
                             <td>Surname</td>
                             <td>{{ $application->rep_surname}}</td>
                         </tr>
                         <tr class="">
-                            <td>1</td>
+                            <td>3</td>
                             <td>Phone</td>
                             <td>{{ $application->rep_phone}}</td>
                         </tr>
                         <tr class="">
-                            <td>1</td>
+                            <td>4</td>
                             <td>Passport Number</td>
                             <td>{{ $application->rep_passport_no}}</td>
                         </tr>
                         <tr class="">
-                            <td>1</td>
+                            <td>5</td>
                             <td>Address</td>
                             <td>{{ $application->rep_address}}</td>
                         </tr>

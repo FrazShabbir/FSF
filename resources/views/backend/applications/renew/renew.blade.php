@@ -134,17 +134,17 @@
                                     </div>
                                     <div id="user" class="wizard-step">
                                         <a href="#suplementery" class="btn btn-default">
-                                            <i class="text-primary">5.</i><span>Suplementary</span>
+                                            <i class="text-primary">5.</i><span>Supplementary</span>
                                         </a>
                                     </div>
                                     <div id="user" class="wizard-step">
                                         <a href="#confirm-data" class="btn btn-default">
-                                            <i class="text-primary">6.</i><span>Sign page</span>
+                                            <i class="text-primary">6.</i><span>Renew info</span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            <form class="form" action="{{ route('application.update', $application->application_id) }}"
+                            <form class="form" action="{{ route('renew.application.update', $application->application_id) }}"
                                 method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -896,17 +896,6 @@
                                         </div>
                                     </div>
                                     <div class="col-6"></div>
-                                    <div class="col-lg-8 col-md-8 col-sm-12">
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="rep_confirmed"
-                                                name="rep_confirmed" value="1"
-                                                {{ $application->rep_confirmed == 1 ? 'checked' : '' }} required readonly>
-                                            <label class="custom-control-label" for="rep_confirmed">Have you
-                                                informed him that you are appointing this person as your
-                                                Representative in FSF and this person will be authorized to
-                                                collect your remaining amount?</label>
-                                        </div>
-                                    </div>
                                     <div class="col-12">
                                         <div class="text-right">
                                             <button class="btn btn-primary nextBtn btn-lg pull-right"
@@ -983,31 +972,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 mb-4">
-                                        <p>How much will you pay annually into this fund?</p>
-                                      
-                                      
-                                     
-                                        <div id="other_amount" class="">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group row mb-4">
-                                              
-                                                    <div class="col-sm-12">
-                                                        <input type="number" class="form-control" step="0.01"
-                                                            id="other_annually_fund_amount" name="annually_fund_amount"
-                                                            placeholder="Enter Anually Fund Amount"
-                                                            value="{{ $application->annually_fund_amount }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Please enter select anual fund
-                                        </div>
-                                    </div>
+                                 
 
                                     <div class="col-12">
                                         <div class="text-right">
@@ -1039,6 +1004,20 @@
                                         </div>
                                     </div> --}}
 
+                                    <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+                                        <h4 class="mb-3">Representative Confirmed</h4>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="rep_confirmed"
+                                                name="rep_confirmed" value="1"
+                                                {{ $application->rep_confirmed == 1 ? 'checked' : '' }} required readonly>
+                                            <label class="custom-control-label" for="rep_confirmed">Have you
+                                                informed him that you are appointing this person as your
+                                                Representative in FSF and this person will be authorized to
+                                                collect your remaining amount?</label>
+                                        </div>
+                                    </div>
+
+
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
                                             <label class="control-label col-sm-12 align-self-center mb-0"
@@ -1051,7 +1030,35 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-12 mb-4">
+                                        <p>How much will you pay annually into this fund?</p>
+                                      
+                                      
+                                     
+                                        <div id="other_amount" class="">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group row mb-4">
+                                              
+                                                    <div class="col-sm-12">
+                                                        <input type="number" class="form-control" step="0.01"
+                                                            id="other_annually_fund_amount" name="annually_fund_amount"
+                                                            placeholder="Enter Anually Fund Amount"
+                                                            value="{{ $application->annually_fund_amount }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please enter select anual fund
+                                        </div>
+                                    </div>
+
                                     <div class="col-lg-8 col-md-8 col-sm-12">
+                                        <h4 class="mb-3">Verfiy that you Accept all the  Terms and conditions</h4>
+
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" id="declaration_confirm"
                                                 name="declaration_confirm" value="1" required
@@ -1068,7 +1075,7 @@
                                     <div class="col-12">
                                         <div class="text-right">
                                             <button class="btn btn-primary nextBtn btn-lg pull-right"
-                                                type="submit">Finish</button>
+                                                type="submit">Submit for Renew</button>
                                         </div>
                                     </div>
                                 </div>

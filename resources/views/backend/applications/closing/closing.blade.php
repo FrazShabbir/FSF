@@ -151,16 +151,6 @@
                                                     <option  disabled value="">Select Status</option>
                                                     <option value="PERMANENT-CLOSED" {{ $application->status == 'PERMANENT-CLOSED' ? 'selected' : '' }}>
                                                         PERMANENT CLOSE ACCOUNT</option>
-                                                        
-                                                    <option value="APPROVED" {{ $application->status == 'APPROVED' ? 'selected' : '' }}>
-                                                        Approved</option>
-                                                    <option value="PENDING"
-                                                        {{ $application->status == 'PENDING' ? 'selected' : '' }}>
-                                                        Pending</option>
-
-                                                    <option value="INACTIVE"
-                                                        {{ $application->status == 'INACTIVE' ? 'selected' : '' }}>
-                                                        INACTIVE</option>
                                                     <option value="CLOSING-PROCESS"
                                                         {{ $application->status == 'CLOSING-PROCESS' ? 'selected' : '' }}>
                                                         In

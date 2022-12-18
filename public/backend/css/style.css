@@ -1202,7 +1202,7 @@ cursor: pointer;
 }
 .badge-PENDING{
     background-color: #10CAF0;
-    color: #000;
+    color: #fff;
 }
 
 .badge-0, .badge-INACTIVE{

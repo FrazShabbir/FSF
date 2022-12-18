@@ -105,10 +105,9 @@ class ApplicationController extends Controller
     public function renew(Request $request)
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
-           
             $application = Application::where('application_id', $request->application_id)->first();
-            
-            if($application->status!='RENEWABLE'){
+
+            if ($application->status!='RENEWABLE') {
                 return response()->json([
                     'status' => 403,
                     'message' => 'Application Not Renewable',
@@ -117,21 +116,16 @@ class ApplicationController extends Controller
 
             $supplementory = [];
             if ($application) {
-               
                 if ($application->user_id != $request->user_id) {
                     return response()->json([
                         'status' => 403,
                         'message' => 'Unauthorized Access',
                     ], 403);
-                   
-                    
                 }
-               
-                if($application->registered_relatives==1){
-                      
+
+                if ($application->registered_relatives==1) {
                     $relative = Application::where('passport_number', $application->registered_relative_passport_no)->first();
-                    if($relative){
-                      
+                    if ($relative) {
                         $supplementory = [
                             'full_name' => $relative->full_name,
                             'father_name' => $relative->father_name,
@@ -140,7 +134,6 @@ class ApplicationController extends Controller
                             'address'=>$relative->country->name.' '.$relative->community->name.' '.$relative->province->name.' '.$relative->city->name.' '.$relative->area,
                         ];
                     }
-    
                 }
 
                 $countries = Country::all();
@@ -149,7 +142,7 @@ class ApplicationController extends Controller
                     'supplementory'=>$supplementory,
                     'countries' => $countries,
                     'application'=>$application,
-                    
+
                     'location'=>[
                         'country'=>[
                             'id'=>$application->country->id,
@@ -353,12 +346,9 @@ class ApplicationController extends Controller
                 $comment = ApplicationComment::create([
                 'application_id' => $application->id,
                 'comment' => 'Application Submitted for Renewal.',
-                'status' => 'PENDING',
+                'status' => $application->status,
                 'receiver_id' => $application->user_id,
                 ]);
-
-
-
                 $applicationRenewal = RenewApplication::create([
                     'application_id' => $application->id,
                     'annually_fund_amount' => $request->annually_fund_amount,
@@ -368,20 +358,13 @@ class ApplicationController extends Controller
                     'renewal_date' => Carbon::now()->addDays(365)->format('Y-m-d'),
                 ]);
 
+
                 if ($request->user_signature) {
-                    $avatarValidator = Validator::make(
-                        $request->all(),
+                    $request->validate(
                         [
-                            'user_signature' => 'required|mimes:png,jpg,jpeg',]
+                            'user_signature' => 'required|mimes:png,jpg,jpeg|max:2000',]
                     );
-                    if ($avatarValidator->fails()) {
-                        DB::rollback();
-                        return response()->json([
-                            'status' => 401,
-                            'message' => 'validation error',
-                            'errors' => $avatarValidator->errors()
-                        ], 401);
-                    }
+
                     $file = $request->user_signature;
                     $extension = $file->getClientOriginalExtension();
                     $filename = getRandomString().'-'.time() . '.' . $extension;
@@ -391,22 +374,15 @@ class ApplicationController extends Controller
                     $application->save();
                     $applicationRenewal->save();
                 }
+
                 $application->save();
                 DB::commit();
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Application Submitted Successfully.',
-                    'data' => $application,
-                    'renew_data' => $applicationRenewal
-                ], 200);
+                alert()->success('Application Submitted Successfully', 'Success');
+                return redirect()->route('application.show', $application->application_id);
             }
         } catch (\Throwable $th) {
             DB::rollBack();
-            return response()->json([
-                'status' => false,
-                'message' => 'Something went wrong',
-                'error' => $th->getMessage()
-            ], 500);
+            alert()->error('Error', $th->getMessage());
         }
     }
 
@@ -734,10 +710,9 @@ class ApplicationController extends Controller
 
         if ($application->count()>0) {
             $application = Application::with('comments')->with('donations')->where('application_id', $id)->where('user_id', $user->id)->first();
-            if($application->registered_relatives==1){
-               
+            if ($application->registered_relatives==1) {
                 $relative = Application::where('passport_number', $application->registered_relative_passport_no)->first();
-                if($relative){
+                if ($relative) {
                     $supplementory = [
                         'full_name' => $relative->full_name,
                         'father_name' => $relative->father_name,
@@ -746,7 +721,6 @@ class ApplicationController extends Controller
                         'address'=>$relative->country->name.' '.$relative->community->name.' '.$relative->province->name.' '.$relative->city->name.' '.$relative->area,
                     ];
                 }
-
             }
         } else {
             return response()->json([
@@ -834,7 +808,7 @@ class ApplicationController extends Controller
                     'user_signature'=>$application->user_signature,
                     // 'declaration_confirm'=>$application->declaration_confirm,
                     'status'=>$application->status,
-                  
+
 
                 ],
                 'supplementory'=>$supplementory
@@ -865,13 +839,12 @@ class ApplicationController extends Controller
             $application = Application::with('comments')->where('application_id', $request->application_id)->where('user_id', $user->id)->first();
 
 
-            if($application->status!='PENDING'){
+            if ($application->status!='PENDING') {
                 return response()->json([
                     'status' => 403,
                     'message' => 'Application Not EDITABLE.',
                 ], 403);
             }
-
         } else {
             return response()->json([
                 'status' => 400,
@@ -988,14 +961,13 @@ class ApplicationController extends Controller
                 $application = Application::where('application_id', $request->application_id)->where('user_id', $user->id)->get();
                 if ($application->count()>0) {
                     $application = Application::with('comments')->where('application_id', $request->application_id)->where('user_id', $user->id)->first();
-                    
-                    if($application->status!='PENDING'){
+
+                    if ($application->status!='PENDING') {
                         return response()->json([
                             'status' => 403,
                             'message' => 'Application Not EDITABLE.',
                         ], 403);
                     }
-
                 } else {
                     return response()->json([
                         'status' => 400,

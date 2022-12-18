@@ -191,7 +191,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="#step-5">
                                             <span class="num">5</span>
-                                            Suplementary
+                                            Supplementary
                                         </a>
                                     </li>
                                     <li class="nav-item">

@@ -779,7 +779,7 @@
                                         @foreach($application->comments as $comment)
                                         <tr>
                                             <td>{{$comment->comment}}</td>
-                                            <td>{{$comment->status}}</td>
+                                            <td><span class="badge badge-{{$comment->status}}">{{$comment->status}}</span></td>
                                             <td>{{$comment->user->full_name ?? $application->user->full_name}}</td>
                                             <td>{{date('d-M-Y',strtotime($comment->created_at))}}</td>
                                             
@@ -797,6 +797,10 @@
                 @include('backend.partials.common._donation_stats',['data'=>$application])
                 @endif
                 
+                @if ($application->status=='PERMANENT-CLOSED')
+                @include('backend.partials.common.applicationClosedStats',['data'=>$application])
+                @endif
+
             </div>
         </div>
     </div>

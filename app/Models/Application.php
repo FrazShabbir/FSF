@@ -46,4 +46,8 @@ class Application extends Model
     function pendingdonations(){
         return $this->hasMany(Donation::class)->where('status', 'PENDING');
     }
+
+    function applicationCloser(){
+        return $this->belongsTo('App\Models\User', 'application_closed_by');
+    }
 }

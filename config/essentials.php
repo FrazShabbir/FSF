@@ -24,6 +24,10 @@ return [
             'Read Applications',
             'Delete Applications',
             'Export Applications',
+            'Approve Applications',
+            'Reject Applications',
+            'Close Applications',
+            'Permanent Close Applications',
         ],
         
         'Donations' => [
@@ -32,6 +36,8 @@ return [
             'Read Donations',
             'Delete Donations',
             'Export Donations',
+            'Approve Donations',
+            'Reject Donations',
         ],
         'Accounts' => [
             'Create Accounts',

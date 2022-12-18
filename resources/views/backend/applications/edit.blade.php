@@ -172,7 +172,7 @@
                                     </div>
                                     <div id="user" class="wizard-step">
                                         <a href="#suplementery" class="btn btn-default">
-                                            <i class="text-primary">5.</i><span>Suplementary</span>
+                                            <i class="text-primary">5.</i><span>Supplementary</span>
                                         </a>
                                     </div>
                                     <div id="user" class="wizard-step">
