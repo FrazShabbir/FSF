@@ -24,6 +24,7 @@ use Spatie\Permission\Models\Role;
 
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+
 class ApplicationController extends Controller
 {
     /**
@@ -43,7 +44,7 @@ class ApplicationController extends Controller
         if (! auth()->user()->hasPermissionTo('Read Applications')) {
             abort(403);
         }
-        $applications = Application::where('status','PERMANENT-CLOSED')->get();
+        $applications = Application::where('status', 'PERMANENT-CLOSED')->get();
         return view('backend.applications.index')
         ->with('applications', $applications);
     }
@@ -53,7 +54,7 @@ class ApplicationController extends Controller
         if (! auth()->user()->hasPermissionTo('Read Applications')) {
             abort(403);
         }
-        $applications = Application::where('status','PENDING')->get();
+        $applications = Application::where('status', 'PENDING')->get();
         return view('backend.applications.index')
         ->with('applications', $applications);
     }
@@ -63,7 +64,7 @@ class ApplicationController extends Controller
         if (! auth()->user()->hasPermissionTo('Read Applications')) {
             abort(403);
         }
-        $applications = Application::where('status','APPROVED')->get();
+        $applications = Application::where('status', 'APPROVED')->get();
         return view('backend.applications.index')
         ->with('applications', $applications);
     }
@@ -73,7 +74,7 @@ class ApplicationController extends Controller
         if (! auth()->user()->hasPermissionTo('Read Applications')) {
             abort(403);
         }
-        $applications = Application::where('status','REJECTED')->get();
+        $applications = Application::where('status', 'REJECTED')->get();
         return view('backend.applications.index')
         ->with('applications', $applications);
     }
@@ -318,7 +319,7 @@ class ApplicationController extends Controller
     {
         $application = Application::where('application_id', $id)->firstOrFail();
 
-        if($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED'){
+        if ($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED') {
             alert()->error('Error', 'Application Already Closed/Rejected');
             return redirect()->back();
         }
@@ -342,7 +343,7 @@ class ApplicationController extends Controller
         // dd($request->all());
         $application = Application::where('application_id', $id)->firstOrFail();
 
-        if($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED'){
+        if ($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED') {
             alert()->error('Error', 'Application Already Closed/Rejected');
             return redirect()->back();
         }
@@ -546,7 +547,7 @@ class ApplicationController extends Controller
             DB::beginTransaction();
             $application = Application::where('application_id', $id)->first();
 
-            if($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED'){
+            if ($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED') {
                 alert()->error('Error', 'Application Already Closed/Rejected');
                 return redirect()->back();
             }
@@ -575,17 +576,16 @@ class ApplicationController extends Controller
 
     public function closeApplication($id)
     {
-
         try {
             DB::beginTransaction();
             $application = Application::where('application_id', $id)->first();
 
-            if($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED'){
-            alert()->error('Error', 'Application Already Closed/Rejected');
-            return redirect()->back();
-        }
+            if ($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED') {
+                alert()->error('Error', 'Application Already Closed/Rejected');
+                return redirect()->back();
+            }
 
-            if($application->status!='CLOSING-PROCESS'){
+            if ($application->status!='CLOSING-PROCESS') {
                 $application->status = 'CLOSING-PROCESS';//'IN-CLOSING-PROCESS';
                 $application->save();
                 $comment = ApplicationComment::create([
@@ -613,7 +613,7 @@ class ApplicationController extends Controller
             DB::beginTransaction();
             $application = Application::where('application_id', $id)->first();
 
-            if($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED'){
+            if ($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED') {
                 alert()->error('Error', 'Application Already Closed/Rejected');
                 return redirect()->back();
             }
@@ -628,7 +628,6 @@ class ApplicationController extends Controller
             ]);
             DB::commit();
             return redirect()->route('users.show', $application->user_id);
-            
         } catch (\Throwable $th) {
             DB::rollback();
             alert()->error('Error', $th->getMessage());
@@ -648,7 +647,7 @@ class ApplicationController extends Controller
             'status' => 'required',
             'rep_received_amount' => 'required',
             'reason' => 'required'
-            
+
         ]);
 
         try {
@@ -658,20 +657,20 @@ class ApplicationController extends Controller
             // $user->save();
             $application  = Application::where('application_id', $id)->first();
             // dd($user->totaldonations->sum('amount'));
-    
+
             $application->deceased_at = $request->deceased_at;
             $application->process_start_at = $request->process_start_at;
             $application->process_ends_at = $request->process_ends_at;
             $application->total_donations = $application->totaldonations->sum('amount');
             $application->total_expense = $request->amount_used;
-    
+
             $application->rep_received_amount = $request->rep_received_amount;
             $application->status = $request->status;
             $application->reason = $request->reason;
             $application->rep_received_amount = $request->rep_received_amount;
             $application->application_closed_by = Auth::user()->id;
             $application->application_closed_at= Carbon::now();
-            
+
             $application->save();
 
             $comment = ApplicationComment::create([
@@ -699,19 +698,18 @@ class ApplicationController extends Controller
             //code...
         } catch (\Throwable $th) {
             DB::rollBack();
-             throw $th;
+            throw $th;
             alert()->error('Error', $th->getMessage());
             return redirect()->back();
-           
         }
-       
     }
 
 
 
 
-    public function addUserApplication($id){
-        $user = User::where('username',$id)->firstOrFail();
+    public function addUserApplication($id)
+    {
+        $user = User::where('username', $id)->firstOrFail();
         $countries = Country::where('status', 1)->get();
         return view('backend.applications.user.addApplication')
         ->with('user', $user)
@@ -725,7 +723,7 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeAddUserApplication(Request $request,$id)
+    public function storeAddUserApplication(Request $request, $id)
     {
         $request->validate([
             'email'=>'required|email|unique:users,email',
@@ -780,13 +778,13 @@ class ApplicationController extends Controller
             'registered_relative_passport_no'=>'nullable',
 
             'annually_fund_amount'=>'required',
-         
+
             'declaration_confirm'=>'required',
         ]);
 
         try {
             DB::beginTransaction();
-            $user = User::where('username',$id)->firstOrFail();
+            $user = User::where('username', $id)->firstOrFail();
             $find_relative = Application::where('passport_number', $request->registered_relative_passport_no)->first();
             $registered = 0;
             if ($find_relative) {
@@ -904,6 +902,23 @@ class ApplicationController extends Controller
     }
 
 
-  
+
+    public function applicationRenew($id)
+    {
+        $application = Application::where('application_id', $id)->firstOrfail();
+        if ($application->status!='RENEWABLE') {
+            alert()->info('Application is not Renewable right now.');
+            return redirect()->back();
+        }
+        $countries = Country::where('status',1)->get();
+        return view('backend.applications.renew.renew')
+        ->with('application', $application)
+        ->with('countries', $countries);
+    }
+
+
+    public function applicationRenewUpdate(Request $request,$id){
+
+    }
 
 }

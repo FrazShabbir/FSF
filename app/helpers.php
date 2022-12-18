@@ -196,4 +196,47 @@ if (! function_exists('SendMessage')) {
             //throw $th;
         }
     }
+
+    if (! function_exists('allApplicationsCount')) {
+        function allApplicationsCount()
+        {
+            return Application::get()->count();
+        }
+    }
+
+    if (! function_exists('allApprovedApplicationsCount')) {
+        function allApprovedApplicationsCount()
+        {
+            return Application::where('status','APPROVED')->get()->count();
+        }
+    }
+
+    if (! function_exists('allPendingApplicationsCount')) {
+        function allPendingApplicationsCount()
+        {
+            return Application::where('status','PENDING')->get()->count();
+        }
+    }
+
+    if (! function_exists('allRejectedApplicationsCount')) {
+        function allRejectedApplicationsCount()
+        {
+            return Application::where('status','REJECTED')->get()->count();
+        }
+    }
+    if (! function_exists('allRenewablepplicationsCount')) {
+        function allRenewablepplicationsCount()
+        {
+            return Application::where('status','RENEWABLE')->get()->count();
+        }
+    }
+    
+
+
+    if (! function_exists('allApplications')) {
+        function allApplications()
+        {
+            return Application::get();
+        }
+    }
 }

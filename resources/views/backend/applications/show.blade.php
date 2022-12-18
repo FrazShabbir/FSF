@@ -659,8 +659,8 @@
                                                                 <p class="mb-0 text-dark">Signature</p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <img class="mb-0 float-right font-weight-bold"
-                                                                    src="" alt="signatures">
+                                                                <img class="mb-0 float-right font-weight-bold img-fluid" style="max-width: 300px"
+                                                                    src="{{ $application->user_signature }}" alt="signatures">
                                                                 {{-- <p class="mb-0 float-right font-weight-bold">{{$application->full_name}}</p> --}}
                                                             </div>
                                                         </div>

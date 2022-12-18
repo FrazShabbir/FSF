@@ -1182,12 +1182,16 @@ cursor: pointer;
     }
 }
 
-
-
-.badge-APPROVED{
+.badge-RENEWABLE{
+    background-color: #6021de;
+    color: #fff;
+}
+ 
+.badge-APPROVED,.badge-ACTIVE,.badge-1, .badge-SUCCESS{
     background-color: #198753;
     color: #fff;
 }
+
 .badge-COMPLETED{
     background-color: #0C6EFD;
     color: #fff;
@@ -1200,22 +1204,12 @@ cursor: pointer;
     background-color: #10CAF0;
     color: #000;
 }
-.badge-ACTIVE{
-    background-color: #198753;
-    color: #fff;
-}
-.badge-INACTIVE{
+
+.badge-0, .badge-INACTIVE{
     background-color: #DC3444;
     color: #fff;
 }
-.badge-0{
-    background-color: #DC3444;
-    color: #fff;
-}
-.badge-1, .badge-SUCCESS{
-    background-color: #198753;
-    color: #fff;
-}
+
 .badge-CLOSING-PROCESS{
     background-color: #cb3d4b;
     color: #ffff;

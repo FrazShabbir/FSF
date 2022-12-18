@@ -44,6 +44,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
 
 
 
+
+    // renewal of application
+    
+    Route::get('application/{id}/renew', [ApplicationController::class, 'applicationRenew'])->name('renew.application.edit')->middleware(['can:Update Applications']);
+    Route::put('application/{id}/renew/update', [ApplicationController::class, 'applicationRenewUpdate'])->name('renew.application.update')->middleware(['can:Update Applications']);
+  
 });
 
 
