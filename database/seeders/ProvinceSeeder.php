@@ -18,26 +18,32 @@ class ProvinceSeeder extends Seeder
         Province::create([
             'name'=>'Province 1',
             'community_id'=>1,
+            'hod'=>1,
         ]);
         Province::create([
             'name'=>'Province 2',
             'community_id'=>2,
+            'hod'=>1,
         ]);
         Province::create([
             'name'=>'Province 3',
             'community_id'=>3,
+            'hod'=>1,
         ]);
         Community::create([
             'name'=>'Community 1',
             'country_id'=>1,
+            'hod'=>1,
         ]);
         Community::create([
             'name'=>'Community 2',
             'country_id'=>1,
+            'hod'=>1,
         ]);
         Community::create([
             'name'=>'Community 3',
             'country_id'=>1,
+            'hod'=>1,
         ]);
     }
 }

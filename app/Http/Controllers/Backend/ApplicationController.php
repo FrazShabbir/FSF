@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\Community;
 use App\Models\Province;
 use App\Models\City;
+use App\Models\Account;
 use App\Models\ApplicationComment;
 use Illuminate\Support\Facades\DB;
 
@@ -601,8 +602,10 @@ class ApplicationController extends Controller
             }
 
             DB::commit();
+            $accounts = Account::where('status',1)->get();
             return view('backend.applications.closing.closing')
-            ->with('application', $application);
+            ->with('application', $application)
+            ->with('accounts', $accounts);
         } catch (\Throwable $th) {
             DB::rollback();
             alert()->error('Error', $th->getMessage());

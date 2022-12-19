@@ -44,6 +44,16 @@
 
                                 </div>
                                 <div class="row">
+
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label for="hod" class="required">Head of Department</label>
+                                        <select name="hod" id="" class="form-control" required>
+                                            @foreach (officeUsers() as $user)
+                                                <option value="{{ $user->id }}">{{ $user->full_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="status">status:</label>
                                         <select name="status" id="" class="form-control">

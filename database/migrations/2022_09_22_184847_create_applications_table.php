@@ -93,6 +93,8 @@ return new class () extends Migration {
             $table->date('process_ends_at')->nullable();
             $table->date('application_closed_at')->nullable();
             $table->integer('application_closed_by')->unsigned()->nullable();
+            
+            $table->integer('account_id')->unsigned()->nullable();
 
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

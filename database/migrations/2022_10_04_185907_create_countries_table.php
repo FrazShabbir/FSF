@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('region')->default('Europe');
             $table->string('iso2')->nullable();
             $table->string('iso3')->nullable();
+            $table->integer('hod')->unsigned();
             $table->boolean('status')->nullable()->default(true);
             $table->timestamps();
             $table->softDeletes();

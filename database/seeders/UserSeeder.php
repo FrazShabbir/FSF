@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             $user->password = bcrypt('admin');
             $user->email = 'fraz.shabbir54@gmail.com';
             $user->email_verified_at = now();
-            // $user->ar_user = true;
+            $user->is_office_member = 1;
             $user->assignRole('Super Admin');
             $user->save();
          }

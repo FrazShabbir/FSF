@@ -45,12 +45,15 @@ class CountryController extends Controller
             'region' => 'required',
             'iso2' => 'required',
             'iso3' => 'required',
+            'hod' => 'required'
+
         ]);
         $country = Country::create([
             'name' => $request->name,
             'region' => $request->region,
             'iso2' => $request->iso2,
             'iso3' => $request->iso3,
+            'hod' => $request->hod,
         ]);
         alert()->success('Country Created Successfully');
         return redirect()->route('country.index');

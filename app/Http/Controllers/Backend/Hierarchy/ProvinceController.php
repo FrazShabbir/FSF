@@ -48,11 +48,14 @@ class ProvinceController extends Controller
             'name' => 'required',
             'community_id' => 'required',
             'status' => 'required',
+            'hod' => 'required'
+
         ]);
         $province = Province::create([
             'name' => $request->name,
             'community_id' => $request->community_id,
             'status' => $request->status,
+            'hod' => $request->hod,
         ]);
         alert()->success('Province Created Successfully');
         return redirect()->route('province.index');
@@ -102,11 +105,14 @@ class ProvinceController extends Controller
         $request->validate([
             'name' => 'required',
             'community_id' => 'required',
+            'hod' => 'required'
+
         ]);
         $province = Province::find($id);
         $province->name = $request->name;
         $province->community_id = $request->community_id;
         $province->status = $request->status;
+        $province->hod = $request->hod;
         $province->save();
         alert()->success('Province Updated Successfully');
         return redirect()->route('province.index');

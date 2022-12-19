@@ -46,10 +46,13 @@ class CommunityController extends Controller
         $request->validate([
             'name' => 'required',
             'country_id' => 'required',
+            'hod' => 'required'
+
         ]);
         $community = Community::create([
             'name' => $request->name,
             'country_id' => $request->country_id,
+            'hod' => $request->hod,
             'status' => $request->status,
         ]);
         alert()->success('Community Created Successfully');
@@ -98,11 +101,14 @@ class CommunityController extends Controller
         $request->validate([
             'name' => 'required',
             'country_id' => 'required',
+            'hod' => 'required'
+
         ]);
         $community = Community::find($id);
         $community->name = $request->name;
         $community->country_id = $request->country_id;
         $community->status = $request->status;
+        $community->hod = $request->hod;
         $community->save();
         alert()->success('Community Updated Successfully');
         return redirect()->route('community.index');

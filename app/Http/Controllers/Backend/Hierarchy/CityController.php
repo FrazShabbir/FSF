@@ -47,11 +47,13 @@ class CityController extends Controller
             'name' => 'required',
             'province_id' => 'required',
             'office_id' => 'nullable',
+            'hod' => 'required'
         ]);
         $city = City::create([
             'name' => $request->name,
             'province_id' => $request->province_id,
             'office_id' => $request->office_id,
+            'hod' => $request->hod,
         ]);
         alert()->success('City Created Successfully');
         return redirect()->route('city.index');
@@ -101,12 +103,14 @@ class CityController extends Controller
             'name' => 'required',
             'province_id' => 'required',
             'office_id' => 'nullable',
+            'hod' => 'required'
         ]);
         $city = City::find($id);
         $city->name = $request->name;
         $city->province_id = $request->province_id;
         $city->office_id = $request->office_id;
         $city->status = $request->status;
+        $city->hod = $request->hod;
         $city->save();
         alert()->success('City Updated Successfully');
         return redirect()->route('city.index');

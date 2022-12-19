@@ -19,6 +19,7 @@ class CountrySeeder extends Seeder
             'name' => 'Spain',
             'iso2' => 'ES',
             'iso3' => 'ESP',
+            'hod'=>1,
         ]);
     }
 }

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('api_token', 80)->unique()->nullable()->default(null);
             $table->string('otp')->nullable();
             $table->string('device_token')->nullable();
+            $table->integer('is_office_member')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

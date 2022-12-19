@@ -18,11 +18,13 @@ class CitySeeder extends Seeder
             'name'=>'City 1',
             'province_id'=>1,
             'office_id'=>1,
+            'hod'=>1,
         ]);
         City::create([
             'name'=>'City 2',
             'province_id'=>2,
             'office_id'=>2,
+            'hod'=>1,
         ]);
 
         

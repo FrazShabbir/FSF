@@ -239,4 +239,12 @@ if (! function_exists('SendMessage')) {
             return Application::get();
         }
     }
+
+    if (! function_exists('officeUsers')) {
+        function officeUsers()
+        {
+            return User::where('is_office_member',1)->get();
+        }
+    }
+
 }

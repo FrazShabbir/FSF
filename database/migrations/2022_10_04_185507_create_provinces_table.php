@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('community_id')->unsigned();
+            $table->integer('hod')->unsigned();
             $table->boolean('status')->nullable()->default(true);
             $table->timestamps();
             $table->softDeletes();
