@@ -58,6 +58,7 @@
                                     </form>
                                 </td>
                                 <td>
+                                    @can('Close Applications')
                                     @if ($application->status != 'PERMANENT-CLOSED')
                                     <button type="button" class="btn btn-danger openModal"
                                     data-id="{{$application->application_id}}" data-link="{{ route('user.close.application', $application->application_id) }}">
@@ -66,7 +67,7 @@
                                    @else
                                       <span class="badge badge-danger">Already CLOSED</span>
                                     @endif
-                                  
+                                  @endcan
                                 </td>
                             </tr>
                         @endforeach

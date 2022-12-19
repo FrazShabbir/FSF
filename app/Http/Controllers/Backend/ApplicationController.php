@@ -550,6 +550,9 @@ class ApplicationController extends Controller
         ]);
         try {
             DB::beginTransaction();
+
+            checkPermission($request->status);
+
             $application = Application::where('application_id', $id)->first();
 
             if ($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED') {

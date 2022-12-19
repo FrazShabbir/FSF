@@ -10,5 +10,13 @@ class Office extends Model
 {    use SoftDeletes;
     use HasFactory;
     protected $guarded = [];
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+    public function head()
+    {
+        return $this->belongsTo(User::class,'officehead');
+    }
 
 }

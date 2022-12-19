@@ -125,7 +125,7 @@
                                             @can('Reject Application')
                                             <option value="REJECTED" {{$application->status=='REJECTED'?'selected':''}}>REJECTED</option>
                                             @endcan
-                                            @can('Read Application')
+                                            @can('update Application')
                                             <option value="SUBMITTED" {{$application->status=='SUBMITTED'?'selected':''}}>SUBMITTED</option>
                                             @endcan
                                             @can('Approve Application')

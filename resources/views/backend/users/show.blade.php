@@ -215,7 +215,7 @@
             </div>
         </div>
     </div>
-
+    @can('Close Applications')
     <div class="modal fade" id="CloseAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         style="display: none;" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -240,6 +240,7 @@
             </div>
         </div>
     </div>
+    @endcan
 @endsection
 
 

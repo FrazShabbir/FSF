@@ -214,30 +214,30 @@ if (! function_exists('SendMessage')) {
     if (! function_exists('allApprovedApplicationsCount')) {
         function allApprovedApplicationsCount()
         {
-            return Application::where('status','APPROVED')->get()->count();
+            return Application::where('status', 'APPROVED')->get()->count();
         }
     }
 
     if (! function_exists('allPendingApplicationsCount')) {
         function allPendingApplicationsCount()
         {
-            return Application::where('status','PENDING')->get()->count();
+            return Application::where('status', 'PENDING')->get()->count();
         }
     }
 
     if (! function_exists('allRejectedApplicationsCount')) {
         function allRejectedApplicationsCount()
         {
-            return Application::where('status','REJECTED')->get()->count();
+            return Application::where('status', 'REJECTED')->get()->count();
         }
     }
     if (! function_exists('allRenewablepplicationsCount')) {
         function allRenewablepplicationsCount()
         {
-            return Application::where('status','RENEWABLE')->get()->count();
+            return Application::where('status', 'RENEWABLE')->get()->count();
         }
     }
-    
+
 
 
     if (! function_exists('allApplications')) {
@@ -250,7 +250,14 @@ if (! function_exists('SendMessage')) {
     if (! function_exists('officeUsers')) {
         function officeUsers()
         {
-            return User::where('is_office_member',1)->get();
+            return User::where('is_office_member', 1)->get();
+        }
+    }
+
+    if (! function_exists('getCities')) {
+        function getCities()
+        {
+            return City::where('status', 1)->get();
         }
     }
 
@@ -259,7 +266,7 @@ if (! function_exists('SendMessage')) {
         function cityHOD()
         {
             $city_hod = City::where('hod', auth()->user()->id)->get();
-    
+
             return $city_hod;
         }
     }
@@ -267,7 +274,7 @@ if (! function_exists('SendMessage')) {
         function provinceHOD()
         {
             $province_hod = Province::where('hod', auth()->user()->id)->get();
-    
+
             return $province_hod;
         }
     }
@@ -275,7 +282,7 @@ if (! function_exists('SendMessage')) {
         function communityHOD()
         {
             $community_hod = Community::where('hod', auth()->user()->id)->get();
-    
+
             return $community_hod;
         }
     }
@@ -295,5 +302,60 @@ if (! function_exists('SendMessage')) {
         }
     }
 
-    
+    if (! function_exists('checkPermission')) {
+        function checkPermission($status)
+        {
+            if ($status == 'APPROVED') {
+                if (! auth()->user()->hasPermissionTo('Approve Applications')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } elseif ($status == 'PENDING') {
+                if (! auth()->user()->hasPermissionTo('Update Applications')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } elseif ($status == 'REJECTED') {
+                if (! auth()->user()->hasPermissionTo('Reject Applications')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } elseif ($status == 'RENEWABLE') {
+                if (! auth()->user()->hasPermissionTo('Renew Applications')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } elseif ($status == 'CLOSED') {
+                if (! auth()->user()->hasPermissionTo('Close Applications')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } elseif ($status == 'CLOSING-PROCESS') {
+                if (! auth()->user()->hasPermissionTo('Close Applications')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } elseif ($status == 'PERMANENT-CLOSED') {
+                if (! auth()->user()->hasPermissionTo('Permanent Close Applications')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } elseif ($status=='INACTIVE') {
+                if (! auth()->user()->hasPermissionTo('Close Applications')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
 }

@@ -28,8 +28,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::post('application/comment/{id}', [ApplicationController::class, 'commentStore'])->name('application.commentStore')->middleware(['can:Update Applications']);
 
 
-    Route::get('close-Application/application/{id}/', [ApplicationController::class, 'closeApplication'])->name('user.close.application')->middleware(['can:Update Users']);
-    Route::post('close-Application/application/{id}/save', [ApplicationController::class, 'closeApplicationSave'])->name('user.close.application.save')->middleware(['can:Update Users']);
+    Route::get('close-Application/application/{id}/', [ApplicationController::class, 'closeApplication'])->name('user.close.application')->middleware(['can:Close Applications']);
+    Route::post('close-Application/application/{id}/save', [ApplicationController::class, 'closeApplicationSave'])->name('user.close.application.save')->middleware(['can:Close Applications']);
     
     
     Route::get('close-Application/application/{id}/cancel', [ApplicationController::class, 'cancelApplicationClosing'])->name('user.close.application.cancel')->middleware(['can:Update Users']);

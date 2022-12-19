@@ -21,7 +21,8 @@
                             </div>
                         </div>
                         <div class="iq-card-body px-4">
-                            <form action="{{ route('user.close.application.save', $application->application_id) }}" method="POST">
+                            <form action="{{ route('user.close.application.save', $application->application_id) }}"
+                                method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">
@@ -79,7 +80,7 @@
                                 <div class="row mb-2">
                                     <div class="col-12">
                                         <label for="process_ends_at" class="required">Reason of Application Closure</label>
-                                        <textarea name="reason" class="form-control" id="" required>{{old('reason')}}</textarea>
+                                        <textarea name="reason" class="form-control" id="" required>{{ old('reason') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -91,7 +92,8 @@
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="first_name" class="required">Amount Used For Process</label>
                                         <input type="number" step="0.01" name="amount_used" id="amountUsed"
-                                            class="form-control" placeholder="100" value="{{old('amount_used')}}" required>
+                                            class="form-control" placeholder="100" value="{{ old('amount_used') }}"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -139,7 +141,7 @@
                                         <div class="col-lg-6 col-md-2 col-sm-12">
                                             <div class="mt-2 mb-3">
                                                 <h4 class="required">
-                                                    Application Status 
+                                                    Application Status
                                                 </h4>
                                             </div>
                                         </div>
@@ -148,17 +150,18 @@
                                                 {{-- <label for="exampleFormControlSelect1">Select Input</label> --}}
                                                 <select class="form-control" id="exampleFormControlSelect1" required
                                                     name="status">
-                                                    <option  disabled value="">Select Status</option>
+                                                    <option disabled value="">Select Status</option>
                                                     @can('Permanent Close Applications')
-                                                    <option value="PERMANENT-CLOSED" {{ $application->status == 'PERMANENT-CLOSED' ? 'selected' : '' }}>
-                                                        PERMANENT CLOSE ACCOUNT</option>
+                                                        <option value="PERMANENT-CLOSED"
+                                                            {{ $application->status == 'PERMANENT-CLOSED' ? 'selected' : '' }}>
+                                                            PERMANENT CLOSE ACCOUNT</option>
                                                     @endcan
                                                     @can('Close Applications')
-                                                    <option value="CLOSING-PROCESS"
-                                                        {{ $application->status == 'CLOSING-PROCESS' ? 'selected' : '' }}>
-                                                        In
-                                                        Closing process</option>
-                                                        @endcan
+                                                        <option value="CLOSING-PROCESS"
+                                                            {{ $application->status == 'CLOSING-PROCESS' ? 'selected' : '' }}>
+                                                            In
+                                                            Closing process</option>
+                                                    @endcan
                                                 </select>
                                             </div>
                                         </div>

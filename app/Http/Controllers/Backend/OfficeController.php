@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Office;
 class OfficeController extends Controller
 {
     /**
@@ -14,7 +14,9 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        //
+        $offices = Office::all();
+       return view('backend.hierarchy.office.index')
+            ->with('offices', $offices);
     }
 
     /**
@@ -24,7 +26,7 @@ class OfficeController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.hierarchy.office.create');
     }
 
     /**
@@ -35,7 +37,30 @@ class OfficeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'phone'=>'required',
+            'office_code'=>'required|unique:offices',
+            'street'=>'required',
+            'area'=>'required',
+            'city_id'=>'required',
+            'officehead'=>'required',
+            'status'=>'required',
+        ]);
+        Office::create([
+            'name' => $request->name,
+            'office_code' => $request->office_code,
+            'phone' => $request->phone,
+            'street' => $request->street,
+            'area' => $request->area,
+            'city_id' => $request->city_id,
+            'officehead' => $request->officehead,
+            'status' => $request->status,
+        ]);
+
+        alert()->success('Office Created Successfully', 'Success');
+        return redirect()->route('office.index');
+        
     }
 
     /**
@@ -46,7 +71,9 @@ class OfficeController extends Controller
      */
     public function show($id)
     {
-        //
+        $office = Office::where('office_code',$id)->first();
+       return view('backend.hierarchy.office.show')
+            ->with('office', $office);
     }
 
     /**
@@ -57,7 +84,9 @@ class OfficeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $office = Office::where('office_code',$id)->first();
+        return view('backend.hierarchy.office.edit')
+            ->with('office', $office);
     }
 
     /**
@@ -69,7 +98,25 @@ class OfficeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'phone'=>'required',
+            'street'=>'required',
+            'area'=>'required',
+            'city_id'=>'required',
+            'officehead'=>'required',
+            'status'=>'required',
+        ]);
+        $office = Office::where('office_code',$id)->first();
+        $office->name = $request->name;
+        $office->phone = $request->phone;
+        $office->street = $request->street;
+        $office->area = $request->area;
+        $office->city_id = $request->city_id;
+        $office->status = $request->status;
+        $office->save();
+        alert()->success('Office Updated Successfully', 'Success');
+        return redirect()->route('office.index');
     }
 
     /**

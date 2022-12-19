@@ -25,9 +25,9 @@
                         class="las la-cash-register iq-arrow-left"></i><span>Offices</span><i
                         class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="offices" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                    <li class=""><a href="{{ route('account.index') }}"><i class="las la-money-bill-wave"></i>All
+                    <li class=""><a href="{{ route('office.index') }}"><i class="las la-money-bill-wave"></i>All
                             Offices</a></li>
-                    <li class=""><a href="{{ route('account.create') }}"><i class="las la-money-bill-wave"></i>Add
+                    <li class=""><a href="{{ route('office.create') }}"><i class="las la-money-bill-wave"></i>Add
                             New Office</a></li>
 
                 </ul>
@@ -227,120 +227,133 @@
         @endcan
 
 
+        @if (officeHOD()->count() > 0 or
+            countryHOD()->count() > 0 or
+            communityHOD()->count() > 0 or
+            provinceHOD()->count() > 0 or
+            cityHOD()->count() > 0)
+
+            <li>
+                <a href="#mysupervision" class="iq-waves-effect" data-toggle="collapse">
+                    <i class="las la-th-list  iq-arrow-left"></i><span>My Supervision</span><i
+                        class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="mysupervision" class="iq-submenu collapse " data-parent="#iq-sidebar-toggle" style="">
+
+                    <li>
+                        <ul>
+                            <li class="mysupervision">
+
+                                @if (countryHOD()->count() > 0)
+                                    <a href="#countries_" class="iq-waves-effect collapse" data-toggle="collapse"
+                                        aria-expanded="false">
+                                        <span class="ripple rippleEffect"
+                                            style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                            class="las la-th-list "></i><span>Country(s)</span><i
+                                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+                                    <ul id="countries_" class="iq-submenu iq-submenu-data collapse" style="">
+
+                                        @foreach (countryHOD() as $country)
+                                            <li>
+                                                <a href="{{ route('country.show', $country->id) }}">
+                                                    <i class="las la-plus-circle"></i>{{ $country->name }}</a>
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+
+                                @endif
+                                @if (communityHOD()->count() > 0)
+                                    <a href="#commnuties_" class="iq-waves-effect collapse" data-toggle="collapse"
+                                        aria-expanded="false">
+                                        <span class="ripple rippleEffect"
+                                            style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                            class="las la-th-list "></i><span>Community(s)</span><i
+                                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+                                    <ul id="commnuties_" class="iq-submenu iq-submenu-data collapse" style="">
+
+                                        @foreach (communityHOD() as $community)
+                                            <li>
+                                                <a href="{{ route('community.show', $community->id) }}">
+                                                    <i class="las la-plus-circle"></i>{{ $community->name }}</a>
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+                                @endif
+                                @if (provinceHOD()->count() > 0)
+                                    <a href="#province_" class="iq-waves-effect collapse" data-toggle="collapse"
+                                        aria-expanded="false">
+                                        <span class="ripple rippleEffect"
+                                            style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                            class="las la-th-list "></i><span>Province(s)</span><i
+                                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+                                    <ul id="province_" class="iq-submenu iq-submenu-data collapse" style="">
+
+                                        @foreach (provinceHOD() as $province)
+                                            <li>
+                                                <a href="{{ route('province.show', $province->id) }}">
+                                                    <i class="las la-plus-circle"></i>{{ $province->name }}</a>
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+                                @endif
+                                @if (cityHOD()->count() > 0)
+                                    <a href="#city_" class="iq-waves-effect collapse" data-toggle="collapse"
+                                        aria-expanded="false">
+                                        <span class="ripple rippleEffect"
+                                            style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                            class="las la-th-list "></i><span>City(s)</span><i
+                                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+                                    <ul id="city_" class="iq-submenu iq-submenu-data collapse" style="">
+
+                                        @foreach (cityHOD() as $city)
+                                            <li>
+                                                <a href="{{ route('city.show', $city->id) }}">
+                                                    <i class="las la-plus-circle"></i>{{ $city->name }}</a>
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+                                @endif
+                                @if (officeHOD()->count() > 0)
+                                    <a href="#office_" class="iq-waves-effect collapse" data-toggle="collapse"
+                                        aria-expanded="false">
+                                        <span class="ripple rippleEffect"
+                                            style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                            class="las la-th-list "></i><span>Office(s)</span><i
+                                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+                                    <ul id="office_" class="iq-submenu iq-submenu-data collapse" style="">
+
+                                        @foreach (officeHOD() as $office)
+                                            <li>
+                                                <a href="{{route('office.show',$office->office_code)}}">
+                                                    <i class="las la-plus-circle"></i>{{ $office->name }}</a>
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+                                @endif
 
 
-        <li @if (in_array(request()->route()->getName(),
-            ['roles.create'])) class="active" @endif>
-            <a href="#mysupervision" class="iq-waves-effect" data-toggle="collapse">
-                <i class="las la-th-list  iq-arrow-left"></i><span>My Supervision</span><i
-                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-            <ul id="mysupervision" class="iq-submenu collapse " data-parent="#iq-sidebar-toggle" style="">
-
-                <li>
-                    <ul>
-                        <li class="mysupervision">
-
-                            <a href="#countries_" class="iq-waves-effect collapse" data-toggle="collapse"
-                                aria-expanded="false">
-                                <span class="ripple rippleEffect"
-                                    style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
-                                    class="las la-th-list "></i><span>Country(s)</span><i
-                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-
-                            <ul id="countries_" class="iq-submenu iq-submenu-data collapse" style="">
-
-                                @foreach (countryHOD() as $country)
-                                    <li>
-                                        <a href="{{ route('country.show', $country->id) }}">
-                                            <i class="las la-plus-circle"></i>{{ $country->name }}</a>
-                                    </li>
-                                @endforeach
-
-                            </ul>
-
-
-                            <a href="#commnuties_" class="iq-waves-effect collapse" data-toggle="collapse"
-                                aria-expanded="false">
-                                <span class="ripple rippleEffect"
-                                    style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
-                                    class="las la-th-list "></i><span>Community(s)</span><i
-                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-
-                            <ul id="commnuties_" class="iq-submenu iq-submenu-data collapse" style="">
-
-                                @foreach (communityHOD() as $community)
-                                    <li>
-                                        <a href="{{ route('community.show', $community->id) }}">
-                                            <i class="las la-plus-circle"></i>{{ $community->name }}</a>
-                                    </li>
-                                @endforeach
-
-                            </ul>
-
-                            <a href="#province_" class="iq-waves-effect collapse" data-toggle="collapse"
-                                aria-expanded="false">
-                                <span class="ripple rippleEffect"
-                                    style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
-                                    class="las la-th-list "></i><span>Province(s)</span><i
-                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-
-                            <ul id="province_" class="iq-submenu iq-submenu-data collapse" style="">
-
-                                @foreach (provinceHOD() as $province)
-                                    <li>
-                                        <a href="{{ route('province.show', $province->id) }}">
-                                            <i class="las la-plus-circle"></i>{{ $province->name }}</a>
-                                    </li>
-                                @endforeach
-
-                            </ul>
-
-                            <a href="#city_" class="iq-waves-effect collapse" data-toggle="collapse"
-                                aria-expanded="false">
-                                <span class="ripple rippleEffect"
-                                    style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
-                                    class="las la-th-list "></i><span>City(s)</span><i
-                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-
-                            <ul id="city_" class="iq-submenu iq-submenu-data collapse" style="">
-
-                                @foreach (cityHOD() as $city)
-                                    <li>
-                                        <a href="{{ route('city.show', $city->id) }}">
-                                            <i class="las la-plus-circle"></i>{{ $city->name }}</a>
-                                    </li>
-                                @endforeach
-
-                            </ul>
-
-                            <a href="#office_" class="iq-waves-effect collapse" data-toggle="collapse"
-                            aria-expanded="false">
-                            <span class="ripple rippleEffect"
-                                style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
-                                class="las la-th-list "></i><span>Office(s)</span><i
-                                class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-
-                        <ul id="office_" class="iq-submenu iq-submenu-data collapse" style="">
-
-                            @foreach (officeHOD() as $office)
-                                <li>
-                                    <a href="">
-                                        <i class="las la-plus-circle"></i>{{ $office->name }}</a>
-                                </li>
-                            @endforeach
+                            </li>
 
                         </ul>
 
-                        </li>
-
-                    </ul>
-
-                </li>
+                    </li>
 
 
 
-            </ul>
-        </li>
+                </ul>
+            </li>
+        @endif
+
+
 
     </ul>
 </nav>
