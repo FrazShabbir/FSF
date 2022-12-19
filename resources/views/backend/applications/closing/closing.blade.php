@@ -149,12 +149,16 @@
                                                 <select class="form-control" id="exampleFormControlSelect1" required
                                                     name="status">
                                                     <option  disabled value="">Select Status</option>
+                                                    @can('Permanent Close Applications')
                                                     <option value="PERMANENT-CLOSED" {{ $application->status == 'PERMANENT-CLOSED' ? 'selected' : '' }}>
                                                         PERMANENT CLOSE ACCOUNT</option>
+                                                    @endcan
+                                                    @can('Close Applications')
                                                     <option value="CLOSING-PROCESS"
                                                         {{ $application->status == 'CLOSING-PROCESS' ? 'selected' : '' }}>
                                                         In
                                                         Closing process</option>
+                                                        @endcan
                                                 </select>
                                             </div>
                                         </div>

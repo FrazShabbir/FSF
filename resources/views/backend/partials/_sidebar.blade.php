@@ -19,6 +19,19 @@
 
                 </ul>
             </li>
+
+            <li>
+                <a href="#offices" class="iq-waves-effect collapsed" data-toggle="collapse"><i
+                        class="las la-cash-register iq-arrow-left"></i><span>Offices</span><i
+                        class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="offices" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    <li class=""><a href="{{ route('account.index') }}"><i class="las la-money-bill-wave"></i>All
+                            Offices</a></li>
+                    <li class=""><a href="{{ route('account.create') }}"><i class="las la-money-bill-wave"></i>Add
+                            New Office</a></li>
+
+                </ul>
+            </li>
             {{-- Heirarchy END --}}
         @endif
 

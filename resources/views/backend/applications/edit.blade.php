@@ -116,12 +116,25 @@
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="status">Status:</label>
                                         <select type="text" name="status" id="" class="form-control">
-                                            <option value="PENDING" {{$application->status=='PENDING'?'selected':''}} >PENDING</option>
+                                            @can('Read Application')
+                                            <option value="PENDING" {{$->status=='PENDING'?'selected':''}} >PENDING</option>
+                                            @endcan
+                                            @can('Renewable Application')
                                             <option value="RENEWABLE" {{$application->status=='RENEWABLE'?'selected':''}} >RENEWABLE</option>
+                                            @endcan
+                                            @can('Reject Application')
                                             <option value="REJECTED" {{$application->status=='REJECTED'?'selected':''}}>REJECTED</option>
+                                            @endcan
+                                            @can('Read Application')
                                             <option value="SUBMITTED" {{$application->status=='SUBMITTED'?'selected':''}}>SUBMITTED</option>
+                                            @endcan
+                                            @can('Approve Application')
                                             <option value="APPROVED" {{$application->status=='APPROVED'?'selected':''}}>APPROVED</option>
+                                            @endcan
+                                            @can('Inactive Application')
                                             <option value="INACTIVE" {{$application->status=='INACTIVE'?'selected':''}}>IN-ACTIVE</option>
+                                            @endcan
+                                           
                                         </select>
                                     </div>
                                 </div>

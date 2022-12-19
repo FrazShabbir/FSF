@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\NotificationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\AccountController;
+use App\Http\Controllers\Backend\OfficeController;
 
 
 /*
@@ -53,6 +54,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
     Route::get('account/{id}/edit', [AccountController::class, 'edit'])->name('account.edit')->middleware(['can:Update Accounts']);
     Route::put('account/{id}/update', [AccountController::class, 'update'])->name('account.update')->middleware(['can:Update Accounts']);
     Route::delete('account/{id}', [AccountController::class, 'destroy'])->name('account.destroy')->middleware(['can:Delete Accounts']);
+
+
+    Route::get('offices', [OfficeController::class, 'index'])->name('office.index')->middleware(['can:Read Office']);
+    Route::get('office/create', [OfficeController::class, 'create'])->name('office.create')->middleware(['can:Create Office']);
+    Route::post('office/create/save', [OfficeController::class, 'store'])->name('office.store')->middleware(['can:Create Office']);
+    Route::get('office/{id}', [OfficeController::class, 'show'])->name('office.show')->middleware(['can:Read Office']);
+    Route::get('office/{id}/edit', [OfficeController::class, 'edit'])->name('office.edit')->middleware(['can:Update Office']);
+    Route::put('office/{id}/update', [OfficeController::class, 'update'])->name('office.update')->middleware(['can:Update Office']);
+    Route::delete('office/{id}', [OfficeController::class, 'destroy'])->name('office.destroy')->middleware(['can:Delete Office']);
+
 
 
 

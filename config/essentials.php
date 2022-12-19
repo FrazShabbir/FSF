@@ -27,6 +27,8 @@ return [
             'Approve Applications',
             'Reject Applications',
             'Close Applications',
+            'Renewable Applications',
+            'Inactive Applications',
             'Permanent Close Applications',
         ],
         
@@ -49,9 +51,13 @@ return [
         'Settings' => [
             'Update Settings',
         ],
-
-
-
+        'Office' => [
+            'Create Office',
+            'Update Office',
+            'Read Office',
+            'Delete Office',
+            'Export Office',
+        ],
 
     ],
 
