@@ -8,6 +8,13 @@ use App\Models\GeneralSetting;
 use App\Models\Application;
 use Twilio\Rest\Client;
 
+
+use App\Models\Country;
+use App\Models\Community;
+use App\Models\Province;
+use App\Models\City;
+use App\Models\Office;
+
 if (! function_exists('fromSettings')) {
     function fromSettings(string $key, $alternative = null)
     {
@@ -247,4 +254,46 @@ if (! function_exists('SendMessage')) {
         }
     }
 
+
+    if (! function_exists('cityHOD')) {
+        function cityHOD()
+        {
+            $city_hod = City::where('hod', auth()->user()->id)->get();
+    
+            return $city_hod;
+        }
+    }
+    if (! function_exists('provinceHOD')) {
+        function provinceHOD()
+        {
+            $province_hod = Province::where('hod', auth()->user()->id)->get();
+    
+            return $province_hod;
+        }
+    }
+    if (! function_exists('communityHOD')) {
+        function communityHOD()
+        {
+            $community_hod = Community::where('hod', auth()->user()->id)->get();
+    
+            return $community_hod;
+        }
+    }
+    if (! function_exists('countryHOD')) {
+        function countryHOD()
+        {
+            $country_hod = Country::where('hod', auth()->user()->id)->get();
+            return $country_hod;
+        }
+    }
+
+    if (! function_exists('officeHOD')) {
+        function officeHOD()
+        {
+            $office_hod = Office::where('officehead', auth()->user()->id)->get();
+            return $office_hod;
+        }
+    }
+
+    
 }

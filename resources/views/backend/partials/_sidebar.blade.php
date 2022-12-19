@@ -6,19 +6,21 @@
                     class="las la-home iq-arrow-left"></i><span>Dashboard</span></a>
         </li>
         @if (getuser()->hasRole('Super Admin'))
-        {{-- Heirarchy ONLY FOR SUPER ADMIN --}}
-        <li>
-            <a href="#accounts" class="iq-waves-effect collapsed" data-toggle="collapse"><i
-                    class="las la-cash-register iq-arrow-left"></i><span>Accounts</span><i
-                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-            <ul id="accounts" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                <li class=""><a href="{{route('account.index')}}"><i class="las la-money-bill-wave"></i>All Accounts</a></li>
-                <li class=""><a href="{{route('account.create')}}"><i class="las la-money-bill-wave"></i>Add New Account</a></li>
+            {{-- Heirarchy ONLY FOR SUPER ADMIN --}}
+            <li>
+                <a href="#accounts" class="iq-waves-effect collapsed" data-toggle="collapse"><i
+                        class="las la-cash-register iq-arrow-left"></i><span>Accounts</span><i
+                        class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="accounts" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    <li class=""><a href="{{ route('account.index') }}"><i class="las la-money-bill-wave"></i>All
+                            Accounts</a></li>
+                    <li class=""><a href="{{ route('account.create') }}"><i class="las la-money-bill-wave"></i>Add
+                            New Account</a></li>
 
-            </ul>
-        </li>
-        {{-- Heirarchy END --}}
-    @endif
+                </ul>
+            </li>
+            {{-- Heirarchy END --}}
+        @endif
 
 
         <li @if (in_array(request()->route()->getName(),
@@ -58,7 +60,6 @@
                                     <li>
                                         <a href="{{ route('users.index') }}"> <i class="las la-th-list"></i>All Users</a>
                                     </li>
-                                    
                                 @endcan
                             </ul>
                             <a href="#roles" class="iq-waves-effect collapsed" data-toggle="collapse"
@@ -115,13 +116,16 @@
                         <a href="{{ route('applications.closed') }}"> <i class="las la-th-list"></i>Closed Applications</a>
                     </li>
                     <li>
-                        <a href="{{ route('applications.pending') }}"> <i class="las la-th-list"></i>Pending Applications</a>
+                        <a href="{{ route('applications.pending') }}"> <i class="las la-th-list"></i>Pending
+                            Applications</a>
                     </li>
                     <li>
-                        <a href="{{ route('applications.approved') }}"> <i class="las la-th-list"></i>Approved Applications</a>
+                        <a href="{{ route('applications.approved') }}"> <i class="las la-th-list"></i>Approved
+                            Applications</a>
                     </li>
                     <li>
-                        <a href="{{ route('applications.rejected') }}"> <i class="las la-th-list"></i>Rejected Applications</a>
+                        <a href="{{ route('applications.rejected') }}"> <i class="las la-th-list"></i>Rejected
+                            Applications</a>
                     </li>
                 @endcan
             </ul>
@@ -167,39 +171,164 @@
                         class="las la-sitemap iq-arrow-left"></i><span>Hierarchy</span><i
                         class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="hierarchy" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                    <li class=""><a href="{{route('country.index')}}"><i class="las la-city"></i>Country</a></li>
-                    <li class=""><a href="{{route('community.index')}}"><i class="ri-database-line"></i>Community</a></li>
-                    <li class=""><a href="{{route('province.index')}}"><i class="las la-building"></i>Province</a></li>
-                    <li class=""><a href="{{route('city.index')}}"><i class="las la-map-marker-alt"></i>City</a></li>
+                    <li class=""><a href="{{ route('country.index') }}"><i class="las la-city"></i>Country</a>
+                    </li>
+                    <li class=""><a href="{{ route('community.index') }}"><i
+                                class="ri-database-line"></i>Community</a></li>
+                    <li class=""><a href="{{ route('province.index') }}"><i
+                                class="las la-building"></i>Province</a></li>
+                    <li class=""><a href="{{ route('city.index') }}"><i
+                                class="las la-map-marker-alt"></i>City</a></li>
                 </ul>
             </li>
             {{-- Heirarchy END --}}
         @endif
 
-   
+
         @if (getuser()->hasRole('Super Admin'))
-        {{-- Heirarchy ONLY FOR SUPER ADMIN --}}
-        <li>
-            <a href="#reports" class="iq-waves-effect collapsed" data-toggle="collapse"><i
-                    class="las la-chart-bar iq-arrow-left"></i><span>Reports</span><i
+            {{-- Heirarchy ONLY FOR SUPER ADMIN --}}
+            <li>
+                <a href="#reports" class="iq-waves-effect collapsed" data-toggle="collapse"><i
+                        class="las la-chart-bar iq-arrow-left"></i><span>Reports</span><i
+                        class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="reports" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    <li class=""><a href="{{ route('report.countries') }}"><i
+                                class="las la-city"></i>Countries</a></li>
+                    <li class=""><a href="{{ route('report.communities') }}"><i
+                                class="ri-database-line"></i>Communities</a></li>
+                    <li class=""><a href="{{ route('report.provinces') }}"><i
+                                class="las la-building"></i>Provinces</a></li>
+                    <li class=""><a href="{{ route('report.cities') }}"><i
+                                class="las la-map-marker-alt"></i>Cities</a></li>
+
+                </ul>
+            </li>
+            {{-- Heirarchy END --}}
+        @endif
+
+        @can('Update Settings')
+            <li class="bg-primary  {{ request()->route()->getName() == 'notification.create'? 'active': '' }}">
+                <a href="{{ route('notification.create') }}" class="iq-waves-effect text-light"><i
+                        class="las la-bell iq-arrow-left"></i><span>Send Notificatons</span></a>
+            </li>
+        @endcan
+
+
+
+
+        <li @if (in_array(request()->route()->getName(),
+            ['roles.create'])) class="active" @endif>
+            <a href="#mysupervision" class="iq-waves-effect" data-toggle="collapse">
+                <i class="las la-th-list  iq-arrow-left"></i><span>My Supervision</span><i
                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-            <ul id="reports" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                <li class=""><a href="{{route('report.countries')}}"><i class="las la-city"></i>Countries</a></li>
-                <li class=""><a href="{{route('report.communities')}}"><i class="ri-database-line"></i>Communities</a></li>
-                <li class=""><a href="{{route('report.provinces')}}"><i class="las la-building"></i>Provinces</a></li>
-                <li class=""><a href="{{route('report.cities')}}"><i class="las la-map-marker-alt"></i>Cities</a></li>
+            <ul id="mysupervision" class="iq-submenu collapse " data-parent="#iq-sidebar-toggle" style="">
+
+                <li>
+                    <ul>
+                        <li class="mysupervision">
+
+                            <a href="#countries_" class="iq-waves-effect collapse" data-toggle="collapse"
+                                aria-expanded="false">
+                                <span class="ripple rippleEffect"
+                                    style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                    class="las la-th-list "></i><span>Country(s)</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+                            <ul id="countries_" class="iq-submenu iq-submenu-data collapse" style="">
+
+                                @foreach (countryHOD() as $country)
+                                    <li>
+                                        <a href="{{ route('country.show', $country->id) }}">
+                                            <i class="las la-plus-circle"></i>{{ $country->name }}</a>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+
+
+                            <a href="#commnuties_" class="iq-waves-effect collapse" data-toggle="collapse"
+                                aria-expanded="false">
+                                <span class="ripple rippleEffect"
+                                    style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                    class="las la-th-list "></i><span>Community(s)</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+                            <ul id="commnuties_" class="iq-submenu iq-submenu-data collapse" style="">
+
+                                @foreach (communityHOD() as $community)
+                                    <li>
+                                        <a href="{{ route('community.show', $community->id) }}">
+                                            <i class="las la-plus-circle"></i>{{ $community->name }}</a>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+
+                            <a href="#province_" class="iq-waves-effect collapse" data-toggle="collapse"
+                                aria-expanded="false">
+                                <span class="ripple rippleEffect"
+                                    style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                    class="las la-th-list "></i><span>Province(s)</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+                            <ul id="province_" class="iq-submenu iq-submenu-data collapse" style="">
+
+                                @foreach (provinceHOD() as $province)
+                                    <li>
+                                        <a href="{{ route('province.show', $province->id) }}">
+                                            <i class="las la-plus-circle"></i>{{ $province->name }}</a>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+
+                            <a href="#city_" class="iq-waves-effect collapse" data-toggle="collapse"
+                                aria-expanded="false">
+                                <span class="ripple rippleEffect"
+                                    style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                    class="las la-th-list "></i><span>City(s)</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+                            <ul id="city_" class="iq-submenu iq-submenu-data collapse" style="">
+
+                                @foreach (cityHOD() as $city)
+                                    <li>
+                                        <a href="{{ route('city.show', $city->id) }}">
+                                            <i class="las la-plus-circle"></i>{{ $city->name }}</a>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+
+                            <a href="#office_" class="iq-waves-effect collapse" data-toggle="collapse"
+                            aria-expanded="false">
+                            <span class="ripple rippleEffect"
+                                style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                class="las la-th-list "></i><span>Office(s)</span><i
+                                class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+                        <ul id="office_" class="iq-submenu iq-submenu-data collapse" style="">
+
+                            @foreach (officeHOD() as $office)
+                                <li>
+                                    <a href="">
+                                        <i class="las la-plus-circle"></i>{{ $office->name }}</a>
+                                </li>
+                            @endforeach
+
+                        </ul>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
 
             </ul>
         </li>
-        {{-- Heirarchy END --}}
-    @endif
 
-        @can('Update Settings')
-        <li class="bg-primary  {{ request()->route()->getName() == 'notification.create'? 'active': '' }}">
-            <a href="{{ route('notification.create') }}" class="iq-waves-effect text-light"><i
-                    class="las la-bell iq-arrow-left"></i><span>Send Notificatons</span></a>
-        </li>
-        @endcan
     </ul>
 </nav>
 <div class="p-3"></div>
