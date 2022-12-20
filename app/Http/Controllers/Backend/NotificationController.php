@@ -24,6 +24,11 @@ class NotificationController extends Controller
 
     public function create()
     {
+        if (! auth()->user()->hasPermissionTo('Send Notifications')) {
+            abort(403);
+        }
+
+        
         return view('backend.notifications.create');
     }
 
@@ -41,6 +46,10 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
+        if (! auth()->user()->hasPermissionTo('Send Notifications')) {
+            abort(403);
+        }
+
         $request->validate([
             'title' => 'required',
             'short_description' => 'required',
@@ -53,58 +62,15 @@ class NotificationController extends Controller
             'sent_by'=>auth()->user()->id,
         ]);
 
-        // $user = User::where('id', 1)->first();
-
-
-        // $type = "basic";
-
-        // $res = send_notification_FCM(1, $notification->title, $notification->short_description, $user->id,$type);
-        // if ($res == 1) {
-        //     dd('Done');
-        // } else {
-        //     dd('unDone');
-        // }
+        
+        $applications = Application::all();
+        foreach($applications as $application){
+            dispatch(new RenewalJob($application));
+        }
 
         alert()->success('Notification sent successfully', 'Success');
         return redirect()->route('notification.index');
     }
 
-     /**
-         * Write code on Method
-         *
-         * @return response()
-         */
-    public function sendNotification(Request $request)
-    {
-        $firebaseToken = User::whereNotNull('device_token')->pluck('device_token')->all();
 
-        $SERVER_API_KEY = 'a689887cb9bb350035e4bf648f9e962f641376b2';
-
-        $data = [
-            "registration_ids" => $firebaseToken,
-            "notification" => [
-                "title" => $request->title,
-                "body" => $request->details,
-            ]
-        ];
-        $dataString = json_encode($data);
-
-        $headers = [
-            'Authorization: key=' . $SERVER_API_KEY,
-            'Content-Type: application/json',
-        ];
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-
-        $response = curl_exec($ch);
-
-        dd($response);
-    }
 }

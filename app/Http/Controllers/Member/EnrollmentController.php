@@ -209,14 +209,23 @@ class EnrollmentController extends Controller
             $comment->save();
 
             
+            $applicationRenewal = RenewApplication::create([
+                'application_id' => $application->id,
+                'annually_fund_amount' =>$request->annually_fund_amount,
+                'user_signature' => $application->user_signature,
+                'rep_confirmed' => $request->rep_confirmed??1,
+                'declaration_confirm' => $request->declaration_confirm??1,
+                'renewal_date' => Carbon::now()->addDays(365)->format('Y-m-d'),
+            ]);
+
             DB::commit();
 
             $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been submitted successfully with Application ID  ' . $application->application_id . '. You will be notified once your application is approved.';
             $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
             
             
-            // SendMessage($application->phone,$applicant_message);
-            // SendMessage($application->rep_phone,$rep_messsage);
+            SendMessage($application->phone,$applicant_message);
+            SendMessage($application->rep_phone,$rep_messsage);
             
             alert()->success('Application Submitted Successfully');
             return redirect()->route('enrollment.show', $application->application_id);
@@ -592,7 +601,7 @@ class EnrollmentController extends Controller
             $application->annually_fund_amount=$request->annually_fund_amount;
             $application->declaration_confirm=$request->declaration_confirm??1;
             $application->user_signature=$request->user_signature;
-            $application->status='RENEWAL REQUESTED';
+            $application->status='RENEWAL-REQUESTED';
 
             // if ($request->user_signature) {
         //     $request->validate([
@@ -622,7 +631,7 @@ class EnrollmentController extends Controller
             $comment = new ApplicationComment();
             $comment->application_id = $application->id;
             $comment->comment = 'Application Submitted for Renewal';
-            $comment->status = 'RENEWAL REQUESTED';
+            $comment->status = 'RENEWAL-REQUESTED';
             $comment->save();
             DB::commit();
             alert()->success('Application Submitted Successfully for Renewal');

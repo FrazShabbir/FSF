@@ -132,6 +132,17 @@
                         <a href="{{ route('applications.pending') }}"> <i class="las la-th-list"></i>Pending
                             Applications</a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('applications.requested.renewal') }}"> <i class="las la-th-list"></i>Renewal Requested
+                            </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('applications.renewal') }}"> <i class="las la-th-list"></i>Renewable Applications
+                            </a>
+                    </li>
+
                     <li>
                         <a href="{{ route('applications.approved') }}"> <i class="las la-th-list"></i>Approved
                             Applications</a>
@@ -219,7 +230,7 @@
             {{-- Heirarchy END --}}
         @endif
 
-        @can('Update Settings')
+        @can('Send Notifications')
             <li class="bg-primary  {{ request()->route()->getName() == 'notification.create'? 'active': '' }}">
                 <a href="{{ route('notification.create') }}" class="iq-waves-effect text-light"><i
                         class="las la-bell iq-arrow-left"></i><span>Send Notificatons</span></a>

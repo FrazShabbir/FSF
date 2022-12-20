@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('type'); // Income or Expense
             $table->integer('user_id')->unsigned();
             $table->integer('account_id')->unsigned();
-            $table->integer('donation_id')->unsigned();
+            $table->integer('donation_id')->unsigned()->nullable();
             $table->integer('application_id')->unsigned()->nullable();
 
             $table->integer('country_id')->unsigned()->nullable();

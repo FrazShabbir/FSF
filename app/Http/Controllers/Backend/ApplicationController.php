@@ -37,7 +37,8 @@ class ApplicationController extends Controller
     {
         $applications = Application::all();
         return view('backend.applications.index')
-        ->with('applications', $applications);
+        ->with('applications', $applications)
+        ->with('type','All');
     }
 
     public function closedApplications()
@@ -47,7 +48,34 @@ class ApplicationController extends Controller
         }
         $applications = Application::where('status', 'PERMANENT-CLOSED')->get();
         return view('backend.applications.index')
-        ->with('applications', $applications);
+        ->with('applications', $applications)
+        ->with('type','Closed');
+        ;
+    }
+
+    public function renewalApplications()
+    {
+        if (! auth()->user()->hasPermissionTo('Read Applications')) {
+            abort(403);
+        }
+        $applications = Application::where('status', 'RENEWABLE')->get();
+        return view('backend.applications.index')
+        ->with('applications', $applications)
+        ->with('type','Renewable');
+        ;
+    }
+    
+
+    public function renewalRequestedApplications()
+    {
+        if (! auth()->user()->hasPermissionTo('Read Applications')) {
+            abort(403);
+        }
+        $applications = Application::where('status', 'RENEWAL-REQUESTED')->get();
+        return view('backend.applications.index')
+        ->with('applications', $applications)
+        ->with('type','Renewal Requested');
+        ;
     }
 
     public function pendingApplications()
@@ -57,7 +85,8 @@ class ApplicationController extends Controller
         }
         $applications = Application::where('status', 'PENDING')->get();
         return view('backend.applications.index')
-        ->with('applications', $applications);
+        ->with('applications', $applications)
+        ->with('type','Pending');
     }
 
     public function approvedApplications()
@@ -67,7 +96,8 @@ class ApplicationController extends Controller
         }
         $applications = Application::where('status', 'APPROVED')->get();
         return view('backend.applications.index')
-        ->with('applications', $applications);
+        ->with('applications', $applications)
+        ->with('type','Approved');
     }
 
     public function rejectedApplications()
@@ -77,7 +107,8 @@ class ApplicationController extends Controller
         }
         $applications = Application::where('status', 'REJECTED')->get();
         return view('backend.applications.index')
-        ->with('applications', $applications);
+        ->with('applications', $applications)
+        ->with('type','Rejected');
     }
 
     /**
@@ -100,6 +131,9 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
+        if (! auth()->user()->hasPermissionTo('Create Applications')) {
+            abort(403);
+        }
         $request->validate([
             'email'=>'required|email|unique:users,email',
             'passport_number' => 'required',
@@ -566,8 +600,17 @@ class ApplicationController extends Controller
                 'status'=>$request->status,
                 'receiver_id'=>auth()->user()->id,
             ]);
+
             $application->status = $request->status;
             $application->save();
+
+            if($application->renewal_date==null){
+                if($request->status=='APPROVED'){
+                    $application->renewal_date = date('Y-m-d', strtotime('+1 year'));
+                    $application->save();
+                }
+            }
+
             DB::commit();
             alert()->success('Success', 'Comment Added Successfully');
             return redirect()->back();
@@ -911,7 +954,7 @@ class ApplicationController extends Controller
     public function applicationRenew($id)
     {
         $application = Application::where('application_id', $id)->firstOrfail();
-        if ($application->status!='RENEWABLE') {
+        if ($application->status!='RENEWABLE' and $application->status!='RENEWAL-REQUESTED') {
             alert()->info('Application is not Renewable right now.');
             return redirect()->back();
         }
@@ -924,7 +967,6 @@ class ApplicationController extends Controller
 
     public function applicationRenewUpdate(Request $request, $id)
     {
-        // dd($request->all());
         try {
             DB::beginTransaction();
             $request->validate([
@@ -1043,7 +1085,7 @@ class ApplicationController extends Controller
             $application->annually_fund_amount=$request->annually_fund_amount;
             $application->declaration_confirm=$request->declaration_confirm;
             $application->renewal_date =Carbon::now()->addDays(365)->format('Y-m-d');
-            $application->status='PENDING';
+            $application->status='APPROVED';
 
             if ($request->avatar) {
                 $avatarValidator = Validator::make(
@@ -1069,7 +1111,7 @@ class ApplicationController extends Controller
 
             $comment = ApplicationComment::create([
             'application_id' => $application->id,
-            'comment' => 'Application Submitted for Renewal.',
+            'comment' => 'Application Renewed',
             'status' => $application->status,
             'receiver_id' => auth()->user()->id,
             ]);

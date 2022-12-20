@@ -12,7 +12,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::get('applications/pending', [ApplicationController::class, 'pendingApplications'])->name('applications.pending')->middleware(['can:Read Applications']);
     Route::get('applications/approved', [ApplicationController::class, 'approvedApplications'])->name('applications.approved')->middleware(['can:Read Applications']);
     Route::get('applications/rejected', [ApplicationController::class, 'rejectedApplications'])->name('applications.rejected')->middleware(['can:Read Applications']);
+    Route::get('applications/renewal/requested', [ApplicationController::class, 'renewalRequestedApplications'])->name('applications.requested.renewal')->middleware(['can:Read Applications']);
+    Route::get('applications/renewal/', [ApplicationController::class, 'renewalApplications'])->name('applications.renewal')->middleware(['can:Read Applications']);
 
+
+    
     Route::get('application/create', [ApplicationController::class, 'create'])->name('application.create')->middleware(['can:Create Applications']);
     
     Route::get('create/application-with-user/{id}', [ApplicationController::class, 'addUserApplication'])->name('application.create.user')->middleware(['can:Create Applications']);

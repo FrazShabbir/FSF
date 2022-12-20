@@ -90,10 +90,20 @@
                                             placeholder="100" value="{{ $application->totaldonations->sum('amount') }}">
                                     </div>
                                     <div class="col-md-6 col-sm-12 mb-3">
+                                        <label for="first_name" class="required">FSF ACCOUNT</label>
+                                        <select name="account_id" id="account_drop" class="form-control" required>
+                                            <option value="">Please Select Account</option>
+                                            @foreach ($accounts as $acc)
+                                                <option value="{{ $acc->id }}" data-balance="{{ $acc->balance }}">
+                                                    {{ $acc->name }} - available Balance: {{ $acc->balance }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="first_name" class="required">Amount Used For Process</label>
                                         <input type="number" step="0.01" name="amount_used" id="amountUsed"
                                             class="form-control" placeholder="100" value="{{ old('amount_used') }}"
-                                            required>
+                                            required disabled>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -244,8 +254,19 @@
 
 @push('js')
     <script>
-        $(document).ready(function() {
+          $(document).ready(function() {
+        var balance = 0;
+
+        $("#CloseAccount").modal('show');
+
+        $('.closebtn').click(function() {
+            $("#CloseAccount").modal('hide');
+        });
+
+      
             $('#amountUsed').keyup(function() {
+               
+             
                 var totalDonations = $('#totalDonations').val();
                 var amountUsed = $('#amountUsed').val();
                 var calculations = totalDonations - amountUsed;
@@ -253,17 +274,24 @@
                 $('#expense').text(calculations);
             });
 
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("#CloseAccount").modal('show');
-        });
-        $(document).ready(function() {
-            $('.closebtn').click(function() {
-                $("#CloseAccount").modal('hide');
+
+            $('#account_drop').change(function() {
+                var value = $('#account_drop').find(":selected").val();
+                balance = $('#account_drop').find(":selected").data('balance');
+                $('#amountUsed').attr('disabled', false);
+                $('#amountUsed').attr('max', balance);
+            })
+
+            $('#amountUsed').change(function() {
+                if($('#amountUsed').val()>balance){
+                    alert('Amount used can not be greater than balance.Please select another account Or Topup the account');
+                    $('#amountUsed').val('');
+                    $('#processAmount').text(0);
+                $('#expense').text(0);
+                }
             });
 
         });
+      
     </script>
 @endpush

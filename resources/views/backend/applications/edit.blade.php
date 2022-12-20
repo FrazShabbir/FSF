@@ -112,26 +112,28 @@
                                         <input type="text" name="comment" id="" class="form-control"
                                             placeholder="Application Comment" required>
                                     </div>
+                                    	
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="status">Status:</label>
                                         <select type="text" name="status" id="" class="form-control">
-                                            @can('Read Application')
-                                            <option value="PENDING" {{$->status=='PENDING'?'selected':''}} >PENDING</option>
+                                            @can('Read Applications')
+                                            <option value="PENDING" {{$application->status=='PENDING'?'selected':''}} >PENDING</option>
                                             @endcan
-                                            @can('Renewable Application')
+                                            @can('Renewable Applications')
                                             <option value="RENEWABLE" {{$application->status=='RENEWABLE'?'selected':''}} >RENEWABLE</option>
+                                            <option value="RENEWAL-REQUESTED" {{$application->status=='RENEWAL-REQUESTED'?'selected':''}}  disabled>RENEWAL-REQUESTED</option>
                                             @endcan
-                                            @can('Reject Application')
+                                            @can('Reject Applications')
                                             <option value="REJECTED" {{$application->status=='REJECTED'?'selected':''}}>REJECTED</option>
                                             @endcan
-                                            @can('update Application')
+                                            @can('update Applications')
                                             <option value="SUBMITTED" {{$application->status=='SUBMITTED'?'selected':''}}>SUBMITTED</option>
                                             @endcan
-                                            @can('Approve Application')
+                                            @can('Approve Applications')
                                             <option value="APPROVED" {{$application->status=='APPROVED'?'selected':''}}>APPROVED</option>
                                             @endcan
-                                            @can('Inactive Application')
+                                            @can('Inactive Applications')
                                             <option value="INACTIVE" {{$application->status=='INACTIVE'?'selected':''}}>IN-ACTIVE</option>
                                             @endcan
                                            
@@ -1156,7 +1158,7 @@
                                         @foreach($application->comments as $comment)
                                         <tr>
                                             <td>{{$comment->comment}}</td>
-                                            <td>{{$comment->status}}</td>
+                                            <td><span class="badge badge-{{$comment->status}}">{{$comment->status}}</span></td>
                                             <td>{{$comment->user->full_name ?? $application->user->full_name}}</td>
                                             <td>{{date('d-M-Y',strtotime($comment->created_at))}}</td>
                                             

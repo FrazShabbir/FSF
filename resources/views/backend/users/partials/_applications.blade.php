@@ -31,8 +31,8 @@
                                 <td>{{ $application->full_name }} </td>
                                 <td><span class="badge badge-{{ $application->status }}">{{ $application->status}}</span></td>
                                 <td>
-                                    <form action=""
-                                        method="post">
+                                    {{-- <form action=""
+                                        method="post"> --}}
                                         <div class="flex align-items-center list-donation-action">
                                             <a class="iq-bg-primary" data-toggle="tooltip"
                                                 data-placement="top" title=""
@@ -44,7 +44,7 @@
                                                 data-original-title="Edit"
                                                 href="{{route('application.edit',$application->application_id)}}"><i
                                                     class="ri-pencil-line"></i></a>
-                                            @csrf
+                                            {{-- @csrf
                                             {{ method_field('Delete') }}
                                             <button
                                                 onclick="return confirm('Are you sure you want to delete?')"
@@ -52,7 +52,7 @@
                                                 data-toggle="tooltip" data-placement="top" title=""
                                                 data-original-title="Delete">
                                                 <i class="las la-trash"></i>
-                                            </button>
+                                            </button> --}}
 
                                         </div>
                                     </form>

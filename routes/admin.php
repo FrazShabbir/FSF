@@ -55,6 +55,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
     Route::put('account/{id}/update', [AccountController::class, 'update'])->name('account.update')->middleware(['can:Update Accounts']);
     Route::delete('account/{id}', [AccountController::class, 'destroy'])->name('account.destroy')->middleware(['can:Delete Accounts']);
 
+    Route::post('account/topup/{id}/save', [AccountController::class, 'addAmount'])->name('account.topup')->middleware(['can:Update Accounts']);
+
+    
 
     Route::get('offices', [OfficeController::class, 'index'])->name('office.index')->middleware(['can:Read Office']);
     Route::get('office/create', [OfficeController::class, 'create'])->name('office.create')->middleware(['can:Create Office']);

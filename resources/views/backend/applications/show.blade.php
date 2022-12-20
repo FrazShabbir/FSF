@@ -125,7 +125,7 @@
                                             <div class="" id="personal_info">
                                                 <div class="mb-4">
                                                     <h3>
-                                                        Personal Information <span class="badge badge-info"><small><a href="{{route('users.show',$application->user_id)}}">View User</a></small> </span> <span class="badge badge-{{$application->status}}">{{$application->status}}</span> <a class="badge badge-{{$application->status}}" href="{{route('application.edit',$application->application_id)}}">Edit</a>
+                                                        Personal Information <small><span class="badge badge-info"><a href="{{route('users.show',$application->user_id)}}">View User</a> </span> <span class="badge badge-{{$application->status}}">{{$application->status}}</span> <a class="badge badge-{{$application->status}}" href="{{route('application.edit',$application->application_id)}}">Edit</a> <small><span class="badge badge-info">Exp:{{$application->renewal_date}}</span></small></small>
                                                     </h3>
                                                     <div class="heading-bottom-line"></div>
                                                 </div>

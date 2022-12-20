@@ -8,7 +8,7 @@ use Mail;
 use App\Models\Application;
 use App\Jobs\RenewalJob;
 use App\Mail\RenewalMail;
-
+use App\Models\ApplicationComment;
 class RenewalCron extends Command
 {
     /**
@@ -40,11 +40,17 @@ class RenewalCron extends Command
         
             // Mail::to($application->email)->send(new RenewalMail($application));
 
-            if (now()->diffInDays($application->renewal_date)<200) {
+            if (now()->diffInDays($application->renewal_date)<7) {
                 $application->status = 'RENEWABLE';
                 $application->save();
-                
                 dispatch(new RenewalJob($application));
+                $comment = ApplicationComment::create([
+                    'application_id'=>$application->id,
+                    'comment'=>'Application is renewable',
+                    'status'=>'RENEWABLE',
+                    'receiver_id'=>$application->user_id,
+                ]);
+
                 // Mail::to($this->application->email)->send(new RenewalMail($this->application));
 
             }

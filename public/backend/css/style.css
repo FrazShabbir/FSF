@@ -1187,11 +1187,19 @@ cursor: pointer;
     color: #fff;
 }
  
+.badge-RENEWAL-REQUESTED{
+    background-color: #ac8ceb;
+    color: #fff;
+}
+
 .badge-APPROVED,.badge-ACTIVE,.badge-1, .badge-SUCCESS{
     background-color: #198753;
     color: #fff;
 }
-
+.badge-SUBMITTED{
+    background-color: #0C6EFD;
+    color: #fff;
+}
 .badge-COMPLETED{
     background-color: #0C6EFD;
     color: #fff;

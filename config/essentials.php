@@ -58,6 +58,9 @@ return [
             'Delete Office',
             'Export Office',
         ],
+        'Notifications' => [
+          'Send Notifications',
+        ],
 
     ],
 

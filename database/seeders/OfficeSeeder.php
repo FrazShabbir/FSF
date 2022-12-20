@@ -18,6 +18,7 @@ class OfficeSeeder extends Seeder
     
 
         Office::create([
+            'office_code'=>'002',
             'name'=>'Head Office',
             'phone'=>'9898989898',
             'city_id'=>'1',
@@ -26,6 +27,8 @@ class OfficeSeeder extends Seeder
             'officehead'=>1,
         ]);
         Office::create([
+            'office_code'=>'0022',
+
             'name'=>'State Office',
             'phone'=>'1212121',
             'city_id'=>'2',

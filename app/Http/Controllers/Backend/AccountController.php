@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Account;
+use App\Models\AccountTransaction;
+use Illuminate\Support\Facades\DB;
 class AccountController extends Controller
 {
     /**
@@ -17,7 +19,6 @@ class AccountController extends Controller
         $accounts = Account::all();
         return view('backend.accounts.index')
             ->with('accounts', $accounts);
-       
     }
 
     /**
@@ -28,7 +29,6 @@ class AccountController extends Controller
     public function create()
     {
         return view('backend.accounts.create');
-       
     }
 
     /**
@@ -40,17 +40,17 @@ class AccountController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-         
+
             'name' => 'required',
             'account_number' => 'required',
             'bank' => 'required',
             'type' => 'required',
             'city' => 'required',
-           
-           
+
+
         ]);
         $account = new Account();
-        $account->code = 'Acc-'.rand(100,999);
+        $account->code = 'Acc-'.rand(100, 999);
         $account->name = $request->name;
         $account->account_number = $request->account_number;
         $account->bank = $request->bank;
@@ -59,7 +59,6 @@ class AccountController extends Controller
         $account->status = 'ACTIVE';
         $account->save();
         return redirect()->route('account.index');
-        
     }
 
     /**
@@ -106,7 +105,7 @@ class AccountController extends Controller
             'status' => 'required',
         ]);
         $account = Account::where('code', $id)->first();
-      
+
         $account->name = $request->name;
         $account->account_number = $request->account_number;
         $account->bank = $request->bank;
@@ -115,7 +114,6 @@ class AccountController extends Controller
         $account->save();
         alert()->success('Success', 'Account Updated Successfully');
         return redirect()->route('account.index');
-        
     }
 
     /**
@@ -127,5 +125,46 @@ class AccountController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function addAmount(Request $request, $id)
+    {
+        $request->validate([
+       'amount' => 'required',
+        'details' => 'required',
+        ]);
+
+
+        try {
+            db::beginTransaction();
+            $account = Account::where('code', $id)->first();
+            $account->balance = $account->balance + $request->amount;
+            $account->save();
+            
+            $transaction = AccountTransaction::create([
+                'transaction_id' => 'T-'.date('YmdHis'),
+                'type' => 'Credit',
+                'user_id'=> auth()->user()->id,
+                'account_id' => $account->id,
+                'debit'=>0,
+                'credit'=>$request->amount,
+                'balance'=>$account->balance,
+                'summary'=>'[SYSTEM CHANGE] Account Credited by '. auth()->user()->full_name. ' for '.$request->details,
+            ]);
+
+            db::commit();
+            alert()->success('Success', 'Account Credited Successfully');
+            return redirect()->route('account.index');
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollback();
+            alert()->error('Error', $th->getMessage());
+            return redirect()->route('account.index');
+        }
+
+
+        alert()->success('Success', 'Account Updated Successfully');
+        return redirect()->route('account.index');
     }
 }
