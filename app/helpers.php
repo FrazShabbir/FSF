@@ -302,6 +302,14 @@ if (! function_exists('SendMessage')) {
         }
     }
 
+    if (! function_exists('getPendingApplications')) {
+        function getPendingApplications()
+        {
+            
+            return Application::where('status','PENDING')->limit(10)->get();
+        }
+    }
+
     if (! function_exists('checkPermission')) {
         function checkPermission($status)
         {

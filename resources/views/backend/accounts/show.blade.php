@@ -115,10 +115,10 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Donation ID</th>
-                                            <th>Person Name</th>
+                                            <th>Source</th>
+                                            <th>Done By</th>
 
-                                           
+
                                             <th>Debit</th>
                                             <th>Credit</th>
                                             <th>Balance</th>
@@ -133,11 +133,22 @@
                                         @endphp
                                         @foreach ($account->transactions as $trans)
                                             <tr>
-                                                <td>%</td>
-                                                <td><a href="{{route('donation.show',$trans->donation->donation_code)}}">{{$trans->donation->donation_code}}</a></td>
-                                                <td><a href="{{route('users.show',$trans->user->id)}}">{{ $trans->donation->user->full_name }}</a></td>
+                                                <td>{{$i}}</td>
+                                                @if ($trans->donation_id)
+                                                    <td><a
+                                                            href="{{ route('donation.show', $trans->donation->donation_code) }}">{{ $trans->donation->donation_code }}</a>
+                                                    </td>
+                                                @else
+                                                    <td><a
+                                                            href="#">Account Topup</a>
+                                                    </td>
+                                                @endif
 
-                                              
+                                                <td><a
+                                                        href="{{ route('users.show', $trans->user->id) }}">{{ $trans->user->full_name }}</a>
+                                                </td>
+
+
                                                 <td> <span class="font-weight-bold">€</span> {{ $trans->debit }}</td>
                                                 <td> <span class="font-weight-bold">€</span> {{ $trans->credit }}</td>
                                                 <td> <span class="font-weight-bold">€</span> {{ $trans->balance }}</td>
@@ -190,5 +201,4 @@
 @endsection
 
 @push('js')
-
 @endpush
