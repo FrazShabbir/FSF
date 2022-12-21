@@ -200,7 +200,7 @@ if (! function_exists('SendMessage')) {
                 // 'body' => 'Your Application at ' . env('APP_NAME') . ' has been submitted successfully. Your Application ID is ' . $application->application_id . '.'
                 ]);
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
         }
     }
 
@@ -239,6 +239,14 @@ if (! function_exists('SendMessage')) {
     }
 
 
+    if (! function_exists('pendingApproval')) {
+        function pendingApproval()
+        {
+            return Application::where('status', 'PENDING-APPROVAL')->get()->count();
+        }
+    }
+
+
 
     if (! function_exists('allApplications')) {
         function allApplications()
@@ -270,6 +278,16 @@ if (! function_exists('SendMessage')) {
             return $city_hod;
         }
     }
+
+
+    if (! function_exists('cityApplications')) {
+        function cityApplications($id)
+        {
+            return Application::where('city_id', $id)->get();
+        }
+    }
+
+
     if (! function_exists('provinceHOD')) {
         function provinceHOD()
         {
@@ -278,6 +296,14 @@ if (! function_exists('SendMessage')) {
             return $province_hod;
         }
     }
+    if (! function_exists('provinceApplications')) {
+        function provinceApplications($id)
+        {
+            return Application::where('province_id', $id)->get();
+        }
+    }
+
+
     if (! function_exists('communityHOD')) {
         function communityHOD()
         {
@@ -286,6 +312,14 @@ if (! function_exists('SendMessage')) {
             return $community_hod;
         }
     }
+    if (! function_exists('communityApplications')) {
+        function communityApplications($id)
+        {
+            return Application::where('community_id', $id)->get();
+        }
+    }
+
+
     if (! function_exists('countryHOD')) {
         function countryHOD()
         {
@@ -293,6 +327,14 @@ if (! function_exists('SendMessage')) {
             return $country_hod;
         }
     }
+
+    if (! function_exists('countryApplications')) {
+        function countryApplications($id)
+        {
+            return Application::where('country_id', $id)->get();
+        }
+    }
+
 
     if (! function_exists('officeHOD')) {
         function officeHOD()
@@ -302,11 +344,18 @@ if (! function_exists('SendMessage')) {
         }
     }
 
+    if (! function_exists('officeApplications')) {
+        function officeApplications($id)
+        {
+            $office = Office::where('id', $id)->first();
+            return Application::where('city_id', $office->city_id)->get();
+        }
+    }
+    
     if (! function_exists('getPendingApplications')) {
         function getPendingApplications()
         {
-            
-            return Application::where('status','PENDING')->limit(10)->get();
+            return Application::where('status', 'PENDING')->limit(10)->get();
         }
     }
 

@@ -4,8 +4,8 @@
 @section('styles')
     <style>
         /* body {
-            margin-top:40px;
-        } */
+                        margin-top:40px;
+                    } */
         .stepwizard-step p {
             margin-top: 10px;
         }
@@ -26,15 +26,15 @@
         }
 
         /* .stepwizard-row:before {
-            top: 14px;
-            bottom: 0;
-            position: absolute;
-            content: " ";
-            width: 100%;
-            height: 1px;
-            background-color: #ccc;
-            z-order: 0;
-        } */
+                        top: 14px;
+                        bottom: 0;
+                        position: absolute;
+                        content: " ";
+                        width: 100%;
+                        height: 1px;
+                        background-color: #ccc;
+                        z-order: 0;
+                    } */
         .stepwizard-step {
             display: table-cell;
             text-align: center;
@@ -73,6 +73,26 @@
 @endsection
 
 @push('css')
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css"
+        integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"
+        integrity="sha512-+gShyB8GWoOiXNwOlBaYXdLTiZt10Iy6xjACGadpqMs20aJOoh+PJt3bwUVA6Cefe7yF7vblX6QwyXZiVwTWGg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>
+                   .form-group label {
+            font-weight: 500;
+        }
+
+        .radius-10 {
+            border-radius: 10px;
+        }
+
+        .iti {
+            width: 100%;
+        }
+        </style>
 @endpush
 
 @section('content')
@@ -160,8 +180,12 @@
                                                         <label class="control-label">Gender</label>
                                                         <select class="custom-select form-control" required name="gender">
                                                             <option selected disabled>Select your gender</option>
-                                                            <option value="Male" {{old('gender')=='Male'?'selected':'' }}>Male</option>
-                                                            <option value="Female" {{old('gender')=='Female'?'selected':'' }}>Female</option>
+                                                            <option value="Male"
+                                                                {{ old('gender') == 'Male' ? 'selected' : '' }}>Male
+                                                            </option>
+                                                            <option value="Female"
+                                                                {{ old('gender') == 'Female' ? 'selected' : '' }}>Female
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -195,7 +219,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No.</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ getuser()->phone ?? old('phone') }}" name="phone"
                                                             id="phone" placeholder="+34032032090932">
                                                     </div>
@@ -206,8 +230,8 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Email Address</label>
                                                         <input type="email" required class="form-control"
-                                                            value="{{old('email') }}"
-                                                            name="email" id="email" placeholder="dummy@gmail.com">
+                                                            value="{{ old('email') }}" name="email" id="email"
+                                                            placeholder="dummy@gmail.com">
                                                     </div>
                                                 </div>
                                             </div>
@@ -331,10 +355,10 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No.</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ old('s_relative_1_phone') }}"
                                                             name="s_relative_1_phone" id="s_relative_1_phone"
-                                                            placeholder="Muhammad Ahmad">
+                                                            placeholder="22677678">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -370,10 +394,10 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No.</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ old('s_relative_2_phone') }}"
                                                             name="s_relative_2_phone" id="s_relative_2_phone"
-                                                            placeholder="Muhammad Ahmad">
+                                                            placeholder="00223344">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -418,7 +442,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No.</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ old('n_relative_1_phone') }}"
                                                             name="n_relative_1_phone" id="n_relative_1_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -457,7 +481,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No.</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ old('n_relative_2_phone') }}"
                                                             name="n_relative_2_phone" id="n_relative_2_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -510,7 +534,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No.</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ old('rep_phone') }}" name="rep_phone"
                                                             id="rep_phone" placeholder="+34032032090932">
                                                     </div>
@@ -841,7 +865,7 @@
                     .children("a"),
                     curInputs = curStep.find(
                         "input[type='text'],input[type='email'],input[type='password'],input[type='url'],textarea"
-                        ),
+                    ),
                     isValid = true;
 
                 $(".form-group").removeClass("has-error");
@@ -1123,5 +1147,22 @@
 
 
         });
+    </script>
+
+    <script>
+        $(".phone_number").each(function(index) {
+            selector = "#" + $(this).attr('id')
+            console.log(selector);
+            loadPhoneValidator(selector);
+        });
+
+        function loadPhoneValidator(selector = ".phone_number") {
+
+            var input = document.querySelector(selector);
+            var iti = window.intlTelInput(input, {
+                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/utils.js",
+            });
+            window.iti = iti;
+        }
     </script>
 @endpush

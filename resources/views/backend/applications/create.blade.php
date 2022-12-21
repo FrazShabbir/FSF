@@ -6,6 +6,18 @@
 
 @push('css')
     <style>
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .radius-10 {
+            border-radius: 10px;
+        }
+
+        .iti {
+            width: 100%;
+        }
+
         canvas {
             background: #fff;
             display: block;
@@ -86,6 +98,13 @@
             background-position: center;
         }
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css"
+        integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"
+        integrity="sha512-+gShyB8GWoOiXNwOlBaYXdLTiZt10Iy6xjACGadpqMs20aJOoh+PJt3bwUVA6Cefe7yF7vblX6QwyXZiVwTWGg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endpush
 
 
@@ -136,19 +155,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <form class="form" action="{{ route('application.store') }}" method="POST" enctype="multipart/form-data">
+                            <form class="form" action="{{ route('application.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row setup-content px-3" id="user-detail" style="display: flex;">
                                     <div class="col-12">
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
                                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
-                                                     name="avatar"/>
+                                                    name="avatar" />
                                                 <label for="imageUpload" class=" required"></label>
                                             </div>
                                             <div class="avatar-preview">
                                                 <div id="imagePreview"
-                                                    style="background-image: url({{asset('placeholder.png')}});">
+                                                    style="background-image: url({{ asset('placeholder.png') }});">
                                                 </div>
                                             </div>
                                         </div>
@@ -193,7 +213,8 @@
                                                 Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="surname" name="surname"
-                                                    placeholder="Enter Your Sur Name" required value="{{ old('surname') }}">
+                                                    placeholder="Enter Your Sur Name" required
+                                                    value="{{ old('surname') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -231,7 +252,7 @@
                                             <div class="col-sm-12">
                                                 <input type="date" class="form-control" name="dob" id="dob"
                                                     max="{{ date('Y-m-d') }}"
-                                                    value="{{ date('Y-m-d',strtotime(old('dob')??'2000-1-1')) }}" required>
+                                                    value="{{ date('Y-m-d', strtotime(old('dob') ?? '2000-1-1')) }}" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -280,9 +301,9 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="native_country">Native Country</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" name="native_country" id="native_country"
-                                                placeholder="Englain" required
-                                                value="{{ old('native_country') }}">
+                                                <input type="text" class="form-control" name="native_country"
+                                                    id="native_country" placeholder="Englain" required
+                                                    value="{{ old('native_country') }}">
 
                                                 {{-- <select name="native_country" id="native_country" class="form-control"
                                                     required>
@@ -341,8 +362,9 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="phone">Cell No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="phone" name="phone"
-                                                    placeholder="2345678" required value="{{ old('phone') }}">
+                                                <input type="text" class="form-control phone_number" id="phone"
+                                                    name="phone" placeholder="2345678" required
+                                                    value="{{ old('phone') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -359,14 +381,14 @@
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="email" name="email"
                                                     placeholder="johndoe@gmail.com" required value="{{ old('email') }}">
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                            <div class="invalid-feedback">
-                                                Please enter your Email.
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please enter your Email.
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </div>
                                     <div class="col-12">
                                         <h4 class="mb-4">
@@ -502,7 +524,8 @@
                                                 for="s_relative_1_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_1_relation"
-                                                    name="s_relative_1_relation" placeholder="Enter Your Realtion" required>
+                                                    name="s_relative_1_relation" placeholder="Enter Your Realtion"
+                                                    required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -517,8 +540,9 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0 required"
                                                 for="s_relative_1_phone">Cell No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="s_relative_1_phone"
-                                                    name="s_relative_1_phone" placeholder="Enter Relative Cell No." required>
+                                                <input type="text" class="form-control phone_number"
+                                                    id="s_relative_1_phone" name="s_relative_1_phone"
+                                                    placeholder="Enter Relative Cell No." required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -534,7 +558,7 @@
                                                 for="s_relative_1_address">Complete Address</label>
                                             <div class="col-sm-12">
                                                 <textarea class="form-control" name="s_relative_1_address" id="s_relative_1_address"
-                                                    placeholder="Enter Relative Complete Address"  required></textarea>
+                                                    placeholder="Enter Relative Complete Address" required></textarea>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -555,7 +579,8 @@
                                                 for="s_relative_2_name">Full Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_2_name"
-                                                     required name="s_relative_2_name" placeholder="Enter Relative Full Name">
+                                                    required name="s_relative_2_name"
+                                                    placeholder="Enter Relative Full Name">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -571,7 +596,8 @@
                                                 for="s_relative_2_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_2_relation"
-                                                     required name="s_relative_2_relation" placeholder="Enter Your Realtion">
+                                                    required name="s_relative_2_relation"
+                                                    placeholder="Enter Your Realtion">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -586,8 +612,9 @@
                                             <label class=" required control-label col-sm-12 align-self-center mb-0"
                                                 for="s_relative_2_phone">Cell No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="s_relative_2_phone"
-                                                     required name="s_relative_2_phone" placeholder="Enter Relative Cell No.">
+                                                <input type="text" class="form-control phone_number"
+                                                    id="s_relative_2_phone" required name="s_relative_2_phone"
+                                                    placeholder="Enter Relative Cell No.">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -602,7 +629,7 @@
                                             <label class=" required control-label col-sm-12 align-self-center mb-0"
                                                 for="s_relative_2_address">Complete Address</label>
                                             <div class="col-sm-12">
-                                                <textarea class="form-control"  required name="s_relative_2_address" id="s_relative_2_address"
+                                                <textarea class="form-control" required name="s_relative_2_address" id="s_relative_2_address"
                                                     placeholder="Enter Relative Complete Address">
                                                             </textarea>
                                                 <div class="valid-feedback">
@@ -664,8 +691,9 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="n_relative_1_phone">Cell No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="n_relative_1_phone"
-                                                    name="n_relative_1_phone" placeholder="Enter Relative Cell No.">
+                                                <input type="text" class="form-control phone_number"
+                                                    id="n_relative_1_phone" name="n_relative_1_phone"
+                                                    placeholder="Enter Relative Cell No.">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -734,8 +762,9 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="n_relative_2_phone">Cell No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="n_relative_2_phone"
-                                                    name="n_relative_2_phone" placeholder="Enter Relative Cell No.">
+                                                <input type="text" class="form-control phone_number"
+                                                    id="n_relative_2_phone" name="n_relative_2_phone"
+                                                    placeholder="Enter Relative Cell No.">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -832,7 +861,7 @@
                                                 for="rep_phone">Cell
                                                 No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="rep_phone"
+                                                <input type="text" class="form-control phone_number" id="rep_phone"
                                                     name="rep_phone" placeholder="Enter Representative Cell No.">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -990,8 +1019,7 @@
                                                         for="other_annually_fund_amount">Enter Other Amount</label>
                                                     <div class="col-sm-12">
                                                         <input type="text" class="form-control"
-                                                            id="other_annually_fund_amount"
-                                                            name="annually_fund_amount"
+                                                            id="other_annually_fund_amount" name="annually_fund_amount"
                                                             placeholder="Enter Anually Fund Amount">
                                                     </div>
                                                 </div>
@@ -1075,12 +1103,12 @@
             $('input[type=radio][name=annually_fund_amount_fixed]').change(function() {
                 if (this.value == 'other') {
                     $("#other_amount").removeClass('d-none');
-                    var amount  = $('input[type=radio][name="annually_fund_amount_fixed"]:checked').val();
+                    var amount = $('input[type=radio][name="annually_fund_amount_fixed"]:checked').val();
                     $('#other_annually_fund_amount').val(100);
                     $('#other_annually_fund_amount').prop('required', true);
                 } else {
                     $("#other_amount").addClass('d-none');
-                    var amount  = $('input[type=radio][name="annually_fund_amount_fixed"]:checked').val();
+                    var amount = $('input[type=radio][name="annually_fund_amount_fixed"]:checked').val();
                     $('#other_annually_fund_amount').val(amount);
                     $('#other_annually_fund_amount').prop('required', false);
 
@@ -1232,33 +1260,48 @@
 
 
         });
-
-
-        
     </script>
 
-<script>
-    $(document).ready(function() {
-        $('input[type=radio][name=registered_relatives]').change(function() {
-            if (this.value == 'Yes') {
-                $("#reg_relative_passport_no").removeClass('d-none');
-            } else if (this.value == 'No') {
-                $("#reg_relative_passport_no").addClass('d-none');
-            }
+    <script>
+        $(document).ready(function() {
+            $('input[type=radio][name=registered_relatives]').change(function() {
+                if (this.value == 'Yes') {
+                    $("#reg_relative_passport_no").removeClass('d-none');
+                } else if (this.value == 'No') {
+                    $("#reg_relative_passport_no").addClass('d-none');
+                }
+            });
         });
-    });
-</script>
-{{-- Anual Amount Others --}}
-<script>
-    $(document).ready(function() {
-        $('input[type=radio][name=annually_fund_amount]').change(function() {
-            if (this.value == 'other') {
-                $("#other_amount").removeClass('d-none');
-            } else {
-                $("#other_amount").addClass('d-none');
-            }
+    </script>
+    {{-- Anual Amount Others --}}
+    <script>
+        $(document).ready(function() {
+            $('input[type=radio][name=annually_fund_amount]').change(function() {
+                if (this.value == 'other') {
+                    $("#other_amount").removeClass('d-none');
+                } else {
+                    $("#other_amount").addClass('d-none');
+                }
+            });
         });
-    });
-</script>
-{{-- Signature Pad JS --}}
+    </script>
+    {{-- Signature Pad JS --}}
+
+
+    <script>
+        $(".phone_number").each(function(index) {
+            selector = "#" + $(this).attr('id')
+            console.log(selector);
+            loadPhoneValidator(selector);
+        });
+
+        function loadPhoneValidator(selector = ".phone_number") {
+
+            var input = document.querySelector(selector);
+            var iti = window.intlTelInput(input, {
+                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/utils.js",
+            });
+            window.iti = iti;
+        }
+    </script>
 @endpush

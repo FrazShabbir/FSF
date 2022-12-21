@@ -89,6 +89,18 @@ class ApplicationController extends Controller
         ->with('type','Pending');
     }
 
+    public function pendingApproval(){
+        
+        if (! auth()->user()->hasPermissionTo('Approve Applications')) {
+            abort(403);
+        }
+        
+        $applications = Application::where('status', 'PENDING-APPROVAL')->get()->count();
+        return view('backend.applications.index')
+        ->with('applications', $applications)
+        ->with('type','Pending Approval');
+
+    }
     public function approvedApplications()
     {
         if (! auth()->user()->hasPermissionTo('Read Applications')) {

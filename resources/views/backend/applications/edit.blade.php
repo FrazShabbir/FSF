@@ -119,6 +119,7 @@
                                         <select type="text" name="status" id="" class="form-control">
                                             @can('Read Applications')
                                             <option value="PENDING" {{$application->status=='PENDING'?'selected':''}} >PENDING</option>
+                                            <option value="PENDING-APPROVAL" {{$application->status=='PENDING-APPROVAL'?'selected':''}} >Send For APPROVAL</option>
                                             @endcan
                                             @can('Renewable Applications')
                                             <option value="RENEWABLE" {{$application->status=='RENEWABLE'?'selected':''}} >RENEWABLE</option>

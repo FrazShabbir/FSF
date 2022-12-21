@@ -9,11 +9,13 @@ use App\Models\ApplicationComment;
 use App\Models\Country;
 use App\Models\Community;
 use App\Models\Province;
+use App\Models\RenewApplication;
 use App\Models\City;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Image;
 use Twilio\Rest\Client;
+use Carbon\Carbon;
 
 class EnrollmentController extends Controller
 {
@@ -176,6 +178,7 @@ class EnrollmentController extends Controller
             $application->annually_fund_amount=$request->annually_fund_amount;
             $application->declaration_confirm=$request->declaration_confirm??1;
             $application->user_signature=$request->user_signature;
+            $application->status='PENDING';
 
             // if ($request->user_signature) {
         //     $request->validate([
@@ -205,7 +208,7 @@ class EnrollmentController extends Controller
             $comment = new ApplicationComment();
             $comment->application_id = $application->id;
             $comment->comment = 'Application Submitted Successfully';
-            $comment->status = 'SUBMITTED';
+            $comment->status = $application->status;
             $comment->save();
 
             

@@ -65,7 +65,7 @@
                                                 Bank Name:
                                             </b>
                                             <span>
-                                                {{ $account->bank_name }}
+                                                {{ $account->bank }}
                                             </span>
                                         </p>
                                     </div>
@@ -89,7 +89,7 @@
                                                 Account Type:
                                             </b>
                                             <span>
-                                                {{ ucfirst($account->account_type) }}
+                                                {{ ucfirst($account->type) }}
                                             </span>
                                         </p>
                                     </div>

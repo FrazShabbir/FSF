@@ -58,6 +58,14 @@ return [
             'Delete Office',
             'Export Office',
         ],
+        'Hierarchy' => [
+            'Create Hierarchy',
+            'Update Hierarchy',
+            'Read Hierarchy',
+            'Delete Hierarchy',
+            'Export Hierarchy',
+        ],
+
         'Notifications' => [
           'Send Notifications',
         ],

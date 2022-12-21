@@ -125,22 +125,33 @@
                             href="{{ route('application.index') }}"><i class="las la-money-check-all"></i>All
                             Applications</a>
                     </li>
+                    @can('Approve Applications')
+                    <li class="{{ request()->route()->getName() == 'application.index'? 'active': '' }}"><a
+                        href="{{ route('application.index') }}"><i class="las la-money-check-all"></i>Pending
+                        Approvals</a>
+                </li> 
+                    @endcan
+
+
                     <li>
                         <a href="{{ route('applications.closed') }}"> <i class="las la-th-list"></i>Closed Applications</a>
                     </li>
+
                     <li>
-                        <a href="{{ route('applications.pending') }}"> <i class="las la-th-list"></i>Pending
+                        <a href="{{ route('applications.pending') }}"> <i class="las la-th-list"></i>New
                             Applications</a>
                     </li>
 
                     <li>
-                        <a href="{{ route('applications.requested.renewal') }}"> <i class="las la-th-list"></i>Renewal Requested
-                            </a>
+                        <a href="{{ route('applications.requested.renewal') }}"> <i class="las la-th-list"></i>Renewal
+                            Requested
+                        </a>
                     </li>
 
                     <li>
-                        <a href="{{ route('applications.renewal') }}"> <i class="las la-th-list"></i>Renewable Applications
-                            </a>
+                        <a href="{{ route('applications.renewal') }}"> <i class="las la-th-list"></i>Renewable
+                            Applications
+                        </a>
                     </li>
 
                     <li>
@@ -190,22 +201,27 @@
         {{-- SETTING END --}}
         @if (getuser()->hasRole('Super Admin'))
             {{-- Heirarchy ONLY FOR SUPER ADMIN --}}
-            <li>
-                <a href="#hierarchy" class="iq-waves-effect collapsed" data-toggle="collapse"><i
-                        class="las la-sitemap iq-arrow-left"></i><span>Hierarchy</span><i
-                        class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                <ul id="hierarchy" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                    <li class=""><a href="{{ route('country.index') }}"><i class="las la-city"></i>Country</a>
-                    </li>
-                    <li class=""><a href="{{ route('community.index') }}"><i
-                                class="ri-database-line"></i>Community</a></li>
-                    <li class=""><a href="{{ route('province.index') }}"><i
-                                class="las la-building"></i>Province</a></li>
-                    <li class=""><a href="{{ route('city.index') }}"><i
-                                class="las la-map-marker-alt"></i>City</a></li>
-                </ul>
-            </li>
-            {{-- Heirarchy END --}}
+            @can('Read Hierarchy')
+                <li>
+                    <a href="#hierarchy" class="iq-waves-effect collapsed" data-toggle="collapse"><i
+                            class="las la-sitemap iq-arrow-left"></i><span>Hierarchy</span><i
+                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul id="hierarchy" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        <li class=""><a href="{{ route('country.index') }}"><i class="las la-city"></i>Country</a>
+                        </li>
+
+                        <li class=""><a href="{{ route('community.index') }}"><i
+                                    class="ri-database-line"></i>Community</a></li>
+                        <li class=""><a href="{{ route('province.index') }}"><i
+                                    class="las la-building"></i>Province</a></li>
+                        <li class=""><a href="{{ route('city.index') }}"><i
+                                    class="las la-map-marker-alt"></i>City</a></li>
+
+
+                    </ul>
+                </li>
+                {{-- Heirarchy END --}}
+            @endcan
         @endif
 
 
@@ -343,7 +359,7 @@
 
                                         @foreach (officeHOD() as $office)
                                             <li>
-                                                <a href="{{route('office.show',$office->office_code)}}">
+                                                <a href="{{ route('office.show', $office->office_code) }}">
                                                     <i class="las la-plus-circle"></i>{{ $office->name }}</a>
                                             </li>
                                         @endforeach
