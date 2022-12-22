@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Account;
+use App\Models\Country;
 use App\Models\AccountTransaction;
 use Illuminate\Support\Facades\DB;
 class AccountController extends Controller
@@ -84,8 +85,11 @@ class AccountController extends Controller
     public function edit($id)
     {
         $account = Account::where('code', $id)->first();
+        $countries = Country::where('status', 1)->get();
+
         return view('backend.accounts.edit')
-            ->with('account', $account);
+            ->with('account', $account)
+            ->with('countries', $countries);
     }
 
     /**
@@ -131,8 +135,12 @@ class AccountController extends Controller
     public function addAmount(Request $request, $id)
     {
         $request->validate([
-       'amount' => 'required',
+        'amount' => 'required',
         'details' => 'required',
+        'city' => 'required',
+        'province' => 'required',
+        'country' => 'required',
+        'community' => 'required',
         ]);
 
 
@@ -148,6 +156,10 @@ class AccountController extends Controller
                 'user_id'=> auth()->user()->id,
                 'account_id' => $account->id,
                 'debit'=>0,
+                'city_id'=>$request->city,
+                'province_id'=>$request->province,
+                'country_id'=>$request->country,
+                'community_id'=>$request->community,
                 'credit'=>$request->amount,
                 'balance'=>$account->balance,
                 'summary'=>'[SYSTEM CHANGE] Account Credited by '. auth()->user()->full_name. ' for '.$request->details,

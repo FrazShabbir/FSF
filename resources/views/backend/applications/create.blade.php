@@ -438,8 +438,7 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0  required"
                                                 for="province">Province</label>
                                             <div class="col-sm-12">
-                                                <select class="form-control" name="province" id="province_id" required
-                                                    value="{{ old('full_name') }}">
+                                                <select class="form-control" name="province" id="province_id" required>
                                                     <option selected value="">Select Your </option>
 
                                                 </select>

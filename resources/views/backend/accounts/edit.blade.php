@@ -110,6 +110,53 @@
                            <label for="details" class="required">Details</label>
                            <input type="text" class="form-control" value="" name="details">
                        </div>
+
+                       <div class="col-md-12 col-sm-12 mb-3">
+                        <label for="city" class="required">City</label>
+
+                        <select class="form-control" name="country" id="country_id" required>
+                            <option selected value="" disabled>Select Your Country </option>
+                            @foreach ($countries as $country)
+                                <option value="{{ $country->id }}">
+                                    {{ $country->name }}</option>
+                            @endforeach
+                        </select>
+                        </div>
+
+                        
+                        <div class="col-md-12 col-sm-12 mb-3">
+                            <label for="community" class="required">Community</label>
+    
+                            <select class="form-control" name="community" id="community" required>
+                                <option selected value="dsds">Select Your Community</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-12 col-sm-12 mb-3">
+                            <label for="community" class="required">province</label>
+    
+                            <select class="form-control" name="province" id="province_id" required>
+                                <option selected value="">Select Your </option>
+
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-12 col-sm-12 mb-3">
+                            <label for="city" class="required">City</label>
+    
+                            <select class="form-control" name="city" id="city_id" required>
+                                <option selected value="">Select Your
+                                    City
+                                </option>
+
+                            </select>
+                        </div>
+
+
+                     
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -128,4 +175,83 @@
 @endsection
 
 @push('js')
+
+<script>
+    $(document).ready(function() {
+        $('#country_id').on('change', function() {
+
+            var country_id = this.value;
+            $("#community").html('');
+            $.ajax({
+                url: "{{ route('get.communities') }}",
+                type: "POST",
+                data: {
+                    country_id: country_id,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#community').html(
+                        '<option value="">-- Select community --</option>');
+                    $.each(result.community, function(key, value) {
+                        $("#community").append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+        });
+
+        /*------------------------------------------
+        --------------------------------------------
+        Center Dropdown Change Event
+        --------------------------------------------
+        --------------------------------------------*/
+        $('#community').on('change', function() {
+            var community_id = this.value;
+            $("#province_id").html('');
+            $.ajax({
+                url: "{{ route('get.provinces') }}",
+                type: "POST",
+                data: {
+                    community_id: community_id,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#province_id').html(
+                        '<option value="">-- Select Province --</option>');
+                    $.each(result.provinces, function(key, value) {
+                        $("#province_id").append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+        });
+
+
+        $('#province_id').on('change', function() {
+            var province_id = this.value;
+            $("#city_id").html('');
+            $.ajax({
+                url: "{{ route('get.cities') }}",
+                type: "POST",
+                data: {
+                    province_id: province_id,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#city_id').html('<option value="">-- Select Province --</option>');
+                    $.each(result.cities, function(key, value) {
+                        $("#city_id").append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+        });
+
+
+    });
+</script>
+
 @endpush

@@ -139,6 +139,7 @@ class ReportController extends Controller
             $area = City::where('id', $place->city_id)->first();
             $debit[$area->name] = $place->debit;
         }
+        
     //    $transaction_credit = AccountTransaction::select(DB::raw('SUM(credit) as credit'), DB::raw('MONTH(created_at) as month'))
     //         ->groupBy('month')
     //         ->get(['credit', 'month']);
