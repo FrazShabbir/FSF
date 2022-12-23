@@ -241,10 +241,83 @@
                     <li class=""><a href="{{ route('report.cities') }}"><i
                                 class="las la-map-marker-alt"></i>Cities</a></li>
 
+
                 </ul>
             </li>
             {{-- Heirarchy END --}}
         @endif
+
+        @canany(['Read Statements'])
+        <li @if (in_array(request()->route()->getName(),
+            [
+                'reports.create',
+                'reports.edit',
+                'reports.index',
+                'reports.show',
+                'report.ThreeMledger',
+                'report.SixMledger',
+                'report.TewelveMledger',
+                'report.ledgerByAccount',
+            ])) class='active' @endif>
+            <a href="#ledgers" class="iq-waves-effect" data-toggle="collapse"
+                @if (in_array(request()->route()->getName(),
+                    [
+                        'reports.create',
+                        'reports.edit',
+                        'reports.index',
+                        'reports.show',
+                        'report.ThreeMledger',
+                        'report.SixMledger',
+                        'report.TewelveMledger',
+                    ])) aria-expanded="true" @else aria-expanded="false" @endif><i
+                    class="las la-book iq-arrow-left"></i><span>Statements</span><i
+                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+            <ul id="ledgers" class="iq-submenu collapse " data-parent="#iq-sidebar-toggle" style="">
+
+                <li>
+                    <ul>
+                        <li class="ledgers">
+                            <a href="#incomevoucher" class="iq-waves-effect collapse" data-toggle="collapse"
+                                aria-expanded="false"><span class="ripple rippleEffect"
+                                    style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                                    class="ri-play-circle-line"></i><span>Vouchers Statement</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                            <ul id="incomevoucher" class="iq-submenu iq-submenu-data collapse" style="">
+                                <li><a href="{{ route('report.ThreeMledger') }}"><i
+                                            class="ri-record-circle-line"></i>Last 3 Months</a></li>
+                                <li><a href="{{ route('report.SixMledger') }}"><i
+                                            class="ri-record-circle-line"></i>Last 6 Months</a></li>
+                                <li><a href="{{ route('report.TewelveMledger') }}"><i
+                                            class="ri-record-circle-line"></i>Last 12 Montns</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </li>
+
+                <li><a href="{{ route('report.ledger') }}"><i class="ri-record-circle-line"></i>Ledger</a></li>
+                {{-- <li><a href="{{ route('report.generator') }}"><i class="ri-record-circle-line"></i>Master Report
+                        Generator</a></li> --}}
+
+
+                <li class="ledgers">
+                    <a href="#accountsList" class="iq-waves-effect collapsed" data-toggle="collapse"
+                        aria-expanded="false"><span class="ripple rippleEffect"
+                            style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
+                            class="ri-play-circle-line"></i><span>Accounts</span><i
+                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul id="accountsList" class="iq-submenu iq-submenu-data collapse" style="">
+                        @foreach (getAccounts() as $account)
+                            <li class="{{ request()->route()->getName() == 'report.ledgerByAccount'? 'active': '' }}">
+                                <a href="{{ route('report.ledgerByAccount', $account->code) }}"><i
+                                        class="ri-record-circle-line"></i>{{ $account->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    @endcanany
 
         @can('Send Notifications')
             <li class="bg-primary  {{ request()->route()->getName() == 'notification.create'? 'active': '' }}">

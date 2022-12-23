@@ -9,8 +9,9 @@ use App\Models\City;
 use App\Models\Province;
 use App\Models\Community;
 use App\Models\Country;
+use App\Models\Account;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 class ReportController extends Controller
 {
     public function reportCountries()
@@ -155,4 +156,141 @@ class ReportController extends Controller
             ->with('debit_transactions', $debit_transactions)
             ->with('area','Cities');
     }
+
+    public function ledger(Request $request)
+    {
+        //  dd($request->all());
+
+        $transactions = AccountTransaction::when(!empty(request()->input('date_from')), function ($q) {
+            return $q->whereBetween('created_at', [date(request()->date_from), date(request()->date_to)]);
+        })
+
+        ->when(!empty(request()->input('account')), function ($q) {
+            return $q->where('account_id', '=', request()->input('account'));
+        })
+        ->orderBy('id', 'ASC')
+        ->get();
+        // dd($transactions);
+        $accounts = Account::all();
+        //$transactions = AccountTransaction::all();
+        return view('backend.journals.ledger')
+        ->with('transactions', $transactions)
+        ->with('accounts', $accounts);
+    }
+
+
+    public function ledgerByAccount(Request $request, $id)
+    {
+        $account = Account::where('code', $id)->first();
+        // $transactions = AccountTransaction::where('account_id', $account->id)->get();
+
+
+
+        $transactions = AccountTransaction::when(!empty(request()->input('date_from')), function ($q) {
+            return $q->whereBetween('created_at', [date(request()->date_from), date(request()->date_to)]);
+        })
+
+        ->when(!empty(request()->input('account')), function ($q) {
+            return $q->where('account_id', '=', request()->input('account'));
+        })
+        ->orderBy('id', 'ASC')
+        ->get();
+
+
+        $opening_balance = $account->balance;
+        $closing_balance = $account->balance;
+
+        if ($transactions->count() > 0) {
+            $opening_balance = $transactions[0]->balance - $transactions[0]->credit + $transactions[0]->debit;
+
+            //$opening_balance = $transactions->first()->amount;
+            $closing_balance = $transactions->last()->amount;
+        }
+        //dd($opening_balance);
+        return view('backend.journals.accounts.ledger')
+        ->with('transactions', $transactions)
+        ->with('account', $account)
+        ->with('opening_balance', $opening_balance);
+    }
+
+
+    public function ledgerOfSixMonths(Request $request)
+    {
+        // dd($request->all());
+        $transactions = AccountTransaction::whereBetween('created_at', [Carbon::now()->subMonth(6), Carbon::now()])
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        $accounts = Account::all();
+        //$transactions = AccountTransaction::all();
+        return view('backend.journals.ledger')
+        ->with('transactions', $transactions)
+        ->with('accounts', $accounts);
+    }
+    public function ledgerOfThreeMonths(Request $request)
+    {
+        // dd($request->all());
+        $transactions = AccountTransaction::whereBetween('created_at', [Carbon::now()->subMonth(3), Carbon::now()])
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        $accounts = Account::all();
+        //$transactions = AccountTransaction::all();
+        return view('backend.journals.ledger')
+        ->with('transactions', $transactions)
+        ->with('accounts', $accounts);
+    }
+    public function ledgerOfTewelveMonths(Request $request)
+    {
+        // dd($request->all());
+        $transactions = AccountTransaction::whereBetween('created_at', [Carbon::now()->subMonth(12), Carbon::now()])
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        $accounts = Account::all();
+        //$transactions = AccountTransaction::all();
+        return view('backend.journals.ledger')
+        ->with('transactions', $transactions)
+        ->with('accounts', $accounts);
+    }
+
+    public function masterReport()
+    {
+        $accounts = Account::where('status', 1)->get();
+        return view('backend.journals.masterLedger')
+        ->with('accounts', $accounts);
+    }
+
+    public function masterReportRequest(Request $request)
+    {
+        // dd($request->all());
+         $arr = [];
+        // add all values to array
+        foreach ($request->all() as $key => $value) {
+            $arr[] = $key;
+        }
+        
+        $transactions = AccountTransaction::when(!empty(request()->input('date_from')), function ($q) {
+            return $q->whereBetween('created_at', [date(request()->date_from), date(request()->date_to)]);
+        })
+        ->when(!empty(request()->input('date_from')), function ($q) {
+            return $q->where('created_at', '=', request()->input('date_from'));
+        })
+        ->when(!empty(request()->input('date_to')), function ($q) {
+            return $q->where('created_at', '=', request()->input('date_to'));
+        })
+        ->when(!empty(request()->input('document_date')), function ($q) {
+            return $q->where('document_date', '=', request()->input('document_date'));
+        })
+        ->when(!empty(request()->input('account_id')), function ($q) {
+            return $q->where('account_id', '=', request()->input('account_id'));
+        })
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('backend.journals.masterDownload')
+        ->with('transactions', $transactions)
+        ->with('arr', $arr);
+    }
+
 }

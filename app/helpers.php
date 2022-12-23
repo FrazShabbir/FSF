@@ -14,6 +14,7 @@ use App\Models\Community;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\Office;
+use App\Models\Account;
 
 if (! function_exists('fromSettings')) {
     function fromSettings(string $key, $alternative = null)
@@ -415,4 +416,13 @@ if (! function_exists('SendMessage')) {
             }
         }
     }
+
+    if (! function_exists('getAccounts')) {
+        function getAccounts()
+        {
+            $accounts = Account::all();
+            return $accounts;
+        }
+    }
+
 }

@@ -70,6 +70,12 @@ return [
           'Send Notifications',
         ],
 
+        'Statements' => [
+            'Read Statements',
+            'Export Locations',
+        ],
+        
+
     ],
 
     'Regions'=>[

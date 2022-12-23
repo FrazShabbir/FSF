@@ -56,7 +56,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
     Route::delete('account/{id}', [AccountController::class, 'destroy'])->name('account.destroy')->middleware(['can:Delete Accounts']);
 
     Route::post('account/topup/{id}/save', [AccountController::class, 'addAmount'])->name('account.topup')->middleware(['can:Update Accounts']);
-
+    Route::post('account/expense/{id}/save', [AccountController::class, 'payAmount'])->name('account.expense')->middleware(['can:Update Accounts']);
+    
     
 
     Route::get('offices', [OfficeController::class, 'index'])->name('office.index')->middleware(['can:Read Office']);
@@ -87,6 +88,20 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
     Route::get('reports/communities', [ReportController::class, 'reportCommunities'])->name('report.communities');
     Route::get('reports/provinces', [ReportController::class, 'reportProvinces'])->name('report.provinces');
     Route::get('reports/cities', [ReportController::class, 'reportCities'])->name('report.cities');
+
+
+    Route::get('ledger', [ReportController::class, 'ledger'])->name('report.ledger');
+
+    // Route::get('master-report/generator', [ReportController::class, 'masterReport'])->name('report.generator');
+    // Route::post('request/master-report/generator', [ReportController::class, 'masterReportRequest'])->name('master.report.request');
+
+    Route::get('ledger/account/{id}', [ReportController::class, 'ledgerByAccount'])->name('report.ledgerByAccount');
+    
+    Route::get('three-months', [ReportController::class, 'ledgerOfThreeMonths'])->name('report.ThreeMledger');
+    Route::get('ledger/six-months', [ReportController::class, 'ledgerOfSixMonths'])->name('report.SixMledger');
+    Route::get('ledgertewelve-months', [ReportController::class, 'ledgerOfTewelveMonths'])->name('report.TewelveMledger');    
+
+
 
 });
 require __DIR__.'/auth.php';
