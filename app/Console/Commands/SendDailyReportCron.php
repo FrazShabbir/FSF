@@ -7,6 +7,7 @@ use App\Models\User;
 use Mail;
 use \Carbon\Carbon;
 use App\Mail\SendDailyReport;
+use App\Jobs\SendDailyReportsJob;
 
 class SendDailyReportCron extends Command
 {
@@ -37,7 +38,8 @@ class SendDailyReportCron extends Command
         {
             $email = $user->email;
 
-            Mail::to($email)->send(new SendDailyReport($user));
+            dispatch(new SendDailyReportsJob($user));
+
         }
 
         // return 0;

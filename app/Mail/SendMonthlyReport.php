@@ -9,17 +9,17 @@ use Illuminate\Queue\SerializesModels;
 
 class SendMonthlyReport extends Mailable
 {
-    use Queueable, SerializesModels;
-    public $details;
-
+    use Queueable;
+    use SerializesModels;
+    private $user;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($user)
     {
-        $this->details = $details;
+        $this->user = $user;
     }
 
     /**
@@ -29,6 +29,8 @@ class SendMonthlyReport extends Mailable
      */
     public function build()
     {
-        return $this->subject('Your Daily Report')
-                    ->view('backend.emails.monthly_report');    }
+        return $this->subject('Your Monthly Report')
+        ->view('backend.emails.monthly_report')
+        ->with('user', $this->user);
+    }
 }

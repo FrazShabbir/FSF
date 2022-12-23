@@ -10,16 +10,16 @@ use Illuminate\Queue\SerializesModels;
 class SendDailyReport extends Mailable
 {
     use Queueable, SerializesModels;
-    public $details;
+    private $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($user)
     {
-        $this->details = $details;
+         $this->user = $user;
     }
 
 
@@ -31,6 +31,7 @@ class SendDailyReport extends Mailable
     public function build()
     {
         return $this->subject('Your Daily Report')
-                    ->view('backend.emails.daily_report');
+        ->view('backend.emails.daily_report')
+        ->with('user', $this->user);
     }
 }

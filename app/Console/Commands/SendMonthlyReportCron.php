@@ -7,6 +7,7 @@ use App\Models\User;
 use Mail;
 use \Carbon\Carbon;
 use App\Mail\SendMonthlyReport;
+use App\Jobs\SendMonthlyReportsJob;
 
 class SendMonthlyReportCron extends Command
 {
@@ -37,7 +38,7 @@ class SendMonthlyReportCron extends Command
         {
             $email = $user->email;
 
-            Mail::to($email)->send(new SendMonthlyReport($user));
+            dispatch(new SendMonthlyReportsJob($user));
         }
 
         // return 0;

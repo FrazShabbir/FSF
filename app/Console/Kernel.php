@@ -17,6 +17,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('renewal:cron')->everyMinute();
+        $schedule->command('dailyreport:cron')->everyMinute();
+        $schedule->command('monthlyreport:cron')->everyMinute();
         // ->monthlyOn(4, '15:00');	
     }
 
