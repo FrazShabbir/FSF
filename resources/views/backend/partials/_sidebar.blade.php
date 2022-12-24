@@ -280,7 +280,7 @@
                             <a href="#incomevoucher" class="iq-waves-effect collapse" data-toggle="collapse"
                                 aria-expanded="false"><span class="ripple rippleEffect"
                                     style="width: 204px; height: 204px; top: -80px; left: 59px;"></span><i
-                                    class="ri-play-circle-line"></i><span>Vouchers Statement</span><i
+                                    class="ri-play-circle-line"></i><span>Statements</span><i
                                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                             <ul id="incomevoucher" class="iq-submenu iq-submenu-data collapse" style="">
                                 <li><a href="{{ route('report.ThreeMledger') }}"><i

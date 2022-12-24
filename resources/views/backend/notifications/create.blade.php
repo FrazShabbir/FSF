@@ -19,6 +19,9 @@
                             <div class="iq-header-title">
                                 <h4 class="card-title">Notification</h4>
                             </div>
+                            <div>
+                                <a class="btn btn-primary" href="{{route('notification.index')}}">Previous Notifications</a>
+                            </div>
                         </div>
                         <div class="iq-card-body px-4">
                             <form action="{{ route('notification.store') }}" method="POST">

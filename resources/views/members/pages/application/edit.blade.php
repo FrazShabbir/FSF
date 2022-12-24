@@ -194,8 +194,8 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
-                                                        <input type="text" required class="form-control"
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
+                                                        <input type="tel" required class="form-control"
                                                             value="{{$application->phone ?? getuser()->phone ?? old('phone') }}" name="phone"
                                                             id="phone" placeholder="+34032032090932">
                                                     </div>
@@ -336,7 +336,7 @@
                                             <div class="row mb-5">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control"
                                                             value="{{ $application->s_relative_1_phone ?? old('s_relative_1_phone') }}"
                                                             name="s_relative_1_phone" id="s_relative_1_phone"
@@ -375,7 +375,7 @@
                                             <div class="row mb-5">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control"
                                                             value="{{ $application->s_relative_2_phone ?? old('s_relative_2_phone') }}"
                                                             name="s_relative_2_phone" id="s_relative_2_phone"
@@ -423,7 +423,7 @@
                                             <div class="row mb-5">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control"
                                                             value="{{ $application->n_relative_1_phone ?? old('n_relative_1_phone') }}"
                                                             name="n_relative_1_phone" id="n_relative_1_phone"
@@ -462,7 +462,7 @@
                                             <div class="row mb-5">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control"
                                                             value="{{ $application->n_relative_2_phone ?? old('n_relative_2_phone') }}"
                                                             name="n_relative_2_phone" id="n_relative_2_phone"
@@ -515,7 +515,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control"
                                                             value="{{ $application->rep_phone ?? old('rep_phone') }}" name="rep_phone"
                                                             id="rep_phone" placeholder="+34032032090932">
@@ -1130,4 +1130,14 @@
 
         });
     </script>
+
+
+<script>
+    $(document).ready(function(){
+        //check country code first in input field
+     $('.phone_number').keyup(function(){
+
+     })
+    })
+</script>
 @endpush

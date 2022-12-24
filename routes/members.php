@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'member'],function () {
     Route::get('my-profile/{username}', [ProfileController::class, 'myProfile'])->name('member.profile');//->middleware(['can:Read enrollments']);
     Route::put('my-profile/{username}/update', [ProfileController::class, 'profileUpdate'])->name('member.profile.update');//->middleware(['can:Update enrollments']);
 
+    Route::get('notifications', [ProfileController::class, 'notifications'])->name('member.notifications');//->middleware(['can:Read enrollments']);
+
     
 });
 require __DIR__.'/auth.php';

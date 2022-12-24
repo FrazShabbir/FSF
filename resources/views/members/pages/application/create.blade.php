@@ -218,7 +218,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control phone_number"
                                                             value="{{ getuser()->phone ?? old('phone') }}" name="phone"
                                                             id="phone" placeholder="+34032032090932">
@@ -354,7 +354,7 @@
                                             <div class="row mb-5">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control phone_number"
                                                             value="{{ old('s_relative_1_phone') }}"
                                                             name="s_relative_1_phone" id="s_relative_1_phone"
@@ -393,7 +393,7 @@
                                             <div class="row mb-5">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control phone_number"
                                                             value="{{ old('s_relative_2_phone') }}"
                                                             name="s_relative_2_phone" id="s_relative_2_phone"
@@ -441,7 +441,7 @@
                                             <div class="row mb-5">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control phone_number"
                                                             value="{{ old('n_relative_1_phone') }}"
                                                             name="n_relative_1_phone" id="n_relative_1_phone"
@@ -480,7 +480,7 @@
                                             <div class="row mb-5">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control phone_number"
                                                             value="{{ old('n_relative_2_phone') }}"
                                                             name="n_relative_2_phone" id="n_relative_2_phone"
@@ -533,7 +533,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Cell No.</label>
+                                                        <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
                                                         <input type="text" required class="form-control phone_number"
                                                             value="{{ old('rep_phone') }}" name="rep_phone"
                                                             id="rep_phone" placeholder="+34032032090932">
@@ -1154,13 +1154,16 @@
             selector = "#" + $(this).attr('id')
             console.log(selector);
             loadPhoneValidator(selector);
+           
         });
 
         function loadPhoneValidator(selector = ".phone_number") {
 
             var input = document.querySelector(selector);
             var iti = window.intlTelInput(input, {
+                initialCountry: "es",
                 utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/utils.js",
+                
             });
             window.iti = iti;
         }

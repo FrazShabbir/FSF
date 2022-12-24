@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Image;
 use Twilio\Rest\Client;
 use Carbon\Carbon;
+use App\Service\Twilio\PhoneNumberLookupService;
 
 class EnrollmentController extends Controller
 {
@@ -57,6 +58,7 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
+     
         // dd($request->all());
         $request->validate([
          'passport_number' => 'required',
@@ -67,7 +69,7 @@ class EnrollmentController extends Controller
          'father_name'=>'required',
          'surname'=>'required',
          'gender'=>'required',
-         'phone'=>'required',
+         'phone' => ['required'],
          'dob'=>'required',
          'native_country'=>'required',
          'native_country_address'=>'required',
@@ -115,6 +117,7 @@ class EnrollmentController extends Controller
          'declaration_confirm'=>'required',
         ]);
 
+        dd('Test');
         try {
             //code...
             DB::beginTransaction();
@@ -636,7 +639,13 @@ class EnrollmentController extends Controller
             $comment->comment = 'Application Submitted for Renewal';
             $comment->status = 'RENEWAL-REQUESTED';
             $comment->save();
+
             DB::commit();
+            $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been submitted successfully for Renewal with Application ID  ' . $application->application_id . '. You will be notified once your application is approved. You will be notified once his application is approved.';
+            $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.Now he applied for Renewal of his membership. You will be notified once his application is approved.';
+            SendMessage($application->phone,$applicant_message);
+            SendMessage($application->rep_phone,$rep_messsage);
+            
             alert()->success('Application Submitted Successfully for Renewal');
             return redirect()->route('enrollment.index');
         } catch (\Throwable $th) {

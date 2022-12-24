@@ -44,6 +44,13 @@
         </li>
 
         <li>
+          <a href="{{route('member.notifications')}}">
+            <i class="now-ui-icons users_single-02"></i>
+            <p>Notifications</p>
+          </a>
+        </li>
+
+        <li>
           <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"role="button">
             <i class="now-ui-icons media-1_button-power"></i>
             <p>Logout</p>

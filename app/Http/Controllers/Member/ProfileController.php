@@ -42,4 +42,8 @@ class ProfileController extends Controller
         $user->save();
         return view('members.pages.profile.profile');
     }
+
+    public function notifications(){
+        return view('members.pages.notification.index');
+    }
 }
