@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Notification;
 class ProfileController extends Controller
 {
     public function myProfile($username)
@@ -44,6 +44,8 @@ class ProfileController extends Controller
     }
 
     public function notifications(){
-        return view('members.pages.notification.index');
+        $notifications = Notification::get();
+        return view('members.pages.notification.index')
+            ->with('notifications', $notifications);
     }
 }

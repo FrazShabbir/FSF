@@ -73,6 +73,25 @@
 @endsection
 
 @push('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css"
+integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw=="
+crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"
+integrity="sha512-+gShyB8GWoOiXNwOlBaYXdLTiZt10Iy6xjACGadpqMs20aJOoh+PJt3bwUVA6Cefe7yF7vblX6QwyXZiVwTWGg=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+           .form-group label {
+    font-weight: 500;
+}
+
+.radius-10 {
+    border-radius: 10px;
+}
+
+.iti {
+    width: 100%;
+}
+</style>
 @endpush
 
 @section('content')
@@ -195,7 +214,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
-                                                        <input type="tel" required class="form-control"
+                                                        <input type="tel" required class="form-control phone_number"
                                                             value="{{$application->phone ?? getuser()->phone ?? old('phone') }}" name="phone"
                                                             id="phone" placeholder="+34032032090932">
                                                     </div>
@@ -337,7 +356,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ $application->s_relative_1_phone ?? old('s_relative_1_phone') }}"
                                                             name="s_relative_1_phone" id="s_relative_1_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -376,7 +395,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ $application->s_relative_2_phone ?? old('s_relative_2_phone') }}"
                                                             name="s_relative_2_phone" id="s_relative_2_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -424,7 +443,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ $application->n_relative_1_phone ?? old('n_relative_1_phone') }}"
                                                             name="n_relative_1_phone" id="n_relative_1_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -463,7 +482,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ $application->n_relative_2_phone ?? old('n_relative_2_phone') }}"
                                                             name="n_relative_2_phone" id="n_relative_2_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -516,7 +535,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" required class="form-control phone_number"
                                                             value="{{ $application->rep_phone ?? old('rep_phone') }}" name="rep_phone"
                                                             id="rep_phone" placeholder="+34032032090932">
                                                     </div>
@@ -1136,8 +1155,29 @@
     $(document).ready(function(){
         //check country code first in input field
      $('.phone_number').keyup(function(){
-
+        let letter = $(this).charAt(1);
+alert(letter)
      })
     })
+</script>
+
+<script>
+    $(".phone_number").each(function(index) {
+        selector = "#" + $(this).attr('id')
+        console.log(selector);
+        loadPhoneValidator(selector);
+       
+    });
+
+    function loadPhoneValidator(selector = ".phone_number") {
+
+        var input = document.querySelector(selector);
+        var iti = window.intlTelInput(input, {
+            initialCountry: "es",
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/utils.js",
+            
+        });
+        window.iti = iti;
+    }
 </script>
 @endpush
