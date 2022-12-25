@@ -16,13 +16,18 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', function(){
-    if(auth()->check()){
-        return redirect()->route('dashboard');
-    }else{
-        return redirect()->route('login');
-    }
-})->name('index');
+// Route::get('/', function(){
+//     if(auth()->check()){
+//         return redirect()->route('dashboard');
+//     }else{
+//         return redirect()->route('login');
+//     }
+// })->name('index');
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
 
 Route::group(['middleware' => ['auth']],function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');

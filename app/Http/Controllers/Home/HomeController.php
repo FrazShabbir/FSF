@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
-        return view('members.pages.index');
+    public function index()
+    {
+        return view('frontend.pages.index');
+    }
+    public function contact()
+    {
+        return view('frontend.pages.contact');
     }
 
  
