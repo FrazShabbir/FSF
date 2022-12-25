@@ -26,6 +26,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Models\RenewApplication;
+
 class ApplicationController extends Controller
 {
     /**
@@ -38,7 +39,7 @@ class ApplicationController extends Controller
         $applications = Application::all();
         return view('backend.applications.index')
         ->with('applications', $applications)
-        ->with('type','All');
+        ->with('type', 'All');
     }
 
     public function closedApplications()
@@ -49,7 +50,7 @@ class ApplicationController extends Controller
         $applications = Application::where('status', 'PERMANENT-CLOSED')->get();
         return view('backend.applications.index')
         ->with('applications', $applications)
-        ->with('type','Closed');
+        ->with('type', 'Closed');
         ;
     }
 
@@ -61,10 +62,10 @@ class ApplicationController extends Controller
         $applications = Application::where('status', 'RENEWABLE')->get();
         return view('backend.applications.index')
         ->with('applications', $applications)
-        ->with('type','Renewable');
+        ->with('type', 'Renewable');
         ;
     }
-    
+
 
     public function renewalRequestedApplications()
     {
@@ -74,7 +75,7 @@ class ApplicationController extends Controller
         $applications = Application::where('status', 'RENEWAL-REQUESTED')->get();
         return view('backend.applications.index')
         ->with('applications', $applications)
-        ->with('type','Renewal Requested');
+        ->with('type', 'Renewal Requested');
         ;
     }
 
@@ -86,20 +87,19 @@ class ApplicationController extends Controller
         $applications = Application::where('status', 'PENDING')->get();
         return view('backend.applications.index')
         ->with('applications', $applications)
-        ->with('type','Pending');
+        ->with('type', 'Pending');
     }
 
-    public function pendingApproval(){
-        
+    public function pendingApproval()
+    {
         if (! auth()->user()->hasPermissionTo('Approve Applications')) {
             abort(403);
         }
-        
+
         $applications = Application::where('status', 'PENDING-APPROVAL')->get()->count();
         return view('backend.applications.index')
         ->with('applications', $applications)
-        ->with('type','Pending Approval');
-
+        ->with('type', 'Pending Approval');
     }
     public function approvedApplications()
     {
@@ -109,7 +109,7 @@ class ApplicationController extends Controller
         $applications = Application::where('status', 'APPROVED')->get();
         return view('backend.applications.index')
         ->with('applications', $applications)
-        ->with('type','Approved');
+        ->with('type', 'Approved');
     }
 
     public function rejectedApplications()
@@ -120,7 +120,7 @@ class ApplicationController extends Controller
         $applications = Application::where('status', 'REJECTED')->get();
         return view('backend.applications.index')
         ->with('applications', $applications)
-        ->with('type','Rejected');
+        ->with('type', 'Rejected');
     }
 
     /**
@@ -616,10 +616,16 @@ class ApplicationController extends Controller
             $application->status = $request->status;
             $application->save();
 
-            if($application->renewal_date==null){
-                if($request->status=='APPROVED'){
+
+
+            if ($application->renewal_date==null) {
+                if ($request->status=='APPROVED') {
                     $application->renewal_date = date('Y-m-d', strtotime('+1 year'));
                     $application->save();
+                    $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been Approved successfully with Application ID  ' . $application->application_id . '.';
+                    $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '. And his Application has been Approved successfully.';
+                    SendMessage($application->phone, $applicant_message);
+                    SendMessage($application->rep_phone, $rep_messsage);
                 }
             }
 
@@ -660,7 +666,7 @@ class ApplicationController extends Controller
             }
 
             DB::commit();
-            $accounts = Account::where('status',1)->get();
+            $accounts = Account::where('status', 1)->get();
             return view('backend.applications.closing.closing')
             ->with('application', $application)
             ->with('accounts', $accounts);

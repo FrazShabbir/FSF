@@ -194,16 +194,24 @@ if (! function_exists('SendMessage')) {
             $auth_token = env("TWILIO_TOKEN");
             $twilio_number = env("TWILIO_FROM");
 
+            if (substr($number, 0, 1) != '+') {
+                $number = '+'.$number;
+               
+            }
+
             $client = new Client($account_sid, $auth_token);
             $client->messages->create($number, [
                 'from' => $twilio_number,
                 'body' => $message
-                // 'body' => 'Your Application at ' . env('APP_NAME') . ' has been submitted successfully. Your Application ID is ' . $application->application_id . '.'
                 ]);
         } catch (\Throwable $th) {
             throw $th;
+            dd($th);
         }
     }
+
+
+    // 'body' => 'Your Application at ' . env('APP_NAME') . ' has been submitted successfully. Your Application ID is ' . $application->application_id . '.'
 
     if (! function_exists('allApplicationsCount')) {
         function allApplicationsCount()
@@ -352,7 +360,7 @@ if (! function_exists('SendMessage')) {
             return Application::where('city_id', $office->city_id)->get();
         }
     }
-    
+
     if (! function_exists('getPendingApplications')) {
         function getPendingApplications()
         {
@@ -424,5 +432,4 @@ if (! function_exists('SendMessage')) {
             return $accounts;
         }
     }
-
 }
