@@ -231,6 +231,39 @@ class ApplicationController extends Controller
                 $passport_number = $find_relative->passport_number;
             }
 
+            $phone = $request->phone;
+            $rep_phone = $request->rep_phone;
+            $s_relative_1_phone = $request->s_relative_1_phone;
+            $s_relative_2_phone = $request->s_relative_2_phone;
+            $n_relative_1_phone = $request->n_relative_1_phone;
+            $n_relative_2_phone = $request->n_relative_2_phone;
+
+            if (substr($request->phone, 0, 1) != '+') {
+                $phone = '+'.$request->phone;
+               
+            }
+            if (substr($request->rep_phone, 0, 1) != '+') {
+                $rep_phone = '+'.$request->rep_phone;
+               
+            }
+            if (substr($request->s_relative_1_phone, 0, 1) != '+') {
+                $s_relative_1_phone = '+'.$request->s_relative_1_phone;
+               
+            }
+            if (substr($request->s_relative_2_phone, 0, 1) != '+') {
+                $s_relative_2_phone = '+'.$request->s_relative_2_phone;
+               
+            }
+            if (substr($request->n_relative_1_phone, 0, 1) != '+') {
+                $n_relative_1_phone = '+'.$request->n_relative_1_phone;
+               
+            }
+            if (substr($request->n_relative_2_phone, 0, 1) != '+') {
+                $n_relative_2_phone = '+'.$request->n_relative_2_phone;
+               
+            }
+
+
             $application = Application::create([
                 'application_id'=>'W-'.rand(11, 99).'-'.rand(111, 999).'-'.rand(11, 99),
                 'user_id'=>$user->id,
@@ -244,7 +277,7 @@ class ApplicationController extends Controller
 
 
                 'gender'=>$request->gender,
-                'phone'=>$request->phone,
+                'phone'=>$phone,
                 'dob'=>$request->dob,
                 'native_country'=>$request->native_country,
                 'native_country_address'=>$request->native_country_address,
@@ -261,23 +294,23 @@ class ApplicationController extends Controller
 
                 's_relative_1_name'=>$request->s_relative_1_name,
                 's_relative_1_relation'=>$request->s_relative_1_relation,
-                's_relative_1_phone'=>$request->s_relative_1_phone,
+                's_relative_1_phone'=>$s_relative_1_phone,
                 's_relative_1_address'=>$request->s_relative_1_address,
 
                 's_relative_2_name'=>$request->s_relative_2_name,
                 's_relative_2_relation'=>$request->s_relative_2_relation,
-                's_relative_2_phone'=>$request->s_relative_2_phone,
+                's_relative_2_phone'=>$s_relative_2_phone,
                 's_relative_2_address'=>$request->s_relative_2_address,
 
 
                 'n_relative_1_name'=>$request->n_relative_1_name,
                 'n_relative_1_relation'=>$request->n_relative_1_relation,
-                'n_relative_1_phone'=>$request->n_relative_1_phone,
+                'n_relative_1_phone'=>$n_relative_1_phone,
                 'n_relative_1_address'=>$request->n_relative_1_address,
 
                 'n_relative_2_name'=>$request->n_relative_2_name,
                 'n_relative_2_relation'=>$request->n_relative_2_relation,
-                'n_relative_2_phone'=>$request->n_relative_2_phone,
+                'n_relative_2_phone'=>$n_relative_2_phone,
                 'n_relative_2_address'=>$request->n_relative_2_address,
 
 
@@ -285,7 +318,7 @@ class ApplicationController extends Controller
                 'rep_name'=>$request->rep_name,
                 'rep_surname'=>$request->rep_surname,
                 'rep_passport_no'=>$request->rep_passport_no,
-                'rep_phone'=>$request->rep_phone,
+                'rep_phone'=>$rep_phone,
                 'rep_address'=>$request->rep_address,
                 'rep_confirmed'=>$request->rep_confirmed??'1',
 
@@ -460,6 +493,38 @@ class ApplicationController extends Controller
         try {
             db::beginTransaction();
 
+            $phone = $request->phone;
+            $rep_phone = $request->rep_phone;
+            $s_relative_1_phone = $request->s_relative_1_phone;
+            $s_relative_2_phone = $request->s_relative_2_phone;
+            $n_relative_1_phone = $request->n_relative_1_phone;
+            $n_relative_2_phone = $request->n_relative_2_phone;
+
+            if (substr($request->phone, 0, 1) != '+') {
+                $phone = '+'.$request->phone;
+               
+            }
+            if (substr($request->rep_phone, 0, 1) != '+') {
+                $rep_phone = '+'.$request->rep_phone;
+               
+            }
+            if (substr($request->s_relative_1_phone, 0, 1) != '+') {
+                $s_relative_1_phone = '+'.$request->s_relative_1_phone;
+               
+            }
+            if (substr($request->s_relative_2_phone, 0, 1) != '+') {
+                $s_relative_2_phone = '+'.$request->s_relative_2_phone;
+               
+            }
+            if (substr($request->n_relative_1_phone, 0, 1) != '+') {
+                $n_relative_1_phone = '+'.$request->n_relative_1_phone;
+               
+            }
+            if (substr($request->n_relative_2_phone, 0, 1) != '+') {
+                $n_relative_2_phone = '+'.$request->n_relative_2_phone;
+               
+            }
+
             $find_relative = Application::where('passport_number', $request->registered_relative_passport_no)->first();
             $registered = 0;
             if ($find_relative) {
@@ -470,7 +535,7 @@ class ApplicationController extends Controller
 
             $user->full_name = $request->full_name;
             $user->email = $request->email;
-            $user->phone = $request->phone;
+            $user->phone = $phone;
             $user->passport_number = $request->passport_number;
             $user->save();
 
@@ -495,23 +560,23 @@ class ApplicationController extends Controller
 
             $application->s_relative_1_name=$request->s_relative_1_name;
             $application->s_relative_1_relation=$request->s_relative_1_relation;
-            $application->s_relative_1_phone=$request->s_relative_1_phone;
+            $application->s_relative_1_phone=$s_relative_1_phone;
             $application->s_relative_1_address=$request->s_relative_1_address;
 
             $application->s_relative_2_name=$request->s_relative_2_name;
             $application->s_relative_2_relation=$request->s_relative_2_relation;
-            $application->s_relative_2_phone=$request->s_relative_2_phone;
+            $application->s_relative_2_phone=$s_relative_2_phone;
             $application->s_relative_2_address=$request->s_relative_2_address;
 
 
             $application->n_relative_1_name=$request->n_relative_1_name;
             $application->n_relative_1_relation=$request->n_relative_1_relation;
-            $application->n_relative_1_phone=$request->n_relative_1_phone;
+            $application->n_relative_1_phone=$n_relative_1_phone;
             $application->n_relative_1_address=$request->n_relative_1_address;
 
             $application->n_relative_2_name=$request->n_relative_2_name;
             $application->n_relative_2_relation=$request->n_relative_2_relation;
-            $application->n_relative_2_phone=$request->n_relative_2_phone;
+            $application->n_relative_2_phone=$n_relative_2_phone;
             $application->n_relative_2_address=$request->n_relative_2_address;
 
 
@@ -519,7 +584,7 @@ class ApplicationController extends Controller
             $application->rep_name=$request->rep_name;
             $application->rep_surname=$request->rep_surname;
             $application->rep_passport_no=$request->rep_passport_no;
-            $application->rep_phone=$request->rep_phone;
+            $application->rep_phone=$rep_phone;
             $application->rep_address=$request->rep_address;
             $application->rep_confirmed=$request->rep_confirmed??'1';
 
@@ -850,6 +915,38 @@ class ApplicationController extends Controller
 
         try {
             DB::beginTransaction();
+
+            $phone = $request->phone;
+            $rep_phone = $request->rep_phone;
+            $s_relative_1_phone = $request->s_relative_1_phone;
+            $s_relative_2_phone = $request->s_relative_2_phone;
+            $n_relative_1_phone = $request->n_relative_1_phone;
+            $n_relative_2_phone = $request->n_relative_2_phone;
+
+            if (substr($request->phone, 0, 1) != '+') {
+                $phone = '+'.$request->phone;
+               
+            }
+            if (substr($request->rep_phone, 0, 1) != '+') {
+                $rep_phone = '+'.$request->rep_phone;
+               
+            }
+            if (substr($request->s_relative_1_phone, 0, 1) != '+') {
+                $s_relative_1_phone = '+'.$request->s_relative_1_phone;
+               
+            }
+            if (substr($request->s_relative_2_phone, 0, 1) != '+') {
+                $s_relative_2_phone = '+'.$request->s_relative_2_phone;
+               
+            }
+            if (substr($request->n_relative_1_phone, 0, 1) != '+') {
+                $n_relative_1_phone = '+'.$request->n_relative_1_phone;
+               
+            }
+            if (substr($request->n_relative_2_phone, 0, 1) != '+') {
+                $n_relative_2_phone = '+'.$request->n_relative_2_phone;
+               
+            }
             $user = User::where('username', $id)->firstOrFail();
             $find_relative = Application::where('passport_number', $request->registered_relative_passport_no)->first();
             $registered = 0;
@@ -869,7 +966,7 @@ class ApplicationController extends Controller
                 'surname'=>$request->surname,
 
                 'gender'=>$request->gender,
-                'phone'=>$request->phone,
+                'phone'=>$phone,
                 'dob'=>$request->dob,
                 'native_country'=>$request->native_country,
                 'native_country_address'=>$request->native_country_address,
@@ -886,23 +983,23 @@ class ApplicationController extends Controller
 
                 's_relative_1_name'=>$request->s_relative_1_name,
                 's_relative_1_relation'=>$request->s_relative_1_relation,
-                's_relative_1_phone'=>$request->s_relative_1_phone,
+                's_relative_1_phone'=>$s_relative_1_phone,
                 's_relative_1_address'=>$request->s_relative_1_address,
 
                 's_relative_2_name'=>$request->s_relative_2_name,
                 's_relative_2_relation'=>$request->s_relative_2_relation,
-                's_relative_2_phone'=>$request->s_relative_2_phone,
+                's_relative_2_phone'=>$s_relative_2_phone,
                 's_relative_2_address'=>$request->s_relative_2_address,
 
 
                 'n_relative_1_name'=>$request->n_relative_1_name,
                 'n_relative_1_relation'=>$request->n_relative_1_relation,
-                'n_relative_1_phone'=>$request->n_relative_1_phone,
+                'n_relative_1_phone'=>$n_relative_1_phone,
                 'n_relative_1_address'=>$request->n_relative_1_address,
 
                 'n_relative_2_name'=>$request->n_relative_2_name,
                 'n_relative_2_relation'=>$request->n_relative_2_relation,
-                'n_relative_2_phone'=>$request->n_relative_2_phone,
+                'n_relative_2_phone'=>$n_relative_2_phone,
                 'n_relative_2_address'=>$request->n_relative_2_address,
 
 
@@ -910,7 +1007,7 @@ class ApplicationController extends Controller
                 'rep_name'=>$request->rep_name,
                 'rep_surname'=>$request->rep_surname,
                 'rep_passport_no'=>$request->rep_passport_no,
-                'rep_phone'=>$request->rep_phone,
+                'rep_phone'=>$rep_phone,
                 'rep_address'=>$request->rep_address,
                 'rep_confirmed'=>$request->rep_confirmed??'1',
 
@@ -1045,6 +1142,38 @@ class ApplicationController extends Controller
                 ]);
 
 
+                $phone = $request->phone;
+            $rep_phone = $request->rep_phone;
+            $s_relative_1_phone = $request->s_relative_1_phone;
+            $s_relative_2_phone = $request->s_relative_2_phone;
+            $n_relative_1_phone = $request->n_relative_1_phone;
+            $n_relative_2_phone = $request->n_relative_2_phone;
+
+            if (substr($request->phone, 0, 1) != '+') {
+                $phone = '+'.$request->phone;
+               
+            }
+            if (substr($request->rep_phone, 0, 1) != '+') {
+                $rep_phone = '+'.$request->rep_phone;
+               
+            }
+            if (substr($request->s_relative_1_phone, 0, 1) != '+') {
+                $s_relative_1_phone = '+'.$request->s_relative_1_phone;
+               
+            }
+            if (substr($request->s_relative_2_phone, 0, 1) != '+') {
+                $s_relative_2_phone = '+'.$request->s_relative_2_phone;
+               
+            }
+            if (substr($request->n_relative_1_phone, 0, 1) != '+') {
+                $n_relative_1_phone = '+'.$request->n_relative_1_phone;
+               
+            }
+            if (substr($request->n_relative_2_phone, 0, 1) != '+') {
+                $n_relative_2_phone = '+'.$request->n_relative_2_phone;
+               
+            }
+
             $application = Application::where('application_id', $id)->firstOrfail();
 
             $application->passport_number = $request->passport_number;
@@ -1054,7 +1183,7 @@ class ApplicationController extends Controller
             $application->father_name = $request->father_name;
             $application->surname = $request->surname;
             $application->gender=$request->gender;
-            $application->phone=$request->phone;
+            $application->phone=$phone;
             $application->dob=$request->dob;
             $application->native_country=$request->native_country;
             $application->native_country_address=$request->native_country_address;
@@ -1067,23 +1196,23 @@ class ApplicationController extends Controller
 
             $application->s_relative_1_name=$request->s_relative_1_name;
             $application->s_relative_1_relation=$request->s_relative_1_relation;
-            $application->s_relative_1_phone=$request->s_relative_1_phone;
+            $application->s_relative_1_phone=$s_relative_1_phone;
             $application->s_relative_1_address=$request->s_relative_1_address;
 
             $application->s_relative_2_name=$request->s_relative_2_name;
             $application->s_relative_2_relation=$request->s_relative_2_relation;
-            $application->s_relative_2_phone=$request->s_relative_2_phone;
+            $application->s_relative_2_phone=$s_relative_2_phone;
             $application->s_relative_2_address=$request->s_relative_2_address;
 
 
             $application->n_relative_1_name=$request->n_relative_1_name;
             $application->n_relative_1_relation=$request->n_relative_1_relation;
-            $application->n_relative_1_phone=$request->n_relative_1_phone;
+            $application->n_relative_1_phone=$n_relative_1_phone;
             $application->n_relative_1_address=$request->n_relative_1_address;
 
             $application->n_relative_2_name=$request->n_relative_2_name;
             $application->n_relative_2_relation=$request->n_relative_2_relation;
-            $application->n_relative_2_phone=$request->n_relative_2_phone;
+            $application->n_relative_2_phone=$n_relative_2_phone;
             $application->n_relative_2_address=$request->n_relative_2_address;
 
 
@@ -1091,7 +1220,7 @@ class ApplicationController extends Controller
             $application->rep_name=$request->rep_name;
             $application->rep_surname=$request->rep_surname;
             $application->rep_passport_no=$request->rep_passport_no;
-            $application->rep_phone=$request->rep_phone;
+            $application->rep_phone=$rep_phone;
             $application->rep_address=$request->rep_address;
             $application->rep_confirmed=$request->rep_confirmed;
 

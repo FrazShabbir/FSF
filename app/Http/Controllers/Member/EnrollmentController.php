@@ -121,6 +121,39 @@ class EnrollmentController extends Controller
         try {
             //code...
             DB::beginTransaction();
+
+            $phone = $request->phone;
+            $rep_phone = $request->rep_phone;
+            $s_relative_1_phone = $request->s_relative_1_phone;
+            $s_relative_2_phone = $request->s_relative_2_phone;
+            $n_relative_1_phone = $request->n_relative_1_phone;
+            $n_relative_2_phone = $request->n_relative_2_phone;
+
+            if (substr($request->phone, 0, 1) != '+') {
+                $phone = '+'.$request->phone;
+               
+            }
+            if (substr($request->rep_phone, 0, 1) != '+') {
+                $rep_phone = '+'.$request->rep_phone;
+               
+            }
+            if (substr($request->s_relative_1_phone, 0, 1) != '+') {
+                $s_relative_1_phone = '+'.$request->s_relative_1_phone;
+               
+            }
+            if (substr($request->s_relative_2_phone, 0, 1) != '+') {
+                $s_relative_2_phone = '+'.$request->s_relative_2_phone;
+               
+            }
+            if (substr($request->n_relative_1_phone, 0, 1) != '+') {
+                $n_relative_1_phone = '+'.$request->n_relative_1_phone;
+               
+            }
+            if (substr($request->n_relative_2_phone, 0, 1) != '+') {
+                $n_relative_2_phone = '+'.$request->n_relative_2_phone;
+               
+            }
+
             $application = new Application();
             $application->application_id= 'U-'.rand(11, 99).'-'.rand(111, 999).'-'.rand(11, 99);
             $application->user_id = auth()->user()->id;
@@ -132,7 +165,7 @@ class EnrollmentController extends Controller
             $application->father_name = $request->father_name;
             $application->surname = $request->surname;
             $application->gender=$request->gender;
-            $application->phone=$request->phone;
+            $application->phone=$phone;
             $application->dob=$request->dob;
             $application->native_country=$request->native_country;
             $application->native_country_address=$request->native_country_address;
@@ -145,23 +178,23 @@ class EnrollmentController extends Controller
 
             $application->s_relative_1_name=$request->s_relative_1_name;
             $application->s_relative_1_relation=$request->s_relative_1_relation;
-            $application->s_relative_1_phone=$request->s_relative_1_phone;
+            $application->s_relative_1_phone=$s_relative_1_phone;
             $application->s_relative_1_address=$request->s_relative_1_address;
 
             $application->s_relative_2_name=$request->s_relative_2_name;
             $application->s_relative_2_relation=$request->s_relative_2_relation;
-            $application->s_relative_2_phone=$request->s_relative_2_phone;
+            $application->s_relative_2_phone=$s_relative_2_phone;
             $application->s_relative_2_address=$request->s_relative_2_address;
 
 
             $application->n_relative_1_name=$request->n_relative_1_name;
             $application->n_relative_1_relation=$request->n_relative_1_relation;
-            $application->n_relative_1_phone=$request->n_relative_1_phone;
+            $application->n_relative_1_phone=$n_relative_1_phone;
             $application->n_relative_1_address=$request->n_relative_1_address;
 
             $application->n_relative_2_name=$request->n_relative_2_name;
             $application->n_relative_2_relation=$request->n_relative_2_relation;
-            $application->n_relative_2_phone=$request->n_relative_2_phone;
+            $application->n_relative_2_phone=$n_relative_2_phone;
             $application->n_relative_2_address=$request->n_relative_2_address;
 
 
@@ -169,7 +202,7 @@ class EnrollmentController extends Controller
             $application->rep_name=$request->rep_name;
             $application->rep_surname=$request->rep_surname;
             $application->rep_passport_no=$request->rep_passport_no;
-            $application->rep_phone=$request->rep_phone;
+            $application->rep_phone=$rep_phone;
             $application->rep_address=$request->rep_address;
             $application->rep_confirmed=$request->rep_confirmed??1;
 
@@ -346,6 +379,39 @@ class EnrollmentController extends Controller
         try {
             //code...
             DB::beginTransaction();
+
+            $phone = $request->phone;
+            $rep_phone = $request->rep_phone;
+            $s_relative_1_phone = $request->s_relative_1_phone;
+            $s_relative_2_phone = $request->s_relative_2_phone;
+            $n_relative_1_phone = $request->n_relative_1_phone;
+            $n_relative_2_phone = $request->n_relative_2_phone;
+
+            if (substr($request->phone, 0, 1) != '+') {
+                $phone = '+'.$request->phone;
+               
+            }
+            if (substr($request->rep_phone, 0, 1) != '+') {
+                $rep_phone = '+'.$request->rep_phone;
+               
+            }
+            if (substr($request->s_relative_1_phone, 0, 1) != '+') {
+                $s_relative_1_phone = '+'.$request->s_relative_1_phone;
+               
+            }
+            if (substr($request->s_relative_2_phone, 0, 1) != '+') {
+                $s_relative_2_phone = '+'.$request->s_relative_2_phone;
+               
+            }
+            if (substr($request->n_relative_1_phone, 0, 1) != '+') {
+                $n_relative_1_phone = '+'.$request->n_relative_1_phone;
+               
+            }
+            if (substr($request->n_relative_2_phone, 0, 1) != '+') {
+                $n_relative_2_phone = '+'.$request->n_relative_2_phone;
+               
+            }
+            
             $application = Application::where('application_id', $id)->firstOrfail();
             $old_rep_name = $application->rep_name;
             $old_rep_phone = $application->rep_phone;
@@ -357,7 +423,7 @@ class EnrollmentController extends Controller
             $application->father_name = $request->father_name;
             $application->surname = $request->surname;
             $application->gender=$request->gender;
-            $application->phone=$request->phone;
+            $application->phone=$phone;
             $application->dob=$request->dob;
             $application->native_country=$request->native_country;
             $application->native_country_address=$request->native_country_address;
@@ -370,23 +436,23 @@ class EnrollmentController extends Controller
 
             $application->s_relative_1_name=$request->s_relative_1_name;
             $application->s_relative_1_relation=$request->s_relative_1_relation;
-            $application->s_relative_1_phone=$request->s_relative_1_phone;
+            $application->s_relative_1_phone=$s_relative_1_phone;
             $application->s_relative_1_address=$request->s_relative_1_address;
 
             $application->s_relative_2_name=$request->s_relative_2_name;
             $application->s_relative_2_relation=$request->s_relative_2_relation;
-            $application->s_relative_2_phone=$request->s_relative_2_phone;
+            $application->s_relative_2_phone=$s_relative_2_phone;
             $application->s_relative_2_address=$request->s_relative_2_address;
 
 
             $application->n_relative_1_name=$request->n_relative_1_name;
             $application->n_relative_1_relation=$request->n_relative_1_relation;
-            $application->n_relative_1_phone=$request->n_relative_1_phone;
+            $application->n_relative_1_phone=$n_relative_1_phone;
             $application->n_relative_1_address=$request->n_relative_1_address;
 
             $application->n_relative_2_name=$request->n_relative_2_name;
             $application->n_relative_2_relation=$request->n_relative_2_relation;
-            $application->n_relative_2_phone=$request->n_relative_2_phone;
+            $application->n_relative_2_phone=$n_relative_2_phone;
             $application->n_relative_2_address=$request->n_relative_2_address;
 
 
@@ -394,7 +460,7 @@ class EnrollmentController extends Controller
             $application->rep_name=$request->rep_name;
             $application->rep_surname=$request->rep_surname;
             $application->rep_passport_no=$request->rep_passport_no;
-            $application->rep_phone=$request->rep_phone;
+            $application->rep_phone=$rep_phone;
             $application->rep_address=$request->rep_address;
             $application->rep_confirmed=$request->rep_confirmed??1;
 
@@ -550,6 +616,39 @@ class EnrollmentController extends Controller
         try {
             //code...
             DB::beginTransaction();
+
+            $phone = $request->phone;
+            $rep_phone = $request->rep_phone;
+            $s_relative_1_phone = $request->s_relative_1_phone;
+            $s_relative_2_phone = $request->s_relative_2_phone;
+            $n_relative_1_phone = $request->n_relative_1_phone;
+            $n_relative_2_phone = $request->n_relative_2_phone;
+
+            if (substr($request->phone, 0, 1) != '+') {
+                $phone = '+'.$request->phone;
+               
+            }
+            if (substr($request->rep_phone, 0, 1) != '+') {
+                $rep_phone = '+'.$request->rep_phone;
+               
+            }
+            if (substr($request->s_relative_1_phone, 0, 1) != '+') {
+                $s_relative_1_phone = '+'.$request->s_relative_1_phone;
+               
+            }
+            if (substr($request->s_relative_2_phone, 0, 1) != '+') {
+                $s_relative_2_phone = '+'.$request->s_relative_2_phone;
+               
+            }
+            if (substr($request->n_relative_1_phone, 0, 1) != '+') {
+                $n_relative_1_phone = '+'.$request->n_relative_1_phone;
+               
+            }
+            if (substr($request->n_relative_2_phone, 0, 1) != '+') {
+                $n_relative_2_phone = '+'.$request->n_relative_2_phone;
+               
+            }
+
             $application = Application::where('application_id', $id)->firstOrfail();
             $application->passport_number = $request->passport_number;
             $application->nie = $request->nie;
@@ -558,7 +657,7 @@ class EnrollmentController extends Controller
             $application->father_name = $request->father_name;
             $application->surname = $request->surname;
             $application->gender=$request->gender;
-            $application->phone=$request->phone;
+            $application->phone=$phone;
             $application->dob=$request->dob;
             $application->native_country=$request->native_country;
             $application->native_country_address=$request->native_country_address;
@@ -571,23 +670,23 @@ class EnrollmentController extends Controller
 
             $application->s_relative_1_name=$request->s_relative_1_name;
             $application->s_relative_1_relation=$request->s_relative_1_relation;
-            $application->s_relative_1_phone=$request->s_relative_1_phone;
+            $application->s_relative_1_phone=$s_relative_1_phone;
             $application->s_relative_1_address=$request->s_relative_1_address;
 
             $application->s_relative_2_name=$request->s_relative_2_name;
             $application->s_relative_2_relation=$request->s_relative_2_relation;
-            $application->s_relative_2_phone=$request->s_relative_2_phone;
+            $application->s_relative_2_phone=$s_relative_2_phone;
             $application->s_relative_2_address=$request->s_relative_2_address;
 
 
             $application->n_relative_1_name=$request->n_relative_1_name;
             $application->n_relative_1_relation=$request->n_relative_1_relation;
-            $application->n_relative_1_phone=$request->n_relative_1_phone;
+            $application->n_relative_1_phone=$n_relative_1_phone;
             $application->n_relative_1_address=$request->n_relative_1_address;
 
             $application->n_relative_2_name=$request->n_relative_2_name;
             $application->n_relative_2_relation=$request->n_relative_2_relation;
-            $application->n_relative_2_phone=$request->n_relative_2_phone;
+            $application->n_relative_2_phone=$n_relative_2_phone;
             $application->n_relative_2_address=$request->n_relative_2_address;
 
 
@@ -595,7 +694,7 @@ class EnrollmentController extends Controller
             $application->rep_name=$request->rep_name;
             $application->rep_surname=$request->rep_surname;
             $application->rep_passport_no=$request->rep_passport_no;
-            $application->rep_phone=$request->rep_phone;
+            $application->rep_phone=$rep_phone;
             $application->rep_address=$request->rep_address;
             $application->rep_confirmed=$request->rep_confirmed??1;
 
@@ -650,7 +749,6 @@ class EnrollmentController extends Controller
             return redirect()->route('enrollment.index');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             alert()->error('Error', $th->getMessage());
             return redirect()->back();
             //throw $th;
