@@ -34,6 +34,8 @@
                                             <th>Father's Name</th>
                                             <th>Passport Number</th>
                                             <th>Status</th>
+                                            <th>Registeration Date</th>
+                                            <th>Renewal Date</th>
 
                                             <th>Action</th>
                                         </tr>
@@ -49,6 +51,9 @@
                                                 <td><span
                                                         class="badge badge-{{ $application->status }}">{{ $application->status }}</span>
                                                 </td>
+                                                <td>{{ date('d-m-Y',strtotime($application->created_at ))}}</td>
+                                                <td>{{ $application->renewal_date?date('d-m-Y',strtotime($application->renewal_date )):'NULL'}}</td>
+
                                                 <td>
 
                                                     {{-- <form action="" method="post"> --}}
@@ -117,7 +122,7 @@
             buttons: [{
                     extend: 'copyHtml5',
                     exportOptions: {
-                        columns: [0, 1, 2, 3]
+                        columns: [0, 1, 2, 3,4,5,6]
                     }
                 },
                 {
@@ -129,7 +134,7 @@
                 {
                     extend: 'pdfHtml5',
                     exportOptions: {
-                        columns: [0, 1, 2, 3]
+                        columns: [0, 1, 2, 3,4,5,6]
                     }
                 },
                 'colvis'

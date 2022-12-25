@@ -24,6 +24,60 @@
                             </div>
                         </div>
                         <div class="iq-card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-4 mt-3">
+                                        <h4>Filter By:</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <form action="" method="Get">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="account_title">Account Title</label>
+                                                    <select class="form-control" id="account_id" name="account">
+                                                        <option selected value="" disabled="">Select Account
+                                                            Title</option>
+                                                        @foreach ($accounts as $account)
+                                                            <option value="{{ $account->id }}"
+                                                                {{ app()->request->input('account') == $account->id ? 'selected' : '' }}>
+                                                                {{ $account->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        @php
+                                            use Carbon\Carbon;
+                                        @endphp
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="date_form">Date From</label>
+                                                    <input type="date" name="date_form" class="form-control"
+                                                        id="date_from"
+                                                        value="{{ date('Y-m-d', strtotime(app()->request->input('date_from')?? Carbon::parse('Now -7 days') )) }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="date_to">Date To</label>
+                                                    <input type="date" name="date_to" class="form-control" id="date_to"
+                                                        value="{{ date('Y-m-d', strtotime(app()->request->input('date_to')??date('Y-m-d') ))  }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <div class="mb-5">
+                                                    <button type="button" onclick="filter()"
+                                                        class="btn btn-primary btn-sm mr-2">Apply</button>
+                                                    <button type="button" onclick="clearFilters()"
+                                                        class="btn btn-outline-secondary btn-sm">Clear Filters</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
                             <div class="table-responsive">
                               
                                 <table id="FSF-Table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
@@ -176,5 +230,27 @@
     });
 </script>
 
+<script>
+    function filter() {
+        const account_id = $("#account_id").val() ? $("#account_id").val() : "";
+        const date_from = $("#date_from").val() ? $("#date_from").val() : "";
+        const date_to = $("#date_to").val() ? $("#date_to").val() : "";
 
+
+        const url = "{{ route('donation.index') }}" + "?account=" + account_id + "&date_from=" + date_from +
+            "&date_to=" + date_to
+
+        //    alert(date_from);
+        // console.log(completed_at);
+        window.location.replace(url);
+    }
+</script>
+<script>
+    // alert('Final')
+    function clearFilters() {
+        const newurl = window.location.href.split("?");
+        window.location.replace(newurl[0]);
+
+    }
+</script>
 @endpush

@@ -31,14 +31,24 @@ class ApplicationController extends Controller
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
             // $applications = Application::where('user_id', $request->user_id)->get(['id','application_id','passport_number','full_name','status']);
 
+            // $applications = Application::where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
+            //     return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
+            // })
+            // ->when(!empty(request()->input('date_from')), function ($q) {
+            //     return $q->where('created_at', '=', request()->input('date_from'));
+            // })
+            // ->when(!empty(request()->input('date_to')), function ($q) {
+            //     return $q->where('created_at', '=', request()->input('date_to'));
+            // })
+            // ->orderBy('id', 'ASC')
+            // ->get(['id','application_id','passport_number','full_name','status','created_at','renewal_date']);
+
+
             $applications = Application::where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
                 return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
             })
             ->when(!empty(request()->input('date_from')), function ($q) {
-                return $q->where('created_at', '=', request()->input('date_from'));
-            })
-            ->when(!empty(request()->input('date_to')), function ($q) {
-                return $q->where('created_at', '=', request()->input('date_to'));
+                return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
             })
             ->orderBy('id', 'ASC')
             ->get(['id','application_id','passport_number','full_name','status','created_at','renewal_date']);

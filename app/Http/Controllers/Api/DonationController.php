@@ -56,20 +56,30 @@ class DonationController extends Controller
             $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
             if ($user) {
                 // $donations = Donation::where('user_id', $request->user_id)->get();
+                // $donations = Donation::with(['application' => function ($query) {
+                //     $query->select('id', 'application_id','passport_number','full_name');
+                // }])->where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
+                //     return $q->whereBetween('created_at', [date(request()->date_from), date(request()->date_to)]);
+                // })
+                // ->when(!empty(request()->input('date_from')), function ($q) {
+                //     return $q->where('created_at', '=', request()->input('date_from'));
+                // })
+                // ->when(!empty(request()->input('date_to')), function ($q) {
+                //     return $q->where('created_at', '=', request()->input('date_to'));
+                // })
+                // ->orderBy('id', 'ASC')
+                // ->get();
+
                 $donations = Donation::with(['application' => function ($query) {
                     $query->select('id', 'application_id','passport_number','full_name');
                 }])->where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
-                    return $q->whereBetween('created_at', [date(request()->date_from), date(request()->date_to)]);
+                    return $q->whereBetween('donation_date', [request()->date_from, request()->date_to]);
                 })
                 ->when(!empty(request()->input('date_from')), function ($q) {
-                    return $q->where('created_at', '=', request()->input('date_from'));
-                })
-                ->when(!empty(request()->input('date_to')), function ($q) {
-                    return $q->where('created_at', '=', request()->input('date_to'));
+                    return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
                 })
                 ->orderBy('id', 'ASC')
                 ->get();
-
 
                 return response()->json([
                     'donations' => $donations,

@@ -39,7 +39,7 @@
                                                         @foreach ($accounts as $account)
                                                             <option value="{{ $account->id }}"
                                                                 {{ app()->request->input('account') == $account->id ? 'selected' : '' }}>
-                                                                {{ $account->account_title }}</option>
+                                                                {{ $account->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

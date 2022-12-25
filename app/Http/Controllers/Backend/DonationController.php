@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Application;
 use App\Models\AccountTransaction;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DonationController extends Controller
 {
@@ -20,21 +21,36 @@ class DonationController extends Controller
      */
     public function index(Request $request)
     {
+        // $donations = Donation::when(!empty(request()->input('date_from')), function ($q) {
+        //     return $q->whereBetween('donation_date', [request()->date_from, request()->date_to]);
+        // })
+        // ->when(!empty(request()->input('date_from')), function ($q) {
+        //     return $q->where('donation_date', '=', request()->input('date_from'));
+        // })
+        // ->when(!empty(request()->input('date_to')), function ($q) {
+        //     return $q->where('donation_date', '=', request()->input('date_to'));
+        // })
+        // ->when(!empty(request()->input('account')), function ($q) {
+        //     return $q->where('fsf_bank_id', '=', request()->input('account'));
+        // })
+        // ->orderBy('id', 'ASC')
+        // ->get();
+
+
+        //filter that filter the data from the database basis of date_from and date_to
         $donations = Donation::when(!empty(request()->input('date_from')), function ($q) {
-            return $q->whereBetween('created_at', [date(request()->date_from), date(request()->date_to)]);
+            return $q->whereBetween('donation_date', [request()->date_from, request()->date_to]);
         })
-        ->when(!empty(request()->input('date_from')), function ($q) {
-            return $q->where('created_at', '=', request()->input('date_from'));
-        })
-        ->when(!empty(request()->input('date_to')), function ($q) {
-            return $q->where('created_at', '=', request()->input('date_to'));
+        ->when(!empty(request()->input('account')), function ($q) {
+            return $q->where('fsf_bank_id', '=', request()->input('account'));
         })
         ->orderBy('id', 'ASC')
         ->get();
 
-
+        $accounts = Account::all();
         return view('backend.donation.index')
-            ->with('donations', $donations);
+            ->with('donations', $donations)
+            ->with('accounts', $accounts);
     }
 
     /**
@@ -72,11 +88,11 @@ class DonationController extends Controller
 
             DB::beginTransaction();
 
-            $application = Application::where('application_id', $request->application_id)->orWhere('passport_number',$request->passport_number)->first();
+            $application = Application::where('application_id', $request->application_id)->orWhere('passport_number', $request->passport_number)->first();
             if ($application) {
                 $application_id = $application->id;
                 $type = 'Application';
-                $passport = $application->passport_number;                
+                $passport = $application->passport_number;
             } else {
                 $application_id = null;
                 $type = 'General';
@@ -142,14 +158,14 @@ class DonationController extends Controller
     public function edit($id)
     {
         $donation = Donation::where('donation_code', $id)->firstOrFail();
-        
-        if($donation->status == 'APPROVED' or $donation->status == 'REJECTED'){
+
+        if ($donation->status == 'APPROVED' or $donation->status == 'REJECTED') {
             alert()->info('Donation Already '.$donation->status, 'Error');
             return redirect()->route('donation.show', $donation->donaton_code);
         }
 
         $accounts = Account::all();
-        if($donation->status == 'APPROVED' or $donation->status == 'REJECTED'){
+        if ($donation->status == 'APPROVED' or $donation->status == 'REJECTED') {
             alert()->info('Donation Already '.$donation->status, 'Error');
             return redirect()->route('donation.show', $donation->donaton_code);
         }
@@ -201,7 +217,7 @@ class DonationController extends Controller
             $donation->amount = $request->amount;
             $donation->status = $request->status;
             $donation->donation_date=$request->donation_date;
-            
+
             if ($request->receipt) {
                 $file = $request->receipt;
                 $extension = $file->getClientOriginalExtension();
@@ -211,7 +227,7 @@ class DonationController extends Controller
             }
             $donation->save();
 
-            if($donation->status == 'APPROVED'){
+            if ($donation->status == 'APPROVED') {
                 $transaction = AccountTransaction::create([
                 'transaction_id' => 'T-'.date('YmdHis'),
                 'type' => 'Credit',
@@ -225,9 +241,9 @@ class DonationController extends Controller
                 'summary'=>'Donation',
 
             ]);
-            
-            $account->balance = $account->balance + $request->amount;
-            $account->save();
+
+                $account->balance = $account->balance + $request->amount;
+                $account->save();
             }
             DB::commit();
             alert()->success('Donation Updated Successfully', 'Success');
