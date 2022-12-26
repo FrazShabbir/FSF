@@ -163,6 +163,11 @@ class DonationController extends Controller
                     $donation->save();
                 }
 
+                $applicant_message = 'Dear ' . $application->full_name . ', Your Donation under Application ID  ' . $application->application_id . 'is received. You will be notified once your donation is approved.';
+                
+                
+                SendMessage($application->phone,$applicant_message);
+            
                 // $transaction = AccountTransaction::create([
                 //     'transaction_id' => 'T-'.date('YmdHis'),
                 //     'type' => 'Credit',

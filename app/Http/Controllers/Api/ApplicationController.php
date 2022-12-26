@@ -769,6 +769,14 @@ class ApplicationController extends Controller
                 ]);
 
                 DB::commit();
+                $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been submitted successfully with Application ID  ' . $application->application_id . '. You will be notified once your application is approved.';
+                $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
+                
+                
+                SendMessage($application->phone,$applicant_message);
+                SendMessage($application->rep_phone,$rep_messsage);
+            
+                
                 return response()->json([
                     'status' => true,
                     'message' => 'Application created successfully',

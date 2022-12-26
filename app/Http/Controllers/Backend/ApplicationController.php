@@ -365,6 +365,13 @@ class ApplicationController extends Controller
             ]);
 
             DB::commit();
+            $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been submitted successfully with Application ID  ' . $application->application_id . '. You will be notified once your application is approved.';
+            $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
+            
+            
+            SendMessage($application->phone,$applicant_message);
+            SendMessage($application->rep_phone,$rep_messsage);
+            
             alert()->success('Success', 'Application Submitted Successfully');
             return redirect()->route('application.index');
             // return response()->json(['success'=>'Application Created Successfully']);
@@ -527,6 +534,8 @@ class ApplicationController extends Controller
 
             $find_relative = Application::where('passport_number', $request->registered_relative_passport_no)->first();
             $registered = 0;
+            $old_rep_name = $application->rep_name;
+            $old_rep_phone = $application->rep_phone;
             if ($find_relative) {
                 $registered = 1;
                 $passport_number = $find_relative->passport_number;
@@ -605,6 +614,13 @@ class ApplicationController extends Controller
                 'receiver_id'=>auth()->user()->id,
             ]);
 
+            $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been updated and submitted successfully with Application ID  ' . $application->application_id . '. You will be notified once your application is approved.';
+            $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
+
+            SendMessage($application->phone,$applicant_message);
+            if($application->rep_phone != $old_rep_phone and $old_rep_name != $application->rep_name){
+                SendMessage($application->rep_phone,$rep_messsage);
+            }
             db::commit();
             alert()->success('Success', 'Application Updated Successfully');
             return redirect()->route('application.show', $application->application_id);
@@ -728,6 +744,10 @@ class ApplicationController extends Controller
                     'status'=>$application->status,
                     'receiver_id'=>auth()->user()->id,
                 ]);
+                $applicant_message = 'Dear ' . $application->full_name . ', Your Application with Application ID  ' . $application->application_id . 'is now under CLOSING PROCESS.';
+                $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '. And his Application is under process of closing.We will inform you once it is closed.';
+                SendMessage($application->phone, $applicant_message);
+                SendMessage($application->rep_phone, $rep_messsage);
             }
 
             DB::commit();
@@ -810,6 +830,10 @@ class ApplicationController extends Controller
                 'status'=>$application->status,
                 'receiver_id'=>auth()->user()->id,
             ]);
+            $applicant_message = 'Dear ' . $application->full_name . ', Your Application with Application ID  ' . $application->application_id . 'is now Permanent Closed.';
+            $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '. And his Application is Permanent Closed.Please Visit our office for further details.';
+            SendMessage($application->phone, $applicant_message);
+            SendMessage($application->rep_phone, $rep_messsage);
 
             // $account_transaction = AccountTransaction::create([
             //     'application_id'=>$application->id,
@@ -1055,6 +1079,11 @@ class ApplicationController extends Controller
             ]);
 
             DB::commit();
+            $applicant_message = 'Dear ' . $application->full_name . ', Your Application with Application ID  ' . $application->application_id . 'is now under CLOSING PROCESS.';
+            $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '. And his Application is under process of closing.We will inform you once it is closed.';
+            SendMessage($application->phone, $applicant_message);
+            SendMessage($application->rep_phone, $rep_messsage);
+
             alert()->success('Success', 'Application Submitted Successfully');
             return redirect()->route('application.index');
             // return response()->json(['success'=>'Application Created Successfully']);
