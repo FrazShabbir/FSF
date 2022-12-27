@@ -794,6 +794,7 @@ class ApplicationController extends Controller
 
     public function closeApplicationSave(Request $request, $id)
     {
+        dd($request->all());
         $request->validate([
             'deceased_at' => 'required',
             'process_start_at' => 'required',
@@ -830,24 +831,34 @@ class ApplicationController extends Controller
                 'status'=>$application->status,
                 'receiver_id'=>auth()->user()->id,
             ]);
+           
+            $account = Account::where('id', $request->account_id)->first();
+            
+            $transaction = AccountTransaction::create([
+                'transaction_id' => 'T-'.date('YmdHis'),
+                'type' => 'debit',
+                'user_id'=> auth()->user()->id,
+                'account_id' => $account->id,
+                'application_id' => $application->id,
+                'credit'=>0,
+                
+                'country_id'=>1,
+                'community_id'=>1,
+                'province_id'=>1,
+                'city_id'=>1,
+                
+                'debit'=>$request->amount,
+                'balance'=>$account->balance - $request->amount,
+                'summary'=>'Application Permanent Closed by '.auth()->user()->full_name.'.',
+
+            ]);
+
+            DB::commit();
+
             $applicant_message = 'Dear ' . $application->full_name . ', Your Application with Application ID  ' . $application->application_id . 'is now Permanent Closed.';
             $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '. And his Application is Permanent Closed.Please Visit our office for further details.';
             SendMessage($application->phone, $applicant_message);
             SendMessage($application->rep_phone, $rep_messsage);
-
-            // $account_transaction = AccountTransaction::create([
-            //     'application_id'=>$application->id,
-            //     'amount'=>$application->rep_received_amount,
-            //     'type'=>'CREDIT',
-            //     'status'=>'SUCCESS',
-            //     'transaction_id'=>Str::random(10),
-            //     'transaction_type'=>'APPLICATION-CLOSED',
-            //     'transaction_date'=>Carbon::now(),
-            //     'transaction_by'=>Auth::user()->id,
-            // ]);
-
-            DB::commit();
-
             alert()->success('Account Closed');
             return redirect()->route('users.show', $application->user_id);
             //code...
