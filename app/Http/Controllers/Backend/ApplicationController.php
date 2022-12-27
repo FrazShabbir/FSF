@@ -11,6 +11,7 @@ use App\Models\Community;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\Account;
+use App\Models\AccountTransaction;
 use App\Models\ApplicationComment;
 use Illuminate\Support\Facades\DB;
 
@@ -240,27 +241,21 @@ class ApplicationController extends Controller
 
             if (substr($request->phone, 0, 1) != '+') {
                 $phone = '+'.$request->phone;
-               
             }
             if (substr($request->rep_phone, 0, 1) != '+') {
                 $rep_phone = '+'.$request->rep_phone;
-               
             }
             if (substr($request->s_relative_1_phone, 0, 1) != '+') {
                 $s_relative_1_phone = '+'.$request->s_relative_1_phone;
-               
             }
             if (substr($request->s_relative_2_phone, 0, 1) != '+') {
                 $s_relative_2_phone = '+'.$request->s_relative_2_phone;
-               
             }
             if (substr($request->n_relative_1_phone, 0, 1) != '+') {
                 $n_relative_1_phone = '+'.$request->n_relative_1_phone;
-               
             }
             if (substr($request->n_relative_2_phone, 0, 1) != '+') {
                 $n_relative_2_phone = '+'.$request->n_relative_2_phone;
-               
             }
 
 
@@ -367,11 +362,11 @@ class ApplicationController extends Controller
             DB::commit();
             $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been submitted successfully with Application ID  ' . $application->application_id . '. You will be notified once your application is approved.';
             $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
-            
-            
-            SendMessage($application->phone,$applicant_message);
-            SendMessage($application->rep_phone,$rep_messsage);
-            
+
+
+            SendMessage($application->phone, $applicant_message);
+            SendMessage($application->rep_phone, $rep_messsage);
+
             alert()->success('Success', 'Application Submitted Successfully');
             return redirect()->route('application.index');
             // return response()->json(['success'=>'Application Created Successfully']);
@@ -509,27 +504,21 @@ class ApplicationController extends Controller
 
             if (substr($request->phone, 0, 1) != '+') {
                 $phone = '+'.$request->phone;
-               
             }
             if (substr($request->rep_phone, 0, 1) != '+') {
                 $rep_phone = '+'.$request->rep_phone;
-               
             }
             if (substr($request->s_relative_1_phone, 0, 1) != '+') {
                 $s_relative_1_phone = '+'.$request->s_relative_1_phone;
-               
             }
             if (substr($request->s_relative_2_phone, 0, 1) != '+') {
                 $s_relative_2_phone = '+'.$request->s_relative_2_phone;
-               
             }
             if (substr($request->n_relative_1_phone, 0, 1) != '+') {
                 $n_relative_1_phone = '+'.$request->n_relative_1_phone;
-               
             }
             if (substr($request->n_relative_2_phone, 0, 1) != '+') {
                 $n_relative_2_phone = '+'.$request->n_relative_2_phone;
-               
             }
 
             $find_relative = Application::where('passport_number', $request->registered_relative_passport_no)->first();
@@ -614,14 +603,15 @@ class ApplicationController extends Controller
                 'receiver_id'=>auth()->user()->id,
             ]);
 
+
+            db::commit();
             $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been updated and submitted successfully with Application ID  ' . $application->application_id . '. You will be notified once your application is approved.';
             $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
 
-            SendMessage($application->phone,$applicant_message);
-            if($application->rep_phone != $old_rep_phone and $old_rep_name != $application->rep_name){
-                SendMessage($application->rep_phone,$rep_messsage);
+            SendMessage($application->phone, $applicant_message);
+            if ($application->rep_phone != $old_rep_phone and $old_rep_name != $application->rep_name) {
+                SendMessage($application->rep_phone, $rep_messsage);
             }
-            db::commit();
             alert()->success('Success', 'Application Updated Successfully');
             return redirect()->route('application.show', $application->application_id);
         } catch (\Throwable $th) {
@@ -729,7 +719,7 @@ class ApplicationController extends Controller
         try {
             DB::beginTransaction();
             $application = Application::where('application_id', $id)->first();
-
+            $countries = Country::all();
             if ($application->status=='PERMANENT-CLOSED' or $application->status=='REJECTED') {
                 alert()->error('Error', 'Application Already Closed/Rejected');
                 return redirect()->back();
@@ -754,7 +744,8 @@ class ApplicationController extends Controller
             $accounts = Account::where('status', 1)->get();
             return view('backend.applications.closing.closing')
             ->with('application', $application)
-            ->with('accounts', $accounts);
+            ->with('accounts', $accounts)
+            ->with('countries', $countries);
         } catch (\Throwable $th) {
             DB::rollback();
             alert()->error('Error', $th->getMessage());
@@ -794,7 +785,7 @@ class ApplicationController extends Controller
 
     public function closeApplicationSave(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
             'deceased_at' => 'required',
             'process_start_at' => 'required',
@@ -820,38 +811,52 @@ class ApplicationController extends Controller
             $application->status = $request->status;
             $application->reason = $request->reason;
             $application->rep_received_amount = $request->rep_received_amount;
-            $application->application_closed_by = Auth::user()->id;
+            $application->application_closed_by = auth()->user()->id;
             $application->application_closed_at= Carbon::now();
 
             $application->save();
 
-            $comment = ApplicationComment::create([
-                'application_id'=>$application->id,
-                'comment'=>'Application Permanent Closed by '.auth()->user()->full_name.'.',
-                'status'=>$application->status,
-                'receiver_id'=>auth()->user()->id,
-            ]);
-           
-            $account = Account::where('id', $request->account_id)->first();
-            
-            $transaction = AccountTransaction::create([
-                'transaction_id' => 'T-'.date('YmdHis'),
-                'type' => 'debit',
-                'user_id'=> auth()->user()->id,
-                'account_id' => $account->id,
-                'application_id' => $application->id,
-                'credit'=>0,
-                
-                'country_id'=>1,
-                'community_id'=>1,
-                'province_id'=>1,
-                'city_id'=>1,
-                
-                'debit'=>$request->amount,
-                'balance'=>$account->balance - $request->amount,
-                'summary'=>'Application Permanent Closed by '.auth()->user()->full_name.'.',
+          
 
-            ]);
+            if($request->status=='PERMANENT-CLOSED'){
+
+                $comment = ApplicationComment::create([
+                    'application_id'=>$application->id,
+                    'comment'=>'Application Permanent Closed by '.auth()->user()->full_name.'.',
+                    'status'=>$application->status,
+                    'receiver_id'=>auth()->user()->id,
+                ]);
+
+                $account = Account::where('id', $request->account_id)->first();
+                $transaction = AccountTransaction::create([
+                    'transaction_id' => 'T-'.date('YmdHis'),
+                    'type' => 'debit',
+                    'user_id'=> auth()->user()->id,
+                    'account_id' => $account->id,
+                    'application_id' => $application->id,
+                    'credit'=>0,
+    
+                    'country_id'=>$request->country,
+                    'community_id'=>$request->community,
+                    'province_id'=>$request->province,
+                    'city_id'=>$request->city,
+    
+                    'debit'=>$request->amount_used,
+                    'balance'=>$account->balance - $request->amount_used,
+                    'summary'=>'Application Permanent Closed by '.auth()->user()->full_name.'.',
+    
+                ]);
+
+                if($account->balance >= $request->amount_used){
+
+                $account->balance = $account->balance - $request->amount_used;
+                }else{
+                    DB::rollBack();
+                    alert()->error('Error', 'Insufficient Balance Please Add Balance to Account');
+                    return redirect()->back();
+                }
+            }
+         
 
             DB::commit();
 
@@ -859,7 +864,7 @@ class ApplicationController extends Controller
             $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '. And his Application is Permanent Closed.Please Visit our office for further details.';
             SendMessage($application->phone, $applicant_message);
             SendMessage($application->rep_phone, $rep_messsage);
-            alert()->success('Account Closed');
+            alert()->info('Application Permanently Closed','Status');
             return redirect()->route('users.show', $application->user_id);
             //code...
         } catch (\Throwable $th) {
@@ -960,27 +965,21 @@ class ApplicationController extends Controller
 
             if (substr($request->phone, 0, 1) != '+') {
                 $phone = '+'.$request->phone;
-               
             }
             if (substr($request->rep_phone, 0, 1) != '+') {
                 $rep_phone = '+'.$request->rep_phone;
-               
             }
             if (substr($request->s_relative_1_phone, 0, 1) != '+') {
                 $s_relative_1_phone = '+'.$request->s_relative_1_phone;
-               
             }
             if (substr($request->s_relative_2_phone, 0, 1) != '+') {
                 $s_relative_2_phone = '+'.$request->s_relative_2_phone;
-               
             }
             if (substr($request->n_relative_1_phone, 0, 1) != '+') {
                 $n_relative_1_phone = '+'.$request->n_relative_1_phone;
-               
             }
             if (substr($request->n_relative_2_phone, 0, 1) != '+') {
                 $n_relative_2_phone = '+'.$request->n_relative_2_phone;
-               
             }
             $user = User::where('username', $id)->firstOrFail();
             $find_relative = Application::where('passport_number', $request->registered_relative_passport_no)->first();
@@ -1182,7 +1181,7 @@ class ApplicationController extends Controller
                 ]);
 
 
-                $phone = $request->phone;
+            $phone = $request->phone;
             $rep_phone = $request->rep_phone;
             $s_relative_1_phone = $request->s_relative_1_phone;
             $s_relative_2_phone = $request->s_relative_2_phone;
@@ -1191,27 +1190,21 @@ class ApplicationController extends Controller
 
             if (substr($request->phone, 0, 1) != '+') {
                 $phone = '+'.$request->phone;
-               
             }
             if (substr($request->rep_phone, 0, 1) != '+') {
                 $rep_phone = '+'.$request->rep_phone;
-               
             }
             if (substr($request->s_relative_1_phone, 0, 1) != '+') {
                 $s_relative_1_phone = '+'.$request->s_relative_1_phone;
-               
             }
             if (substr($request->s_relative_2_phone, 0, 1) != '+') {
                 $s_relative_2_phone = '+'.$request->s_relative_2_phone;
-               
             }
             if (substr($request->n_relative_1_phone, 0, 1) != '+') {
                 $n_relative_1_phone = '+'.$request->n_relative_1_phone;
-               
             }
             if (substr($request->n_relative_2_phone, 0, 1) != '+') {
                 $n_relative_2_phone = '+'.$request->n_relative_2_phone;
-               
             }
 
             $application = Application::where('application_id', $id)->firstOrfail();

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Donation;
 use App\Models\Account;
+use App\Models\Country;
 use App\Models\User;
 use App\Models\Application;
 use App\Models\AccountTransaction;
@@ -160,18 +161,16 @@ class DonationController extends Controller
         $donation = Donation::where('donation_code', $id)->firstOrFail();
 
         if ($donation->status == 'APPROVED' or $donation->status == 'REJECTED') {
-            alert()->info('Donation Already '.$donation->status, 'Error');
+            alert()->info('Donation Already '.$donation->status, 'Info');
             return redirect()->route('donation.show', $donation->donaton_code);
         }
 
         $accounts = Account::all();
-        if ($donation->status == 'APPROVED' or $donation->status == 'REJECTED') {
-            alert()->info('Donation Already '.$donation->status, 'Error');
-            return redirect()->route('donation.show', $donation->donaton_code);
-        }
+        $countries = Country::all();
         return view('backend.donation.edit')
         ->with('accounts', $accounts)
-        ->with('donation', $donation);
+        ->with('donation', $donation)
+        ->with('countries', $countries);
     }
 
     /**
@@ -192,6 +191,10 @@ class DonationController extends Controller
             'amount' => 'required',
             'status' => 'required',
             'receipt' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'country' => 'required',
+            'community' => 'required',
+            'province' => 'required',
+            'city' => 'required',
         ]);
         try {
             DB::beginTransaction();
@@ -236,6 +239,12 @@ class DonationController extends Controller
                 'donation_id' => $donation->id,
                 'application_id' => $application_id,
                 'debit'=>0,
+
+                'country_id'=>$request->country,
+                'community_id'=>$request->community,
+                'province_id'=>$request->province,
+                'city_id'=>$request->city,
+
                 'credit'=>$request->amount,
                 'balance'=>$account->balance + $request->amount,
                 'summary'=>'Donation',
@@ -244,6 +253,14 @@ class DonationController extends Controller
 
                 $account->balance = $account->balance + $request->amount;
                 $account->save();
+
+              
+                    $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been Donation for Application ID  ' . $application->application_id . 'has been Approved.';
+                    $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname .', this SMS is to inform you that your relative\'s donation at  '.env('APP_NAME').'  has been approved.' ;
+                    SendMessage($application->phone, $applicant_message);
+                    SendMessage($application->rep_phone, $rep_messsage);
+               
+
             }
             DB::commit();
             alert()->success('Donation Updated Successfully', 'Success');

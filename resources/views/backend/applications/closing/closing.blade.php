@@ -77,9 +77,70 @@
                                     </div>
                                 </div>
 
+                                <hr>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group row mb-4">
+                                            <label class="control-label col-sm-12 align-self-center mb-0  required"
+                                                for="country">Country</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" name="country" id="country_id" required>
+                                                    <option selected value="" disabled>Select Your Country </option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->id }}">
+                                                            {{ $country->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group row mb-4">
+                                            <label class="control-label col-sm-12 align-self-center mb-0  required"
+                                                for="community">Community</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" name="community" id="community" required>
+                                                    <option selected value="dsds">Select Your Community</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group row mb-4">
+                                            <label class="control-label col-sm-12 align-self-center mb-0  required"
+                                                for="province">Province</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" name="province" id="province_id" required>
+                                                    <option selected value="">Select Your </option>
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group row mb-4">
+                                            <label class="control-label col-sm-12 align-self-center mb-0 required"
+                                                for="city">City</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" name="city" id="city_id" required>
+                                                    <option selected value="">Select Your
+                                                        City
+                                                    </option>
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+
                                 <div class="row mb-2">
                                     <div class="col-12">
-                                        <label for="process_ends_at" class="required">Reason of Application Closure</label>
+                                        <label for="process_ends_at" class="required">Reason of Application
+                                            Closure</label>
                                         <textarea name="reason" class="form-control" id="" required>{{ old('reason') }}</textarea>
                                     </div>
                                 </div>
@@ -254,19 +315,94 @@
 
 @push('js')
     <script>
-          $(document).ready(function() {
-        var balance = 0;
+        $(document).ready(function() {
 
-        $("#CloseAccount").modal('show');
+            $('#country_id').on('change', function() {
 
-        $('.closebtn').click(function() {
-            $("#CloseAccount").modal('hide');
-        });
+                var country_id = this.value;
+                $("#community").html('');
+                $.ajax({
+                    url: "{{ route('get.communities') }}",
+                    type: "POST",
+                    data: {
+                        country_id: country_id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#community').html(
+                            '<option value="">-- Select community --</option>');
+                        $.each(result.community, function(key, value) {
+                            $("#community").append('<option value="' + value
+                                .id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
 
-      
+            /*------------------------------------------
+            --------------------------------------------
+            Center Dropdown Change Event
+            --------------------------------------------
+            --------------------------------------------*/
+            $('#community').on('change', function() {
+                var community_id = this.value;
+                $("#province_id").html('');
+                $.ajax({
+                    url: "{{ route('get.provinces') }}",
+                    type: "POST",
+                    data: {
+                        community_id: community_id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#province_id').html(
+                            '<option value="">-- Select Province --</option>');
+                        $.each(result.provinces, function(key, value) {
+                            $("#province_id").append('<option value="' + value
+                                .id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+
+
+            $('#province_id').on('change', function() {
+                var province_id = this.value;
+                $("#city_id").html('');
+                $.ajax({
+                    url: "{{ route('get.cities') }}",
+                    type: "POST",
+                    data: {
+                        province_id: province_id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#city_id').html('<option value="">-- Select Province --</option>');
+                        $.each(result.cities, function(key, value) {
+                            $("#city_id").append('<option value="' + value
+                                .id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+
+
+
+            var balance = 0;
+
+            $("#CloseAccount").modal('show');
+
+            $('.closebtn').click(function() {
+                $("#CloseAccount").modal('hide');
+            });
+
+
             $('#amountUsed').keyup(function() {
-               
-             
+
+
                 var totalDonations = $('#totalDonations').val();
                 var amountUsed = $('#amountUsed').val();
                 var calculations = totalDonations - amountUsed;
@@ -283,15 +419,15 @@
             })
 
             $('#amountUsed').change(function() {
-                if($('#amountUsed').val()>balance){
-                    alert('Amount used can not be greater than balance.Please select another account Or Topup the account');
+                if ($('#amountUsed').val() > balance) {
+                    alert(
+                        'Amount used can not be greater than balance.Please select another account Or Topup the account');
                     $('#amountUsed').val('');
                     $('#processAmount').text(0);
-                $('#expense').text(0);
+                    $('#expense').text(0);
                 }
             });
 
         });
-      
     </script>
 @endpush
