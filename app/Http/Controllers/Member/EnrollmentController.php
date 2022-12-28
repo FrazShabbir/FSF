@@ -306,6 +306,11 @@ class EnrollmentController extends Controller
             alert()->error('Error', 'You are not authorized to edit this application');
             return redirect()->back();
         }
+        if($application->status!='PENDING'){
+            alert()->error('Error', 'This application is not in EDITABLE state');
+            return redirect()->back();
+        }
+
         return view('members.pages.application.edit')
         ->with('application', $application)
         ->with('countries', $countries);
@@ -320,6 +325,8 @@ class EnrollmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+       
+
         $request->validate([
             'passport_number' => 'required',
             'nie' => 'required',
@@ -413,6 +420,17 @@ class EnrollmentController extends Controller
             }
             
             $application = Application::where('application_id', $id)->firstOrfail();
+
+            if ($application->user_id != Auth::user()->id) {
+                alert()->error('Error', 'You are not authorized to edit this application');
+                return redirect()->back();
+            }
+
+            if($application->status!='PENDING'){
+                alert()->error('Error', 'This application is not in EDITABLE state');
+                return redirect()->back();
+            }
+
             $old_rep_name = $application->rep_name;
             $old_rep_phone = $application->rep_phone;
 
@@ -551,6 +569,13 @@ class EnrollmentController extends Controller
             alert()->error('Error', 'You are not authorized to edit this application');
             return redirect()->back();
         }
+
+       
+        if($application->status!='RENEWABLE'){
+            alert()->error('Error', 'This application is not in EDITABLE state');
+            return redirect()->back();
+        }
+
         return view('members.pages.application.renew.edit')
         ->with('application', $application)
         ->with('countries', $countries);
@@ -650,6 +675,15 @@ class EnrollmentController extends Controller
             }
 
             $application = Application::where('application_id', $id)->firstOrfail();
+            if ($application->user_id != Auth::user()->id) {
+                alert()->error('Error', 'You are not authorized to edit this application');
+                return redirect()->back();
+            }
+            if($application->status!='RENEWABLE'){
+                alert()->error('Error', 'This application is not in EDITABLE state');
+                return redirect()->back();
+            }
+
             $application->passport_number = $request->passport_number;
             $application->nie = $request->nie;
             $application->native_id = $request->native_id;

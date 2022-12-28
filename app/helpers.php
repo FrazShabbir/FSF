@@ -205,8 +205,8 @@ if (! function_exists('SendMessage')) {
                 'body' => $message
                 ]);
         } catch (\Throwable $th) {
-            throw $th;
-            dd($th);
+            
+            return $th->getMessage();
         }
     }
 
