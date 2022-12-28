@@ -126,6 +126,12 @@ class DonationController extends Controller
             $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
             if ($user) {
                 $application = Application::where('application_id', $request->application_id)->first();
+                if($application->status!='APPROVED'){
+                    return response()->json([
+                        'status' => 401,
+                        'message' => 'Application is not approved',
+                    ], 401);
+                }
                 if ($application) {
                     $application_id = $application->id;
                     $type = 'Application';
