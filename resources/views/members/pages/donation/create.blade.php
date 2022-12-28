@@ -21,52 +21,38 @@
                         <div>
                             <table class="table mt-5 mb-5">
                                 <tbody>
+                                
                                     <tr>
                                         <td class="font-weight-bold">
-                                            Name
+                                            Application ID
                                         </td>
-                                        <td class="text-right">
-                                            Muhammad Akbar
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-weight-bold">
-                                            Registration No.
-                                        </td>
-                                        <td class="text-right">
-                                            8490874738
+                                        <td class="text-right" id="app_id">
+                                            ----------
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="font-weight-bold">
-                                            Donation Type:
-                                        </td>
-                                        <td class="text-right">
-                                            FSF members Fund
-                                        </td>
-                                    </tr>
+                                 
                                     <tr>
                                         <td class="font-weight-bold">
                                             Donation Category:
                                         </td>
                                         <td class="text-right">
-                                            FSF-22 (Auto as per signed Terms Policy)
+                                            Application Donation
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="font-weight-bold">
                                             Beneficiary Bank Name:
                                         </td>
-                                        <td class="text-right">
-                                            Dummy Bank
+                                        <td class="text-right" id="fsf_bank_name">
+                                            ----------
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="font-weight-bold">
+                                        <td class="font-weight-bold" >
                                             Beneficiary Bank AC No.
                                         </td>
-                                        <td class="text-right">
-                                            8490874738
+                                        <td class="text-right" id="fsf_bank_no">
+                                            000000000
                                         </td>
                                     </tr>
                                 </tbody>
@@ -80,22 +66,27 @@
                                         <div class="col-md-6 pl-5">
                                             <div class="form-group">
                                                 <label>FSF account:</label>
-                                                <select name="fsf_bank_id" id="" class="form-control" required>
+                                                <select name="fsf_bank_id" id="fsf_bank_id" class="form-control" required>
+                                                    <option value="" selected>Select Bank</option>
+
                                                     @foreach ($accounts as $account)
-                                                        <option value="{{ $account->id }}" meta-name="{{ $account->name }}"
-                                                            meta-bank="{{ $account->bank }}"
-                                                            meta-city="{{ $account->city }}"
-                                                            meta-account_number="{{ $account->account_number }}">
+                                                        <option value="{{ $account->id }}" >
                                                             {{ $account->name }} - {{ $account->account_number }}
                                                         </option>
+                                                        <span id="id_option_{{ $account->id }}" meta-name="{{ $account->name }}"  meta-bank="{{ $account->bank }}"  meta-city="{{ $account->city }}" meta-account_number="{{ $account->account_number }}"></span>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
+                                        @foreach ($accounts as $account)
+                                        
+                                        <span id="id_option_{{ $account->id }}" meta-name="{{ $account->name }}"  meta-bank="{{ $account->bank }}"  meta-city="{{ $account->city }}" meta-account_number="{{ $account->account_number }}"></span>
+                                    @endforeach
                                         <div class="col-md-6 pr-5">
                                             <div class="form-group">
                                                 <label>Application ID</label>
-                                                <select name="application_id" id="" class="form-control" required>
+                                                <select name="application_id" id="change_app" class="form-control" required>
+                                                    <option value="" selected>Select Application</option>
                                                     @foreach ($applications as $application)
                                                         <option value="{{ $application->application_id }}"> {{ $application->full_name }} - {{ $application->application_id }} - {{ $application->passport_number }}
                                                         </option>
@@ -195,5 +186,22 @@
             });
             reader.readAsDataURL(this.files[0]);
         });
+
+        $('#change_app').change(function(){
+            var app_id = $('#change_app').find(":selected").val();
+            $('#app_id').text(app_id);
+        })
+
+        $('#fsf_bank_id').change(function(){
+            var bank_id = $('#fsf_bank_id').find(":selected").val();
+            var bank_name = $('#id_option_'+bank_id).attr('meta-name');
+            var bank_city = $('#id_option_'+bank_id).attr('meta-city');
+            var account_number = $('#id_option_'+bank_id).attr('meta-account_number');
+
+            $('#fsf_bank_name').text(bank_name);
+            $('#fsf_bank_no').text(account_number);
+        })
+
     </script>
+
 @endpush

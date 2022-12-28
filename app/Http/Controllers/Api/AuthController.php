@@ -135,7 +135,10 @@ class AuthController extends Controller
                     'message' => 'Please verify your account first.',
                 ], 401);
             }
-            $user->api_token = Str::random(60);
+            if($user->api_token==null){
+                $user->api_token = Str::random(60);
+                
+            }
             $user->save();
             $applications = Application::where('user_id', $user->id)->get(['application_id','full_name','status']);
             return response()->json([

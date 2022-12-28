@@ -12,10 +12,9 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="banner-content align-middle">
-                    <h1>Make cool contact cards with vCard</h1>
+                    <h1>Subscribe to FSF</h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt
-                        molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.
+                        A project by Dawat-e-Islami
                     </p>
                     <div class="banner-button">
                         <a href="#google"><img src="{{asset('frontend/assets/images/Storebutton/app-store.png')}}" alt="app-store"></a>
@@ -42,37 +41,37 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="counter-content">
                             <div class="counter-item">
-                                <span data-toggle="counter-up">232</span>
-                                <span>M</span>
+                                <span data-toggle="counter-up">500</span>
+                                <span>+</span>
                             </div>
-                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Themes</h5>
+                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Members</h5>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="counter-content sm-none">
                             <div class="counter-item">
-                                <span data-toggle="counter-up">132</span>
-                                <span>K</span>
+                                <span data-toggle="counter-up">100</span>
+                                <span>+</span>
                             </div>
-                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Downloads</h5>
+                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Jobs Done</h5>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="counter-content">
                             <div class="counter-item">
-                                <span data-toggle="counter-up">432</span>
-                                <span>M</span>
+                                <span data-toggle="counter-up">30</span>
+                                <span>+</span>
                             </div>
-                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Customer</h5>
+                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Offices</h5>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="counter-content c-4">
                             <div class="counter-item">
-                                <span data-toggle="counter-up">100</span>
-                                <span>K</span>
+                                <span data-toggle="counter-up">2</span>
+                                <span></span>
                             </div>
-                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Testimonials</h5>
+                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Countries</h5>
                         </div>
                     </div>
                 </div>
@@ -86,7 +85,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10 col-lg-8">
                         <div class="section-title">
-                            <h2>What Makes vCard Different?</h2>
+                            <h2>What Makes FSF Different?</h2>
                             <p class="mt-4">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.
                             </p>

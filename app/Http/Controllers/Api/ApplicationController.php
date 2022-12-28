@@ -542,7 +542,7 @@ class ApplicationController extends Controller
                 [
                     'api_token' => 'required',
                     'user_id' => 'required',
-                    'passport_number' => 'required|unique:applications',
+                    'passport_number' => 'required',
                     'nie' => 'required',
                     'native_id'=>'required',
                     'full_name'=>'required',
@@ -550,7 +550,7 @@ class ApplicationController extends Controller
                     'surname'=>'required',
                     'gender'=>'required',
                     'phone'=>'required',
-                    'email'=>'required|unique:applications',
+                    'email'=>'required',
                     'dob'=>'required',
                     'native_country'=>'required',
                     'native_country_address'=>'required',
@@ -606,6 +606,22 @@ class ApplicationController extends Controller
                     'errors' => $validateApplicationRequest->errors()
                 ], 401);
             } else {
+                $already_passport = Application::where('status','!=','REJECTED')->where('passport_number', $request->passport_number)->first();
+                $already_email = Application::where('status','!=','REJECTED')->where('email', $request->email)->first();
+                
+                if ($already_passport) {
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Passport Number already exists',
+                    ], 400);
+                }
+                if ($already_email) {
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Email already exists',
+                    ], 400);
+                }
+
                 $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
                 if (!$user) {
                     return response()->json([
@@ -1262,10 +1278,10 @@ class ApplicationController extends Controller
             ], 404);
         }
 
-        $application = Application::where('passport_number', $id)->get();
+        $application = Application::where('status','APPROVED')->where('passport_number', $id)->get();
 
         if ($application->count()>0) {
-            $application = Application::where('passport_number', $id)->first();
+            $application = Application::where('status','APPROVED')->where('passport_number', $id)->first();
         } else {
             return response()->json([
                 'status' => 400,
