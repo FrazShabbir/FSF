@@ -14,6 +14,7 @@ use App\Models\City;
 use App\Models\Application;
 use App\Models\ApplicationComment;
 use App\Models\User;
+use App\Models\Donation;
 use App\Models\RenewApplication;
 use App\Models\Country;
 use Carbon\Carbon;
@@ -60,6 +61,65 @@ class ApplicationController extends Controller
                 'status' => 200,
                 'message' => 'All Applications Fetched',
                 'applications' => $applications,
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User Not Found',
+            ], 404);
+        }
+    }
+
+
+    public function allfilter(Request $request)
+    {
+        // dd($request->all());
+        if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
+
+            $applications = Application::where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
+                return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
+            })
+            ->when(!empty(request()->input('date_from')), function ($q) {
+                return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
+            })
+            ->when(!empty(request()->input('date_from')), function ($q) {
+                return $q->where('created_at',request()->date_from);
+            })
+            ->when(!empty(request()->input('date_to')), function ($q) {
+                return $q->where('created_at',request()->date_to);
+            })
+
+            ->orderBy('id', 'ASC')
+            ->get(['id','application_id','passport_number','full_name','status','created_at','renewal_date']);
+
+            $donations = Donation::with(['application' => function ($query) {
+                $query->select('id', 'application_id','passport_number','full_name');
+            }])->where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
+                return $q->whereBetween('donation_date', [request()->date_from, request()->date_to]);
+            })
+            ->when(!empty(request()->input('date_from')), function ($q) {
+                return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
+            })
+            ->when(!empty(request()->input('date_from')), function ($q) {
+                return $q->where('donation_date',request()->date_from);
+            })
+            ->when(!empty(request()->input('date_to')), function ($q) {
+                return $q->where('donation_date',request()->date_to);
+            })
+            ->when(!empty(request()->input('date_from')), function ($q) {
+                return $q->where('created_at',request()->date_from);
+            })
+            ->when(!empty(request()->input('date_to')), function ($q) {
+                return $q->where('created_at',request()->date_to);
+            })
+            ->orderBy('id', 'ASC')
+            ->get();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'All data Fetched',
+                'applications' => $applications,
+                'donations' => $donations,
             ], 200);
         } else {
             return response()->json([

@@ -36,6 +36,9 @@ Route::post('/auth/verify-otp', [AuthController::class, 'verifyOtp']); // login
 Route::post('/auth/logout', [AuthController::class, 'logout']); // login
 
 
+Route::get('filter/result', [ApplicationController::class, 'allfilter']); // application status
+
+
 // Route::group( function () {
     // Route::apiResource('application', ApplicationController::class);// application
 Route::get('application/myapplication', [ApplicationController::class, 'index']); // application status
