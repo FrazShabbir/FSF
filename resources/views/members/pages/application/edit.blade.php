@@ -1151,7 +1151,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </script>
 
 
-<script>
+{{-- <script>
     $(document).ready(function(){
         //check country code first in input field
      $('.phone_number').keyup(function(){
@@ -1159,7 +1159,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 alert(letter)
      })
     })
-</script>
+</script> --}}
 
 <script>
     $(".phone_number").each(function(index) {

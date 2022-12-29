@@ -1153,7 +1153,7 @@
 
         });
     </script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('.phone_number').change(function() {
                 let letter = $(this).val();
@@ -1162,7 +1162,7 @@
                 }
             })
         })
-    </script>
+    </script> --}}
     <script>
         $(".phone_number").each(function(index) {
             selector = "#" + $(this).attr('id')

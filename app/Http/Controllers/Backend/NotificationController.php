@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Notification;
+use App\Models\Application;
+use App\Jobs\RenewalJob;
 
 class NotificationController extends Controller
 {
@@ -51,8 +53,8 @@ class NotificationController extends Controller
         }
 
         $request->validate([
-            'title' => 'required',
-            'short_description' => 'required',
+            'title' => 'required|string|max:50',
+            'short_description' => 'required|string|max:100',
             'description' => 'required',
         ]);
         $notification = Notification::create([
@@ -62,14 +64,22 @@ class NotificationController extends Controller
             'sent_by'=>auth()->user()->id,
         ]);
 
-        
+        // dd($notification);
         $applications = Application::all();
-        foreach($applications as $application){
-            dispatch(new RenewalJob($application));
-        }
+
+        // foreach($applications as $application){
+        //     dispatch(new RenewalJob($application));
+        // }
 
         alert()->success('Notification sent successfully', 'Success');
         return redirect()->route('notification.index');
+    }
+
+    public function show($id)
+    {
+        $notification = Notification::find($id);
+        return view('backend.notifications.show')
+        ->with('notification', $notification);
     }
 
 

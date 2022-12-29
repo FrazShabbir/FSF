@@ -14,4 +14,9 @@ class Notification extends Model
         'description',
         'sent_by',
     ];
+
+    function user()
+    {
+        return $this->belongsTo(User::class, 'sent_by');
+    }
 }
