@@ -4,7 +4,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="footer-intro">
                     <a href="index-2.html" class="footer-logo">
-                        <img class="mb-3" src="{{asset(fromSettings('logo')??'frontend/assets/images/fsf-white-logo-update.png')}}" alt="logo">
+                        <img class="mb-3" src="{{asset(fromSettings('logo')??'frontend/assets/images/logo.png')}}" alt="logo">
                     </a>
                     <p class="mb-3 text-white">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis non, fugit totam vel laboriosam vitae.

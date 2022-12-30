@@ -2,10 +2,10 @@
     <div class="container">
         <!-- Add Your Logo Here... -->
         <a href="{{ route('home') }}" class="navbar-brand">
-            <img class="default-logo" src="{{ asset(fromSettings('logo') ?? 'frontend/assets/images/fsf-white-logo-update.png') }}"
+            <img class="default-logo" src="{{ asset(fromSettings('logo') ?? 'frontend/assets/images/logo.png') }}"
                 height="60px" width="auto" alt="nav-logo">
             <img class="sticky-logo"
-                src="{{ asset(fromSettings('logo_dark') ?? 'frontend/assets/images/fsf-logo.png') }}" height="60px"
+                src="{{ asset(fromSettings('logo_dark') ?? 'frontend/assets/images/logo-dark.png') }}" height="60px"
                 width="auto" alt="sticky-logo">
         </a>
         <button class="navbar-toggler mx-3" type="button" data-toggle="collapse" data-target="#navbar-collapse"

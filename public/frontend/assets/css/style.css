@@ -37,15 +37,15 @@ body{
 }
 :root{
   /* --primary:linear-gradient(to right, rgba(32, 40, 119, 1), rgba(55, 46, 149, 1), rgba(83, 49, 177, 1), rgba(114, 48, 205, 1), rgba(150, 41, 230, 1)); */
-  --primary:#7345E5;
-  --primary_hover:#88CCDD;
+  --primary:#000858;
+  --primary_hover:#2b317c;
   /* --secondary: linear-gradient(to left, rgba(32, 40, 119, 0.9), rgba(55, 46, 149, 0.9), rgba(83, 49, 177, 0.9), rgba(114, 48, 205, 0.9), rgba(150, 41, 230, 0.9)); */
   --secondary: linear-gradient(to left, rgba(0, 8, 74, 0.9), rgba(19, 27, 100, 0.9), rgba(58, 65, 134, 0.9), rgba(90, 96, 156, 0.9), rgba(125, 130, 181, 0.9));
   --footer: linear-gradient(to left, rgba(32, 40, 119, 1), rgba(55, 46, 149, 1), rgba(83, 49, 177, 1), rgba(114, 48, 205, 1), rgba(150, 41, 230, 1));
     /* --purple: #6730e3; */
-    --purple: #7345E5;
+    --purple: #000858;
     /* --purple-light: #6630e3dc; */
-    --purple-light: #7345E5;
+    --purple-light: #000858;
     --white: #ffffff;
     --black: #000000;
 }
@@ -464,7 +464,7 @@ nav{
 ======================================== */
 
 .main-banner{
-  background: rgba(0, 0, 0, 0) url(../images/bg/main_banner_bg.png);
+  background: rgba(0, 0, 0, 0) url(../images/welcome-bg.jpg);
   padding: 150px 0 100px;
   position: relative;
   z-index: 1;

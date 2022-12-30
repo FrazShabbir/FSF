@@ -44,7 +44,7 @@
                                 <span data-toggle="counter-up">500</span>
                                 <span>+</span>
                             </div>
-                            <h5 class="mt-lg-4 mb-lg-0 mb-4">FSF Members</h5>
+                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Members</h5>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
@@ -53,7 +53,7 @@
                                 <span data-toggle="counter-up">100</span>
                                 <span>+</span>
                             </div>
-                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Completed Jobs</h5>
+                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Jobs Done</h5>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
@@ -62,7 +62,7 @@
                                 <span data-toggle="counter-up">30</span>
                                 <span>+</span>
                             </div>
-                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Service Centers</h5>
+                            <h5 class="mt-lg-4 mb-lg-0 mb-4">Offices</h5>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
@@ -285,7 +285,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10 col-lg-8">
                         <div class="section-title">
-                            <h2 class="text-white">How FSF works?</h2>
+                            <h2 class="text-white">How vCard works?</h2>
                             <p class="text-white my-3 mt-sm-4 mb-sm-5">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.
                             </p>
