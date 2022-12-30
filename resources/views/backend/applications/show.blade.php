@@ -1,815 +1,441 @@
-@extends('backend.main')
-@section('title', 'Page')
+<!DOCTYPE html>
+<html>
 
-@section('styles')
-    <link href="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/css/smart_wizard_all.min.css" rel="stylesheet"
-        type="text/css" />
-@endsection
-
-@push('css')
+<head>
+    <title>Voucher Pdf</title>
     <style>
         body {
-            scroll-behavior: smooth;
-            transition: 0.4s all ease;
+            /* background: rgb(204, 204, 204); */
+            background: #fff;
         }
 
-        .heading-bottom-line {
-            width: 150px;
-            height: 2px;
-            background: #1f3d73;
+        page {
+            background: #fff;
+            color: #000;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 0.5cm;
+            /* box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5); */
         }
 
-        .enroll_show_nav {
-            border-radius: 10px;
+        page[size="A4"] {
+            width: 21cm;
+            height: 29.7cm;
         }
 
-        .enroll_show_nav .nav-link {
-            margin-right: 55px;
-            transition: 0.4s all ease;
-            border-radius: 10px;
-        }
+        @media print {
 
-        .enroll_show_nav .nav-link:hover {
-            background: #1f3d73;
-            color: #fff !important;
-        }
-
-        @media screen and (max-width: 576px) {
-            .nav-item {
-                background: #fff;
-                padding-left: 20px !important;
+            body,
+            page {
+                margin: 0;
+                box-shadow: 0;
             }
         }
+
+        /* Main Design CSS */
+        /* .doc-bg-img {
+            position: absolute;
+            top: 40%;
+            left: 35%;
+            width: 20%;
+            z-index: 1;
+            opacity: 0.3;
+        } */
+
+        .doc-bg-img {
+            position: absolute;
+            top: 42%;
+            left: 32%;
+            width: 30%;
+            z-index: 1;
+            opacity: 0.2;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #000;
+            border-collapse: collapse;
+        }
+
+        .table td,
+        .table th {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #000;
+        }
+
+        th {
+            padding: 10px 20px;
+        }
+
+        td {
+            padding: 10px 20px;
+        }
+
+        .mb-0 {
+            margin-bottom: 0px;
+        }
+
+        .m-0 {
+            margin: 0px;
+        }
+
+        .p-3 {
+            padding: 10px;
+        }
+
+        .border {
+            border: 1px solid #000;
+        }
+
+        .outer-border {
+            border: 1px dashed #50b748;
+            border-radius: 5px;
+            margin: 3px !important;
+            padding: 3px;
+        }
+
+        .inner-border {
+            border: 4px solid #135229;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-between {
+            justify-content: space-between;
+        }
+
+        .justify-content-center {
+            justify-content: center;
+        }
     </style>
-@endpush
+</head>
 
+<body>
+    <page size="A4">
+        <div>
+            <div class="outer-border">
+                <div class="inner-border">
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <p class="m-0">
+                                Date & Time: <span>12-05-2022 _ 22:00 CET</span>
+                            </p>
+                            <p class="m-0">
+                                Created by (UserID): <span>JAWADAHMAD</span>
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between" style="margin-top: 20px; margin-bottom: 20px;">
+                            <div>
+                                <img src="https://fsfeu.org/backend/images/Dawateislami_logo.png" style="margin-top: 15px; margin-left: 20px;"
+                                    width="100px" alt="Logo">
+                            </div>
 
+                            <div style="text-align: center;">
+                                <p class="mb-0" style="font-size: 20px; font-weight: lighter; margin-bottom: 5px;">
+                                    <i>Funeral Services Fund</i>
+                                </p>
+                                <h1 class="m-0" style="color: #135229;"><u><b>Enrollment: {{$application->application_id}}</b></u></h1>
+                                <p style="text-transform: uppercase; margin-top: 5px; font-weight: 600; color: #135229">Dawateislami
+                                </p>
+                            </div>
 
-@section('content')
-    <div id="content-page" class="content-page">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="iq-card">
-                        <div class="iq-card-header pt-5 pb-3">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="ml-4">
-                                        <img src="{{ asset('frontend/images/fsf-logo.png') }}" width="100px"
-                                            alt="DawatIslami Logo">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="text-center">
-                                        <p class="mb-0"><i>Funeral Department</i></p>
-                                        <h2 class="mb-0"><u>Enrollment: {{$application->application_id}}</u></h2>
-                                        <p class="text-uppercase mb-0"><b>Dawateislami</b></p>
-                                    </div>
-                                </div>
-                                {{-- <div class="col-lg-3 col-md-3 col-sm-12">
-                                <div class="mt-3 text-center">
-                                    <p class="mb-0">Check & Audit</p>
+                            <div>
+                                <div style="text-align: center; margin-right: 20px; margin-top: 40px;">
+                                    <p style="margin-bottom: 5px;">Check & Audit</p>
                                     <div class="d-flex justify-content-center">
                                         <div class="border p-3"></div>
                                         <div class="border p-3"></div>
                                         <div class="border p-3"></div>
                                     </div>
                                 </div>
-                            </div> --}}
                             </div>
                         </div>
-                        <div class="iq-card-body p-5">
-                            <div class="row">
-                                <div class="col-12 mb-5">
-                                    <nav class="navbar navbar-expand-lg navbar-light bg-light enroll_show_nav">
-                                        {{-- <a class="navbar-brand" href="#">Navbar</a> --}}
-                                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                            data-target="#enrol_show_nav" aria-controls="enrol_show_nav"
-                                            aria-expanded="false" aria-label="Toggle navigation">
-                                            <span class="navbar-toggler-icon"></span>
-                                        </button>
-
-                                        <div class="collapse navbar-collapse" id="enrol_show_nav">
-                                            <ul class="navbar-nav ml-auto">
-                                                <li class="nav-item">
-                                                    <a class="nav-link ml-0" href="#personal_info">Personal Info</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#residential_relative_info">Residential
-                                                        Relative Info</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#native_country_relative_info">Native Country
-                                                        Relative Info</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#representative_info">Representative Info</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link mr-0" href="#supplementary_info">Supplementary
-                                                        Info</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </nav>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="text-center mb-5">
-                                                <img class="rounded-circle" width="160px"
-                                                    src="{{$application->avatar ?? asset('placeholder.png')}}" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="" id="personal_info">
-                                                <div class="mb-4">
-                                                    <h3>
-                                                        Personal Information <small><span class="badge badge-info"><a href="{{route('users.show',$application->user_id)}}">View User</a> </span> <span class="badge badge-{{$application->status}}">{{$application->status}}</span> <a class="badge badge-{{$application->status}}" href="{{route('application.edit',$application->application_id)}}">Edit</a> <small><span class="badge badge-info">Exp:{{$application->renewal_date}}</span></small></small>
-                                                    </h3>
-                                                    <div class="heading-bottom-line"></div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Full Name</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->full_name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Father's Name</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->father_name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Sur Name</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->surname }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Gender</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->gender }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Date of Birth</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->dob }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Passport No.</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->passport_number }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">European Residence Card No.</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->nie }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Native Country</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->native_country }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">ID Card No. (Native Country)</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->native_id }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Address (Native Country)</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->native_country_address }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Cell No.</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->phone }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Email</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->user->email }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Country</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->country->name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Community</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->community->name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Province</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->province->name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">City</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->city->name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Area / Street / House No.</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->area }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="" id="residential_relative_info">
-                                                <div class="mb-4">
-                                                    <h3>
-                                                        Residential Relative Information
-                                                    </h3>
-                                                    <div class="heading-bottom-line"></div>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <h5>
-                                                        Relative 1
-                                                    </h5>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Full Name</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->s_relative_1_name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Relation</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->s_relative_1_relation }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Cell No.</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->s_relative_1_phone }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Complete Address</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->s_relative_1_address }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <h5>
-                                                        Relative 2
-                                                    </h5>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Full Name</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->s_relative_2_address }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Relation</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->s_relative_2_relation }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Cell No.</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->s_relative_2_phone }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Complete Address</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->s_relative_2_address }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="" id="native_country_relative_info">
-                                                <div class="mb-4">
-                                                    <h3>
-                                                        Native Country Relative Information
-                                                    </h3>
-                                                    <div class="heading-bottom-line"></div>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <h5>
-                                                        Relative 1
-                                                    </h5>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Full Name</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->n_relative_1_name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Relation</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->n_relative_1_relation }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Cell No.</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->n_relative_1_phone }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Complete Address</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->n_relative_1_address }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <h5>
-                                                        Relative 2
-                                                    </h5>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Full Name</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->n_relative_2_name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Relation</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->n_relative_2_relation }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Cell No.</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->n_relative_2_phone }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Complete Address</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->n_relative_2_name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="" id="representative_info">
-                                                <div class="mb-4">
-                                                    <h3>
-                                                        Representative Information
-                                                    </h3>
-                                                    <div class="heading-bottom-line"></div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Full Name</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->rep_name }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Sur Name</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->rep_surname }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Passport No.</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->rep_passport_no }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Cell No.</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->rep_phone }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Complete Address</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->rep_address }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="" id="supplementary_info">
-                                                <div class="mb-4">
-                                                    <h3>
-                                                        Supplementary Information
-                                                    </h3>
-                                                    <div class="heading-bottom-line"></div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Where do you want to be buried?
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->buried_location }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Do you have any relatives
-                                                                    registered in this fund?</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    {{ $application->registered_relatives=='1'?'Yes':'No' }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">How much will you pay annually
-                                                                    into this fund?</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="mb-0 float-right font-weight-bold">
-                                                                    <span class="font-weight-bold mr-1">€</span>{{ $application->annually_fund_amount }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <div class="row mb-4">
-                                                            <div class="col-6">
-                                                                <p class="mb-0 text-dark">Signature</p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <img class="mb-0 float-right font-weight-bold img-fluid" style="max-width: 300px"
-                                                                    src="{{ $application->user_signature }}" alt="signatures">
-                                                                {{-- <p class="mb-0 float-right font-weight-bold">{{$application->full_name}}</p> --}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            @if ($application->registered_relatives == 1)
+                        <hr style="margin-bottom: 20px;">
+                        <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 30px;">
+                            <div>
+                                <h2 style="font-size: 22px; margin-bottom: 5px;"><b>Personal Details:</b></h2>
+                            </div>
+                            <div>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <th style="padding: 0;" colspan="3">
+                                            <table style="border: none;">
+                                                <tr style="border: none;">
+                                                    <th style="border: none; text-align: left;">Full Name:</th>
+                                                    <td style="border: none; text-align: left;">{{ $application->full_name }}</td>
+                                                </tr>
+                                                <tr style="border: none;">
+                                                    <th style="border: none; text-align: left;">Father Name:</th>
+                                                    <td style="border: none; text-align: left;">{{ $application->father_name }}</td>
+                                                </tr>
+                                                <tr style="border: none;">
+                                                    <th style="border: none; text-align: left;">Sur Name:</th>
+                                                    <td style="border: none; text-align: left;">{{ $application->surname }}</td>
+                                                </tr>
+                                                <tr style="border: none;">
+                                                    <th style="border: none; text-align: left;">Gender:</th>
+                                                    <td style="border: none; text-align: left;">{{ $application->gender }}</td>
+                                                </tr>
+                                            </table>
+                                        </th>
+                                        <th colspan="1">
+                                            <img style="width: 100%;" src="{{$application->avatar ?? asset('placeholder.png')}}" alt="">
+                                        </th>
+                                    </tr>
+                                    <!-- <tr>
+                                        <th>Full Name:</th>
+                                        <td>Danish Malhi</td>
+                                        <th>Father Name:</th>
+                                        <td>Asghar Malhi</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Sur Name:</th>
+                                        <td>Malhi</td>
+                                        <th>Gender:</th>
+                                        <td>Male</td>
+                                    </tr> -->
+                                    <tr>
+                                        <th>Date of Birth:</th>
+                                        <td>{{ $application->dob }}</td>
+                                        <th>Passport No:</th>
+                                        <td>{{ $application->passport_number }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Residence Card No:</th>
+                                        <td>{{ $application->nie }}</td>
+                                        <th>Cell No:</th>
+                                        <td>{{ $application->phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td>{{ $application->user->email }}</td>
+                                        <th>Country:</th>
+                                        <td>{{ $application->country->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Community:</th>
+                                        <td>{{ $application->community->name }}</td>
+                                        <th>Province:</th>
+                                        <td>{{ $application->province->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>City:</th>
+                                        <td>{{ $application->city->name }}</td>
+                                        <th>Address:</th>
+                                        <td>{{ $application->area }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Native Country:</th>
+                                        <td>{{ $application->native_country }}</td>
+                                        <th>ID Card No. (Native Country):</th>
+                                        <td>{{ $application->native_id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Complete Address (Native Country):</th>
+                                        <td colspan="3">
+                                            {{ $application->native_country_address }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 30px;">
+                            <div>
+                                <h2 style="font-size: 22px; margin-bottom: 5px;"><b>Relative Information (Residence):</b></h2>
+                            </div>
+                            <div>
+                                <table style="width: 100%;">
+                                    <h4 style="font-size: 15px; margin-bottom: 5px;">Relative 1</h4>
+                                    <tr>
+                                        <th>Full Name:</th>
+                                        <td>{{ $application->s_relative_1_name }}</td>
+                                        <th>Relation:</th>
+                                        <td>{{ $application->s_relative_1_relation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cell No:</th>
+                                        <td>{{ $application->s_relative_1_phone }}</td>
+                                        <th>Complete Address:</th>
+                                        <td>{{ $application->s_relative_1_address }}</td>
+                                    </tr>
+                                </table>
+                                <table style="width: 100%;">
+                                    <h4 style="font-size: 15px; margin-bottom: 5px;">Relative 1</h4>
+                                    <tr>
+                                        <th>Full Name:</th>
+                                        <td>{{ $application->s_relative_2_address }}</td>
+                                        <th>Relation:</th>
+                                        <td>{{ $application->s_relative_2_relation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cell No:</th>
+                                        <td>{{ $application->s_relative_2_phone }}</td>
+                                        <th>Complete Address:</th>
+                                        <td>{{ $application->s_relative_2_address }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 30px;">
+                            <div>
+                                <h2 style="font-size: 22px; margin-bottom: 5px;"><b>Relative Information (Native Country):</b></h2>
+                            </div>
+                            <div>
+                                <table style="width: 100%;">
+                                    <h4 style="font-size: 15px; margin-bottom: 5px;">Relative 1</h4>
+                                    <tr>
+                                        <th>Full Name:</th>
+                                        <td>{{ $application->n_relative_1_name }}</td>
+                                        <th>Relation:</th>
+                                        <td>{{ $application->n_relative_1_relation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cell No:</th>
+                                        <td>{{ $application->n_relative_1_phone }}</td>
+                                        <th>Complete Address:</th>
+                                        <td>{{ $application->n_relative_1_address }}</td>
+                                    </tr>
+                                </table>
+                                <table style="width: 100%;">
+                                    <h4 style="font-size: 15px; margin-bottom: 5px;">Relative 1</h4>
+                                    <tr>
+                                        <th>Full Name:</th>
+                                        <td>{{ $application->n_relative_2_name }}</td>
+                                        <th>Relation:</th>
+                                        <td>{{ $application->n_relative_2_relation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cell No:</th>
+                                        <td>{{ $application->n_relative_2_phone }}</td>
+                                        <th>Complete Address:</th>
+                                        <td>{{ $application->n_relative_2_name }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 30px;">
+                            <div>
+                                <h2 style="font-size: 22px; margin-bottom: 5px;"><b>Representative Information</b></h2>
+                            </div>
+                            <div>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <th>Full Name:</th>
+                                        <td>{{ $application->rep_name }}</td>
+                                        <th>Sur Name:</th>
+                                        <td>{{ $application->rep_surname }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Passport No:</th>
+                                        <td>{{ $application->rep_passport_no }}</td>
+                                        <th>Cell No:</th>
+                                        <td>{{ $application->rep_phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Complete Address:</th>
+                                        <td colspan="3">{{ $application->rep_address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3">Have you informed him that youare appointing this person as your Representative in FSF and this person will be authorized to collect your reaming ammount:</th>
+                                        <td>yes</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 30px;">
+                            <div>
+                                <h2 style="font-size: 22px; margin-bottom: 5px;"><b>Suplementary Information</b></h2>
+                            </div>
+                            <div>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <th>Burried Place:</th>
+                                        <td>{{ $application->buried_location }}</td>
+                                        <th>Registered Relative:</th>
+                                        <td>{{ $application->registered_relatives=='1'?'Yes':'No' }}</td>
+                                    </tr>
+                                    @if ($application->registered_relatives == 1)
                                                 @php
                                                     $relative = App\Models\Application::where('passport_number', $application->registered_relative_passport_no)->first();
                                                 @endphp
-                                                
-                                                <div class="" id="relative_registers">
-                                                    <div class="mb-4">
-                                                        <h3>
-                                                            Registered Relative
-                                                        </h3>
-                                                        <div class="heading-bottom-line"></div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="row mb-4">
-                                                                <div class="col-6">
-                                                                    <p class="mb-0 text-dark">Full Name</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p class="mb-0 float-right font-weight-bold">
-                                                                        {{ $relative->full_name }}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="row mb-4">
-                                                                <div class="col-6">
-                                                                    <p class="mb-0 text-dark">Father Name</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p class="mb-0 float-right font-weight-bold">
-                                                                        {{ $relative->father_name }}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="row mb-4">
-                                                                <div class="col-6">
-                                                                    <p class="mb-0 text-dark">Passport No.</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p class="mb-0 float-right font-weight-bold">
-                                                                        {{ $relative->passport_number }}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="row mb-4">
-                                                                <div class="col-6">
-                                                                    <p class="mb-0 text-dark">Cell No.</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p class="mb-0 float-right font-weight-bold">
-                                                                        {{ $relative->phone }}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="row mb-4">
-                                                                <div class="col-6">
-                                                                    <p class="mb-0 text-dark">Complete Address</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p class="mb-0 float-right font-weight-bold">
-                                                                        {{ $relative->area }}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
+                                    <tr>
+                                        <th>Full Name:</th>
+                                        <td>{{ $relative->full_name }}</td>
+                                        <th>Father Name:</th>
+                                        <td>{{ $relative->father_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cell No:</th>
+                                        <td>{{ $relative->phone }}</td>
+                                        <th>Passport No:</th>
+                                        <td>{{ $relative->passport_number }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Complete Address:</th>
+                                        <td colspan="3">{{ $relative->area }}</td>
+                                    </tr>
 
+                                    @endif
 
-
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <div class="iq-card">
-                        <div class="iq-card-header d-flex justify-content-between">
-                            <div class="iq-header-title">
-                                <h4 class="card-title">Application Tree</h4>
-                            </div>
-                        </div>
-                        <div class="iq-card-body">
-                            <div class="table-responsive">
-                               
-                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
-                                    aria-describedby="user-list-page-info">
-                                    <thead>
-                                        <tr>
-                                            
-                                            <th>Comments</th>
-                                            <th>Status</th>
-                                            <th>Done By</th>
-                                            <th>Date</th>
-                                            
-                                          
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                   
-                                        @foreach($application->comments as $comment)
-                                        <tr>
-                                            <td>{{$comment->comment}}</td>
-                                            <td><span class="badge badge-{{$comment->status}}">{{$comment->status}}</span></td>
-                                            <td>{{$comment->user->full_name ?? $application->user->full_name}}</td>
-                                            <td>{{date('d-M-Y',strtotime($comment->created_at))}}</td>
-                                            
-                                        </tr>
-                                        @endforeach
-                                      
-                                    </tbody>
+                                    <tr>
+                                        <th>How much will you pay annually in this fund:</th>
+                                        <td colspan="3">€ {{ $application->annually_fund_amount }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Your Signature:</th>
+                                        <td colspan="3">
+                                            <img style="width: 150px;" src="{{ $application->user_signature }}" alt="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3">Have you read carefully to all the conditions and regulations on this funderal services fund:</th>
+                                        <td>yes</td>
+                                    </tr>
                                 </table>
                             </div>
-                   
+                        </div>
+                        <div class="d-flex" style="margin-left: 20px; margin-right: 20px; margin-top: 30px;">
+                            <p class="mb-0" style="margin-right: 15px;">Remarks:</p>
+                            <div style="border-bottom: 1px solid #000; width: 100%;">
+
+                            </div>
+                        </div>
+                        <div class="" style="margin-left: 20px; margin-right: 20px;">
+                            <div style="margin-bottom: 80px;">
+                                <p style="text-align: center; font-weight: bold; margin-bottom: 20px;">Signatures:</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="" style="width: 100%;">
+                                    <div style="border-top: 1px solid #000; width: 75%; margin: 0 auto;">
+                                        <p style="text-align: center;">Applicant</p>
+                                    </div>
+                                </div>
+                                <!-- <div class="" style="width: 100%;">
+                                    <div style="border-top: 1px solid #000; width: 75%; margin: 0 auto;">
+                                        <p style="text-align: center;">Donor</p>
+                                    </div>
+                                </div> -->
+                                <div class="" style="width: 100%;">
+                                    <div style="border-top: 1px solid #000; width: 75%; margin: 0 auto;">
+                                        <p style="text-align: center;">Application Receiver</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <img class="doc-bg-img" src="Dawateislami_logo.png" alt="">
                         </div>
                     </div>
                 </div>
-                @if ($application->donations)
-                @include('backend.partials.common._donation_stats',['data'=>$application])
-                @endif
-                
-                @if ($application->status=='PERMANENT-CLOSED')
-                @include('backend.partials.common.applicationClosedStats',['data'=>$application])
-                @endif
-
             </div>
         </div>
-    </div>
-@endsection
+    </page>
+</body>
 
-
-@section('scripts')
-
-@endsection
-
-@push('js')
-@endpush
+</html>
