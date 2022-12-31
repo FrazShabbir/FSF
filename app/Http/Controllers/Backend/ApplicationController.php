@@ -28,6 +28,7 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Models\RenewApplication;
 
+use App\Models\ApplicationDocument;
 class ApplicationController extends Controller
 {
     /**
@@ -388,6 +389,21 @@ class ApplicationController extends Controller
 
         // dd(now()->diffInDays($application->renewal_date));
         return view('backend.applications.show')
+            ->with('application', $application);
+    }
+
+       /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function print($id)
+    {
+        $application = Application::where('application_id', $id)->firstOrFail();
+
+        // dd(now()->diffInDays($application->renewal_date));
+        return view('backend.applications.print_app')
             ->with('application', $application);
     }
 
@@ -1331,5 +1347,35 @@ class ApplicationController extends Controller
             alert()->error('Error', $th->getMessage());
             return redirect()->back();
         }
+    }
+
+    public function documentStore(Request $request,$id)
+    {
+        $request->validate([
+            'document' => 'required',
+        ]);
+        $application = Application::where('application_id',$id)->first();
+    
+        if ($request->document) {
+            $request->validate(
+                [
+                    'document' => 'required|mimes:png,jpg,jpeg,pdf|max:2000',]
+            );
+            $file = $request->document;
+            $extension = $file->getClientOriginalExtension();
+            $filename = getRandomString().'-'.time() . '.' . $extension;
+            $file->move('uploads/application/documents/', $filename);
+
+            $documents = ApplicationDocument::create([
+                'application_id' => $application->id,
+                'original_name' => $file->getClientOriginalName(),
+                'extension' => $extension,
+                'path' => env('APP_URL').'uploads/application/documents/'. $filename,
+                'uploader' => auth()->user()->id,
+            ]);            
+        }
+
+        alert()->success('Comment Added Successfully', 'Success');
+        return redirect()->back();
     }
 }

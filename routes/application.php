@@ -31,7 +31,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::put('application/{id}/update', [ApplicationController::class, 'update'])->name('application.update')->middleware(['can:Update Applications']);
     Route::delete('application/{id}', [ApplicationController::class, 'destroy'])->name('application.destroy')->middleware(['can:Delete Applications']);
 
+    Route::get('application/{id}/print', [ApplicationController::class, 'print'])->name('application.print')->middleware(['can:Read Applications']);
+
+
     Route::post('application/comment/{id}', [ApplicationController::class, 'commentStore'])->name('application.commentStore')->middleware(['can:Update Applications']);
+    Route::post('application/document/{id}', [ApplicationController::class, 'documentStore'])->name('application.documentStore')->middleware(['can:Update Applications']);
 
 
     Route::get('close-Application/application/{id}/', [ApplicationController::class, 'closeApplication'])->name('user.close.application')->middleware(['can:Close Applications']);

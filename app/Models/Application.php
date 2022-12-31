@@ -15,6 +15,9 @@ class Application extends Model
     function comments(){
         return $this->hasMany('App\Models\ApplicationComment')->orderBy('created_at', 'desc');
     }
+    function documents(){
+        return $this->hasMany('App\Models\ApplicationDocument')->orderBy('created_at', 'desc');
+    }
     function user(){
         return $this->belongsTo('App\Models\User');
     }

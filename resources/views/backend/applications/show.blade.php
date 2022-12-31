@@ -125,7 +125,7 @@
                                             <div class="" id="personal_info">
                                                 <div class="mb-4">
                                                     <h3>
-                                                        Personal Information <small><span class="badge badge-info"><a href="{{route('users.show',$application->user_id)}}">View User</a> </span> <span class="badge badge-{{$application->status}}">{{$application->status}}</span> <a class="badge badge-{{$application->status}}" href="{{route('application.edit',$application->application_id)}}">Edit</a> <small><span class="badge badge-info">Exp:{{$application->renewal_date}}</span></small></small>
+                                                        Personal Information <small><span class="badge badge-info"><a href="{{route('users.show',$application->user_id)}}">View User</a> </span> <span class="badge badge-{{$application->status}}">{{$application->status}}</span> <a class="badge badge-{{$application->status}}" href="{{route('application.edit',$application->application_id)}}">Edit</a> <small><span class="badge badge-info">Exp:{{$application->renewal_date}}</span> <span class="badge badge-warning"><a href="{{route('application.print',$application->application_id)}}">Print</a></span></small></small>
                                                     </h3>
                                                     <div class="heading-bottom-line"></div>
                                                 </div>
@@ -793,6 +793,57 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Application Documents</h4>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Upload Related Document(s)</button>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="table-responsive">
+                               
+                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
+                                    aria-describedby="user-list-page-info">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th>Document</th>
+                                            <th>Original Name</th>
+                                            <th>Uploaded By</th>
+                                            <th>Date</th>
+                                            <th>Download</th>
+                                            
+                                            
+                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                   @php
+                                       $i=1;
+                                   @endphp
+                                        @foreach($application->documents as $document)
+                                        <tr>
+                                            <td>{{$i}}</td>
+                                            <td>{{$document->original_name}}</td>
+                                            <td>{{$document->user->full_name}}</td>
+                                            <td>{{date('d-M-Y',strtotime($comment->created_at))}}</td>
+                                            <td><a href="{{$document->path}}">Download</a></td>
+                                        </tr>
+                                        @php
+                                            $i++;
+                                        @endphp
+                                        @endforeach
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                   
+                        </div>
+                    </div>
+                </div>
                 @if ($application->donations)
                 @include('backend.partials.common._donation_stats',['data'=>$application])
                 @endif
@@ -804,6 +855,44 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <form action="{{route('application.documentStore',$application->application_id)}}" method="POST" enctype="multipart/form-data">
+                @csrf
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title">Upload related Document</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">×</span>
+                 </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 mb-3">
+                        <div class="form-group">
+                            <p class="required">Document</p>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="document"
+                                    id="document" accept="image/*,.pdf">
+                                <label class="custom-file-label" for="image">Choose Document
+                                    (.png,.jpeg,jpg,pdf)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                 
+                </div>
+              </div>
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+           </div>
+        </form>
+        </div>
+     </div>
 @endsection
 
 
