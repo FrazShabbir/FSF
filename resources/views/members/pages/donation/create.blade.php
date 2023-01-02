@@ -125,7 +125,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">€</span>
                                                 </div>
-                                                <input type="number" step="0.01" class="form-control" name="amount" placeholder="250" value="{{old('amount')}}" required>
+                                                <input type="number" step="0.01" class="form-control positiveNumber" name="amount" placeholder="250" value="{{old('amount')}}" required min="1">
                                             </div>
                                         </div>
                                         <div class="col-md-6 pr-5">
@@ -203,5 +203,18 @@
         })
 
     </script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.positiveNumber').keyup(function() {
+            // this.value = this.value.replace(/[^0-9\.]/g, '');
+            if (this.value < 0) {
+                this.value = 0;
+                alert('Please enter Amount greater than 0');
+            }
+        });
+    });
+</script>
 
 @endpush

@@ -26,22 +26,26 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="passport_number">Passport Number:</label>
-                                        <input type="text" name="passport_number" id="" class="form-control" placeholder="Passport Number">
+                                        <input type="text" name="passport_number" id="" class="form-control"
+                                            placeholder="Passport Number">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="" for="application_id">Application ID:</label>
-                                        <input type="text" name="application_id" id="" class="form-control" placeholder="W-App-778767">
+                                        <input type="text" name="application_id" id="" class="form-control"
+                                            placeholder="W-App-778767">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="donor_bank_name">Donor Bank Name:</label>
-                                        <input type="text" name="donor_bank_name" id="" class="form-control" placeholder="Bank ABC" required>
+                                        <input type="text" name="donor_bank_name" id="" class="form-control"
+                                            placeholder="Bank ABC" required>
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="donor_bank_no">Account Number/IBAN:</label>
-                                        <input type="text" name="donor_bank_no" id="" class="form-control" placeholder="Bank-90979" required>
+                                        <input type="text" name="donor_bank_no" id="" class="form-control"
+                                            placeholder="Bank-90979" required>
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
@@ -49,7 +53,9 @@
 
                                         <select name="fsf_bank_id" id="" class="form-control" required>
                                             @foreach ($accounts as $key)
-                                                <option value="{{ $key->id }}">{{ $key->name }} - {{$key->account_number}} - {{$key->bank}} - {{$key->city}}</option>
+                                                <option value="{{ $key->id }}">{{ $key->name }} -
+                                                    {{ $key->account_number }} - {{ $key->bank }} - {{ $key->city }}
+                                                </option>
                                             @endforeach
                                         </select>
 
@@ -57,22 +63,24 @@
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="amount">Amount:</label>
-                                        <input type="number" step="0.01" name="amount" id="" class="form-control" placeholder="90" required>
+                                        <input type="number" step="0.01" name="amount" id=""
+                                            class="form-control positiveNumber" placeholder="90" required min="1">
                                     </div>
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="donation_date">Donation Date:</label>
-                                        <input type="date" name="donation_date" id="" class="form-control"  required>
+                                        <input type="date" name="donation_date" id="" class="form-control"
+                                            required>
                                     </div>
-                             
 
-                                    
+
+
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <p class="required">Receipt</p>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="receipt"
-                                                    id="receipt"  accept=".png, .jpg, .jpeg">
+                                                    id="receipt" accept=".png, .jpg, .jpeg">
                                                 <label class="custom-file-label" for="image">Choose Logo
                                                     (.png,.jpeg,jpg)</label>
                                             </div>
@@ -100,4 +108,15 @@
 @endsection
 
 @push('js')
+    <script>
+        $(document).ready(function() {
+            $('.positiveNumber').keyup(function() {
+                // this.value = this.value.replace(/[^0-9\.]/g, '');
+                if (this.value < 0) {
+                    this.value = 0;
+                    alert('Please enter Amount greater than 0');
+                }
+            });
+        });
+    </script>
 @endpush

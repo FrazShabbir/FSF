@@ -31,7 +31,7 @@ class MemberDonationController extends Controller
      */
     public function create()
     {
-        $accounts = Account::all();
+        $accounts = Account::where('status','1')->get();
         $applications = Application::where('user_id', auth()->user()->id)->where('status','APPROVED')->get();
         return view('members.pages.donation.create')
             ->with('accounts', $accounts)
@@ -52,7 +52,7 @@ class MemberDonationController extends Controller
             'donor_bank_name' => 'required',
             'donor_bank_no' => 'required',
             'fsf_bank_id' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|numeric|min:0|not_in:0',
             'receipt' => 'required',
         ]);
 
@@ -70,6 +70,11 @@ class MemberDonationController extends Controller
         }
 
         try {
+            if ($request->amount < 0) {
+                alert()->error('Amount Must Be Greater Than 0', 'Error');
+                return redirect()->back();
+            }
+            
             DB::beginTransaction();
             $donation = Donation::create([
                 'donation_code'=> 'D-'.date('YmdHis'),

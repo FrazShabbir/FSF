@@ -1182,55 +1182,70 @@ cursor: pointer;
     }
 }
 
-.badge-RENEWABLE{
+
+.badge-FAILED {
+    background-color: #f44336;
+    color: #ffffff;
+  }
+  
+  .badge-RENEWABLE{
     background-color: #6021de;
     color: #fff;
-}
- 
-.badge-RENEWAL-REQUESTED{
+  }
+  
+  .badge-RENEWAL-REQUESTED{
     background-color: #ac8ceb;
     color: #fff;
-}
-
-.badge-APPROVED,.badge-ACTIVE,.badge-1, .badge-SUCCESS{
+  }
+  
+  .badge-APPROVED,.badge-ACTIVE,.badge-1, .badge-SUCCESS{
     background-color: #198753;
     color: #fff;
-}
-.badge-SUBMITTED{
+  }
+  .badge-SUBMITTED{
     background-color: #0C6EFD;
     color: #fff;
-}
-.badge-COMPLETED{
+  }
+  .badge-COMPLETED{
     background-color: #0C6EFD;
     color: #fff;
-}
-.badge-REJECTED, .badge-3, .badge-4{
+  }
+  .badge-REJECTED, .badge-3, .badge-4{
     background-color: #DC3444;
     color: #fff;
-}
-.badge-PENDING{
+  }
+  .badge-PENDING{
     background-color: #10CAF0;
     color: #fff;
-}
-
-.badge-0, .badge-INACTIVE{
+  }
+  
+  .badge-PENDING-APPROVAL	{
+    background-color: #438a98;
+    color: #fff;
+  }
+  
+  .badge-0, .badge-INACTIVE{
     background-color: #DC3444;
     color: #fff;
-}
-
-.badge-CLOSING-PROCESS{
+  }
+  
+  .badge-CLOSING-PROCESS{
     background-color: #cb3d4b;
     color: #ffff;
-}
-.badge-PERMANENT-CLOSED {
+  }
+  .badge-PERMANENT-CLOSED {
     background-color: #ff0019;
     color: #ffffff;
   }
-
-.badge-2{
+  
+  .badge-2{
     background-color: #FFC007;
     color: #000;
-}
+  }
+  .badge-EXPIRED {
+    background-color: #f44336;
+    color: #ffffff;
+  }
 .width_100px{
     width: 100px!important;
 }

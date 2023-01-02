@@ -48,7 +48,7 @@ class DonationController extends Controller
         ->orderBy('id', 'ASC')
         ->get();
 
-        $accounts = Account::all();
+        $accounts = Account::where('status','1')->get();
         return view('backend.donation.index')
             ->with('donations', $donations)
             ->with('accounts', $accounts);
@@ -61,7 +61,7 @@ class DonationController extends Controller
      */
     public function create()
     {
-        $accounts = Account::all();
+        $accounts = Account::where('status','1')->get();
         return view('backend.donation.create')
         ->with('accounts', $accounts);
     }
@@ -79,14 +79,18 @@ class DonationController extends Controller
             'donor_bank_name' => 'required',
             'donor_bank_no' => 'required',
             'fsf_bank_id' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|numeric|min:0|not_in:0',
             'passport_number' => 'required',
             'receipt' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         try {
             //code...
-
+            if ($request->amount < 0) {
+                alert()->error('Amount Must Be Greater Than 0', 'Error');
+                return redirect()->back();
+            }
+            
             DB::beginTransaction();
 
             $application = Application::where('application_id', $request->application_id)->orWhere('passport_number', $request->passport_number)->first();
@@ -165,7 +169,7 @@ class DonationController extends Controller
             return redirect()->route('donation.show', $donation->donaton_code);
         }
 
-        $accounts = Account::all();
+        $accounts = Account::where('status','1')->get();
         $countries = Country::all();
         return view('backend.donation.edit')
         ->with('accounts', $accounts)
@@ -188,7 +192,7 @@ class DonationController extends Controller
             'donor_bank_no' => 'required',
             'fsf_bank_id' => 'required',
             'passport_number' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|numeric|min:0|not_in:0',
             'status' => 'required',
             'receipt' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'country' => 'required',
@@ -197,6 +201,12 @@ class DonationController extends Controller
             'city' => 'required',
         ]);
         try {
+
+            if ($request->amount < 0) {
+                alert()->error('Amount Must Be Greater Than 0', 'Error');
+                return redirect()->back();
+            }
+
             DB::beginTransaction();
             $application = Application::where('application_id', $request->application_id)->first();
             if ($application) {

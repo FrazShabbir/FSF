@@ -129,7 +129,7 @@
                     <li class="{{ request()->route()->getName() == 'application.index'? 'active': '' }}"><a
                         href="{{ route('application.index') }}"><i class="las la-money-check-all"></i>Pending
                         Approvals</a>
-                </li> 
+                    </li> 
                     @endcan
 
 

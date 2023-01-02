@@ -58,7 +58,7 @@ class AccountController extends Controller
         $account->bank = $request->bank;
         $account->type = $request->type;
         $account->city = $request->city;
-        $account->status = 'ACTIVE';
+        $account->status = '1';
         $account->save();
         return redirect()->route('account.index');
     }

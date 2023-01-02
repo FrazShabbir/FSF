@@ -51,7 +51,6 @@
                                         <td><span class="badge badge-{{$acc->status}}">{{getStatus($acc->status)}}</span></td>
                                         <td class="width_100px">
 
-                                            <form action="{{route('account.destroy',$acc->code)}}" method="post">
                                                 <div class="flex align-items-center list-user-action">
                                                     <a class="iq-bg-primary" data-toggle="tooltip"
                                                         data-placement="top" title=""
@@ -61,19 +60,12 @@
                                                         data-original-title="Edit" href="{{route('account.edit',$acc->code)}}"><i
                                                             class="ri-pencil-line"></i></a>
 
-                                                        @csrf
-                                                        {{ method_field('Delete') }}
-                                                        <button
-                                                            onclick="return confirm('Are you sure you want to delete?')"
-                                                            type="submit" class="iq-bg-primary border-0 rounded"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="" data-original-title="Delete">
-                                                            <i class="las la-trash"></i>
-                                                        </button>
+                                                    
+                                                      
 
 
                                                 </div>
-                                            </form>
+                                            
                                         </td>
                                     </tr>
                                     @php

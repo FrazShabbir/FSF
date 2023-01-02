@@ -65,10 +65,10 @@
                                     <div class="col-6 mb-3">
                                         <label for="cityr" class="required">Status</label>
                                         <select name="status" id="" class="form-control">
-                                            <option value="ACTIVE" {{ $account->status == 'ACTIVE' ? 'selected' : '' }}>
+                                            <option value="1" {{ $account->status == '1' ? 'selected' : '' }}>
                                                 Active
                                             </option>
-                                            <option value="INACTIVE" {{ $account->status == 'INACTIVE' ? 'selected' : '' }}>
+                                            <option value="0" {{ $account->status == '0' ? 'selected' : '' }}>
                                                 InActive</option>
                                         </select>
                                     </div>
@@ -76,15 +76,18 @@
 
                                 <button type="submit" class="btn btn-primary mr-3">Submit</button>
                                 <a href="{{ route('account.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
+                                @if ($account->status==1)
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#CreditAccount">
-                                    Credit Account
-                                </button>
+                                data-target="#CreditAccount">
+                                Credit Account
+                            </button>
 
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#DebitAccount">
-                                    Debit Account
-                                </button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#DebitAccount">
+                                Debit Account
+                            </button>       
+                                @endif
+      
                             </form>
                         </div>
                     </div>

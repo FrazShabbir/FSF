@@ -71,7 +71,7 @@ class DonationController extends Controller
                 // ->get();
 
                 $donations = Donation::with(['application' => function ($query) {
-                    $query->select('id', 'application_id','passport_number','full_name');
+                    $query->select('id', 'application_id', 'passport_number', 'full_name');
                 }])->where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
                     return $q->whereBetween('donation_date', [request()->date_from, request()->date_to]);
                 })
@@ -121,12 +121,21 @@ class DonationController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
+            
+            if ($request->amount < 0) {
+                return response()->json([
+                    'status' => 401,
+                    'message' => 'Amount must be greater than 0',
+                ], 401);
+            }
+
             DB::beginTransaction();
 
+        
             $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
             if ($user) {
                 $application = Application::where('application_id', $request->application_id)->first();
-                if($application->status!='APPROVED'){
+                if ($application->status!='APPROVED') {
                     return response()->json([
                         'status' => 401,
                         'message' => 'Application is not approved',
@@ -170,10 +179,10 @@ class DonationController extends Controller
                 }
 
                 $applicant_message = 'Dear ' . $application->full_name . ', Your Donation under Application ID  ' . $application->application_id . 'is received. You will be notified once your donation is approved.';
-                
-                
-                SendMessage($application->phone,$applicant_message);
-            
+
+
+                SendMessage($application->phone, $applicant_message);
+
                 // $transaction = AccountTransaction::create([
                 //     'transaction_id' => 'T-'.date('YmdHis'),
                 //     'type' => 'Credit',
@@ -253,7 +262,7 @@ class DonationController extends Controller
                 'status' => 200,
                 'message' => 'Donation Found',
             ], 200);
-        }else{
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'Donation Not Found',

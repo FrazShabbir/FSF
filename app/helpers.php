@@ -146,19 +146,26 @@ if (! function_exists('generateNumericSix')) {
 if (! function_exists('getStatus')) {
     function getStatus($num)
     {
-        if ($num==1) {
-            return 'Active';
-        } elseif ($num=2) {
-            return 'Pending';
-        } elseif ($num==0) {
+        if($num==0) {
             return 'In Active';
-        } elseif ($num==3) {
+        }
+
+        elseif ($num==1) {
+            return 'Active';
+        }
+         elseif ($num=2) {
+            return 'Pending';
+        } 
+        elseif ($num==3) {
             return 'In Closing Process';
-        } elseif ($num==4) {
+        }
+         elseif ($num==4) {
             return 'Permanent Closed';
-        } elseif ($num==5) {
+        }
+        elseif ($num==5) {
             return 'Rejected';
-        } else {
+        } 
+        else {
             return 'Contact Support';
         }
     }
