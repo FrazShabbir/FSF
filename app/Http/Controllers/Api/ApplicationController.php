@@ -75,42 +75,27 @@ class ApplicationController extends Controller
     {
         // dd($request->all());
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
-
             $applications = Application::where('user_id', $request->user_id)
-            ->when(!empty(request()->input('date_from')), function ($q) {
-                return $q->where('created_at',request()->date_from);
-            })
-            ->when(!empty(request()->input('date_to')), function ($q) {
-                return $q->where('created_at',request()->date_to);
-            })
-            // ->when(!empty(request()->input('date_from')), function ($q) {
-            //     return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
-            // })
-            // ->when(!empty(request()->input('date_from')), function ($q) {
-            //     return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
-            // })
-            ->orderBy('id', 'ASC')
-            ->get(['id','application_id','passport_number','full_name','status','created_at','renewal_date']);
+                    ->when(!empty($request->date_from), function ($q) use ($request) {
+                        $from = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))) . " 00:00:00";
+                        $to = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))) . " 23:59:59";
+
+                        return $q->whereDate('created_at', ">=", $from)
+                        ->whereDate('created_at', "<=", $to);
+                    })
+            ->get();
+
+       
 
             $donations = Donation::with(['application' => function ($query) {
-                $query->select('id', 'application_id','passport_number','full_name');
-            }])->where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
-                return $q->whereBetween('donation_date', [request()->date_from, request()->date_to]);
-            })
-            ->when(!empty(request()->input('date_from')), function ($q) {
-                return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
-            })
-            ->when(!empty(request()->input('date_from')), function ($q) {
-                return $q->where('donation_date',request()->date_from);
-            })
-            ->when(!empty(request()->input('date_to')), function ($q) {
-                return $q->where('donation_date',request()->date_to);
-            })
-            ->when(!empty(request()->input('date_from')), function ($q) {
-                return $q->where('created_at',request()->date_from);
-            })
-            ->when(!empty(request()->input('date_to')), function ($q) {
-                return $q->where('created_at',request()->date_to);
+                $query->select('id', 'application_id', 'passport_number', 'full_name');
+            }])->where('user_id', $request->user_id)
+
+            ->when(!empty($request->date_from), function ($q) use ($request) {
+                    $from = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))) . " 00:00:00";
+                    $to = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to ??now()->modify(' +1 day')))) . " 23:59:59";
+                    return $q->whereDate('created_at', ">=", $from)
+                    ->whereDate('created_at', "<=", $to);
             })
             ->orderBy('id', 'ASC')
             ->get();
@@ -118,6 +103,9 @@ class ApplicationController extends Controller
             return response()->json([
                 'status' => 200,
                 'message' => 'All data Fetched',
+                'total_applications' => $applications->count(),
+                'total_donations' => $donations->count(),
+
                 'applications' => $applications,
                 'donations' => $donations,
             ], 200);
@@ -175,10 +163,9 @@ class ApplicationController extends Controller
     public function renew(Request $request)
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
-           
             $application = Application::where('application_id', $request->application_id)->first();
-            
-            if($application->status!='RENEWABLE'){
+
+            if ($application->status!='RENEWABLE') {
                 return response()->json([
                     'status' => 403,
                     'message' => 'Application Not Renewable',
@@ -187,21 +174,16 @@ class ApplicationController extends Controller
 
             $supplementory = [];
             if ($application) {
-               
                 if ($application->user_id != $request->user_id) {
                     return response()->json([
                         'status' => 403,
                         'message' => 'Unauthorized Access',
                     ], 403);
-                   
-                    
                 }
-               
-                if($application->registered_relatives==1){
-                      
+
+                if ($application->registered_relatives==1) {
                     $relative = Application::where('passport_number', $application->registered_relative_passport_no)->first();
-                    if($relative){
-                      
+                    if ($relative) {
                         $supplementory = [
                             'full_name' => $relative->full_name,
                             'father_name' => $relative->father_name,
@@ -210,7 +192,6 @@ class ApplicationController extends Controller
                             'address'=>$relative->country->name.' '.$relative->community->name.' '.$relative->province->name.' '.$relative->city->name.' '.$relative->area,
                         ];
                     }
-    
                 }
 
                 $countries = Country::all();
@@ -219,7 +200,7 @@ class ApplicationController extends Controller
                     'supplementory'=>$supplementory,
                     'countries' => $countries,
                     'application'=>$application,
-                    
+
                     'location'=>[
                         'country'=>[
                             'id'=>$application->country->id,
@@ -342,32 +323,27 @@ class ApplicationController extends Controller
                 }
 
                 $phone = $request->phone;
-            $s_relative_1_phone = $request->s_relative_1_phone;
-            $s_relative_2_phone = $request->s_relative_2_phone;
-            $n_relative_1_phone = $request->n_relative_1_phone;
-            $n_relative_2_phone = $request->n_relative_2_phone;
+                $s_relative_1_phone = $request->s_relative_1_phone;
+                $s_relative_2_phone = $request->s_relative_2_phone;
+                $n_relative_1_phone = $request->n_relative_1_phone;
+                $n_relative_2_phone = $request->n_relative_2_phone;
 
-            if (substr($request->phone, 0, 1) != '+') {
-                $phone = '+'.$request->phone;
-               
-            }
-         
-            if (substr($request->s_relative_1_phone, 0, 1) != '+') {
-                $s_relative_1_phone = '+'.$request->s_relative_1_phone;
-               
-            }
-            if (substr($request->s_relative_2_phone, 0, 1) != '+') {
-                $s_relative_2_phone = '+'.$request->s_relative_2_phone;
-               
-            }
-            if (substr($request->n_relative_1_phone, 0, 1) != '+') {
-                $n_relative_1_phone = '+'.$request->n_relative_1_phone;
-               
-            }
-            if (substr($request->n_relative_2_phone, 0, 1) != '+') {
-                $n_relative_2_phone = '+'.$request->n_relative_2_phone;
-               
-            }
+                if (substr($request->phone, 0, 1) != '+') {
+                    $phone = '+'.$request->phone;
+                }
+
+                if (substr($request->s_relative_1_phone, 0, 1) != '+') {
+                    $s_relative_1_phone = '+'.$request->s_relative_1_phone;
+                }
+                if (substr($request->s_relative_2_phone, 0, 1) != '+') {
+                    $s_relative_2_phone = '+'.$request->s_relative_2_phone;
+                }
+                if (substr($request->n_relative_1_phone, 0, 1) != '+') {
+                    $n_relative_1_phone = '+'.$request->n_relative_1_phone;
+                }
+                if (substr($request->n_relative_2_phone, 0, 1) != '+') {
+                    $n_relative_2_phone = '+'.$request->n_relative_2_phone;
+                }
 
                 $application->passport_number = $request->passport_number;
                 $application->nie = $request->nie;
@@ -666,9 +642,9 @@ class ApplicationController extends Controller
                     'errors' => $validateApplicationRequest->errors()
                 ], 401);
             } else {
-                $already_passport = Application::where('status','!=','REJECTED')->where('passport_number', $request->passport_number)->first();
-                $already_email = Application::where('status','!=','REJECTED')->where('email', $request->email)->first();
-                
+                $already_passport = Application::where('status', '!=', 'REJECTED')->where('passport_number', $request->passport_number)->first();
+                $already_email = Application::where('status', '!=', 'REJECTED')->where('email', $request->email)->first();
+
                 if ($already_passport) {
                     return response()->json([
                         'status' => 400,
@@ -693,37 +669,31 @@ class ApplicationController extends Controller
                 DB::beginTransaction();
 
 
-            $phone = $request->phone;
-            $rep_phone = $request->rep_phone;
-            $s_relative_1_phone = $request->s_relative_1_phone;
-            $s_relative_2_phone = $request->s_relative_2_phone;
-            $n_relative_1_phone = $request->n_relative_1_phone;
-            $n_relative_2_phone = $request->n_relative_2_phone;
+                $phone = $request->phone;
+                $rep_phone = $request->rep_phone;
+                $s_relative_1_phone = $request->s_relative_1_phone;
+                $s_relative_2_phone = $request->s_relative_2_phone;
+                $n_relative_1_phone = $request->n_relative_1_phone;
+                $n_relative_2_phone = $request->n_relative_2_phone;
 
-            if (substr($request->phone, 0, 1) != '+') {
-                $phone = '+'.$request->phone;
-               
-            }
-            if (substr($request->rep_phone, 0, 1) != '+') {
-                $rep_phone = '+'.$request->rep_phone;
-               
-            }
-            if (substr($request->s_relative_1_phone, 0, 1) != '+') {
-                $s_relative_1_phone = '+'.$request->s_relative_1_phone;
-               
-            }
-            if (substr($request->s_relative_2_phone, 0, 1) != '+') {
-                $s_relative_2_phone = '+'.$request->s_relative_2_phone;
-               
-            }
-            if (substr($request->n_relative_1_phone, 0, 1) != '+') {
-                $n_relative_1_phone = '+'.$request->n_relative_1_phone;
-               
-            }
-            if (substr($request->n_relative_2_phone, 0, 1) != '+') {
-                $n_relative_2_phone = '+'.$request->n_relative_2_phone;
-               
-            }
+                if (substr($request->phone, 0, 1) != '+') {
+                    $phone = '+'.$request->phone;
+                }
+                if (substr($request->rep_phone, 0, 1) != '+') {
+                    $rep_phone = '+'.$request->rep_phone;
+                }
+                if (substr($request->s_relative_1_phone, 0, 1) != '+') {
+                    $s_relative_1_phone = '+'.$request->s_relative_1_phone;
+                }
+                if (substr($request->s_relative_2_phone, 0, 1) != '+') {
+                    $s_relative_2_phone = '+'.$request->s_relative_2_phone;
+                }
+                if (substr($request->n_relative_1_phone, 0, 1) != '+') {
+                    $n_relative_1_phone = '+'.$request->n_relative_1_phone;
+                }
+                if (substr($request->n_relative_2_phone, 0, 1) != '+') {
+                    $n_relative_2_phone = '+'.$request->n_relative_2_phone;
+                }
 
                 $application = new Application();
                 $application->application_id= 'M-'.rand(11, 99).'-'.rand(111, 999).'-'.rand(11, 99);
@@ -847,12 +817,12 @@ class ApplicationController extends Controller
                 DB::commit();
                 $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been submitted successfully with Application ID  ' . $application->application_id . '. You will be notified once your application is approved.';
                 $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
-                
-                
-                SendMessage($application->phone,$applicant_message);
-                SendMessage($application->rep_phone,$rep_messsage);
-            
-                
+
+
+                SendMessage($application->phone, $applicant_message);
+                SendMessage($application->rep_phone, $rep_messsage);
+
+
                 return response()->json([
                     'status' => true,
                     'message' => 'Application created successfully',
@@ -892,10 +862,9 @@ class ApplicationController extends Controller
 
         if ($application->count()>0) {
             $application = Application::with('comments')->with('donations')->where('application_id', $id)->where('user_id', $user->id)->first();
-            if($application->registered_relatives==1){
-               
+            if ($application->registered_relatives==1) {
                 $relative = Application::where('passport_number', $application->registered_relative_passport_no)->first();
-                if($relative){
+                if ($relative) {
                     $supplementory = [
                         'full_name' => $relative->full_name,
                         'father_name' => $relative->father_name,
@@ -904,7 +873,6 @@ class ApplicationController extends Controller
                         'address'=>$relative->country->name.' '.$relative->community->name.' '.$relative->province->name.' '.$relative->city->name.' '.$relative->area,
                     ];
                 }
-
             }
         } else {
             return response()->json([
@@ -992,7 +960,7 @@ class ApplicationController extends Controller
                     'user_signature'=>$application->user_signature,
                     // 'declaration_confirm'=>$application->declaration_confirm,
                     'status'=>$application->status,
-                  
+
 
                 ],
                 'supplementory'=>$supplementory
@@ -1023,13 +991,12 @@ class ApplicationController extends Controller
             $application = Application::with('comments')->where('application_id', $request->application_id)->where('user_id', $user->id)->first();
 
 
-            if($application->status!='PENDING'){
+            if ($application->status!='PENDING') {
                 return response()->json([
                     'status' => 403,
                     'message' => 'Application Not EDITABLE.',
                 ], 403);
             }
-
         } else {
             return response()->json([
                 'status' => 400,
@@ -1146,14 +1113,13 @@ class ApplicationController extends Controller
                 $application = Application::where('application_id', $request->application_id)->where('user_id', $user->id)->get();
                 if ($application->count()>0) {
                     $application = Application::with('comments')->where('application_id', $request->application_id)->where('user_id', $user->id)->first();
-                    
-                    if($application->status!='PENDING'){
+
+                    if ($application->status!='PENDING') {
                         return response()->json([
                             'status' => 403,
                             'message' => 'Application Not EDITABLE.',
                         ], 403);
                     }
-
                 } else {
                     return response()->json([
                         'status' => 400,
@@ -1161,34 +1127,28 @@ class ApplicationController extends Controller
                     ], 404);
                 }
                 if ($application) {
+                    $phone = $request->phone;
+                    $s_relative_1_phone = $request->s_relative_1_phone;
+                    $s_relative_2_phone = $request->s_relative_2_phone;
+                    $n_relative_1_phone = $request->n_relative_1_phone;
+                    $n_relative_2_phone = $request->n_relative_2_phone;
 
-            $phone = $request->phone;
-            $s_relative_1_phone = $request->s_relative_1_phone;
-            $s_relative_2_phone = $request->s_relative_2_phone;
-            $n_relative_1_phone = $request->n_relative_1_phone;
-            $n_relative_2_phone = $request->n_relative_2_phone;
+                    if (substr($request->phone, 0, 1) != '+') {
+                        $phone = '+'.$request->phone;
+                    }
 
-            if (substr($request->phone, 0, 1) != '+') {
-                $phone = '+'.$request->phone;
-               
-            }
-         
-            if (substr($request->s_relative_1_phone, 0, 1) != '+') {
-                $s_relative_1_phone = '+'.$request->s_relative_1_phone;
-               
-            }
-            if (substr($request->s_relative_2_phone, 0, 1) != '+') {
-                $s_relative_2_phone = '+'.$request->s_relative_2_phone;
-               
-            }
-            if (substr($request->n_relative_1_phone, 0, 1) != '+') {
-                $n_relative_1_phone = '+'.$request->n_relative_1_phone;
-               
-            }
-            if (substr($request->n_relative_2_phone, 0, 1) != '+') {
-                $n_relative_2_phone = '+'.$request->n_relative_2_phone;
-               
-            }
+                    if (substr($request->s_relative_1_phone, 0, 1) != '+') {
+                        $s_relative_1_phone = '+'.$request->s_relative_1_phone;
+                    }
+                    if (substr($request->s_relative_2_phone, 0, 1) != '+') {
+                        $s_relative_2_phone = '+'.$request->s_relative_2_phone;
+                    }
+                    if (substr($request->n_relative_1_phone, 0, 1) != '+') {
+                        $n_relative_1_phone = '+'.$request->n_relative_1_phone;
+                    }
+                    if (substr($request->n_relative_2_phone, 0, 1) != '+') {
+                        $n_relative_2_phone = '+'.$request->n_relative_2_phone;
+                    }
 
                     $application->passport_number = $request->passport_number;
                     $application->nie = $request->nie;
@@ -1338,10 +1298,10 @@ class ApplicationController extends Controller
             ], 404);
         }
 
-        $application = Application::where('status','APPROVED')->where('passport_number', $id)->get();
+        $application = Application::where('status', 'APPROVED')->where('passport_number', $id)->get();
 
         if ($application->count()>0) {
-            $application = Application::where('status','APPROVED')->where('passport_number', $id)->first();
+            $application = Application::where('status', 'APPROVED')->where('passport_number', $id)->first();
         } else {
             return response()->json([
                 'status' => 400,
