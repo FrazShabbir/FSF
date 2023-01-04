@@ -245,6 +245,8 @@ class EnrollmentController extends Controller
             $comment->application_id = $application->id;
             $comment->comment = 'Application Submitted Successfully';
             $comment->status = $application->status;
+            $comment->receiver_id = $application->user_id;
+
             $comment->save();
 
             
@@ -520,6 +522,8 @@ class EnrollmentController extends Controller
             $comment->application_id = $application->id;
             $comment->comment = 'Application Submitted for Update';
             $comment->status = 'UPDATED';
+            $comment->receiver_id = $application->user_id;
+
             $comment->save();
             DB::commit();
 
@@ -771,6 +775,8 @@ class EnrollmentController extends Controller
             $comment->application_id = $application->id;
             $comment->comment = 'Application Submitted for Renewal';
             $comment->status = 'RENEWAL-REQUESTED';
+            $comment->receiver_id = $application->user_id;
+
             $comment->save();
 
             DB::commit();

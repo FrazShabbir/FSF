@@ -431,6 +431,7 @@ class ApplicationController extends Controller
                 'comment' => 'Application Submitted for Renewal.',
                 'status' => 'PENDING',
                 'receiver_id' => $application->user_id,
+                
                 ]);
 
 
@@ -801,6 +802,7 @@ class ApplicationController extends Controller
                 $application->save();
                 $comment = new ApplicationComment();
                 $comment->application_id = $application->id;
+                $comment->receiver_id = $application->user_id;
                 $comment->comment = 'Application Submitted Successfully';
                 $comment->status = 'SUBMITTED';
                 $comment->save();

@@ -44,7 +44,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     
     Route::get('close-Application/application/{id}/cancel', [ApplicationController::class, 'cancelApplicationClosing'])->name('user.close.application.cancel')->middleware(['can:Update Users']);
 
-    Route::get('donations', [DonationController::class, 'index'])->name('donation.index')->middleware(['can:Read Donations']);
+    Route::get('donations/', [DonationController::class, 'index'])->name('donation.index')->middleware(['can:Read Donations']);
+    
+    
     Route::get('donation/create', [DonationController::class, 'create'])->name('donation.create')->middleware(['can:Create Donations']);
     Route::post('donation/create/save', [DonationController::class, 'store'])->name('donation.store')->middleware(['can:Create Donations']);
     Route::get('donation/{id}', [DonationController::class, 'show'])->name('donation.show')->middleware(['can:Read Donations']);

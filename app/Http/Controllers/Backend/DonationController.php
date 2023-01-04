@@ -39,20 +39,48 @@ class DonationController extends Controller
 
 
         //filter that filter the data from the database basis of date_from and date_to
-        $donations = Donation::when(!empty(request()->input('date_from')), function ($q) {
-            return $q->whereBetween('donation_date', [request()->date_from, request()->date_to]);
+        // $donations = Donation::when(!empty(request()->input('date_from')), function ($q) {
+        //     return $q->whereBetween('donation_date', [request()->date_from, request()->date_to]);
+        // })
+        // ->when(!empty(request()->input('account')), function ($q) {
+        //     return $q->where('fsf_bank_id', '=', request()->input('account'));
+        // })
+        // ->orderBy('id', 'ASC')
+        // ->get();
+
+
+        $donations = Donation::
+        when(!empty(request()->input('status')), function ($q) {
+            return $q->where('status', '=', request()->input('status'));
         })
+
         ->when(!empty(request()->input('account')), function ($q) {
-            return $q->where('fsf_bank_id', '=', request()->input('account'));
+            return $q->where('status', '=', request()->input('account'));
+        })
+        ->when(!empty($request->date_from), function ($q) use ($request) {
+                $from = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))) . " 00:00:00";
+                $to = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to ??now()->modify(' +1 day')))) . " 23:59:59";
+                return $q->whereDate('created_at', ">=", $from)
+                ->whereDate('created_at', "<=", $to);
         })
         ->orderBy('id', 'ASC')
         ->get();
+
 
         $accounts = Account::where('status','1')->get();
         return view('backend.donation.index')
             ->with('donations', $donations)
             ->with('accounts', $accounts);
     }
+
+
+
+       /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+  
 
     /**
      * Show the form for creating a new resource.

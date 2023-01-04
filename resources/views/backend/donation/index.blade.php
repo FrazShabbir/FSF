@@ -33,7 +33,7 @@
                                 <div class="col-12">
                                     <form action="" method="Get">
                                         <div class="row">
-                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label for="account_title">Account Title</label>
                                                     <select class="form-control" id="account_id" name="account">
@@ -47,10 +47,22 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="status_code">Status</label>
+                                                    <select class="form-control" id="status_code" name="status">
+                                                        <option  value="" >Select Status </option>
+                                                        <option value="APPROVED" selected>APPROVED</option>
+                                                        <option value="PENDING">PENDING</option>
+                                                        <option value="REJECTED">REJECTED</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                         @php
                                             use Carbon\Carbon;
                                         @endphp
-                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label for="date_form">Date From</label>
                                                     <input type="date" name="date_form" class="form-control"
@@ -58,7 +70,7 @@
                                                         value="{{ date('Y-m-d', strtotime(app()->request->input('date_from')?? Carbon::parse('Now -7 days') )) }}">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label for="date_to">Date To</label>
                                                     <input type="date" name="date_to" class="form-control" id="date_to"
@@ -89,6 +101,8 @@
                                             <th>receipt</th>
                                             <th>Amount</th>
                                             <th>Status</th>
+                                            <th>donation Date</th>
+                                            <th>Created Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -110,7 +124,10 @@
 
                                                 <td><span class="font-weight-bold mr-1">€</span>{{ $donation->amount }}</td>
                                                 <td><span class="badge badge-{{ $donation->status }}">{{ $donation->status }}</span></td>
-                                             <td>
+                                                <td>{{ $donation->donation_date }}</td>
+                                                <td>{{ date('Y-m-d',strtotime($donation->created_at)) }}</td>
+
+                                                <td>
                                                     <form action="{{ route('donation.destroy', $donation->donation_code) }}" method="post">
                                                         <div class="flex align-items-center list-user-action">
                                                             <a class="iq-bg-primary" data-toggle="tooltip"
@@ -190,7 +207,7 @@
                 buttons: [{
                         extend: 'copyHtml5',
                         exportOptions: {
-                            columns: [0, 1, 2, 3]
+                            columns: [0, 1, 2, 3,4,5,6,7]
                         }
                     },
                     {
@@ -202,7 +219,7 @@
                     {
                         extend: 'pdfHtml5',
                         exportOptions: {
-                            columns: [0, 1, 2, 3]
+                            columns: [0, 1, 2, 3,4,5,6,7]
                         }
                     },
                     'colvis'
@@ -235,10 +252,11 @@
         const account_id = $("#account_id").val() ? $("#account_id").val() : "";
         const date_from = $("#date_from").val() ? $("#date_from").val() : "";
         const date_to = $("#date_to").val() ? $("#date_to").val() : "";
+        const status_code = $("#status_code").val() ? $("#status_code").val() : "";
 
-
+        
         const url = "{{ route('donation.index') }}" + "?account=" + account_id + "&date_from=" + date_from +
-            "&date_to=" + date_to
+            "&date_to=" + date_to + "&status=" + status_code;
 
         //    alert(date_from);
         // console.log(completed_at);
