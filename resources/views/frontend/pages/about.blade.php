@@ -13,7 +13,8 @@
 
 @section('banner')
     @include('frontend.partial._navbar')
-    <section class="hero-banner position-relative custom-pt-1 custom-pb-2 bg-dark" data-bg-img="{{asset('frontend/assets/images/bg/02.png')}}">
+    <section class="hero-banner position-relative custom-pt-1 custom-pb-2 bg-dark"
+        data-bg-img="{{ asset('frontend/assets/images/bg/02.png') }}">
         <div class="container">
             <div class="row text-white text-center z-index-1">
                 <div class="col">
@@ -133,7 +134,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-12 col-lg-6">
-                    <img src="{{asset('frontend/assets/images/about/06.png')}}" alt="Image" class="img-fluid">
+                    <img src="{{ asset('frontend/assets/images/about/06.png') }}" alt="Image" class="img-fluid">
                 </div>
                 <div class="col-12 col-lg-5 mt-5 mt-lg-0">
                     <div class="mb-4">
@@ -202,7 +203,7 @@
 
     <!--testimonial start-->
 
-    <section class="bg-pos-r" data-bg-img="{{asset('frontend/assets/images/bg/01.png')}}">
+    <section class="bg-pos-r" data-bg-img="{{ asset('frontend/assets/images/bg/01.png') }}">
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8">
@@ -222,10 +223,8 @@
                                     <div class="carousel-item active">
                                         <div class="card p-2 p-md-5 border-0">
                                             <div class="mb-3">
-                                                <img alt="Image" src="{{asset('frontend/assets/images/testimonial/01.jpg')}}
-')}}
-')}}
-')}}"
+                                                <img alt="Image"
+                                                    src="{{ asset('frontend/assets/images/testimonial/01.jpg') }}"
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
@@ -243,10 +242,8 @@
                                     <div class="carousel-item">
                                         <div class="card p-2 p-md-5 border-0">
                                             <div class="mb-3">
-                                                <img alt="Image" src="{{asset('frontend/assets/images/testimonial/02.jpg')}}
-')}}
-')}}
-')}}"
+                                                <img alt="Image"
+                                                    src="{{ asset('frontend/assets/images/testimonial/02.jpg') }}"
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
@@ -264,7 +261,8 @@
                                     <div class="carousel-item">
                                         <div class="card p-2 p-md-5 border-0">
                                             <div class="mb-3">
-                                                <img alt="Image" src="{{asset('frontend/assets/images/testimonial/03.jpg')}}
+                                                <img alt="Image"
+                                                    src="{{ asset('frontend/assets/images/testimonial/03.jpg') }}
 ')}}
 ')}}
 ')}}"
@@ -285,10 +283,8 @@
                                     <div class="carousel-item">
                                         <div class="card p-2 p-md-5 border-0">
                                             <div class="mb-3">
-                                                <img alt="Image" src="{{asset('frontend/assets/images/testimonial/04.jpg')}}
-')}}
-')}}
-')}}"
+                                                <img alt="Image"
+                                                    src="{{ asset('frontend/assets/images/testimonial/04.jpg') }}"
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
@@ -306,10 +302,8 @@
                                     <div class="carousel-item">
                                         <div class="card p-2 p-md-5 border-0">
                                             <div class="mb-3">
-                                                <img alt="Image" src="{{asset('frontend/assets/images/testimonial/05.jpg')}}
-')}}
-')}}
-')}}"
+                                                <img alt="Image"
+                                                    src="{{ asset('frontend/assets/images/testimonial/05.jpg') }}"
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
@@ -327,10 +321,8 @@
                                     <div class="carousel-item">
                                         <div class="card p-2 p-md-5 border-0">
                                             <div class="mb-3">
-                                                <img alt="Image" src="{{asset('frontend/assets/images/testimonial/06.jpg')}}
-')}}
-')}}
-')}}"
+                                                <img alt="Image"
+                                                    src="{{ asset('frontend/assets/images/testimonial/06.jpg') }}"
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
@@ -348,10 +340,8 @@
                                     <div class="carousel-item">
                                         <div class="card p-2 p-md-5 border-0">
                                             <div class="mb-3">
-                                                <img alt="Image" src="{{asset('frontend/assets/images/testimonial/07.jpg')}}
-')}}
-')}}
-')}}"
+                                                <img alt="Image"
+                                                    src="{{ asset('frontend/assets/images/testimonial/07.jpg') }}"
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
@@ -369,10 +359,8 @@
                                     <div class="carousel-item">
                                         <div class="card p-2 p-md-5 border-0">
                                             <div class="mb-3">
-                                                <img alt="Image" src="{{asset('frontend/assets/images/testimonial/08.jpg')}}
-')}}
-')}}
-')}}"
+                                                <img alt="Image"
+                                                    src="{{ asset('frontend/assets/images/testimonial/08.jpg') }}"
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
@@ -397,73 +385,57 @@
                                 <li data-bs-target="#testimonial" data-bs-slide-to="0" class="active">
                                     <a href="#">
                                         <img class="img-fluid rounded-circle shadow-primary"
-                                            src="{{asset('frontend/assets/images/testimonial/01.jpg')}}
-')}}
-')}}
-')}}" alt="">
+                                            src="{{ asset('frontend/assets/images/testimonial/01.jpg') }}"
+                                            alt="">
                                     </a>
                                 </li>
                                 <li class="mt-3" data-bs-target="#testimonial" data-bs-slide-to="1">
                                     <a href="#">
                                         <img class="img-fluid rounded-circle shadow-primary"
-                                            src="{{asset('frontend/assets/images/testimonial/02.jpg')}}
-')}}
-')}}
-')}}" alt="">
+                                            src="{{ asset('frontend/assets/images/testimonial/02.jpg') }}"
+                                            alt="">
                                     </a>
                                 </li>
                                 <li data-bs-target="#testimonial" data-bs-slide-to="2">
                                     <a href="#">
                                         <img class="img-fluid rounded-circle shadow-primary"
-                                            src="{{asset('frontend/assets/images/testimonial/03.jpg')}}
-')}}
-')}}
-')}}" alt="">
+                                            src="{{ asset('frontend/assets/images/testimonial/03.jpg') }}"
+                                            alt="">
                                     </a>
                                 </li>
                                 <li class="mt-3" data-bs-target="#testimonial" data-bs-slide-to="3">
                                     <a href="#">
                                         <img class="img-fluid rounded-circle shadow-primary"
-                                            src="{{asset('frontend/assets/images/testimonial/04.jpg')}}
-')}}
-')}}
-')}}" alt="">
+                                            src="{{ asset('frontend/assets/images/testimonial/04.jpg') }}"
+                                            alt="">
                                     </a>
                                 </li>
                                 <li data-bs-target="#testimonial" data-bs-slide-to="4">
                                     <a href="#">
                                         <img class="img-fluid rounded-circle shadow-primary"
-                                            src="{{asset('frontend/assets/images/testimonial/05.jpg')}}
-')}}
-')}}
-')}}" alt="">
+                                            src="{{ asset('frontend/assets/images/testimonial/05.jpg') }}"
+                                            alt="">
                                     </a>
                                 </li>
                                 <li class="mt-3" data-bs-target="#testimonial" data-bs-slide-to="5">
                                     <a href="#">
                                         <img class="img-fluid rounded-circle shadow-primary"
-                                            src="{{asset('frontend/assets/images/testimonial/06.jpg')}}
-')}}
-')}}
-')}}" alt="">
+                                            src="{{ asset('frontend/assets/images/testimonial/06.jpg') }}"
+                                            alt="">
                                     </a>
                                 </li>
                                 <li data-bs-target="#testimonial" data-bs-slide-to="6">
                                     <a href="#">
                                         <img class="img-fluid rounded-circle shadow-primary"
-                                            src="{{asset('frontend/assets/images/testimonial/07.jpg')}}
-')}}
-')}}
-')}}" alt="">
+                                            src="{{ asset('frontend/assets/images/testimonial/07.jpg') }}"
+                                            alt="">
                                     </a>
                                 </li>
                                 <li class="mt-3" data-bs-target="#testimonial" data-bs-slide-to="7">
                                     <a href="#">
                                         <img class="img-fluid rounded-circle shadow-primary"
-                                            src="{{asset('frontend/assets/images/testimonial/08.jpg')}}
-')}}
-')}}
-')}}" alt="">
+                                            src="{{ asset('frontend/assets/images/testimonial/08.jpg') }}"
+                                            alt="">
                                     </a>
                                 </li>
                             </ul>
@@ -480,44 +452,7 @@
 
     <!--newsletter start-->
 
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="bg-light bg-pos-l py-6 px-4 px-lg-6 text-center rounded"
-                        data-bg-img="{{asset('frontend/assets/images/bg/02.png')}}">
-                        <div class="mb-5">
-                            <h2><span class="font-w-4 d-block">Subscribe newsletter</span> now for a custom built</h2>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-lg-9">
-                                <div class="subscribe-form text-center">
-                                    <form id="mc-form" class="row mb-3">
-                                        <div class="col-md">
-                                            <input type="text" value="" name="NAME"
-                                                class="name form-control border-0 shadow-sm rounded" id="mc-name"
-                                                placeholder="Your Name" required="">
-                                        </div>
-                                        <div class="col-md">
-                                            <input type="email" value="" name="EMAIL"
-                                                class="email form-control border-0 shadow-sm rounded mt-3 mt-md-0"
-                                                id="mc-email" placeholder="Email Address" required="">
-                                        </div>
-                                        <div class="col-md-auto">
-                                            <input class="btn btn-dark mt-3 mt-md-0" type="submit" name="subscribe"
-                                                value="Subscribe Now">
-                                        </div>
-                                    </form>
-                                    <small class="text-dark">Get started for 1 Month free trial No Purchace
-                                        required.</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('frontend.partial.newsletter')
 
     <!--newsletter end-->
 

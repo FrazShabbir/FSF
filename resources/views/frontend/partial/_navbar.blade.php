@@ -5,7 +5,7 @@
                 <!--menu start-->
                 <div class="col">
                     <nav class="navbar navbar-expand-lg navbar-light  @yield('extra_class') {{ $extra_class ?? '' }}">
-                        <a class="navbar-brand logo text-primary mb-0 font-w-7 me-6" href="{{route('home')}}">
+                        <a class="navbar-brand logo text-primary mb-0 font-w-7 me-6" href="{{ route('home') }}">
                             W<span class="text-dark font-w-4">FSF.</span>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -15,23 +15,34 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav me-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{route('home')}}">Home</a>
+                                    <a class="nav-link active" href="{{ route('home') }}">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('about')}}">About Us</a>
+                                    <a class="nav-link" href="#testimonials">Testimonials</a>
                                 </li>
-                             
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('contact')}}">Contact Us</a>
+                                    <a class="nav-link" href="{{ route('about') }}">About Us</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('contact') }}">Contact Us</a>
                                 </li>
 
                             </ul>
                         </div>
-                        <div class="d-sm-flex align-items-center justify-content-end ms-auto"> <a
-                                class="btn btn-light btn-sm" href="login.html">Login</a> <a
-                                class="btn btn-light btn-sm ms-3 d-sm-inline-block d-none" href="signup.html">Sign
-                                Up</a>
-                        </div>
+                        @auth
+                            <div class="d-sm-flex align-items-center justify-content-end ms-auto"> <a
+                                    class="btn btn-light btn-sm" href="{{ route('dashboard') }}">{{auth()->user()->full_name}}</a> 
+                            </div>
+                        @else
+                            <div class="d-sm-flex align-items-center justify-content-end ms-auto"> <a
+                                    class="btn btn-light btn-sm" href="{{ route('login') }}">Login</a> <a
+                                    class="btn btn-light btn-sm ms-3 d-sm-inline-block d-none"
+                                    href="{{ route('register') }}">Sign
+                                    Up</a>
+                            </div>
+                        @endauth
+
                     </nav>
 
                 </div>

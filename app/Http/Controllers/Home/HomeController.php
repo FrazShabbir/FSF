@@ -20,5 +20,8 @@ class HomeController extends Controller
     {
         return view('frontend.pages.about');
     }
+    public function privacy(){
+        return view('frontend.pages.privacy');
+    }
  
 }
