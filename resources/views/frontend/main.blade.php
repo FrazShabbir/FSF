@@ -1,32 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Mirrored from themeht.com/template/FSF/ltr/index-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Jan 2023 17:25:34 GMT -->
 <head>
-    @include('frontend.partial._header')
+@include('frontend.partial._header')
 </head>
 
-<body data-spy="scroll" data-target="#navbar" data-offset="0">
-    <!-- Main Body -->
-    <div class="main">
-        <!-- Preloader -->
-        <div class="loader_bg">
-            <div class="loader"></div>
-        </div>
-        <!-- Header Section -->
-        <header>
-            @include('frontend.partial._navbar')
-            @yield('banner')
-        </header>
-        <!-- Header Ends -->
-        @yield('content')
+<body>
 
-        <!-- Footer Section -->
-        @include('frontend.partial._footer')
-        <!-- Footer Ends -->
-    </div>
-    <!-- End Main Body -->
-    <!-- JavaScript -->
-    @include('frontend.partial._scripts')
+<!-- page wrapper start -->
+
+<div class="page-wrapper">
+  
+<!-- preloader start -->
+
+<div id="ht-preloader">
+  <div class="loader clear-loader"> <span>F</span>
+    <span>S</span>
+    <span>F</span>
+    <span>E</span>
+    <span>U</span>
+    <span>.</span>
+    <span>O</span>
+    <span>R</span>
+    <span>G</span>
+  </div>
+</div>
+
+<!-- preloader end -->
+
+<!--header start-->
+@yield('banner')
+
+
+<!--body content start-->
+
+<div class="page-content">
+
+<!--feature start-->
+@yield('content')
+
+
+
+</div>
+
+<!--body content end--> 
+
+
+<!--footer start-->
+
+@include('frontend.partial._footer')
+
+<!--footer end-->
+
+</div>
+
+<!-- page wrapper end -->
+
+@include('frontend.partial._scripts')
 </body>
 
+
+<!-- Mirrored from themeht.com/template/FSF/ltr/index-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Jan 2023 17:30:09 GMT -->
 </html>

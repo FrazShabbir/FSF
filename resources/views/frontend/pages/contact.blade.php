@@ -8,108 +8,171 @@
 @endpush
 
 @section('extra_class')
-contact-page-navbar
+
 @endsection
 
 @section('banner')
-<div class="map">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d196344.1371271128!2d-104.8616648!3d39.7424105!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876c7eb83b813ed1%3A0x401bdfcb1ed16e1a!2sDenver%20Botanic%20Gardens!5e0!3m2!1sen!2s!4v1616253609220!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+@include('frontend.partial._navbar')
 
-</div>
+<section class="hero-banner position-relative custom-pt-1 custom-pb-2 bg-dark" data-bg-img="assets/images/bg/02.png">
+    <div class="container">
+      <div class="row text-white text-center z-index-1">
+        <div class="col">
+          <h1 class="text-white">Contact Us</h1> 
+        </div>
+      </div>
+      <!-- / .row -->
+    </div>
+    <!-- / .container -->
+    <div class="shape-1 bottom">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#fff" fill-opacity="1" d="M0,288L48,288C96,288,192,288,288,266.7C384,245,480,203,576,208C672,213,768,267,864,245.3C960,224,1056,128,1152,96C1248,64,1344,96,1392,112L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+    </div>
+  </section>
 @endsection
 @section('content')
-     <!-- Contact Section -->
-     <section class="contact bg-grey" id="contact">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <div class="section-title">
-                        <h2>Stay Tuned</h2>
-                        <p class="mt-4">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.
-                        </p>
-                    </div>
-                </div>
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-12">
+          <div class="d-flex align-items-center bg-white p-3 shadow-sm rounded">
+            <div class="me-3">
+              <div class="f-icon-s p-3 rounded" data-bg-color="#88C5DD"> <i class="flaticon-location"></i>
+              </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-5">
-                    <div class="contact-us">
-                        <p class="mb-3">
-                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                            Latin literature from 45 BC, making it over 2000 years old.
-                        </p>
-                        <ul class="contact-info">
-                            <li class="py-2">
-                                <a class="media" href="#ew">
-                                    <div class="social-icon mr-3">
-                                        <i class="fas fa-home"></i> 
-                                    </div>
-                                    <span class="media-body align-self-center">Vestibulum nulla libero, convallis, tincidunt suscipit diam, DC 2002</span>
-                                </a>
-                            </li>
-                            <li class="py-2">
-                                <a class="media" href="#we">
-                                    <div class="social-icon mr-3">
-                                        <i class="fas fa-phone-alt"></i> 
-                                    </div>
-                                    <span class="media-body align-self-center">+1 230 456 789-012 345 6789</span>
-                                </a>
-                            </li>
-                            <li class="py-2">
-                                <a class="media" href="#we">
-                                    <div class="social-icon mr-3">
-                                        <i class="fas fa-envelope"></i> 
-                                    </div>
-                                    <span class="media-body align-self-center">dummy@lifo.com</span>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 offset-md-1 pt-4 pt-md-0">
-                    <div class="contact-form">
-                        <form method="POST" class="needs-validation" id="contact-form" novalidate>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="name" placeholder="Name" required="required">
-                                        <div class="valid-feedback">Valid.</div>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" name="email" placeholder="Email" required="required">
-                                        <div class="valid-feedback">Valid.</div>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="subect" placeholder="Subject" required="required">
-                                        <div class="valid-feedback">Valid.</div>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="message" placeholder="Message" required="required"></textarea>
-                                        <div class="valid-feedback">Valid.</div>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-lg btn-block mt-3">
-                                        <span class="text-white pr-3">
-                                            <i class="fas fa-paper-plane"></i> 
-                                        </span>Send Message
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            <div>
+              <h5 class="mb-1">Address:</h5>
+              <span class="text-black">Road Wordwide Country, USA</span>
             </div>
+          </div>
         </div>
-    </section>
-    <!-- Contact Ends -->
+        <div class="col-lg-4 col-md-6 mt-3 mt-lg-0">
+          <div class="d-flex align-items-center bg-white p-3 shadow-sm rounded">
+            <div class="me-3">
+              <div class="f-icon-s p-3 rounded" data-bg-color="#88C5DD"> <i class="flaticon-mail"></i>
+              </div>
+            </div>
+            <div>
+              <h5 class="mb-1">Email Us:</h5>
+              <a class="btn-link" href="mailto:themeht23@gmail.com"> themeht23@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-3 mt-lg-0">
+          <div class="d-flex align-items-center bg-white p-3 shadow-sm rounded">
+            <div class="me-3">
+              <div class="f-icon-s p-3 rounded" data-bg-color="#88C5DD"> <i class="flaticon-telephone"></i>
+              </div>
+            </div>
+            <div>
+              <h5 class="mb-1">Call Us:</h5>
+              <a class="btn-link" href="tel:+912345678900">+91-234-567-8900</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <div>
+            <div>
+              <h2><span class="font-w-4 d-block">Describe your project</span> and
+  leave us your contact info</h2>
+              <p class="lead">Get in touch and let us know how we can help.</p>
+            </div>
+            <form id="contact-form" class="row" method="post" action="php/contact.php">
+              <div class="messages"></div>
+              <div class="form-group col-md-6">
+                <input id="form_name" type="text" name="name" class="form-control" placeholder="First Name" required="required" data-error="Name is required.">
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group col-md-6">
+                <input id="form_name1" type="text" name="name" class="form-control" placeholder="Last Name" required="required" data-error="Name is required.">
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group col-md-6">
+                <input id="form_email" type="email" name="email" class="form-control" placeholder="Email" required="required" data-error="Valid email is required.">
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group col-md-6">
+                <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Phone" required="required" data-error="Phone is required">
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group col-md-6">
+                <select class="form-control">
+                  <option>- Select Service</option>
+                  <option>Consulting</option>
+                  <option>Finance</option>
+                  <option>Marketing</option>
+                  <option>Avanced Analytics</option>
+                  <option>planning</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <input id="form_subject" type="tel" name="subject" class="form-control" placeholder="Subject" required="required" data-error="Subject is required">
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group col-md-12">
+                <textarea id="form_message" name="message" class="form-control h-auto" placeholder="Message" rows="4" required="required" data-error="Please,leave us a message."></textarea>
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="col mt-4">
+                <button class="btn btn-primary">Send Messages</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 mt-5 mt-lg-0">
+          <div class="map h-100">
+            <iframe class="w-100 h-100 border-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.840108181602!2d144.95373631539215!3d-37.8172139797516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sin!4v1497005461921" allowfullscreen=""></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  <!--newsletter start-->
+  
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="bg-light bg-pos-l py-6 px-4 px-lg-6 text-center rounded" data-bg-img="assets/images/bg/02.png">
+            <div class="mb-5">
+              <h2><span class="font-w-4 d-block">Subscribe newsletter</span> now for a custom built</h2>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-9">
+                <div class="subscribe-form text-center">
+                  <form id="mc-form" class="row mb-3">
+                    <div class="col-md">
+                      <input type="text" value="" name="NAME" class="name form-control border-0 shadow-sm rounded" id="mc-name" placeholder="Your Name" required="">
+                    </div>
+                    <div class="col-md">
+                      <input type="email" value="" name="EMAIL" class="email form-control border-0 shadow-sm rounded mt-3 mt-md-0" id="mc-email" placeholder="Email Address" required="">
+                    </div>
+                    <div class="col-md-auto">
+                      <input class="btn btn-dark mt-3 mt-md-0" type="submit" name="subscribe" value="Subscribe Now">
+                    </div>
+                  </form>
+                    <small class="text-dark">Get started for 1 Month free trial No Purchace required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!--newsletter end-->
 @endsection
 
 

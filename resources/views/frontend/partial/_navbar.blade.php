@@ -1,33 +1,42 @@
-<nav class="navbar navbar-expand-lg @yield('extra_class') {{ $extra_class ?? '' }}" id="navbar">
-    <div class="container">
-        <!-- Add Your Logo Here... -->
-        <a href="{{ route('home') }}" class="navbar-brand">
-            <img class="default-logo" src="{{ asset(fromSettings('logo') ?? 'frontend/assets/images/logo.png') }}"
-                height="60px" width="auto" alt="nav-logo">
-            <img class="sticky-logo"
-                src="{{ asset(fromSettings('logo_dark') ?? 'frontend/assets/images/logo-dark.png') }}" height="60px"
-                width="auto" alt="sticky-logo">
-        </a>
-        <button class="navbar-toggler mx-3" type="button" data-toggle="collapse" data-target="#navbar-collapse"
-            aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars toggle-icon-color"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link mx-2 mx-lg-0" href="{{ route('home') }}">Home</a></li>
-                <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link mx-2 mx-lg-0">Contact Us</a></li>
-                @auth
-                    <li class="nav-item"><a href="{{ route('dashboard') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            role="button" class="nav-link mx-2 mx-lg-0">logout</a></li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                @else
-                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link mx-2 mx-lg-0">Login</a></li>
-                @endauth
-            </ul>
+<header class="site-header">
+    <div id="header-wrap" class="@yield('extra_class_2')">
+        <div class="container">
+            <div class="row">
+                <!--menu start-->
+                <div class="col">
+                    <nav class="navbar navbar-expand-lg navbar-light  @yield('extra_class') {{ $extra_class ?? '' }}">
+                        <a class="navbar-brand logo text-primary mb-0 font-w-7 me-6" href="{{route('home')}}">
+                            W<span class="text-dark font-w-4">FSF.</span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+                                class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{{route('home')}}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('about')}}">About Us</a>
+                                </li>
+                             
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('contact')}}">Contact Us</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="d-sm-flex align-items-center justify-content-end ms-auto"> <a
+                                class="btn btn-light btn-sm" href="login.html">Login</a> <a
+                                class="btn btn-light btn-sm ms-3 d-sm-inline-block d-none" href="signup.html">Sign
+                                Up</a>
+                        </div>
+                    </nav>
+
+                </div>
+                <!--menu end-->
+            </div>
         </div>
     </div>
-
-</nav>
+</header>

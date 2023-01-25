@@ -27,6 +27,7 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/about-us', [HomeController::class, 'about'])->name('about');
 
 
 Route::group(['middleware' => ['auth']],function () {
