@@ -117,7 +117,7 @@ class EnrollmentController extends Controller
          'declaration_confirm'=>'required',
         ]);
 
-        dd('Test');
+       
         try {
             //code...
             DB::beginTransaction();

@@ -137,7 +137,9 @@
                                             @can('Inactive Applications')
                                             <option value="INACTIVE" {{$application->status=='INACTIVE'?'selected':''}}>IN-ACTIVE</option>
                                             @endcan
-                                           
+                                            @can('Read Applications')
+                                            <option value="VISIT-OFFICE" {{$application->status=='VISIT-OFFICE'?'selected':''}}>VISIT-OFFICE</option>
+                                            @endcan
                                         </select>
                                     </div>
                                 </div>

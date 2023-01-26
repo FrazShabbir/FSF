@@ -74,7 +74,7 @@
     <div class="col-md-9">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">APPLICATION : <b>{{$application->application_id}}</b> <span class="badge badge-{{$application->status}}">{{$application->status}}</span> <small> <span class="badge badge-info">Exp: {{$application->renewal_date}}</span></small></h4> 
+          <h4 class="card-title">APPLICATION : <b>{{$application->application_id}}</b> <span class="badge badge-{{$application->status}}">{{$application->status}}</span> <small> <span class="badge badge-info">Exp: {{$application->renewal_date ?? 'Approval Pending'}}</span></small></h4> 
         </div>
         <div class="card-body">
           <div class="container">
