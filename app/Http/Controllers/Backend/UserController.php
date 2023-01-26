@@ -74,8 +74,7 @@ class UserController extends Controller
 
         // dd($request->all());
         $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'full_name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -87,12 +86,11 @@ class UserController extends Controller
             $username = $username.'-'.str_random(2);
         }
         $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'full_name' => $request->full_name,
             'username' => $username,
-            'status' => $request->status,
+            'status' => $request->status??1,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password??$request->email),
         ]);
 
         if (isset($request->roles)) {
@@ -154,21 +152,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         if (! auth()->user()->hasPermissionTo('Update Users')) {
             abort(403);
         }
         $user = User::findOrFail($id);
 
         $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'full_name' => ['required', 'string', 'max:255'],
             'email' => 'required|email|unique:users,email,'.$user->id,
                 // 'username' => 'required|unique:users,username,'.$user->id,
                 // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
+        $user->full_name = $request->full_name;
         // $user->username = $request->username;
         $user->email = $request->email;
         $user->status = $request->status;
@@ -176,7 +173,7 @@ class UserController extends Controller
 
         if (isset($request->roles)) {
             $user->roles()->detach();
-            $user->assignRole($$request->roles);
+            $user->assignRole($request->roles);
         }
 
         $user->save();

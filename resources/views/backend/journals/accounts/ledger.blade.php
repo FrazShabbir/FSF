@@ -42,7 +42,7 @@
                                                         @foreach ($accounts as $account)
                                                             <option value="{{ $account->id }}"
                                                                 {{ app()->request->input('account') == $account->id ? 'selected' : '' }}>
-                                                                {{ $account->account_title }}</option>
+                                                                {{ $account->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -91,7 +91,6 @@
                                         <th colspan="" class="text-center"></th>
                                         <th colspan="" class="text-center"></th>
                                         <th colspan="" class="text-center"></th>
-                                        <th colspan="" class="text-center"></th>
 
                                         <th colspan="" class="text-center">Opening Balance</th>
                                         <th colspan="" class="text-right"><span class="font-weight-bold mr-1">€</span>
@@ -101,7 +100,6 @@
 
                                         <th>#</th>
                                         <th>Date/Time</th>
-                                        <th>Voucher Number</th>
                                         <th>Account</th>
                                         <th>Referance</th>
                                         <th>Debit.</th>
@@ -132,9 +130,7 @@
                                             <td>{{ $j }}</td>
 
                                             <th scope="row">{{ date('d-m-y/h:m:s', strtotime($i->created_at)) }}</th>
-                                            <td><a
-                                                    href="{{ route('vouchers.show', $i->voucher->voucher_code) }}">{{ $i->voucher->voucher_code }}</a>
-                                            </td>
+                                          
                                             <td>{{ $i->account->account_number }}</td>
                                             <td>{{ $i->summary }}</td>
                                             <td><span class="font-weight-bold mr-1">€</span> {{ $i->debit }}</td>
@@ -155,12 +151,10 @@
                                         <td colspan=""></td>
                                         <td colspan=""></td>
                                         <td colspan=""></td>
-                                        <td colspan=""></td>
 
                                     </tr>
                                     <tr>
                                         <td colspan=""><span class="d-none" style="display:none;">999</span></td>
-                                        <td colspan=""></td>
                                         <td colspan=""></td>
                                         <td colspan=""></td>
                                         <td colspan=""></td>
@@ -173,13 +167,11 @@
                                         <td colspan=""></td>
                                         <td colspan=""></td>
                                         <td colspan=""></td>
-                                        <td colspan=""></td>
                                         <td colspan=""><b>Total Credit</b></td>
                                         <td> <span class="font-weight-bold">€</span> {{ $credit }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan=""><span class="d-none" style="display:none;">999</span></td>
-                                        <td colspan=""></td>
                                         <td colspan=""></td>
                                         <td colspan=""></td>
                                         <td colspan=""></td>
@@ -189,7 +181,6 @@
 
                                     <tr>
                                         <td colspan=""><span class="d-none" style="display:none;">999</span></td>
-                                        <td colspan=""></td>
                                         <td colspan=""></td>
                                         <td colspan=""></td>
                                         <td colspan=""></td>

@@ -9,7 +9,7 @@ use App\Models\Application;
 use App\Models\Donation;
 use Illuminate\Support\Facades\DB;
 use App\Models\AccountTransaction;
-
+use Carbon\Carbon;
 class MemberDonationController extends Controller
 {
     /**
@@ -32,7 +32,20 @@ class MemberDonationController extends Controller
     public function create()
     {
         $accounts = Account::where('status','1')->get();
-        $applications = Application::where('user_id', auth()->user()->id)->where('status','APPROVED')->get();
+        $applications_ = Application::where('user_id', auth()->user()->id)->where('status','APPROVED')->get();
+        
+// get applications where dob is older than 18 years
+
+        $applications = [];
+        foreach ($applications_ as $application) {
+            $dob = Carbon::parse($application->dob);
+            $now = Carbon::now();
+            $diff = Carbon::parse($application->dob)->age;
+            if ($diff >= 14) {
+                $applications[] = $application;
+            }
+        }
+
         return view('members.pages.donation.create')
             ->with('accounts', $accounts)
             ->with('applications', $applications);

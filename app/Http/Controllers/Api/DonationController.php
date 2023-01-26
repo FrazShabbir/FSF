@@ -18,7 +18,18 @@ class DonationController extends Controller
     {
         if (User::where('id', $request->user_id)->where('api_token', $request->api_token)->first()) {
             $accounts = Account::where('status', 1)->get(['id', 'name', 'account_number','bank','city']);
-            $applications = Application::where('user_id', $request->user_id)->where('status', 'APPROVED')->get(['id', 'application_id', 'passport_number','full_name']);
+            $applications_ = Application::where('user_id', $request->user_id)->where('status', 'APPROVED')->get(['id', 'application_id', 'passport_number','full_name']);
+            
+            $applications = [];
+            foreach ($applications_ as $application) {
+                $dob = Carbon::parse($application->dob);
+                $now = Carbon::now();
+                $diff = Carbon::parse($application->dob)->age;
+                if ($diff >= 14) {
+                    $applications[] = $application;
+                }
+            }
+
             return response()->json([
                 'status' => 200,
                 'message' => 'All data Fetched',

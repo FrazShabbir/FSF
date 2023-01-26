@@ -53,4 +53,8 @@ class Application extends Model
     function applicationCloser(){
         return $this->belongsTo('App\Models\User', 'application_closed_by');
     }
+
+
+  
+
 }

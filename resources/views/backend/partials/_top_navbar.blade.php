@@ -15,7 +15,7 @@
 
              </div>
           </div>
-          <div class="iq-search-bar">
+          <div class="iq-search-bar d-none">
              <form action="#" class="searchbox">
                 <input type="text" class="text search-input" placeholder="Type here to search...">
                 <a class="search-link" href="#"><i class="ri-search-line"></i></a>

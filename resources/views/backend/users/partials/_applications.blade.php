@@ -62,7 +62,7 @@
                                     @if ($application->status != 'PERMANENT-CLOSED')
                                     <button type="button" class="btn btn-danger openModal"
                                     data-id="{{$application->application_id}}" data-link="{{ route('user.close.application', $application->application_id) }}">
-                                   Close Account
+                                   Close Application
                                    </button> 
                                    @else
                                       <span class="badge badge-danger">Already CLOSED</span>
