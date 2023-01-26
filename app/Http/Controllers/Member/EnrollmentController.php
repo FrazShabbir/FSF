@@ -305,11 +305,11 @@ class EnrollmentController extends Controller
         $application = Application::where('application_id', $id)->firstOrfail();
 
         if ($application->user_id != Auth::user()->id) {
-            alert()->error('Error', 'You are not authorized to edit this application');
+            alert()->error('Unauthorized Access', 'You are not authorized to edit this application');
             return redirect()->back();
         }
         if($application->status!='PENDING'){
-            alert()->error('Error', 'This application is not in EDITABLE state');
+            alert()->info('Info', 'This application is not in EDITABLE state');
             return redirect()->back();
         }
 
@@ -424,12 +424,12 @@ class EnrollmentController extends Controller
             $application = Application::where('application_id', $id)->firstOrfail();
 
             if ($application->user_id != Auth::user()->id) {
-                alert()->error('Error', 'You are not authorized to edit this application');
+                alert()->error('Unauthorized Access', 'You are not authorized to edit this application');
                 return redirect()->back();
             }
 
             if($application->status!='PENDING'){
-                alert()->error('Error', 'This application is not in EDITABLE state');
+                alert()->info('Info', 'This application is not in EDITABLE state');
                 return redirect()->back();
             }
 
@@ -570,7 +570,7 @@ class EnrollmentController extends Controller
         $application = Application::where('application_id', $id)->firstOrfail();
 
         if ($application->user_id != Auth::user()->id) {
-            alert()->error('Error', 'You are not authorized to edit this application');
+            alert()->error('Unauthorized Access', 'You are not authorized to edit this application');
             return redirect()->back();
         }
 
@@ -680,11 +680,11 @@ class EnrollmentController extends Controller
 
             $application = Application::where('application_id', $id)->firstOrfail();
             if ($application->user_id != Auth::user()->id) {
-                alert()->error('Error', 'You are not authorized to edit this application');
+                alert()->error('Unauthorized Access', 'You are not authorized to edit this application');
                 return redirect()->back();
             }
             if($application->status!='RENEWABLE'){
-                alert()->error('Error', 'This application is not in EDITABLE state');
+                alert()->info('Info', 'This application is not in EDITABLE state');
                 return redirect()->back();
             }
 

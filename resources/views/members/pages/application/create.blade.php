@@ -637,7 +637,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row mb-5">
+                                                        <div class="row mb-5 d-none">
                                                             <div class="col-12">
                                                                 <div>
                                                                     <div class="table-responsive">
