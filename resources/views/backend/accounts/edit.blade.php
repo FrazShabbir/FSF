@@ -119,7 +119,15 @@
                                 <label for="details" class="required">Details</label>
                                 <input type="text" class="form-control" value="" name="details">
                             </div>
-
+                            <div class="col-md-6 col-sm-12 mb-3">
+                                <label for="donation_category_id" class="required">Donation Category</label>
+                                <select name="donation_category_id" id="donation_category_id" class="form-control" required>
+                                    <option value="">Please Select Category</option>
+                                    @foreach (donationCategories() as $category)
+                                    <option value="{{$category->id}}" >{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="col-md-6 col-sm-6 mb-3">
                                 <label for="city" class="required">Country</label>
 
@@ -197,6 +205,16 @@
                         <div class="col-md-6 col-sm-6 mb-3">
                             <label for="details" class="required">Details</label>
                             <input type="text" class="form-control" value="" name="details">
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <label for="donation_category_id" class="required">Donation Category</label>
+                            <select name="donation_category_id" id="donation_category_id" class="form-control" required>
+                                <option value="">Please Select Category</option>
+                                @foreach (donationCategories() as $category)
+                                <option value="{{$category->id}}" >{{$category->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="col-md-6 col-sm-6 mb-3">

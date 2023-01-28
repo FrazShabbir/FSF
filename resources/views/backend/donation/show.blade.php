@@ -68,8 +68,6 @@
                                         <label for="status" class="required">Status</label>
                                         <input type="text"  id="" disabled class="form-control" placeholder="Bank-90979" required value="{{$donation->status}}">
 
-                                      
-
                                     </div>
                              
 

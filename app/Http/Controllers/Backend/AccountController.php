@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Account;
 use App\Models\Country;
+use App\Models\DonationCategory;
 use App\Models\AccountTransaction;
 use Illuminate\Support\Facades\DB;
 
@@ -164,7 +165,13 @@ class AccountController extends Controller
                 'credit'=>$request->amount,
                 'balance'=>$account->balance,
                 'summary'=>'[SYSTEM CHANGE] Account Credited by '. auth()->user()->full_name. ' for '.$request->details,
+                'donation_category_id'=>$request->donation_category_id,
+
             ]);
+            $donation_category = DonationCategory::where('id',  $request->donation_category_id)->first();
+            $donation_category->donation = $donation_category->donation + $request->amount;
+            $donation_category->save();
+          
 
             db::commit();
             alert()->success('Success', 'Account Credited Successfully');
@@ -212,15 +219,22 @@ class AccountController extends Controller
                 'user_id'=> auth()->user()->id,
                 'account_id' => $account->id,
                 'credit'=>0,
+
                 'city_id'=>$request->city,
                 'province_id'=>$request->province,
                 'country_id'=>$request->country,
                 'community_id'=>$request->community,
+
                 'debit'=>$request->amount,
                 'balance'=>$account->balance,
                 'summary'=>'[SYSTEM CHANGE] Account Debit by '. auth()->user()->full_name. ' for '.$request->details,
-            ]);
+                'donation_category_id'=>$request->donation_category_id,
 
+            ]);
+            $donation_category = DonationCategory::where('id',  $request->donation_category_id)->first();
+            $donation_category->donation = $donation_category->donation - $request->amount;
+            $donation_category->save();
+          
             db::commit();
             alert()->success('Success', 'Account Credited Successfully');
             return redirect()->route('account.index');

@@ -55,7 +55,7 @@
                                                 <tr>
                                                     <td>{{ $i }}</td>
                                                     <td>{{ $key }}</td>
-                                                    <td>{{ $value }}</td>
+                                                    <td><span class="euro"></span> {{ $value }}</td>
                                                    
     
                                                  
@@ -134,7 +134,7 @@
                                                     <tr>
                                                         <td>{{ $i }}</td>
                                                         <td>{{ $key }}</td>
-                                                        <td>{{ $value }}</td>
+                                                        <td><span class="euro"></span>{{ $value }}</td>
                                                        
         
                                                      

@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Ledger - FDD')
+@section('title', 'Ledger - FSF')
 
 @section('styles')
 
@@ -17,7 +17,7 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">FDD Ledger</h4>
+                                <h4 class="card-title">FSF Ledger</h4>
                             </div>
                         </div>
                         <div class="iq-card-body">
@@ -133,9 +133,9 @@
                                             </td>
                                             <td><a href="{{ route('users.show', $i->user->username) }}">{{ getFullNameById($i->user->id) }}</a>
                                             </td>
-                                            <td><span class="font-weight-bold mr-1">€</span> {{ $i->debit }}</td>
-                                            <td><span class="font-weight-bold mr-1">€</span> {{ $i->credit }}</td>
-                                            <td><span class="font-weight-bold mr-1">€</span> {{ $i->balance }}</td>
+                                            <td><span class="euro"></span> {{ $i->debit }}</td>
+                                            <td><span class="euro"></span> {{ $i->credit }}</td>
+                                            <td><span class="euro"></span> {{ $i->balance }}</td>
                                         </tr>
                                         @php
                                             $debit = $debit + $i->debit;

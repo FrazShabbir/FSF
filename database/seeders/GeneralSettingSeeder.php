@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\GeneralSetting;
 use App\Models\Account;
+use App\Models\DonationCategory;
 class GeneralSettingSeeder extends Seeder
 {
     /**
@@ -52,5 +53,21 @@ class GeneralSettingSeeder extends Seeder
             'balance'=>0,
             'status'=>1
         ]);
+
+        DonationCategory::create([
+            'code'=>'001',
+            'name'=>'Funeral',
+            'status'=>1,
+            'donation'=>0
+        ]);
+        DonationCategory::create([
+            'code'=>'002',
+            'name'=>'Services',
+            'status'=>1,
+            'donation'=>0
+        ]);
     }
+
+
+   
 }

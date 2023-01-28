@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Master Ledger - FDD')
+@section('title', 'Master Ledger - FSF')
 
 @section('styles')
 

@@ -54,14 +54,14 @@
                                         <label for="deceased_at" class="required">Application Closing Date/Date of
                                             Death</label>
                                         <input type="date" name="deceased_at" class="form-control" placeholder="e.g. Ali"
-                                            value="" required>
+                                            value="{{$application->deceased_at}}" required>
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="process_start_at" class="required">Process Started at</label>
 
                                         <input type="date" name="process_start_at" class="form-control"
-                                            placeholder="e.g. Ali" value="" required>
+                                            placeholder="e.g. Ali" value="{{$application->process_start_at}}" required>
                                     </div>
                                 </div>
 
@@ -73,10 +73,11 @@
                                         <label for="process_ends_at" class="required">Process Ended at</label>
 
                                         <input type="date" name="process_ends_at" class="form-control"
-                                            placeholder="e.g. Ali" value="" required>
+                                            placeholder="e.g. Ali" value="{{$application->process_ends_at}}" required>
                                     </div>
+                                 
                                 </div>
-
+                              
                                 <hr>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -156,12 +157,22 @@
                                             <option value="">Please Select Account</option>
                                             @foreach ($accounts as $acc)
                                                 <option value="{{ $acc->id }}" data-balance="{{ $acc->balance }}">
-                                                    {{ $acc->name }} - available Balance: {{ $acc->balance }}</option>
+                                                    {{ $acc->name }} - available Balance: <span class="euro">€</span> {{ $acc->balance }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="first_name" class="required">Amount Used For Process</label>
+                                        <label for="donation_category_id" class="required">Donation Category</label>
+                                        <select name="donation_category_id" id="donation_category_id" class="form-control" required>
+                                            <option value="">Please Select Category</option>
+                                            @foreach (donationCategories() as $category)
+                                            <option value="{{$category->id}}" data-donation="{{ $category->donation }}">{{$category->name}} - <span class="euro">€</span> {{$category->donation}} </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label for="first_name" class="required">Amount Used For Process </label>
+                                        <p><small>Balance In account <span class="text-danger"><span class="euro"></span> <span id="AccountBalance">00</span></span> , But donation in your selected category is just <span class="text-danger"><span class="euro"></span> <span id="donationBalanceAvailable">00</span></span> </small>.</p>
                                         <input type="number" step="0.01" name="amount_used" id="amountUsed"
                                             class="form-control" placeholder="100" value="{{ old('amount_used') }}"
                                             required disabled>
@@ -186,16 +197,16 @@
                                                     <tr>
 
                                                         <td>User Donations</td>
-                                                        <td>{{ $application->totaldonations->sum('amount') }}</td>
+                                                        <td><span class="euro"></span> {{ $application->totaldonations->sum('amount') }}</td>
 
                                                     </tr>
                                                     <tr>
                                                         <td>Amount Used in Process</td>
-                                                        <td id="processAmount">0</td>
+                                                        <td ><span class="euro"></span> <span id="processAmount">0</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>FSF payable amount</td>
-                                                        <td id="expense">0</td>
+                                                        <td ><span class="euro"></span> <span id="expense">0</span></td>
                                                     </tr>
 
 
@@ -314,6 +325,7 @@
 @endsection
 
 @push('js')
+
     <script>
         $(document).ready(function() {
 
@@ -392,8 +404,8 @@
 
 
             var balance = 0;
-
-            $("#CloseAccount").modal('show');
+            var donationsAvailable = 0;
+          
 
             $('.closebtn').click(function() {
                 $("#CloseAccount").modal('hide');
@@ -416,12 +428,40 @@
                 balance = $('#account_drop').find(":selected").data('balance');
                 $('#amountUsed').attr('disabled', false);
                 $('#amountUsed').attr('max', balance);
-            })
+                $('#AccountBalance').text(balance);
+                if(value==''){
+                    $('#amountUsed').attr('disabled', true);
+                    $('#AccountBalance').text('00');
 
+                }
+            })
+            $('#donation_category_id').change(function() {
+                var value = $('#donation_category_id').find(":selected").val();
+                donationsAvailable = $('#donation_category_id').find(":selected").data('donation');
+
+                $('#donationBalanceAvailable').text(donationsAvailable);
+                if(value==''){
+                    $('#amountUsed').attr('disabled', true);
+                    $('#donationBalanceAvailable').text('00');
+
+                }
+
+            })
+            
             $('#amountUsed').change(function() {
                 if ($('#amountUsed').val() > balance) {
                     alert(
                         'Amount used can not be greater than balance.Please select another account Or Topup the account');
+                    $('#amountUsed').val('');
+                    $('#processAmount').text(0);
+                    $('#expense').text(0);
+                }
+            });
+
+            $('#amountUsed').change(function() {
+                if ($('#amountUsed').val() > donationsAvailable) {
+                    alert(
+                        'Amount used can not be greater than Donations Available.Please select another Donation Category Or Add more Donations');
                     $('#amountUsed').val('');
                     $('#processAmount').text(0);
                     $('#expense').text(0);

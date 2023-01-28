@@ -1,19 +1,20 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>@yield('title','Funeral Service Fund') | {{fromSettings('site_title')}}</title>
+<title>@yield('title', 'Funeral Service Fund') | {{ fromSettings('site_title') }}</title>
 <!-- Favicon -->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script><!-- Favicon -->
-<link rel="shortcut icon" href="{{asset(fromSettings('favicon')??'backend/images/favicon.png')}}" />
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script><!-- Favicon -->
+<link rel="shortcut icon" href="{{ asset(fromSettings('favicon') ?? 'backend/images/favicon.png') }}" />
 <!-- Bootstrap CSS -->
 
-<link rel="stylesheet" href="{{asset('backend/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
 <!-- Typography CSS -->
-<link rel="stylesheet" href="{{asset('backend/css/typography.css')}}">
+<link rel="stylesheet" href="{{ asset('backend/css/typography.css') }}">
 <!-- Style CSS -->
-<link rel="stylesheet" href="{{asset('backend/css/style.css')}}">
+<link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
 <!-- Responsive CSS -->
-<link rel="stylesheet" href="{{asset('backend/css/responsive.css')}}">
+<link rel="stylesheet" href="{{ asset('backend/css/responsive.css') }}">
 <!-- Full calendar -->
 {{-- DateTables --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
@@ -24,7 +25,14 @@
 <link href='fullcalendar/timegrid/main.css' rel='stylesheet' />
 <link href='fullcalendar/list/main.css' rel='stylesheet' /> --}}
 
-<link rel="stylesheet" href="{{asset('backend/css/flatpickr.min.css')}}">
+<link rel="stylesheet" href="{{ asset('backend/css/flatpickr.min.css') }}">
 
+<style>
+    .euro:before {
+        content: "€";
+        margin-right: 6px;
+        font-weight: 600
+    }
+</style>
 @stack('css')
 @yield('styles')

@@ -1219,6 +1219,27 @@ cursor: pointer;
     color: #fff;
   }
   
+  .badge-secondary-app{
+    background-color: #fd0cad;
+    color: #fff;
+  }
+  .badge-secondary-app a{
+    color: #fff;
+  }
+  
+
+  .badge-primary-app{
+    background-color: #34603a;
+    color: #fff;
+  }
+  .badge-primary-app a{
+    color: #fff;
+  }
+  .badge-null-app{
+    background-color: #f58251;
+
+    color: #fff;
+  }
   .badge-PENDING-APPROVAL	{
     background-color: #438a98;
     color: #fff;

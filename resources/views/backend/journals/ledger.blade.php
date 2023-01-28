@@ -97,8 +97,8 @@
                                             <th scope="row">{{ date('d-m-y/h:m:s', strtotime($i->created_at)) }}</th>
                                             <td>{{ $i->account->account_number }}</td>
                                             <td>{{ $i->summary }}</td>
-                                            <td><span class="font-weight-bold mr-1">€</span> {{ $i->debit }}</td>
-                                            <td><span class="font-weight-bold mr-1">€</span> {{ $i->credit }}</td>
+                                            <td><span class="euro"></span> {{ $i->debit }}</td>
+                                            <td><span class="euro"></span> {{ $i->credit }}</td>
                                         </tr>
                                     @endforeach
 

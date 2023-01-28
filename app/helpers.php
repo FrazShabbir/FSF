@@ -15,7 +15,7 @@ use App\Models\Province;
 use App\Models\City;
 use App\Models\Office;
 use App\Models\Account;
-
+use App\Models\DonationCategory;
 if (! function_exists('fromSettings')) {
     function fromSettings(string $key, $alternative = null)
     {
@@ -440,4 +440,12 @@ if (! function_exists('SendMessage')) {
             return $accounts;
         }
     }
+
+    if (! function_exists('donationCategories')) {
+        function donationCategories()
+        {
+            return DonationCategory::where('status', 1)->get();
+        }
+    }
+    
 }

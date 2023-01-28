@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\ApplicationController;
 use App\Http\Controllers\Backend\DonationController;
-
+use App\Http\Controllers\Backend\DonationCategoryController;
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
 
@@ -45,8 +45,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::get('close-Application/application/{id}/cancel', [ApplicationController::class, 'cancelApplicationClosing'])->name('user.close.application.cancel')->middleware(['can:Update Users']);
 
     Route::get('donations/', [DonationController::class, 'index'])->name('donation.index')->middleware(['can:Read Donations']);
-    
-    
     Route::get('donation/create', [DonationController::class, 'create'])->name('donation.create')->middleware(['can:Create Donations']);
     Route::post('donation/create/save', [DonationController::class, 'store'])->name('donation.store')->middleware(['can:Create Donations']);
     Route::get('donation/{id}', [DonationController::class, 'show'])->name('donation.show')->middleware(['can:Read Donations']);
@@ -54,6 +52,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::put('donation/{id}/update', [DonationController::class, 'update'])->name('donation.update')->middleware(['can:Update Donations']);
     Route::delete('donation/{id}', [DonationController::class, 'destroy'])->name('donation.destroy')->middleware(['can:Delete Donations']);
 
+
+
+
+    Route::get('categories/', [DonationCategoryController::class, 'index'])->name('category.index')->middleware(['can:Read Donations']);
+    Route::get('category/create', [DonationCategoryController::class, 'create'])->name('category.create')->middleware(['can:Create Donations']);
+    Route::post('category/create/save', [DonationCategoryController::class, 'store'])->name('category.store')->middleware(['can:Create Donations']);
+    Route::get('category/{id}', [DonationCategoryController::class, 'show'])->name('category.show')->middleware(['can:Read Donations']);
+    Route::get('category/{id}/edit', [DonationCategoryController::class, 'edit'])->name('category.edit')->middleware(['can:Update Donations']);
+    Route::put('category/{id}/update', [DonationCategoryController::class, 'update'])->name('category.update')->middleware(['can:Update Donations']);
+    Route::delete('category/{id}', [DonationCategoryController::class, 'destroy'])->name('category.destroy')->middleware(['can:Delete Donations']);
 
 
 

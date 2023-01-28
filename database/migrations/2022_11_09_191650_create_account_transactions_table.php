@@ -21,7 +21,9 @@ return new class extends Migration
             $table->integer('account_id')->unsigned();
             $table->integer('donation_id')->unsigned()->nullable();
             $table->integer('application_id')->unsigned()->nullable();
+            $table->integer('donation_category_id')->unsigned()->nullable();
 
+            
             $table->integer('country_id')->unsigned()->nullable();
             $table->integer('community_id')->unsigned()->nullable();
             $table->integer('province_id')->unsigned()->nullable();

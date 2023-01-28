@@ -29,4 +29,8 @@ class Donation extends Model
         return $this->belongsTo(City::class,'city_id');
     }
 
+    function category()
+    {
+        return $this->belongsTo(DonationCategory::class);
+    }
 }

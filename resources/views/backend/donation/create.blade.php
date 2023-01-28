@@ -92,7 +92,7 @@
 
 
                                 <button type="submit" class="btn btn-primary mr-3">Save Donation</button>
-                                <a href="{{ route('province.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
+                                <a href="{{ route('donation.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
 
                             </form>
                         </div>

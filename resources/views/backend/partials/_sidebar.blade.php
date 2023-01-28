@@ -1,7 +1,7 @@
 <nav class="iq-sidebar-menu">
     <ul id="iq-sidebar-toggle" class="iq-menu">
         <li @if (in_array(request()->route()->getName(),
-            ['admin.dashboard'])) class="active" @endif>
+                ['admin.dashboard'])) class="active" @endif>
             <a href="{{ route('admin.dashboard') }}" class="iq-waves-effect"><i
                     class="las la-home iq-arrow-left"></i><span>Dashboard</span></a>
         </li>
@@ -37,16 +37,16 @@
 
 
         <li @if (in_array(request()->route()->getName(),
-            [
-                'roles.create',
-                'roles.edit',
-                'roles.index',
-                'roles.show',
-                'users.create',
-                'users.edit',
-                'users.index',
-                'users.show',
-            ])) class="active" @endif>
+                [
+                    'roles.create',
+                    'roles.edit',
+                    'roles.index',
+                    'roles.show',
+                    'users.create',
+                    'users.edit',
+                    'users.index',
+                    'users.show',
+                ])) class="active" @endif>
             <a href="#usermanagement" class="iq-waves-effect" data-toggle="collapse">
                 <i class="las la-th-list  iq-arrow-left"></i><span>User Management</span><i
                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
@@ -107,10 +107,10 @@
 
 
         <li @if (in_array(request()->route()->getName(),
-            ['application.create', 'application.edit', 'application.index', 'application.show'])) class="active" @endif>
+                ['application.create', 'application.edit', 'application.index', 'application.show'])) class="active" @endif>
             <a href="#application" class="iq-waves-effect" data-toggle="collapse"
                 @if (in_array(request()->route()->getName(),
-                    ['application.create', 'application.edit', 'application.index', 'application.show'])) aria-expanded="true" @else aria-expanded="false" @endif><span
+                        ['application.create', 'application.edit', 'application.index', 'application.show'])) aria-expanded="true" @else aria-expanded="false" @endif><span
                     class="ripple rippleEffect"></span><i
                     class="las la-money-check-alt iq-arrow-left"></i><span>Applications</span><i
                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
@@ -168,10 +168,10 @@
 
 
         <li @if (in_array(request()->route()->getName(),
-            ['donation.create', 'donation.edit', 'donation.index', 'donation.show'])) class="active" @endif>
+                ['donation.create', 'donation.edit', 'donation.index', 'donation.show'])) class="active" @endif>
             <a href="#donation" class="iq-waves-effect" data-toggle="collapse"
                 @if (in_array(request()->route()->getName(),
-                    ['donation.create', 'donation.edit', 'donation.index', 'donation.show'])) aria-expanded="true" @else aria-expanded="false" @endif><span
+                        ['donation.create', 'donation.edit', 'donation.index', 'donation.show'])) aria-expanded="true" @else aria-expanded="false" @endif><span
                     class="ripple rippleEffect"></span><i
                     class="las la-money-check-alt iq-arrow-left"></i><span>Donations</span><i
                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
@@ -202,6 +202,28 @@
             </ul>
         </li>
 
+        <li @if (in_array(request()->route()->getName(),
+                ['category.create', 'category.edit', 'category.index', 'category.show'])) class="active" @endif>
+            <a href="#category" class="iq-waves-effect" data-toggle="collapse"
+                @if (in_array(request()->route()->getName(),
+                        ['category.create', 'category.edit', 'category.index', 'category.show'])) aria-expanded="true" @else aria-expanded="false" @endif><span
+                    class="ripple rippleEffect"></span><i
+                    class="las la-money-check-alt iq-arrow-left"></i><span>Donation Category</span><i
+                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+            <ul id="category" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
+                @can('Create Donations')
+                    <li class="{{ request()->route()->getName() == 'category.create'? 'active': '' }}"><a
+                            href="{{ route('category.create') }}"><i class="las la-plus"></i>New Category</a>
+                    </li>
+                @endcan
+                @can('Read Donations')
+                    <li class="{{ request()->route()->getName() == 'category.index'? 'active': '' }}"><a
+                            href="{{ route('category.index') }}"><i class="las la-money-check-all"></i>All
+                            Categories</a>
+                    </li>
+                @endcan
+            </ul>
+        </li>
 
         {{-- SETTINGS ONLY FOR ADMIN AND SUPERADMIN --}}
         @can('Update Settings')
@@ -261,27 +283,27 @@
 
         @canany(['Read Statements'])
             <li @if (in_array(request()->route()->getName(),
-                [
-                    'reports.create',
-                    'reports.edit',
-                    'reports.index',
-                    'reports.show',
-                    'report.ThreeMledger',
-                    'report.SixMledger',
-                    'report.TewelveMledger',
-                    'report.ledgerByAccount',
-                ])) class='active' @endif>
+                    [
+                        'reports.create',
+                        'reports.edit',
+                        'reports.index',
+                        'reports.show',
+                        'report.ThreeMledger',
+                        'report.SixMledger',
+                        'report.TewelveMledger',
+                        'report.ledgerByAccount',
+                    ])) class='active' @endif>
                 <a href="#ledgers" class="iq-waves-effect" data-toggle="collapse"
                     @if (in_array(request()->route()->getName(),
-                        [
-                            'reports.create',
-                            'reports.edit',
-                            'reports.index',
-                            'reports.show',
-                            'report.ThreeMledger',
-                            'report.SixMledger',
-                            'report.TewelveMledger',
-                        ])) aria-expanded="true" @else aria-expanded="false" @endif><i
+                            [
+                                'reports.create',
+                                'reports.edit',
+                                'reports.index',
+                                'reports.show',
+                                'report.ThreeMledger',
+                                'report.SixMledger',
+                                'report.TewelveMledger',
+                            ])) aria-expanded="true" @else aria-expanded="false" @endif><i
                         class="las la-book iq-arrow-left"></i><span>Statements</span><i
                         class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="ledgers" class="iq-submenu collapse " data-parent="#iq-sidebar-toggle" style="">
@@ -340,10 +362,10 @@
 
 
         @if (officeHOD()->count() > 0 or
-            countryHOD()->count() > 0 or
-            communityHOD()->count() > 0 or
-            provinceHOD()->count() > 0 or
-            cityHOD()->count() > 0)
+                countryHOD()->count() > 0 or
+                communityHOD()->count() > 0 or
+                provinceHOD()->count() > 0 or
+                cityHOD()->count() > 0)
 
             <li>
                 <a href="#mysupervision" class="iq-waves-effect" data-toggle="collapse">

@@ -55,9 +55,6 @@
                                         </select>
 
                                     </div>
-
-                                    
-                             
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group row mb-4">
                                                 <label class="control-label col-sm-12 align-self-center mb-0  required"
@@ -125,7 +122,15 @@
                                         <label class="required" for="donation_date">Donation Date:</label>
                                         <input type="date" name="donation_date" id="" class="form-control" value="{{$donation->donation_date}}"  required>
                                     </div>
-                             
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label for="donation_category_id" class="required">Donation Category</label>
+                                        <select name="donation_category_id" id="donation_category_id" class="form-control" required>
+                                            <option value="">Please Select Category</option>
+                                            @foreach (donationCategories() as $category)
+                                            <option value="{{$category->id}}" {{$donation->donation_category_id==$category->id?'selected':''}}>{{$category->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="status" class="required">Status</label>
@@ -139,6 +144,8 @@
                                     </div>
                              
 
+                                   
+                                    
                                     
 
                                     <div class="col-md-6 col-sm-12 mb-3">
@@ -158,7 +165,7 @@
                               
 
                                 <button type="submit" class="btn btn-primary mr-3">Update Donation</button>
-                                <a href="{{ route('province.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
+                                <a href="{{ route('donation.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
 
                             </form>
                         </div>

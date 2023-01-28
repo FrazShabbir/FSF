@@ -17,6 +17,7 @@ return new class () extends Migration {
             $table->string('donation_code')->unique();
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('application_id')->unsigned()->nullable();
+            $table->integer('donation_category_id')->unsigned()->nullable();
             $table->string('passport_number')->nullable();
 
             $table->string('donor_bank_name')->nullable();

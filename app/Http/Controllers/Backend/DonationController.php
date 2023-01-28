@@ -12,7 +12,7 @@ use App\Models\Application;
 use App\Models\AccountTransaction;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
+use App\Models\DonationCategory;
 class DonationController extends Controller
 {
     /**
@@ -227,6 +227,7 @@ class DonationController extends Controller
             'community' => 'required',
             'province' => 'required',
             'city' => 'required',
+            'donation_category_id' => 'required',
         ]);
         try {
 
@@ -258,7 +259,7 @@ class DonationController extends Controller
             $donation->amount = $request->amount;
             $donation->status = $request->status;
             $donation->donation_date=$request->donation_date;
-
+            $donation->donation_category_id = $request->donation_category_id;
             if ($request->receipt) {
                 $file = $request->receipt;
                 $extension = $file->getClientOriginalExtension();
@@ -286,26 +287,31 @@ class DonationController extends Controller
                 'credit'=>$request->amount,
                 'balance'=>$account->balance + $request->amount,
                 'summary'=>'Donation',
+                'donation_category_id'=> $request->donation_category_id,
 
             ]);
 
                 $account->balance = $account->balance + $request->amount;
                 $account->save();
 
+                $donation_category = DonationCategory::where('id',  $request->donation_category_id)->first();
+                $donation_category->donation = $donation_category->donation + $request->amount;
+                $donation_category->save();
               
                     $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been Donation for Application ID  ' . $application->application_id . 'has been Approved.';
                     $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname .', this SMS is to inform you that your relative\'s donation at  '.env('APP_NAME').'  has been approved.' ;
                     SendMessage($application->phone, $applicant_message);
                     SendMessage($application->rep_phone, $rep_messsage);
-               
-
             }
             DB::commit();
             alert()->success('Donation Updated Successfully', 'Success');
             return redirect()->route('donation.index');
         } catch (\Throwable $th) {
             DB::rollback();
-            throw $th;
+            // dd($th->getMessage());
+            alert()->error($th->getMessage(), 'Error');
+            return redirect()->back();
+            // throw $th;
         }
     }
 

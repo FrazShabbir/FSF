@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Ledger - FDD')
+@section('title', 'Ledger - FSF')
 
 @section('styles')
 
@@ -17,7 +17,7 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">FDD Ledger</h4>
+                                <h4 class="card-title">FSF Ledger</h4>
                             </div>
                         </div>
                         <div class="iq-card-body">
@@ -93,7 +93,7 @@
                                         <th colspan="" class="text-center"></th>
 
                                         <th colspan="" class="text-center">Opening Balance</th>
-                                        <th colspan="" class="text-right"><span class="font-weight-bold mr-1">€</span>
+                                        <th colspan="" class="text-right"><span class="euro"></span>
                                             {{ $opening_balance }}</th>
                                     </tr>
                                     <tr>
@@ -133,8 +133,8 @@
                                           
                                             <td>{{ $i->account->account_number }}</td>
                                             <td>{{ $i->summary }}</td>
-                                            <td><span class="font-weight-bold mr-1">€</span> {{ $i->debit }}</td>
-                                            <td><span class="font-weight-bold mr-1">€</span> {{ $i->credit }}</td>
+                                            <td><span class="euro"></span> {{ $i->debit }}</td>
+                                            <td><span class="euro"></span> {{ $i->credit }}</td>
                                         </tr>
                                         @php
                                             $debit = $debit + $i->debit;
@@ -160,7 +160,7 @@
                                         <td colspan=""></td>
 
                                         <td colspan="-"><b>Total Debit</b></td>
-                                        <td> <span class="font-weight-bold">€</span> {{ $debit }}</td>
+                                        <td> <span class="euro"></span> {{ $debit }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan=""><span class="d-none" style="display:none;">999</span></td>
@@ -168,7 +168,7 @@
                                         <td colspan=""></td>
                                         <td colspan=""></td>
                                         <td colspan=""><b>Total Credit</b></td>
-                                        <td> <span class="font-weight-bold">€</span> {{ $credit }}</td>
+                                        <td> <span class="euro"></span> {{ $credit }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan=""><span class="d-none" style="display:none;">999</span></td>
@@ -176,7 +176,7 @@
                                         <td colspan=""></td>
                                         <td colspan=""></td>
                                         <td colspan=""><b>Total UP/DOWN</b></td>
-                                        <td> <span class="font-weight-bold">€</span> {{ $credit - $debit }}</td>
+                                        <td> <span class="euro"></span> {{ $credit - $debit }}</td>
                                     </tr>
 
                                     <tr>
@@ -186,7 +186,7 @@
                                         <td colspan=""></td>
                                         <th colspan="" class="text-center">Closing Balance</th>
                                         <th colspan="" class="text-right">
-                                            <span class="font-weight-bold mr-1">€</span> {{ $account->balance }}</th>
+                                            <span class="euro"></span>{{ $account->balance }}</th>
                                     </tr>
 
                                     {{--
