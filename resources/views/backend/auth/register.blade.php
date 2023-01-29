@@ -11,10 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Title -->
-    <title>FSF - Bootstrap 5 Multipurpose Landing Page</title>
+    <title>FSF - Create New Account</title>
 
     <!-- Favicon Icon -->
-    <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{asset('frontend/assets/favicon.ico')}}" />
 
     <!-- inject css start -->
 
