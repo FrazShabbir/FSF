@@ -12,8 +12,9 @@
                             <p class="text-secondary">Total Applications</p>
                             <div class="d-flex align-items-center justify-content-between">
                                 <h4><b>{{ allApplicationsCount() }}</b></h4>
-                                <div id="iq-chart-box1"></div>
+                                {{-- <div id="iq-chart-box1"></div>
                                 <span class="text-primary"><b> +14% <i class="ri-arrow-up-fill"></i></b></span>
+                             --}}
                             </div>
                         </div>
                     </div>
@@ -27,8 +28,9 @@
                             <p class="text-secondary">Approved Applications</p>
                             <div class="d-flex align-items-center justify-content-between">
                                 <h4><b>{{ allApprovedApplicationsCount() }}</b></h4>
-                                <div id="iq-chart-box2"></div>
+                                {{-- <div id="iq-chart-box2"></div>
                                 <span class="text-danger"><b> -6% <i class="ri-arrow-down-fill"></i></b></span>
+                            --}}
                             </div>
                         </div>
                     </div>
@@ -42,8 +44,9 @@
                             <p class="text-secondary">Pending Applications</p>
                             <div class="d-flex align-items-center justify-content-between">
                                 <h4><b>{{ allPendingApplicationsCount() }}</b></h4>
-                                <div id="iq-chart-box3"></div>
+                                {{-- <div id="iq-chart-box3"></div>
                                 <span class="text-success"><b> +0.36% <i class="ri-arrow-up-fill"></i></b></span>
+                            --}}
                             </div>
                         </div>
                     </div>
@@ -57,8 +60,9 @@
                             <p class="text-secondary">Rejected Applications</p>
                             <div class="d-flex align-items-center justify-content-between">
                                 <h4><b>{{ allRejectedApplicationsCount() }}</b></h4>
-                                <div id="iq-chart-box4"></div>
+                                {{-- <div id="iq-chart-box4"></div>
                                 <span class="text-warning"><b> +0.45% <i class="ri-arrow-up-fill"></i></b></span>
+                             --}}
                             </div>
                         </div>
                     </div>
@@ -72,8 +76,9 @@
                             <p class="text-secondary">Renewable Applications</p>
                             <div class="d-flex align-items-center justify-content-between">
                                 <h4><b>{{ allRenewablepplicationsCount() }}</b></h4>
-                                <div id="iq-chart-box4"></div>
+                                {{-- <div id="iq-chart-box4"></div>
                                 <span class="text-warning"><b> +0.45% <i class="ri-arrow-up-fill"></i></b></span>
+                            --}}
                             </div>
                         </div>
                     </div>
@@ -87,24 +92,10 @@
                                 <h4 class="card-title">New Applications</h4>
                             </div>
                             <div class="iq-card-header-toolbar d-flex align-items-center">
-                                <div class="dropdown">
-                                    <span class="dropdown-toggle text-primary" id="dropdownMenuButton5"
-                                        data-toggle="dropdown">
-                                        <i class="ri-more-fill"></i>
-                                    </span>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
-                                        <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="ri-printer-fill mr-2"></i>Print</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="ri-file-download-fill mr-2"></i>Download</a>
-                                    </div>
-                                </div>
+                             
                             </div>
                         </div>
+                        @if (getPendingApplications()->count() >0)
                         <div class="iq-card-body">
                             <div class="table-responsive">
                                 <table class="table mb-0">
@@ -173,6 +164,18 @@
                                 </table>
                             </div>
                         </div>
+                        @else
+                        <div class="iq-card-body">
+                            <div class="row text-center">
+                                <div class="col-12">
+                                    NO RECORD FOUND
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                   
+
+                      
                     </div>
                 </div>
                 {{-- <div class="col-lg-4">

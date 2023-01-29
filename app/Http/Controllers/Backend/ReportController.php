@@ -181,18 +181,20 @@ class ReportController extends Controller
 
     public function ledgerByAccount(Request $request, $id)
     {
+    
         $account = Account::where('code', $id)->first();
         // $transactions = AccountTransaction::where('account_id', $account->id)->get();
 
 
 
-        $transactions = AccountTransaction::when(!empty(request()->input('date_from')), function ($q) {
+        $transactions = AccountTransaction::where('account_id',$account->id)->when(!empty(request()->input('date_from')), function ($q) {
             return $q->whereBetween('created_at', [date(request()->date_from), date(request()->date_to)]);
         })
 
         ->when(!empty(request()->input('account')), function ($q) {
-            return $q->where('account_id', '=', request()->input('account'));
+            return $q->where('account_id', '=', request()->input('account')??$id);
         })
+    
         ->orderBy('id', 'ASC')
         ->get();
 

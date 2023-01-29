@@ -1,156 +1,232 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-      <!-- Required meta tags -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>FSF | {{fromSettings('site_title')}}</title>
-      <link rel="shortcut icon" href="{{asset(fromSettings('favicon')??'backend/images/fdd_logo.png')}}" />
 
-      <!-- Favicon -->
-      <link rel="shortcut icon" href="images/favicon.ico" />
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="{{asset('backend/css/bootstrap.min.css')}}">
-      <!-- Typography CSS -->
-      <link rel="stylesheet" href="{{asset('backend/css/typography.css')}}">
-      <!-- Style CSS -->
-      <link rel="stylesheet" href="{{asset('backend/css/style.css')}}">
-      <!-- Responsive CSS -->
-      <link rel="stylesheet" href="{{asset('backend/css/responsive.css')}}">
-   </head>
-   <body>
-      <!-- loader Start -->
-      <div id="loading">
-         <div id="loading-center">
-         </div>
-      </div>
-      <!-- loader END -->
-        <!-- Sign in Start -->
-        <section class="sign-in-page">
-          {{-- <div id="container-inside">
-              <div class="cube"></div>
-              <div class="cube"></div>
-              <div class="cube"></div>
-              <div class="cube"></div>
-              <div class="cube"></div>
-          </div> --}}
-            <div class="container p-0">
-                <div class="row no-gutters height-self-center">
-                  <div class="col-sm-12 align-self-center bg-primary rounded">
-                    <div class="row m-0">
-                      <div class="col-md-5 bg-white sign-in-page-data">
-                          <div class="sign-in-from">
-                              <h1 class="mb-0 text-center">Sign in</h1>
-                              <p class="text-center text-dark">Enter your email address and password to access Finance Department.</p>
-                              @if (count($errors) > 0)
-                              @foreach ($errors->all() as $error)
+    <!-- meta tags -->
+    <meta charset="utf-8">
+    <meta name="keywords" content="bootstrap 5, premium, multipurpose, sass, scss, saas" />
+    <meta name="description" content="Bootstrap 5 Landing Page Template" />
+    <meta name="author" content="www.themeht.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                  {{ $error }}
-                              </div>
-                              @endforeach
-                              @endif
-                              @if (Session::has('error'))
-                              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                  {{ Session::get('error') }}
-                              </div>
-                              @endif
+    <!-- Title -->
+    <title>FSF - Bootstrap 5 Multipurpose Landing Page</title>
 
-                              <form class="mt-4" method="POST" action="{{ route('login') }}">
-                                @csrf
-                                  <div class="form-group">
-                                      <label for="exampleInputEmail1">Email address</label>
-                                      <input type="email" name="email" class="form-control mb-0" id="exampleInputEmail1" value="{{old('email')}}" placeholder="Enter email">
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="exampleInputPassword1">Password</label>
-                                      <a href="{{ route('password.request') }}" class="float-right">Forgot password?</a>
-                                      <input type="password" name="password" value="{{old('password')}}" class="form-control mb-0" id="exampleInputPassword1" placeholder="Password">
-                                  </div>
-                                  <div class="d-inline-block w-100">
-                                      <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
-                                          <input type="checkbox" name="remember" class="custom-control-input" id="customCheck1">
-                                          <label class="custom-control-label" for="customCheck1">Remember Me</label>
-                                      </div>
-                                  </div>
-                                  <div class="sign-info text-center">
-                                      <button type="submit" class="btn btn-primary d-block w-100 mb-2">Sign in</button>
-                                      <span class="text-dark dark-color d-inline-block line-height-2">Don't have an account? <a href="{{route('register')}}">Sign up</a></span>
-                                  </div>
-                              </form>
-                          </div>
-                      </div>
-                      <div class="col-md-7 text-center sign-in-page-image">
-                          <div class="sign-in-detail text-white">
-                            {{-- <a class="sign-in-logo mb-5" href="#"><img src="{{asset(fromSettings('logo')??'backend/images/Dawateislami_logo.png')}}" class="img-fluid" alt="logo"></a> --}}
-                              <div class="owl-carousel bg-white p-5 rounded" data-autoplay="true" data-loop="true" data-nav="false" data-dots="true" data-items="1" data-items-laptop="1" data-items-tab="1" data-items-mobile="1" data-items-mobile-sm="1" data-margin="0">
-                                  <div class="item">
-                                    <img src="{{asset('backend/images/Dawateislami_logo.png')}}" class="w-50 my-0 mx-auto mb-4" alt="logo">
-                                      {{-- <img src="{{asset('backend/images/login/1.png')}}" class="img-fluid mb-4" alt="logo"> --}}
-                                      <h4 class="mb-1">Dawat-e-Islami</h4>
-                                      <p class="text-dark">Dawat-e-Islami is a Sunni Islamic organization based in Pakistan. It has several Islamic educational institutions around the world.</p>
-                                  </div>
-                                  <div class="item">
-                                      <img src="{{asset('backend/images/fdd_logo.png')}}" class="w-50 my-0 mx-auto mb-4" alt="logo">
-                                      <h4 class="mb-1">Finance Department Dawat-e-Islami</h4>
-                                      <p class="text-dark">To manage accounting and audit based activities regarding Dawat-e-Islami’s earning (donation), spending and wealth.</p>
-                                  </div>
-                                  {{-- <div class="item">
-                                      <img src="{{asset('backend/images/login/1.png')}}" class="img-fluid mb-4" alt="logo">
-                                      <h4 class="mb-1 text-white">Create new events</h4>
-                                      <p>It is a long established fact that a reader will be distracted by the readable content.</p>
-                                  </div> --}}
-                               
-                              </div>
-                          </div>
-                      </div>
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.ico') }}" />
+
+    <!-- inject css start -->
+
+    <!--== bootstrap -->
+    <link href="{{ asset('frontend/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <!--== animate -->
+    <link href="{{ asset('frontend/assets/css/animate.css') }}" rel="stylesheet" type="text/css" />
+
+    <!--== line-awesome -->
+    <link href="{{ asset('frontend/assets/css/line-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <!--== magnific-popup -->
+    <link href="{{ asset('frontend/assets/css/magnific-popup.css') }}" rel="stylesheet" type="text/css" />
+
+    <!--== owl.carousel -->
+    <link href="{{ asset('frontend/assets/css/owl.carousel.css') }}" rel="stylesheet" type="text/css" />
+
+    <!--== spacing -->
+    <link href="{{ asset('frontend/assets/css/spacing.css') }}" rel="stylesheet" type="text/css" />
+
+    <!--== theme.min -->
+    <link href="{{ asset('frontend/assets/css/theme.min.css') }}" rel="stylesheet" />
+
+    <!-- inject css end -->
+
+</head>
+
+<body>
+
+    <!-- page wrapper start -->
+
+    <div class="page-wrapper">
+
+        <!-- preloader start -->
+
+        <div id="ht-preloader">
+            <div class="loader clear-loader"> <span>W</span>
+                <span>i</span>
+                <span>n</span>
+                <span>c</span>
+                <span>k</span>
+            </div>
+        </div>
+
+        <!-- preloader end -->
+
+
+        <!--header start-->
+
+        @include('frontend.partial._navbar')
+
+
+        <!--hero section start-->
+
+        <section class="hero-banner position-relative custom-pt-1 custom-pb-2 bg-dark"
+            data-bg-img="{{ asset('frontend/assets/images/bg/02.png') }}')}}">
+            <div class="container">
+                <div class="row text-white text-center z-index-1">
+                    <div class="col">
+                        <h1 class="text-white">Login</h1>
+                        <nav aria-label="breadcrumb">
+
+                        </nav>
                     </div>
-                  </div>
                 </div>
+                <!-- / .row -->
+            </div>
+            <!-- / .container -->
+            <div class="shape-1 bottom">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                    <path fill="#fff" fill-opacity="1"
+                        d="M0,288L48,288C96,288,192,288,288,266.7C384,245,480,203,576,208C672,213,768,267,864,245.3C960,224,1056,128,1152,96C1248,64,1344,96,1392,112L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                    </path>
+                </svg>
             </div>
         </section>
-        <!-- Sign in END -->
-         <!-- color-customizer -->
 
-       <!-- color-customizer END -->
+        <!--hero section end-->
 
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="{{asset('backend/js/jquery.min.js')}}"></script>
-      <script src="{{asset('backend/js/popper.min.js')}}"></script>
-      <script src="{{asset('backend/js/bootstrap.min.js')}}"></script>
-      <!-- Appear JavaScript -->
-      <script src="{{asset('backend/js/jquery.appear.js')}}"></script>
-      <!-- Countdown JavaScript -->
-      <script src="{{asset('backend/js/countdown.min.js')}}"></script>
-      <!-- Counterup JavaScript -->
-      <script src="{{asset('backend/js/waypoints.min.js')}}"></script>
-      <script src="{{asset('backend/js/jquery.counterup.min.js')}}"></script>
-      <!-- Wow JavaScript -->
-      <script src="{{asset('backend/js/wow.min.js')}}"></script>
-      <!-- Apexcharts JavaScript -->
-      <script src="{{asset('backend/js/apexcharts.js')}}"></script>
-      <!-- lottie JavaScript -->
-      <script src="{{asset('backend/js/lottie.js')}}"></script>
-      <!-- Slick JavaScript -->
-      <script src="{{asset('backend/js/slick.min.js')}}"></script>
-      <!-- Select2 JavaScript -->
-      <script src="{{asset('backend/js/select2.min.js')}}"></script>
-      <!-- Owl Carousel JavaScript -->
-      <script src="{{asset('backend/js/owl.carousel.min.js')}}"></script>
-      <!-- Magnific Popup JavaScript -->
-      <script src="{{asset('backend/js/jquery.magnific-popup.min.js')}}"></script>
-      <!-- Smooth Scrollbar JavaScript -->
-      <script src="{{asset('backend/js/smooth-scrollbar.js')}}"></script>
-      <!-- Style Customizer -->
-      <script src="{{asset('backend/js/style-customizer.js')}}"></script>
-      <!-- Chart Custom JavaScript -->
-      <script src="{{asset('backend/js/chart-custom.js')}}"></script>
-      <!-- Custom JavaScript -->
-      <script src="{{asset('backend/js/custom.js')}}"></script>
-      @include('sweetalert::alert')
 
-   </body>
+        <!--body content start-->
+
+        <div class="page-content">
+
+            <!--login start-->
+            <section>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-7 col-12">
+                            <img class="img-fluid" src="{{ asset('frontend/assets/images/login.png') }}" alt="">
+                        </div>
+                        <div class="col-lg-5 col-12">
+                            <div>
+                                <h2 class="mb-3">Sign In</h2>
+                                @if (count($errors) > 0)
+                                @foreach ($errors->all() as $error)
+  
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ $error }}
+                                </div>
+                                @endforeach
+                                @endif
+                                @if (Session::has('error'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ Session::get('error') }}
+                                </div>
+                                @endif
+                                <form id="contact-for" method="post" action="{{ route('login') }}">
+                                    @csrf
+                                    <div class="messages"></div>
+                                    <div class="form-group">
+                                        <input id="form_name" type="text" name="email" class="form-control"
+                                            placeholder="Email" required="required"
+                                            data-error="Email is required.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="form_password" type="password" name="password" class="form-control"
+                                            placeholder="Password" required="required"
+                                            data-error="password is required.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group mt-4 mb-5">
+                                        <div
+                                            class="remember-checkbox d-flex align-items-center justify-content-between">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1"
+                                                    id="check1" name="remember">
+                                                <label class="form-check-label" for="check1">Remember me</label>
+                                            </div> <a class="btn-link" href="{{ route('password.request') }}">Forgot Password?</a>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Login Now</button>
+                                </form>
+                                <div class="d-flex align-items-center mt-4"> <span class="text-muted me-1">Don't have
+                                        an account?</span>
+                                    <a href="{{route('register')}}">Sign Up</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--login end-->
+
+
+            <!--newsletter start-->
+
+            @include('frontend.partial.newsletter')
+
+
+            <!--newsletter end-->
+
+        </div>
+
+        <!--body content end-->
+
+
+        <!--footer start-->
+
+        @include('frontend.partial._footer')
+
+        <!--footer end-->
+
+    </div>
+
+    <!-- page wrapper end -->
+
+
+    <!--back-to-top start-->
+
+    <div class="scroll-top"><a class="smoothscroll" href="#top">Scroll Top</a></div>
+
+    <!--back-to-top end-->
+
+    <!-- inject js start -->
+
+    <!--== jquery -->
+    <script src="{{ asset('frontend/assets/js/jquery.min.js') }}"></script>
+
+    <!--== bootstrap -->
+    <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!--== owl-carousel -->
+    <script src="{{ asset('frontend/assets/js/owl.carousel.min.js') }}"></script>
+
+    <!--== magnific-popup -->
+    <script src="{{ asset('frontend/assets/js/jquery.magnific-popup.min.js') }}"></script>
+
+    <!--== counter -->
+    <script src="{{ asset('frontend/assets/js/counter.js') }}"></script>
+
+    <!--== countdown -->
+    <script src="{{ asset('frontend/assets/js/jquery.countdown.min.js') }}"></script>
+
+    <!--== particles -->
+    <script src="{{ asset('frontend/assets/js/particles.js') }}"></script>
+
+    <!--== typer -->
+    <script src="{{ asset('frontend/assets/js/typer.js') }}"></script>
+
+    <!--== wow -->
+    <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
+
+    <!--== theme-script -->
+    <script src="{{ asset('frontend/assets/js/theme-script.js') }}"></script>
+
+    <!-- inject js end -->
+
+</body>
+
 
 </html>

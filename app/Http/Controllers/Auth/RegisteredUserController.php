@@ -21,6 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        // dd('hh');
         return view('backend.auth.register');
     }
 
@@ -40,6 +41,9 @@ class RegisteredUserController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'terms'=>'required'
+        ],[
+            'terms.required'=>'Please accept our terms and conditions'
         ]);
         $username = str_replace(' ', '-', $request->username);
         // check username exist
