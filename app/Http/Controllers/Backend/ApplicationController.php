@@ -11,10 +11,10 @@ use App\Models\ApplicationDocument;
 use App\Models\City;
 use App\Models\Community;
 use App\Models\Country;
+use App\Models\DonationCategory;
 use App\Models\Province;
 use App\Models\RenewApplication;
 use App\Models\User;
-use App\Models\DonationCategory;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -193,7 +193,7 @@ class ApplicationController extends Controller
             'registered_relative_passport_no' => 'nullable',
 
             'annually_fund_amount' => 'required',
-            // 'user_signature'=>'required',
+            'user_signature' => 'required',
             'declaration_confirm' => 'required',
         ]);
 
@@ -306,7 +306,7 @@ class ApplicationController extends Controller
                 'registered_relatives' => $registered,
                 'registered_relative_passport_no' => $passport_number ?? null,
                 'annually_fund_amount' => $request->annually_fund_amount,
-                'user_signature' => $request->user_signature ?? 'DONE BY OPERATOR',
+                'user_signature' => 'DONE BY OPERATOR',
                 'declaration_confirm' => $request->declaration_confirm ?? '1',
                 'renewal_date' => Carbon::now()->addDays(365)->format('Y-m-d'),
                 'avatar' => config('app.url') . '/placeholder.png',
@@ -325,7 +325,27 @@ class ApplicationController extends Controller
                 $application->avatar = config('app.url') . 'uploads/application/avatars/' . $filename;
                 $application->save();
             }
+            if ($request->signmode == 'image') {
+                if ($request->hasFile('user_signature')) {
+                    $request->validate([
+                        'user_signature' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                    ]);
 
+                    $file = $request->user_signature;
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = getRandomString() . '-' . time() . '.' . $extension;
+                    $file->move('uploads/application/user_signatures/', $filename);
+                    $application->user_signature = config('app.url') . 'uploads/application/user_signatures/' . $filename;
+                    $application->save();
+                }
+            }
+            if ($request->signmode == 'canvas') {
+
+                if ($request->user_signature) {
+                    $user->user_signature = $request->user_signature;
+                }
+            }
+            $user->save();
             $comment = ApplicationComment::create([
                 'application_id' => $application->id,
                 'comment' => 'Application submitted by' . auth()->user()->full_name,

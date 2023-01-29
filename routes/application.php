@@ -53,6 +53,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::delete('donation/{id}', [DonationController::class, 'destroy'])->name('donation.destroy')->middleware(['can:Delete Donations']);
 
 
+    Route::get('donation/search/create', [DonationController::class, 'createBySearch'])->name('donation.create.search')->middleware(['can:Create Donations']);
+
+
 
 
     Route::get('categories/', [DonationCategoryController::class, 'index'])->name('category.index')->middleware(['can:Read Donations']);

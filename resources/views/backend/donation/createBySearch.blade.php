@@ -13,6 +13,52 @@
     <div id="content-page" class="content-page">
         <div class="container-fluid">
             <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Serach and Paste Application id Or Passport Number</h4>
+                            </div>
+                       
+                        </div>
+                        <div class="iq-card-body">
+                           
+                            <div class="table-responsive">
+                              
+                                <table id="FSF-Table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                    <thead>
+                                        <tr>
+                                            <th>Full Name</th>
+                                            <th>Passport Number</th>
+                                            <th>Application ID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      
+                                        @foreach ($applications as $app)
+                                            <tr>
+                                                <td>{{ $app->full_name }}</td>
+                                                <td>{{ $app->passport_number }}</td>
+                                               
+
+                                                <td>{{ $app->application_id }}</td>
+
+                                             
+                                            </tr>
+
+                                       
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                          
+                       
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-sm-12">
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
@@ -21,6 +67,8 @@
                             </div>
                         </div>
                         <div class="iq-card-body px-4">
+                           
+
                             <form action="{{ route('donation.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
@@ -74,6 +122,7 @@
 
 
 
+
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <div class="form-group">
                                             <p class="required">Receipt</p>
@@ -118,4 +167,16 @@
             });
         });
     </script>
+
+<script>
+    $(document).ready(function() {
+        $('#FSF-Table').DataTable({
+         
+            "info": false,
+            "lengthChange": false,
+
+        });
+
+    });
+</script>
 @endpush

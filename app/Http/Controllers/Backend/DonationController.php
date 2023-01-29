@@ -93,6 +93,13 @@ class DonationController extends Controller
         return view('backend.donation.create')
         ->with('accounts', $accounts);
     }
+    public function createBySearch(){
+        $applications = Application::where('status','APPROVED')->get();
+        $accounts = Account::where('status','1')->get();
+        return view('backend.donation.createBySearch')
+        ->with('accounts', $accounts)
+        ->with('applications', $applications);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -122,6 +129,10 @@ class DonationController extends Controller
             DB::beginTransaction();
 
             $application = Application::where('application_id', $request->application_id)->orWhere('passport_number', $request->passport_number)->first();
+            if(!$application){
+                alert()->error('Application Not Found', 'Error');
+                return redirect()->back();
+            }
             if ($application) {
                 $application_id = $application->id;
                 $type = 'Application';

@@ -252,7 +252,8 @@
                                             <div class="col-sm-12">
                                                 <input type="date" class="form-control" name="dob" id="dob"
                                                     max="{{ date('Y-m-d') }}"
-                                                    value="{{ date('Y-m-d', strtotime(old('dob') ?? '2000-1-1')) }}" required>
+                                                    value="{{ date('Y-m-d', strtotime(old('dob') ?? '2000-1-1')) }}"
+                                                    required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -1019,7 +1020,7 @@
                                                     <div class="col-sm-12">
                                                         <input type="text" class="form-control"
                                                             id="other_annually_fund_amount" name="annually_fund_amount"
-                                                            placeholder="Enter Anually Fund Amount">
+                                                            placeholder="Enter Anually Fund Amount" value="100">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1040,15 +1041,64 @@
                                     </div>
                                 </div>
                                 <div class="row setup-content px-3" id="confirm-data" style="display: none;">
-                                    {{-- <div class="col-12 mb-4">
-                                        <div id="signature">
-                                            <canvas width="500" height="200"></canvas>
-                                            <div class="controls">
-                                                <a class="btn btn-primary" href="#" id="clearSig">Clear
-                                                    Signature</a>
+                                    <div class="col-12">
+                                        <p>Select the Mode of Signature</p>
+                                        <div class="radio d-inline-block mr-2">
+                                            <input type="radio" name="signmode" id="radio1" checked=""
+                                                value="image">
+                                            <label for="radio1">Image Upload</label>
+                                        </div>
+                                        <div class="radio d-inline-block mr-2">
+                                            <input type="radio" name="signmode" id="radio2" value="canvas">
+                                            <label for="radio2">Canvas</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-6 d-none" id="canvasMode">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div>
+                                                <p>Sign Here</p>
+                                                <canvas id="sig-canvas" width="620" height="160">
+                                                    Get a better browser.
+                                                </canvas>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button type="button" class="btn btn-primary"
+                                                        id="sig-submitBtn">Submit
+                                                        Signature</button>
+                                                    <button type="button" class="btn btn-default"
+                                                        id="sig-clearBtn">Clear
+                                                        Signature</button>
+                                                </div>
+                                            </div>
+                                            <div class="row d-none">
+                                                <div class="col-md-12">
+                                                    <textarea id="sig-dataUrl" name="user_signature" class="form-control" rows="5">Data URL for your signature will go here!</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <img id="sig-image" src=""
+                                                        alt="Your signature will go here!" />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12 mb-3" id="ImageMode">
+                                        <div class="form-group">
+                                            <p class="required">Signature Image</p>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="user_signature"
+                                                    id="user_signature" accept=".png, .jpg, .jpeg">
+                                                <label class="custom-file-label" for="image">Choose Logo
+                                                    (.png,.jpeg,jpg) (Max Size 2000KB)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" id="declaration_confirm"
@@ -1058,6 +1108,7 @@
                                                 funeral service fund?</label>
                                         </div>
                                     </div>
+
                                     <div class="col-12">
                                         <div class="text-right">
                                             <button class="btn btn-primary nextBtn btn-lg pull-right"
@@ -1302,5 +1353,159 @@
             });
             window.iti = iti;
         }
+    </script>
+
+    <!-- Signature Canvas -->
+    <script>
+        (function() {
+            window.requestAnimFrame = (function(callback) {
+                return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    window.oRequestAnimationFrame ||
+                    window.msRequestAnimaitonFrame ||
+                    function(callback) {
+                        window.setTimeout(callback, 1000 / 60);
+                    };
+            })();
+
+            var canvas = document.getElementById("sig-canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.strokeStyle = "#222222";
+            ctx.lineWidth = 4;
+
+            var drawing = false;
+            var mousePos = {
+                x: 0,
+                y: 0
+            };
+            var lastPos = mousePos;
+
+            canvas.addEventListener("mousedown", function(e) {
+                drawing = true;
+                lastPos = getMousePos(canvas, e);
+            }, false);
+
+            canvas.addEventListener("mouseup", function(e) {
+                drawing = false;
+            }, false);
+
+            canvas.addEventListener("mousemove", function(e) {
+                mousePos = getMousePos(canvas, e);
+            }, false);
+
+            // Add touch event support for mobile
+            canvas.addEventListener("touchstart", function(e) {
+
+            }, false);
+
+            canvas.addEventListener("touchmove", function(e) {
+                var touch = e.touches[0];
+                var me = new MouseEvent("mousemove", {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvas.dispatchEvent(me);
+            }, false);
+
+            canvas.addEventListener("touchstart", function(e) {
+                mousePos = getTouchPos(canvas, e);
+                var touch = e.touches[0];
+                var me = new MouseEvent("mousedown", {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvas.dispatchEvent(me);
+            }, false);
+
+            canvas.addEventListener("touchend", function(e) {
+                var me = new MouseEvent("mouseup", {});
+                canvas.dispatchEvent(me);
+            }, false);
+
+            function getMousePos(canvasDom, mouseEvent) {
+                var rect = canvasDom.getBoundingClientRect();
+                return {
+                    x: mouseEvent.clientX - rect.left,
+                    y: mouseEvent.clientY - rect.top
+                }
+            }
+
+            function getTouchPos(canvasDom, touchEvent) {
+                var rect = canvasDom.getBoundingClientRect();
+                return {
+                    x: touchEvent.touches[0].clientX - rect.left,
+                    y: touchEvent.touches[0].clientY - rect.top
+                }
+            }
+
+            function renderCanvas() {
+                if (drawing) {
+                    ctx.moveTo(lastPos.x, lastPos.y);
+                    ctx.lineTo(mousePos.x, mousePos.y);
+                    ctx.stroke();
+                    lastPos = mousePos;
+                }
+            }
+
+            // Prevent scrolling when touching the canvas
+            document.body.addEventListener("touchstart", function(e) {
+                if (e.target == canvas) {
+                    e.preventDefault();
+                }
+            }, false);
+            document.body.addEventListener("touchend", function(e) {
+                if (e.target == canvas) {
+                    e.preventDefault();
+                }
+            }, false);
+            document.body.addEventListener("touchmove", function(e) {
+                if (e.target == canvas) {
+                    e.preventDefault();
+                }
+            }, false);
+
+            (function drawLoop() {
+                requestAnimFrame(drawLoop);
+                renderCanvas();
+            })();
+
+            function clearCanvas() {
+                canvas.width = canvas.width;
+            }
+
+            // Set up the UI
+            var sigText = document.getElementById("sig-dataUrl");
+            var sigImage = document.getElementById("sig-image");
+            var clearBtn = document.getElementById("sig-clearBtn");
+            var submitBtn = document.getElementById("sig-submitBtn");
+            clearBtn.addEventListener("click", function(e) {
+                clearCanvas();
+                sigText.innerHTML = "Data URL for your signature will go here!";
+                sigImage.setAttribute("src", "");
+            }, false);
+            submitBtn.addEventListener("click", function(e) {
+                var dataUrl = canvas.toDataURL();
+                sigText.innerHTML = dataUrl;
+                sigImage.setAttribute("src", dataUrl);
+            }, false);
+
+        })();
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('input[type=radio][name=signmode]').change(function() {
+                if (this.value == 'canvas') {
+                    $("#canvasMode").removeClass('d-none');
+                    $("#ImageMode").addClass('d-none');
+
+                } else if (this.value == 'image') {
+                    $("#ImageMode").removeClass('d-none');
+                    $("#canvasMode").addClass('d-none');
+
+                }
+            });
+        });
     </script>
 @endpush

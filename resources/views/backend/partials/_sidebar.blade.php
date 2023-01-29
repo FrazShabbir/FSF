@@ -178,6 +178,9 @@
             <ul id="donation" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
                 @can('Create Donations')
                     <li class="{{ request()->route()->getName() == 'donation.create'? 'active': '' }}"><a
+                            href="{{ route('donation.create.search') }}"><i class="las la-plus"></i>Add By Search</a>
+                    </li>
+                    <li class="{{ request()->route()->getName() == 'donation.create'? 'active': '' }}"><a
                             href="{{ route('donation.create') }}"><i class="las la-plus"></i>New Donation</a>
                     </li>
                 @endcan
