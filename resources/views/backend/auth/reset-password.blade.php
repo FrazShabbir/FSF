@@ -51,14 +51,8 @@
 
         <!-- preloader start -->
 
-        <div id="ht-preloader">
-            <div class="loader clear-loader"> <span>W</span>
-                <span>i</span>
-                <span>n</span>
-                <span>c</span>
-                <span>k</span>
-            </div>
-        </div>
+        @include('frontend.partial._preloader')
+
 
         <!-- preloader end -->
 

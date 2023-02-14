@@ -374,7 +374,9 @@ class ApplicationController extends Controller
             // return response()->json(['success'=>'Application Created Successfully']);
         } catch (\Throwable$th) {
             DB::rollback();
-            dd($th);
+            alert()->error($th->getMessage(), 'Something went wrong');
+            return redirect()->back();
+            // dd($th);
         }
     }
 
