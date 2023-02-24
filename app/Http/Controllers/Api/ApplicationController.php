@@ -45,12 +45,13 @@ class ApplicationController extends Controller
             // ->get(['id','application_id','passport_number','full_name','status','created_at','renewal_date']);
 
 
-            $applications = Application::where('user_id', $request->user_id)->when(!empty(request()->input('date_from')), function ($q) {
-                return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
-            })
+            $applications = Application::where('user_id', $request->user_id)
             ->when(!empty(request()->input('date_from')), function ($q) {
                 return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
             })
+            // ->when(!empty(request()->input('date_from')), function ($q) {
+            //     return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
+            // })
             ->orderBy('id', 'ASC')
             ->get(['id','application_id','passport_number','full_name','status','created_at','renewal_date']);
 
