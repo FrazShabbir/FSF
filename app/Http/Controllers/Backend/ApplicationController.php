@@ -665,7 +665,6 @@ class ApplicationController extends Controller
     {
         $data['cities'] = City::where("province_id", $request->province_id)
             ->get(["name", "id"]);
-
         return response()->json($data);
     }
 
