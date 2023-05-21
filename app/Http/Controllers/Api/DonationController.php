@@ -146,19 +146,25 @@ class DonationController extends Controller
             $user = User::where('id', $request->user_id)->where('api_token', $request->api_token)->first();
             if ($user) {
                 $application = Application::where('application_id', $request->application_id)->first();
-                if ($application->status!='APPROVED') {
-                    return response()->json([
-                        'status' => 401,
-                        'message' => 'Application is not approved',
-                    ], 401);
-                }
+
                 if ($application) {
                     $application_id = $application->id;
                     $type = 'Application';
+                    if ($application->status!='APPROVED') {
+                        return response()->json([
+                            'status' => 401,
+                            'message' => 'Application is not approved',
+                        ], 401);
+                    }
+
                 } else {
                     $application_id = null;
                     $type = 'General';
                 }
+
+              
+
+               
 
                 if ($request->fsf_bank_id) {
                     $account = Account::where('id', $request->fsf_bank_id)->first();
@@ -168,7 +174,7 @@ class DonationController extends Controller
                     'donation_code'=> 'D-'.date('YmdHis'),
                     'user_id' => $request->user_id,
                     'application_id' => $application_id,
-                    'passport_number' => $application->passport_number,
+                    'passport_number' => $application->passport_number??'',
                     'donor_bank_name' => $request->donor_bank_name,
                     'donor_bank_no' => $request->donor_bank_no,
                     'fsf_bank_id' => $account->id ?? null,
