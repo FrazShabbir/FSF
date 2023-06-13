@@ -160,7 +160,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Father Name</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{$application->father_name ?? old('father_name') }}" name="father_name"
                                                             id="father_name" placeholder="Muhammad Akbar">
                                                     </div>
@@ -206,7 +206,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">European Residence Card No.</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{$application->nie ?? old('nie') }}" name="nie" id="nie"
                                                             placeholder="3857H858">
                                                     </div>
@@ -306,7 +306,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">ID Card No. (Native Country)</label>
-                                                        <input type="text" required value="{{ $application->native_id ??old('native_id') }}"
+                                                        <input type="text" value="{{ $application->native_id ??old('native_id') }}"
                                                             class="form-control" name="native_id" id="native_id"
                                                             placeholder="3400000000000">
                                                     </div>
@@ -336,7 +336,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{$application->s_relative_1_name ?? old('s_relative_1_name') }}"
                                                             name="s_relative_1_name" id="s_relative_1_name"
                                                             placeholder="Muhammad Ahmad">
@@ -345,7 +345,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Relation</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ $application->s_relative_1_relation ?? old('s_relative_1_relation') }}"
                                                             name="s_relative_1_relation" id="s_relative_1_relation"
                                                             placeholder="Father">
@@ -356,7 +356,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
-                                                        <input type="text" required class="form-control phone_number"
+                                                        <input type="text" class="form-control phone_number"
                                                             value="{{ $application->s_relative_1_phone ?? old('s_relative_1_phone') }}"
                                                             name="s_relative_1_phone" id="s_relative_1_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -365,7 +365,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Complete Address</label>
-                                                        <textarea type="mail" required class="form-control border rounded-pill" 
+                                                        <textarea type="mail" class="form-control border rounded-pill" 
                                                             name="s_relative_1_address" id="s_relative_1_address" placeholder="Address">{{ $application->s_relative_1_address ?? old('s_relative_1_address') }}</textarea>
                                                     </div>
                                                 </div>
@@ -375,7 +375,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ $application->s_relative_2_name ?? old('s_relative_2_name') }}"
                                                             name="s_relative_2_name" id="s_relative_2_name"
                                                             placeholder="Muhammad Ahmad">
@@ -384,7 +384,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Relation</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ $application->s_relative_2_relation ?? old('s_relative_2_relation') }}"
                                                             name="s_relative_2_relation" id="s_relative_2_relation"
                                                             placeholder="Father">
@@ -395,7 +395,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
-                                                        <input type="text" required class="form-control phone_number"
+                                                        <input type="text" class="form-control phone_number"
                                                             value="{{ $application->s_relative_2_phone ?? old('s_relative_2_phone') }}"
                                                             name="s_relative_2_phone" id="s_relative_2_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -404,7 +404,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Complete Address</label>
-                                                        <textarea type="mail" required class="form-control border rounded-pill" 
+                                                        <textarea type="mail" class="form-control border rounded-pill" 
                                                             name="s_relative_2_address" id="s_relative_2_address" placeholder="Address">{{ $application->s_relative_2_address ?? old('s_relative_2_address') }}</textarea>
                                                     </div>
                                                 </div>
@@ -423,7 +423,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ $application->n_relative_1_name ?? old('n_relative_1_name') }}"
                                                             name="n_relative_1_name" id="n_relative_1_name"
                                                             placeholder="Muhammad Ahmad">
@@ -432,7 +432,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Relation</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ $application->n_relative_1_relation ?? old('n_relative_1_relation') }}"
                                                             name="n_relative_1_relation" id="n_relative_1_relation"
                                                             placeholder="Father">
@@ -443,7 +443,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
-                                                        <input type="text" required class="form-control phone_number"
+                                                        <input type="text" class="form-control phone_number"
                                                             value="{{ $application->n_relative_1_phone ?? old('n_relative_1_phone') }}"
                                                             name="n_relative_1_phone" id="n_relative_1_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -452,7 +452,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Complete Address</label>
-                                                        <textarea type="mail" required class="form-control border rounded-pill" 
+                                                        <textarea type="mail" class="form-control border rounded-pill" 
                                                             name="n_relative_1_address" id="n_relative_1_address" placeholder="Address">{{ $application->n_relative_1_address ?? old('n_relative_1_address') }}</textarea>
                                                     </div>
                                                 </div>
@@ -462,7 +462,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ $application->n_relative_2_name ?? old('n_relative_2_name') }}"
                                                             name="n_relative_2_name" id="n_relative_2_name"
                                                             placeholder="Muhammad Ahmad">
@@ -471,7 +471,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Relation</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ $application->n_relative_2_relation ?? old('n_relative_2_relation') }}"
                                                             name="n_relative_2_relation" id="n_relative_2_relation"
                                                             placeholder="Father">
@@ -482,7 +482,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code: +34032032090932</small></label>
-                                                        <input type="text" required class="form-control phone_number"
+                                                        <input type="text" class="form-control phone_number"
                                                             value="{{ $application->n_relative_2_phone ?? old('n_relative_2_phone') }}"
                                                             name="n_relative_2_phone" id="n_relative_2_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -491,7 +491,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Complete Address</label>
-                                                        <textarea type="mail" required class="form-control border rounded-pill"
+                                                        <textarea  class="form-control border rounded-pill"
                                                             name="n_relative_2_address" id="n_relative_2_address" placeholder="Address">{{ $application->n_relative_2_address ?? old('n_relative_2_address') }}</textarea>
                                                     </div>
                                                 </div>

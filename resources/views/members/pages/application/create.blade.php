@@ -159,7 +159,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Father Name</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ old('father_name') }}" name="father_name"
                                                             id="father_name" placeholder="Muhammad Akbar">
                                                     </div>
@@ -210,7 +210,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">European Residence Card No.</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ old('nie') }}" name="nie" id="nie"
                                                             placeholder="3857H858">
                                                     </div>
@@ -305,7 +305,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">ID Card No. (Native Country)</label>
-                                                        <input type="text" required value="{{ old('native_id') }}"
+                                                        <input type="text" value="{{ old('native_id') }}"
                                                             class="form-control" name="native_id" id="native_id"
                                                             placeholder="3400000000000">
                                                     </div>
@@ -335,7 +335,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ old('s_relative_1_name') }}"
                                                             name="s_relative_1_name" id="s_relative_1_name"
                                                             placeholder="Muhammad Ahmad">
@@ -344,7 +344,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Relation</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ old('s_relative_1_relation') }}"
                                                             name="s_relative_1_relation" id="s_relative_1_relation"
                                                             placeholder="Father">
@@ -356,7 +356,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code:
                                                                 +34032032090932</small></label>
-                                                        <input type="text" required class="form-control phone_number"
+                                                        <input type="text" class="form-control phone_number"
                                                             value="{{ old('s_relative_1_phone') }}"
                                                             name="s_relative_1_phone" id="s_relative_1_phone"
                                                             placeholder="22677678">
@@ -365,7 +365,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Complete Address</label>
-                                                        <textarea type="mail" required class="form-control border rounded-pill" value="{{ old('s_relative_1_address') }}"
+                                                        <textarea type="mail" class="form-control border rounded-pill" value="{{ old('s_relative_1_address') }}"
                                                             name="s_relative_1_address" id="s_relative_1_address" placeholder="Address"></textarea>
                                                     </div>
                                                 </div>
@@ -375,7 +375,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ old('s_relative_2_name') }}"
                                                             name="s_relative_2_name" id="s_relative_2_name"
                                                             placeholder="Muhammad Ahmad">
@@ -384,7 +384,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Relation</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ old('s_relative_2_relation') }}"
                                                             name="s_relative_2_relation" id="s_relative_2_relation"
                                                             placeholder="Father">
@@ -396,7 +396,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code:
                                                                 +34032032090932</small></label>
-                                                        <input type="text" required class="form-control phone_number"
+                                                        <input type="text" class="form-control phone_number"
                                                             value="{{ old('s_relative_2_phone') }}"
                                                             name="s_relative_2_phone" id="s_relative_2_phone"
                                                             placeholder="00223344">
@@ -405,7 +405,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Complete Address</label>
-                                                        <textarea type="mail" required class="form-control border rounded-pill" value="{{ old('s_relative_2_address') }}"
+                                                        <textarea type="mail" class="form-control border rounded-pill" value="{{ old('s_relative_2_address') }}"
                                                             name="s_relative_2_address" id="s_relative_2_address" placeholder="Address"></textarea>
                                                     </div>
                                                 </div>
@@ -424,7 +424,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ old('n_relative_1_name') }}"
                                                             name="n_relative_1_name" id="n_relative_1_name"
                                                             placeholder="Muhammad Ahmad">
@@ -433,7 +433,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Relation</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ old('n_relative_1_relation') }}"
                                                             name="n_relative_1_relation" id="n_relative_1_relation"
                                                             placeholder="Father">
@@ -445,7 +445,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code:
                                                                 +34032032090932</small></label>
-                                                        <input type="text" required class="form-control phone_number"
+                                                        <input type="text" class="form-control phone_number"
                                                             value="{{ old('n_relative_1_phone') }}"
                                                             name="n_relative_1_phone" id="n_relative_1_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -454,7 +454,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Complete Address</label>
-                                                        <textarea type="mail" required class="form-control border rounded-pill" value="{{ old('n_relative_1_address') }}"
+                                                        <textarea type="mail" class="form-control border rounded-pill" value="{{ old('n_relative_1_address') }}"
                                                             name="n_relative_1_address" id="n_relative_1_address" placeholder="Address"></textarea>
                                                     </div>
                                                 </div>
@@ -464,7 +464,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ old('n_relative_2_name') }}"
                                                             name="n_relative_2_name" id="n_relative_2_name"
                                                             placeholder="Muhammad Ahmad">
@@ -473,7 +473,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Relation</label>
-                                                        <input type="text" required class="form-control"
+                                                        <input type="text" class="form-control"
                                                             value="{{ old('n_relative_2_relation') }}"
                                                             name="n_relative_2_relation" id="n_relative_2_relation"
                                                             placeholder="Father">
@@ -485,7 +485,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Cell No. <small>Mention Country Code:
                                                                 +34032032090932</small></label>
-                                                        <input type="text" required class="form-control phone_number"
+                                                        <input type="text" class="form-control phone_number"
                                                             value="{{ old('n_relative_2_phone') }}"
                                                             name="n_relative_2_phone" id="n_relative_2_phone"
                                                             placeholder="Muhammad Ahmad">
@@ -494,7 +494,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Complete Address</label>
-                                                        <textarea type="mail" required class="form-control border rounded-pill" value="{{ old('n_relative_2_address') }}"
+                                                        <textarea type="mail" class="form-control border rounded-pill" value="{{ old('n_relative_2_address') }}"
                                                             name="n_relative_2_address" id="n_relative_2_address" placeholder="Address"></textarea>
                                                     </div>
                                                 </div>

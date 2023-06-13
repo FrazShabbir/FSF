@@ -144,9 +144,9 @@ class ApplicationController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email',
             'passport_number' => 'required',
-            'nie' => 'required',
+            'nie' => 'nullable',
             'email' => 'required|email',
-            'native_id' => 'required',
+            'native_id' => 'nullable',
             'full_name' => 'required',
             'father_name' => 'required',
             'surname' => 'required',
@@ -161,25 +161,25 @@ class ApplicationController extends Controller
             'city' => 'required',
             'area' => 'required',
 
-            's_relative_1_name' => 'required',
-            's_relative_1_relation' => 'required',
-            's_relative_1_phone' => 'required',
-            's_relative_1_address' => 'required',
+            's_relative_1_name' => 'nullable',
+            's_relative_1_relation' => 'nullable',
+            's_relative_1_phone' => 'nullable',
+            's_relative_1_address' => 'nullable',
 
-            's_relative_2_name' => 'required',
-            's_relative_2_relation' => 'required',
-            's_relative_2_phone' => 'required',
-            's_relative_2_address' => 'required',
+            's_relative_2_name' => 'nullable',
+            's_relative_2_relation' => 'nullable',
+            's_relative_2_phone' => 'nullable',
+            's_relative_2_address' => 'nullable',
 
-            'n_relative_1_name' => 'required',
-            'n_relative_1_relation' => 'required',
-            'n_relative_1_phone' => 'required',
-            'n_relative_1_address' => 'required',
+            'n_relative_1_name' => 'nullable',
+            'n_relative_1_relation' => 'nullable',
+            'n_relative_1_phone' => 'nullable',
+            'n_relative_1_address' => 'nullable',
 
-            'n_relative_2_name' => 'required',
-            'n_relative_2_relation' => 'required',
-            'n_relative_2_phone' => 'required',
-            'n_relative_2_address' => 'required',
+            'n_relative_2_name' => 'nullable',
+            'n_relative_2_relation' => 'nullable',
+            'n_relative_2_phone' => 'nullable',
+            'n_relative_2_address' => 'nullable',
 
             'rep_name' => 'required',
             'rep_surname' => 'required',
@@ -302,6 +302,7 @@ class ApplicationController extends Controller
                 'rep_confirmed' => $request->rep_confirmed ?? '1',
 
                 'buried_location' => $request->buried_location,
+                'detail' => $request->detail,
 
                 'registered_relatives' => $registered,
                 'registered_relative_passport_no' => $passport_number ?? null,
@@ -339,12 +340,14 @@ class ApplicationController extends Controller
                     $application->save();
                 }
             }
+           
             if ($request->signmode == 'canvas') {
 
                 if ($request->user_signature) {
-                    $user->user_signature = $request->user_signature;
+                    $application->user_signature = $request->user_signature;
                 }
             }
+            $application->save();
             $user->save();
             $comment = ApplicationComment::create([
                 'application_id' => $application->id,
@@ -374,9 +377,10 @@ class ApplicationController extends Controller
             // return response()->json(['success'=>'Application Created Successfully']);
         } catch (\Throwable$th) {
             DB::rollback();
+            dd($th);
             alert()->error($th->getMessage(), 'Something went wrong');
             return redirect()->back();
-            // dd($th);
+            //
         }
     }
 
@@ -457,8 +461,8 @@ class ApplicationController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email,' . $user->id,
             'passport_number' => 'required',
-            'nie' => 'required',
-            'native_id' => 'required',
+            'nie' => 'nullable',
+            'native_id' => 'nullable',
             'full_name' => 'required',
             'father_name' => 'required',
             'surname' => 'required',
@@ -473,25 +477,26 @@ class ApplicationController extends Controller
             'city' => 'required',
             'area' => 'required',
 
-            's_relative_1_name' => 'required',
-            's_relative_1_relation' => 'required',
-            's_relative_1_phone' => 'required',
-            's_relative_1_address' => 'required',
+           
+            's_relative_1_name' => 'nullable',
+            's_relative_1_relation' => 'nullable',
+            's_relative_1_phone' => 'nullable',
+            's_relative_1_address' => 'nullable',
 
-            's_relative_2_name' => 'required',
-            's_relative_2_relation' => 'required',
-            's_relative_2_phone' => 'required',
-            's_relative_2_address' => 'required',
+            's_relative_2_name' => 'nullable',
+            's_relative_2_relation' => 'nullable',
+            's_relative_2_phone' => 'nullable',
+            's_relative_2_address' => 'nullable',
 
-            'n_relative_1_name' => 'required',
-            'n_relative_1_relation' => 'required',
-            'n_relative_1_phone' => 'required',
-            'n_relative_1_address' => 'required',
+            'n_relative_1_name' => 'nullable',
+            'n_relative_1_relation' => 'nullable',
+            'n_relative_1_phone' => 'nullable',
+            'n_relative_1_address' => 'nullable',
 
-            'n_relative_2_name' => 'required',
-            'n_relative_2_relation' => 'required',
-            'n_relative_2_phone' => 'required',
-            'n_relative_2_address' => 'required',
+            'n_relative_2_name' => 'nullable',
+            'n_relative_2_relation' => 'nullable',
+            'n_relative_2_phone' => 'nullable',
+            'n_relative_2_address' => 'nullable',
 
             'rep_name' => 'required',
             'rep_surname' => 'required',
@@ -607,6 +612,10 @@ class ApplicationController extends Controller
             $application->annually_fund_amount = $request->annually_fund_amount;
             $application->user_signature = $request->user_signature ?? 'DONE BY OPERATOR';
             $application->declaration_confirm = $request->declaration_confirm ?? '1';
+
+            $application->detail = $request->detail;
+
+
             $application->save();
 
             $comment = ApplicationComment::create([
@@ -910,9 +919,9 @@ class ApplicationController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email',
             'passport_number' => 'required',
-            'nie' => 'required',
+            'nie' => 'nullable',
             'email' => 'required|email',
-            'native_id' => 'required',
+            'native_id' => 'nullable',
             'full_name' => 'required',
             'father_name' => 'required',
             'surname' => 'required',
@@ -1087,7 +1096,7 @@ class ApplicationController extends Controller
                 'user_signature' => $application->user_signature,
                 'rep_confirmed' => $request->rep_confirmed ?? 1,
                 'declaration_confirm' => $request->declaration_confirm ?? 1,
-                'renewal_date' => Carbon::now()->addDays(365)->format('Y-m-d'),
+                'renewal_date' => Carbon::now()->endOfYear()->format('Y-m-d'),
             ]);
 
             DB::commit();
@@ -1124,9 +1133,9 @@ class ApplicationController extends Controller
             DB::beginTransaction();
             $request->validate([
                 'passport_number' => 'required',
-                'nie' => 'required',
+                'nie' => 'nullable',
                 'email' => 'required',
-                'native_id' => 'required',
+                'native_id' => 'nullable',
                 'full_name' => 'required',
                 'father_name' => 'required',
                 'surname' => 'required',
@@ -1257,7 +1266,10 @@ class ApplicationController extends Controller
             $application->registered_relative_passport_no = $request->registered_relative_passport_no;
             $application->annually_fund_amount = $request->annually_fund_amount;
             $application->declaration_confirm = $request->declaration_confirm;
-            $application->renewal_date = Carbon::now()->addDays(365)->format('Y-m-d');
+            // add renewal date to 31 december of current year
+            // $application->renewal_date = Carbon::now()->addDays(365)->format('Y-m-d');
+            $application->renewal_date = Carbon::now()->endOfYear()->format('Y-m-d');
+
             $application->status = 'APPROVED';
 
             if ($request->avatar) {

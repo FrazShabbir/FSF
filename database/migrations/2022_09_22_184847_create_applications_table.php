@@ -40,27 +40,27 @@ return new class () extends Migration {
             $table->string('area');
             // Relative Of Spain
             // Relative 1
-            $table->string('s_relative_1_name', 50);
-            $table->string('s_relative_1_relation', 50);
-            $table->string('s_relative_1_phone', 50);
-            $table->text('s_relative_1_address');
+            $table->string('s_relative_1_name', 50)->nullable();
+            $table->string('s_relative_1_relation', 50)->nullable();
+            $table->string('s_relative_1_phone', 50)->nullable();
+            $table->text('s_relative_1_address')->nullable();
             // Relative 1
-            $table->string('s_relative_2_name', 50);
-            $table->string('s_relative_2_relation', 50);
-            $table->string('s_relative_2_phone', 50);
-            $table->text('s_relative_2_address');
+            $table->string('s_relative_2_name', 50)->nullable();
+            $table->string('s_relative_2_relation', 50)->nullable();
+            $table->string('s_relative_2_phone', 50)->nullable();
+            $table->text('s_relative_2_address')->nullable();
 
             // Relative of Native Country
             // Relative 1
-            $table->string('n_relative_1_name', 50);
-            $table->string('n_relative_1_relation', 50);
-            $table->string('n_relative_1_phone', 50);
-            $table->text('n_relative_1_address');
+            $table->string('n_relative_1_name', 50)->nullable();
+            $table->string('n_relative_1_relation', 50)->nullable();
+            $table->string('n_relative_1_phone', 50)->nullable();
+            $table->text('n_relative_1_address')->nullable();
             // Relative 1
-            $table->string('n_relative_2_name', 50);
-            $table->string('n_relative_2_relation', 50);
-            $table->string('n_relative_2_phone', 50);
-            $table->text('n_relative_2_address');
+            $table->string('n_relative_2_name', 50)->nullable();
+            $table->string('n_relative_2_relation', 50)->nullable();
+            $table->string('n_relative_2_phone', 50)->nullable();
+            $table->text('n_relative_2_address')->nullable();
 
             // Representative Information
             $table->string('rep_name', 50);
@@ -93,7 +93,8 @@ return new class () extends Migration {
             $table->date('process_ends_at')->nullable();
             $table->date('application_closed_at')->nullable();
             $table->integer('application_closed_by')->unsigned()->nullable();
-            
+            $table->text('detail');
+
             $table->integer('account_id')->unsigned()->nullable();
 
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

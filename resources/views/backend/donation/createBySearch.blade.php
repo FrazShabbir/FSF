@@ -32,6 +32,7 @@
                                             <th>Full Name</th>
                                             <th>Passport Number</th>
                                             <th>Application ID</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,6 +44,7 @@
                                                
 
                                                 <td>{{ $app->application_id }}</td>
+                                                <td><span style="cursor: pointer" class="copyData" meta-application="{{$app->application_id}}" meta-passport="{{ $app->passport_number }}">Click to Copy</span></td>
 
                                              
                                             </tr>
@@ -85,15 +87,15 @@
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label class="required" for="donor_bank_name">Donor Bank Name:</label>
+                                        <label class="" for="donor_bank_name">Donor Bank Name:</label>
                                         <input type="text" name="donor_bank_name" id="" class="form-control"
-                                            placeholder="Bank ABC" required  value="{{old('donor_bank_name')}}">
+                                            placeholder="Bank ABC"   value="{{old('donor_bank_name')}}">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label class="required" for="donor_bank_no">Account Number/IBAN:</label>
+                                        <label class="" for="donor_bank_no">Account Number/IBAN:</label>
                                         <input type="text" name="donor_bank_no" id="" class="form-control"
-                                            placeholder="Bank-90979" required  value="{{old('donor_bank_no')}}">
+                                            placeholder="Bank-90979"   value="{{old('donor_bank_no')}}">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
@@ -165,6 +167,13 @@
                     alert('Please enter Amount greater than 0');
                 }
             });
+
+            $('.copyData').click(function(){
+                var application = $(this).attr('meta-application');
+                var passport = $(this).attr('meta-passport');
+                $('input[name="application_id"]').val(application);
+                $('input[name="passport_number"]').val(passport);
+            })
         });
     </script>
 

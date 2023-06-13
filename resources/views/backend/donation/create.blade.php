@@ -37,15 +37,15 @@
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label class="required" for="donor_bank_name">Donor Bank Name:</label>
+                                        <label class="" for="donor_bank_name">Donor Bank Name:</label>
                                         <input type="text" name="donor_bank_name" id="" class="form-control"
-                                            placeholder="Bank ABC" required  value="{{old('donor_bank_name')}}">
+                                            placeholder="Bank ABC"   value="{{old('donor_bank_name')}}">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">
-                                        <label class="required" for="donor_bank_no">Account Number/IBAN:</label>
+                                        <label class="" for="donor_bank_no">Account Number/IBAN:</label>
                                         <input type="text" name="donor_bank_no" id="" class="form-control"
-                                            placeholder="Bank-90979" required  value="{{old('donor_bank_no')}}">
+                                            placeholder="Bank-90979"   value="{{old('donor_bank_no')}}">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12 mb-3">

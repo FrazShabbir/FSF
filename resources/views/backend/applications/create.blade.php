@@ -503,12 +503,12 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
-                                            <label class="control-label col-sm-12 align-self-center mb-0 required"
+                                            <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="s_relative_1_name">Full Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_1_name"
                                                     name="s_relative_1_name" placeholder="Enter Relative Full Name"
-                                                    required>
+                                                >
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -520,12 +520,12 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
-                                            <label class="control-label col-sm-12 align-self-center mb-0 required"
+                                            <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="s_relative_1_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_1_relation"
                                                     name="s_relative_1_relation" placeholder="Enter Your Realtion"
-                                                    required>
+                                                >
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -537,12 +537,12 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
-                                            <label class="control-label col-sm-12 align-self-center mb-0 required"
+                                            <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="s_relative_1_phone">Cell No.</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control phone_number"
                                                     id="s_relative_1_phone" name="s_relative_1_phone"
-                                                    placeholder="Enter Relative Cell No." required>
+                                                    placeholder="Enter Relative Cell No.">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -554,11 +554,11 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
-                                            <label class="control-label col-sm-12 align-self-center mb-0 required"
+                                            <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="s_relative_1_address">Complete Address</label>
                                             <div class="col-sm-12">
                                                 <textarea class="form-control" name="s_relative_1_address" id="s_relative_1_address"
-                                                    placeholder="Enter Relative Complete Address" required></textarea>
+                                                    placeholder="Enter Relative Complete Address"></textarea>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -575,11 +575,11 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
-                                            <label class=" required control-label col-sm-12 align-self-center mb-0"
+                                            <label class=" control-label col-sm-12 align-self-center mb-0"
                                                 for="s_relative_2_name">Full Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_2_name"
-                                                    required name="s_relative_2_name"
+                                                 name="s_relative_2_name"
                                                     placeholder="Enter Relative Full Name">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -592,11 +592,11 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
-                                            <label class=" required control-label col-sm-12 align-self-center mb-0"
+                                            <label class=" control-label col-sm-12 align-self-center mb-0"
                                                 for="s_relative_2_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_2_relation"
-                                                    required name="s_relative_2_relation"
+                                                 name="s_relative_2_relation"
                                                     placeholder="Enter Your Realtion">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -609,11 +609,11 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
-                                            <label class=" required control-label col-sm-12 align-self-center mb-0"
+                                            <label class=" control-label col-sm-12 align-self-center mb-0"
                                                 for="s_relative_2_phone">Cell No.</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control phone_number"
-                                                    id="s_relative_2_phone" required name="s_relative_2_phone"
+                                                    id="s_relative_2_phone" name="s_relative_2_phone"
                                                     placeholder="Enter Relative Cell No.">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -626,10 +626,10 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group row mb-4">
-                                            <label class=" required control-label col-sm-12 align-self-center mb-0"
+                                            <label class=" control-label col-sm-12 align-self-center mb-0"
                                                 for="s_relative_2_address">Complete Address</label>
                                             <div class="col-sm-12">
-                                                <textarea class="form-control" required name="s_relative_2_address" id="s_relative_2_address"
+                                                <textarea class="form-control" name="s_relative_2_address" id="s_relative_2_address"
                                                     placeholder="Enter Relative Complete Address">
                                                             </textarea>
                                                 <div class="valid-feedback">
@@ -811,7 +811,7 @@
                                                 Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="rep_name"
-                                                    name="rep_name" placeholder="Enter Representative Full Name">
+                                                    name="rep_name" required placeholder="Enter Representative Full Name">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -827,7 +827,7 @@
                                                 for="rep_surname">Sur
                                                 Name</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="rep_surname"
+                                                <input type="text" required class="form-control" id="rep_surname"
                                                     name="rep_surname" placeholder="Enter Representative Sur Name">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -843,7 +843,7 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="rep_passport_no">Passport No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="rep_passport_no"
+                                                <input  required type="text" class="form-control" id="rep_passport_no"
                                                     name="rep_passport_no"
                                                     placeholder="Enter Representative Passport No.">
                                                 <div class="valid-feedback">
@@ -861,7 +861,7 @@
                                                 for="rep_phone">Cell
                                                 No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control phone_number" id="rep_phone"
+                                                <input type="text" required class="form-control phone_number" id="rep_phone"
                                                     name="rep_phone" placeholder="Enter Representative Cell No.">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -877,7 +877,7 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="rep_address">Complete Address</label>
                                             <div class="col-sm-12">
-                                                <textarea class="form-control" name="rep_address" id="rep_address"
+                                                <textarea class="form-control" required name="rep_address" id="rep_address"
                                                     placeholder="Enter Representative Complete Address"></textarea>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -892,7 +892,7 @@
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" id="rep_confirmed"
-                                                name="rep_confirmed" value="1" required readonly checked>
+                                                name="rep_confirmed" value="1" required  >
                                             <label class="custom-control-label" for="rep_confirmed">Have you
                                                 informed him that you are appointing this person as your
                                                 Representative in FSF and this person will be authorized to
@@ -1099,10 +1099,26 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-12">
+                                       
+                                        <div class="form-group row mb-4">
+                                            <label class="control-label col-sm-12 align-self-center mb-0"
+                                                for="detail">Enter Other Details</label>
+                                            <div class="col-sm-12">
+                                                <textarea type="text" class="form-control"
+                                                    id="detail" name="detail"
+                                                    placeholder="Enter other details" value=""></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" id="declaration_confirm"
-                                                name="declaration_confirm" value="1" required checked readonly>
+                                                name="declaration_confirm" value="1" required>
                                             <label class="custom-control-label" for="declaration_confirm">Have you
                                                 read carefully to all the conditions and regulations of this
                                                 funeral service fund?</label>

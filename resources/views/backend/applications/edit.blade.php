@@ -552,7 +552,7 @@
                                 <div class="row setup-content px-3" id="document-detail" style="display: none;">
                                     <div class="col-12">
                                         <h4 class="mb-4">
-                                            Realtive 1
+                                            Relative 1
                                         </h4>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -562,7 +562,7 @@
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_1_name"
                                                     name="s_relative_1_name" placeholder="Enter Relative Full Name"
-                                                    required
+                                                    
                                                     value="{{ $application->s_relative_1_name ?? old('s_relative_1_name') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -579,7 +579,7 @@
                                                 for="s_relative_1_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_1_relation"
-                                                    name="s_relative_1_relation" placeholder="Enter Your Realtion"
+                                                    name="s_relative_1_relation" placeholder="Enter Your relation"
                                                     value="{{ $application->s_relative_1_name ?? old('s_relative_1_name') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -625,7 +625,7 @@
                                     </div>
                                     <div class="col-12">
                                         <h4 class="mb-4">
-                                            Realtive 2
+                                            relative 2
                                         </h4>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -651,7 +651,7 @@
                                                 for="s_relative_2_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_2_relation"
-                                                    name="s_relative_2_relation" placeholder="Enter Your Realtion"
+                                                    name="s_relative_2_relation" placeholder="Enter Your relation"
                                                     value="{{ $application->s_relative_2_relation ?? old('s_relative_2_relation') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -706,7 +706,7 @@
                                 <div class="row setup-content px-3" id="bank-detail" style="display: none;">
                                     <div class="col-12">
                                         <h4 class="mb-4">
-                                            Realtive 1
+                                            relative 1
                                         </h4>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -732,7 +732,7 @@
                                                 for="n_relative_1_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="n_relative_1_relation"
-                                                    name="n_relative_1_relation" placeholder="Enter Your Realtion"
+                                                    name="n_relative_1_relation" placeholder="Enter Your relation"
                                                     value="{{ $application->n_relative_1_relation ?? old('n_relative_1_relation') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -779,7 +779,7 @@
                                     </div>
                                     <div class="col-12">
                                         <h4 class="mb-4">
-                                            Realtive 2
+                                            relative 2
                                         </h4>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -805,7 +805,7 @@
                                                 for="n_relative_2_relation">Relation</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="n_relative_2_relation"
-                                                    name="n_relative_2_relation" placeholder="Enter Your Realtion"
+                                                    name="n_relative_2_relation" placeholder="Enter Your relation"
                                                     value="{{ $application->n_relative_2_relation ?? old('n_relative_2_relation') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -869,9 +869,9 @@
                                                 for="rep_name">Full
                                                 Name</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="rep_name"
+                                                <input type="text" class="form-control required" id="rep_name"
                                                     name="rep_name" placeholder="Enter Representative Full Name"
-                                                    value="{{ $application->rep_name ?? old('rep_name') }}">
+                                                    value="{{ $application->rep_name ?? old('rep_name') }}" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -887,9 +887,9 @@
                                                 for="rep_surname">Sur
                                                 Name</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="rep_surname"
+                                                <input type="text" class="form-control required" id="rep_surname"
                                                     name="rep_surname" placeholder="Enter Representative Sur Name"
-                                                    value="{{ $application->rep_surname ?? old('rep_surname') }}">
+                                                    value="{{ $application->rep_surname ?? old('rep_surname') }}" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -904,9 +904,9 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="rep_passport_no">Passport No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="rep_passport_no"
+                                                <input type="text" class="form-control required" id="rep_passport_no"
                                                     name="rep_passport_no" placeholder="Enter Representative Passport No."
-                                                    value="{{ $application->rep_passport_no ?? old('rep_passport_no') }}">
+                                                    value="{{ $application->rep_passport_no ?? old('rep_passport_no') }}" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -922,9 +922,9 @@
                                                 for="rep_phone">Cell
                                                 No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" id="rep_phone"
+                                                <input type="text" class="form-control required" id="rep_phone"
                                                     name="rep_phone" placeholder="Enter Representative Cell No."
-                                                    value="{{ $application->rep_phone ?? old('rep_phone') }}">
+                                                    value="{{ $application->rep_phone ?? old('rep_phone') }}" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -939,8 +939,8 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="rep_address">Complete Address</label>
                                             <div class="col-sm-12">
-                                                <textarea class="form-control" name="rep_address" id="rep_address"
-                                                    placeholder="Enter Representative Complete Address">
+                                                <textarea class="form-control required" name="rep_address" id="rep_address"
+                                                    placeholder="Enter Representative Complete Address" required>
                                                     {{ $application->rep_address ?? old('rep_address') }}</textarea>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -1105,6 +1105,20 @@
                                                     value="{{ $application->renewal_date }}">
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                       
+                                        <div class="form-group row mb-4">
+                                            <label class="control-label col-sm-12 align-self-center mb-0"
+                                                for="detail">Enter Other Details</label>
+                                            <div class="col-sm-12">
+                                                <textarea type="text" class="form-control"
+                                                    id="detail" name="detail"
+                                                    placeholder="Enter other details" value="">{{$application->detail}}</textarea>
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                     <div class="col-lg-8 col-md-8 col-sm-12">

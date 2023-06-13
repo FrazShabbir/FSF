@@ -47,22 +47,23 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        if (! auth()->user()->hasPermissionTo('Create Roles')) {
-            abort(403);
+    
+
+        try {
+            $role = Role::create([
+                'name'=>$request->name,
+                'guard_name'=>'web',
+                'role_for'=>'Admin',
+            ]);
+            $role->syncPermissions($request->permissions);
+      
+            alert()->success('New Role Added With Permissions Successfully', 'Success');
+              
+            return redirect()->route('roles.show', $role->id);
+        } catch (\exce $th) {
+            //throw $th;
         }
-
-        
-
-        $role = Role::create([
-            'name'=>$request->name,
-            'guard_name'=>'web',
-            'role_for'=>'Admin',
-        ]);
-        $role->syncPermissions($request->permissions);
-  
-        alert()->success('New Role Added With Permissions Successfully', 'Success');
-          
-        return redirect()->route('roles.show', $role->id);
+       
     }
 
     /**
@@ -73,9 +74,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        if (! auth()->user()->hasPermissionTo('Read Roles')) {
-            abort(403);
-        }
+       
         $role = Role::findOrFail($id);
 
         //$users = User::hasRole($role->name)->get();

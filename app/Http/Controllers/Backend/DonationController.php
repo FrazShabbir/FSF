@@ -111,8 +111,8 @@ class DonationController extends Controller
     {
         $request->validate([
             'application_id' => 'nullable',
-            'donor_bank_name' => 'required',
-            'donor_bank_no' => 'required',
+            'donor_bank_name' => 'nullable',
+            'donor_bank_no' => 'nullable',
             'fsf_bank_id' => 'required',
             'amount' => 'required|numeric|min:0|not_in:0',
             'passport_number' => 'required',
@@ -227,8 +227,8 @@ class DonationController extends Controller
     {
         $request->validate([
             // 'application_id' => 'nullable',
-            'donor_bank_name' => 'required',
-            'donor_bank_no' => 'required',
+            'donor_bank_name' => 'nullable',
+            'donor_bank_no' => 'nullable',
             'fsf_bank_id' => 'required',
             'passport_number' => 'required',
             'amount' => 'required|numeric|min:0|not_in:0',
