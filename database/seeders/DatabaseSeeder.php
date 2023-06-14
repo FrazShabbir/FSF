@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             GeneralSettingSeeder::class,
-            HirarchySeeder::class,
+            // HirarchySeeder::class,
             // ProvinceSeeder::class,
             OfficeSeeder::class,
             ]);
