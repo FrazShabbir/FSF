@@ -286,7 +286,7 @@
                                                 for="nie">European Residence Card No.</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" name="nie" id="nie"
-                                                    placeholder="Enter Your European Residence Card No." required
+                                                    placeholder="Enter Your European Residence Card No."
                                                     value="{{ old('nie') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -332,7 +332,7 @@
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" name="native_id"
                                                     id="native_id" placeholder="Enter Your ID Card No. (Native Country)"
-                                                    required value="{{ old('native_id') }}">
+                                                     value="{{ old('native_id') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
