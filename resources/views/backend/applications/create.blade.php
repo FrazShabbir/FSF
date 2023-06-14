@@ -196,7 +196,7 @@
                                                 for="father_name">Father's Name</label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="father_name"
-                                                    name="father_name" placeholder="Enter Your Father's Name" required
+                                                    name="father_name" placeholder="Enter Your Father's Name"
                                                     value="{{ old('full_name') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
