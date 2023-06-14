@@ -1,29 +1,25 @@
 <?php
 
-
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Models\GeneralSetting;
-use App\Models\Application;
-use Twilio\Rest\Client;
-
-
-use App\Models\Country;
-use App\Models\Community;
-use App\Models\Province;
-use App\Models\City;
-use App\Models\Office;
 use App\Models\Account;
+use App\Models\Application;
+use App\Models\City;
+use App\Models\Community;
+use App\Models\Country;
 use App\Models\DonationCategory;
-if (! function_exists('fromSettings')) {
+use App\Models\GeneralSetting;
+use App\Models\Office;
+use App\Models\Province;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Twilio\Rest\Client;
+if (!function_exists('fromSettings')) {
     function fromSettings(string $key, $alternative = null)
     {
         return GeneralSetting::where('key', $key)->first()->value ?? $alternative;
     }
 }
 
-if (! function_exists('setSettings')) {
+if (!function_exists('setSettings')) {
     function setSettings(string $key, string $value)
     {
         GeneralSetting::updateOrCreate(
@@ -34,38 +30,38 @@ if (! function_exists('setSettings')) {
     }
 }
 
-if (! function_exists('getuser')) {
+if (!function_exists('getuser')) {
     function getuser()
     {
         return Auth::user();
     }
 }
 
-if (! function_exists('getFullName')) {
+if (!function_exists('getFullName')) {
     function getFullName()
     {
         $user = Auth::user();
         return $user->full_name;
     }
 }
-if (! function_exists('getFullNameById')) {
+if (!function_exists('getFullNameById')) {
     function getFullNameById($id)
     {
         $user = User::find($id);
         return $user->full_name;
     }
 }
-if (! function_exists('getUserStatus')) {
+if (!function_exists('getUserStatus')) {
     function getUserStatus($id)
     {
         $user = User::find($id);
-        if ($user->status==1) {
+        if ($user->status == 1) {
             return 'Active';
-        } elseif ($user->status==0) {
+        } elseif ($user->status == 0) {
             return 'In Active';
-        } elseif ($user->status==3) {
+        } elseif ($user->status == 3) {
             return 'In Closing Process, Person DECEASED.';
-        } elseif ($user->status==4) {
+        } elseif ($user->status == 4) {
             return 'Permanent Closed, Person DECEASED.';
         } else {
             return 'Contact Support';
@@ -73,7 +69,7 @@ if (! function_exists('getUserStatus')) {
     }
 }
 // make a function that will print 15 char random string
-if (! function_exists('getRandomString')) {
+if (!function_exists('getRandomString')) {
     function getRandomString($length = 15)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -86,7 +82,7 @@ if (! function_exists('getRandomString')) {
     }
 }
 
-if (! function_exists('generateAlphaNumeric')) {
+if (!function_exists('generateAlphaNumeric')) {
     function generateAlphaNumeric($length = 3)
     {
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -98,11 +94,11 @@ if (! function_exists('generateAlphaNumeric')) {
         $random1 = rand(100, 999);
         $random2 = rand(100, 999);
 
-        $alphanumeric = $randomString.$random1.$random2;
+        $alphanumeric = $randomString . $random1 . $random2;
         return $alphanumeric;
     }
 }
-if (! function_exists('generateAlpha')) {
+if (!function_exists('generateAlpha')) {
     function generateAlpha($length = 5)
     {
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -118,82 +114,70 @@ if (! function_exists('generateAlpha')) {
         return $alphanumeric;
     }
 }
-if (! function_exists('generateNumeric')) {
+if (!function_exists('generateNumeric')) {
     function generateNumeric()
     {
         $random1 = rand(100, 999);
         $random2 = rand(100, 999);
         $random3 = rand(100, 999);
 
-
-        $alphanumeric = $random1.$random2.$random3;
+        $alphanumeric = $random1 . $random2 . $random3;
         return $alphanumeric;
     }
 }
-if (! function_exists('generateNumericSix')) {
+if (!function_exists('generateNumericSix')) {
     function generateNumericSix()
     {
         $random1 = rand(10, 99);
         $random2 = rand(10, 99);
         $random3 = rand(10, 99);
 
-
-        $alphanumeric = $random1.$random2.$random3;
+        $alphanumeric = $random1 . $random2 . $random3;
         return $alphanumeric;
     }
 }
 
-if (! function_exists('getStatus')) {
+if (!function_exists('getStatus')) {
     function getStatus($num)
     {
-        if($num==0) {
+        if ($num == 0) {
             return 'In Active';
-        }
-
-        elseif ($num==1) {
+        } elseif ($num == 1) {
             return 'Active';
-        }
-         elseif ($num=2) {
+        } elseif ($num = 2) {
             return 'Pending';
-        } 
-        elseif ($num==3) {
+        } elseif ($num == 3) {
             return 'In Closing Process';
-        }
-         elseif ($num==4) {
+        } elseif ($num == 4) {
             return 'Permanent Closed';
-        }
-        elseif ($num==5) {
+        } elseif ($num == 5) {
             return 'Rejected';
-        } 
-        else {
+        } else {
             return 'Contact Support';
         }
     }
 }
 
-if (! function_exists('loadCountries')) {
+if (!function_exists('loadCountries')) {
     function loadCountries()
     {
-        return  config('countries.countries');
+        return config('countries.countries');
     }
 }
-if (! function_exists('getAddress')) {
+if (!function_exists('getAddress')) {
     function getAddress($id)
     {
-        $application =Application::where('user_id', $id)->first();
-        $country = $application->country->name ??'';
-        $community = $application->community->name ??'';
-        $province = $application->province->name ??'';
-        $city = $application->country->name ??'';
-        $address = $application->area ??'';
-        return $address.', '.$city.', '.$province.', '.$community.', '.$country;
+        $application = Application::where('user_id', $id)->first();
+        $country = $application->country->name ?? '';
+        $community = $application->community->name ?? '';
+        $province = $application->province->name ?? '';
+        $city = $application->country->name ?? '';
+        $address = $application->area ?? '';
+        return $address . ', ' . $city . ', ' . $province . ', ' . $community . ', ' . $country;
     }
 }
 
-
-
-
-if (! function_exists('SendMessage')) {
+if (!function_exists('SendMessage')) {
     function SendMessage($number, $message)
     {
         try {
@@ -204,90 +188,108 @@ if (! function_exists('SendMessage')) {
                 $twilio_number = env("TWILIO_FROM");
 
                 if (substr($number, 0, 1) != '+') {
-                    $number = '+'.$number;
+                    $number = '+' . $number;
                 }
 
                 $client = new Client($account_sid, $auth_token);
                 $client->messages->create($number, [
                     'from' => $twilio_number,
-                    'body' => $message
-                    ]);
+                    'body' => $message,
+                ]);
             }
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
     }
 
+    if (!function_exists('activeUserCount')) {
+        function activeUserCount()
+        {
+            return User::where('status', 1)->get()->count();
+        }
+    }
+
+    if (!function_exists('inactiveUserCount')) {
+        function inactiveUserCount()
+        {
+            return User::where('status', 0)->get()->count();
+        }
+    }
+
+    if (!function_exists('getApplicantCount')) {
+        function getApplicantCount()
+        {
+            // count users that has application
+            return Application::where('status', 'APPROVED')->get()->count();
+            
+        }
+    }
 
     // 'body' => 'Your Application at ' . env('APP_NAME') . ' has been submitted successfully. Your Application ID is ' . $application->application_id . '.'
 
-    if (! function_exists('allApplicationsCount')) {
+    if (!function_exists('allApplicationsCount')) {
         function allApplicationsCount()
         {
             return Application::get()->count();
         }
     }
 
-    if (! function_exists('allApprovedApplicationsCount')) {
+    if (!function_exists('allApprovedApplicationsCount')) {
         function allApprovedApplicationsCount()
         {
             return Application::where('status', 'APPROVED')->get()->count();
         }
     }
 
-    if (! function_exists('allPendingApplicationsCount')) {
+    if (!function_exists('allPendingApplicationsCount')) {
         function allPendingApplicationsCount()
         {
             return Application::where('status', 'PENDING')->get()->count();
         }
     }
 
-    if (! function_exists('allRejectedApplicationsCount')) {
+    if (!function_exists('allRejectedApplicationsCount')) {
         function allRejectedApplicationsCount()
         {
             return Application::where('status', 'REJECTED')->get()->count();
         }
     }
-    if (! function_exists('allRenewablepplicationsCount')) {
+    if (!function_exists('allRenewablepplicationsCount')) {
         function allRenewablepplicationsCount()
         {
             return Application::where('status', 'RENEWABLE')->get()->count();
         }
     }
 
-
-    if (! function_exists('pendingApproval')) {
+    if (!function_exists('pendingApproval')) {
         function pendingApproval()
         {
             return Application::where('status', 'PENDING-APPROVAL')->get()->count();
         }
     }
 
-
-
-    if (! function_exists('allApplications')) {
+    if (!function_exists('allApplications')) {
         function allApplications()
         {
             return Application::get();
         }
     }
 
-    if (! function_exists('officeUsers')) {
+    if (!function_exists('officeUsers')) {
         function officeUsers()
         {
             return User::where('is_office_member', 1)->get();
         }
     }
 
-    if (! function_exists('getCities')) {
+    if (!function_exists('getCities')) {
         function getCities()
         {
             return City::where('status', 1)->get();
         }
     }
 
-
-    if (! function_exists('cityHOD')) {
+    if (!function_exists('cityHOD')) {
         function cityHOD()
         {
             $city_hod = City::where('hod', auth()->user()->id)->get();
@@ -296,16 +298,14 @@ if (! function_exists('SendMessage')) {
         }
     }
 
-
-    if (! function_exists('cityApplications')) {
+    if (!function_exists('cityApplications')) {
         function cityApplications($id)
         {
             return Application::where('city_id', $id)->get();
         }
     }
 
-
-    if (! function_exists('provinceHOD')) {
+    if (!function_exists('provinceHOD')) {
         function provinceHOD()
         {
             $province_hod = Province::where('hod', auth()->user()->id)->get();
@@ -313,15 +313,14 @@ if (! function_exists('SendMessage')) {
             return $province_hod;
         }
     }
-    if (! function_exists('provinceApplications')) {
+    if (!function_exists('provinceApplications')) {
         function provinceApplications($id)
         {
             return Application::where('province_id', $id)->get();
         }
     }
 
-
-    if (! function_exists('communityHOD')) {
+    if (!function_exists('communityHOD')) {
         function communityHOD()
         {
             $community_hod = Community::where('hod', auth()->user()->id)->get();
@@ -329,15 +328,14 @@ if (! function_exists('SendMessage')) {
             return $community_hod;
         }
     }
-    if (! function_exists('communityApplications')) {
+    if (!function_exists('communityApplications')) {
         function communityApplications($id)
         {
             return Application::where('community_id', $id)->get();
         }
     }
 
-
-    if (! function_exists('countryHOD')) {
+    if (!function_exists('countryHOD')) {
         function countryHOD()
         {
             $country_hod = Country::where('hod', auth()->user()->id)->get();
@@ -345,15 +343,14 @@ if (! function_exists('SendMessage')) {
         }
     }
 
-    if (! function_exists('countryApplications')) {
+    if (!function_exists('countryApplications')) {
         function countryApplications($id)
         {
             return Application::where('country_id', $id)->get();
         }
     }
 
-
-    if (! function_exists('officeHOD')) {
+    if (!function_exists('officeHOD')) {
         function officeHOD()
         {
             $office_hod = Office::where('officehead', auth()->user()->id)->get();
@@ -361,7 +358,7 @@ if (! function_exists('SendMessage')) {
         }
     }
 
-    if (! function_exists('officeApplications')) {
+    if (!function_exists('officeApplications')) {
         function officeApplications($id)
         {
             $office = Office::where('id', $id)->first();
@@ -369,60 +366,60 @@ if (! function_exists('SendMessage')) {
         }
     }
 
-    if (! function_exists('getPendingApplications')) {
+    if (!function_exists('getPendingApplications')) {
         function getPendingApplications()
         {
             return Application::where('status', 'PENDING')->limit(10)->get();
         }
     }
 
-    if (! function_exists('checkPermission')) {
+    if (!function_exists('checkPermission')) {
         function checkPermission($status)
         {
             if ($status == 'APPROVED') {
-                if (! auth()->user()->hasPermissionTo('Approve Applications')) {
+                if (!auth()->user()->hasPermissionTo('Approve Applications')) {
                     return true;
                 } else {
                     return false;
                 }
             } elseif ($status == 'PENDING') {
-                if (! auth()->user()->hasPermissionTo('Update Applications')) {
+                if (!auth()->user()->hasPermissionTo('Update Applications')) {
                     return true;
                 } else {
                     return false;
                 }
             } elseif ($status == 'REJECTED') {
-                if (! auth()->user()->hasPermissionTo('Reject Applications')) {
+                if (!auth()->user()->hasPermissionTo('Reject Applications')) {
                     return true;
                 } else {
                     return false;
                 }
             } elseif ($status == 'RENEWABLE') {
-                if (! auth()->user()->hasPermissionTo('Renew Applications')) {
+                if (!auth()->user()->hasPermissionTo('Renew Applications')) {
                     return true;
                 } else {
                     return false;
                 }
             } elseif ($status == 'CLOSED') {
-                if (! auth()->user()->hasPermissionTo('Close Applications')) {
+                if (!auth()->user()->hasPermissionTo('Close Applications')) {
                     return true;
                 } else {
                     return false;
                 }
             } elseif ($status == 'CLOSING-PROCESS') {
-                if (! auth()->user()->hasPermissionTo('Close Applications')) {
+                if (!auth()->user()->hasPermissionTo('Close Applications')) {
                     return true;
                 } else {
                     return false;
                 }
             } elseif ($status == 'PERMANENT-CLOSED') {
-                if (! auth()->user()->hasPermissionTo('Permanent Close Applications')) {
+                if (!auth()->user()->hasPermissionTo('Permanent Close Applications')) {
                     return true;
                 } else {
                     return false;
                 }
-            } elseif ($status=='INACTIVE') {
-                if (! auth()->user()->hasPermissionTo('Close Applications')) {
+            } elseif ($status == 'INACTIVE') {
+                if (!auth()->user()->hasPermissionTo('Close Applications')) {
                     return true;
                 } else {
                     return false;
@@ -433,7 +430,7 @@ if (! function_exists('SendMessage')) {
         }
     }
 
-    if (! function_exists('getAccounts')) {
+    if (!function_exists('getAccounts')) {
         function getAccounts()
         {
             $accounts = Account::all();
@@ -441,11 +438,11 @@ if (! function_exists('SendMessage')) {
         }
     }
 
-    if (! function_exists('donationCategories')) {
+    if (!function_exists('donationCategories')) {
         function donationCategories()
         {
             return DonationCategory::where('status', 1)->get();
         }
     }
-    
+
 }

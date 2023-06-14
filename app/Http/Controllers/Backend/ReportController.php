@@ -295,4 +295,12 @@ class ReportController extends Controller
         ->with('arr', $arr);
     }
 
+
+    public function applicationReports(){
+    return view('backend.reports.applications');
+    }
+    public function userReport(){
+        return view('backend.reports.users');
+    }
+
 }

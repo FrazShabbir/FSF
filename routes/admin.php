@@ -88,6 +88,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard/admin'],function 
     Route::get('reports/communities', [ReportController::class, 'reportCommunities'])->name('report.communities');
     Route::get('reports/provinces', [ReportController::class, 'reportProvinces'])->name('report.provinces');
     Route::get('reports/cities', [ReportController::class, 'reportCities'])->name('report.cities');
+    Route::get('reports/applications', [ReportController::class, 'applicationReports'])->name('report.application');
+    Route::get('reports/users', [ReportController::class, 'userReport'])->name('report.users');
 
 
     Route::get('ledger', [ReportController::class, 'ledger'])->name('report.ledger');

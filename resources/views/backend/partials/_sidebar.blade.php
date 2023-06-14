@@ -123,12 +123,12 @@
                 @can('Read Applications')
                     <li class="{{ request()->route()->getName() == 'application.index'? 'active': '' }}"><a
                             href="{{ route('application.index') }}"><i class="las la-money-check-all"></i>All
-                            Applications</a>
+                            Applications ({{allApplicationsCount()}})</a>
                     </li>
                     @can('Approve Applications')
                         <li class="{{ request()->route()->getName() == 'application.index'? 'active': '' }}"><a
                                 href="{{ route('application.index') }}"><i class="las la-money-check-all"></i>Pending
-                                Approvals</a>
+                                Approvals ({{allPendingApplicationsCount()}})</a>
                         </li>
                     @endcan
 
@@ -139,7 +139,7 @@
 
                     <li>
                         <a href="{{ route('applications.pending') }}"> <i class="las la-th-list"></i>New
-                            Applications</a>
+                            Applications ({{pendingApproval()}})</a>
                     </li>
 
                     <li>
@@ -150,17 +150,17 @@
 
                     <li>
                         <a href="{{ route('applications.renewal') }}"> <i class="las la-th-list"></i>Renewable
-                            Applications
+                            Applications ({{allRenewablepplicationsCount()}})
                         </a>
                     </li>
 
                     <li>
                         <a href="{{ route('applications.approved') }}"> <i class="las la-th-list"></i>Approved
-                            Applications</a>
+                            Applications ({{allApprovedApplicationsCount()}})</a>
                     </li>
                     <li>
                         <a href="{{ route('applications.rejected') }}"> <i class="las la-th-list"></i>Rejected
-                            Applications</a>
+                            Applications ({{allRejectedApplicationsCount()}})</a>
                     </li>
                 @endcan
             </ul>
@@ -278,7 +278,10 @@
                     <li class=""><a href="{{ route('report.cities') }}"><i
                                 class="las la-map-marker-alt"></i>Cities</a></li>
 
-
+                    <li class=""><a href="{{ route('report.application') }}"><i
+                        class="las la-map-marker-alt"></i>Application Stats</a></li>
+                        <li class=""><a href="{{ route('report.users') }}"><i
+                            class="las la-map-marker-alt"></i>User Stats</a></li>
                 </ul>
             </li>
             {{-- Heirarchy END --}}

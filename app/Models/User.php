@@ -63,6 +63,7 @@ class User extends Authenticatable
     function donations(){
         return $this->hasMany(Donation::class)->orderBy('created_at', 'desc');
     }
+    
     // function alldonations(){
     //     return $this->hasMany(Donation::class,'user_id');
     // }
