@@ -58,7 +58,7 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-     
+
         // dd($request->all());
         $request->validate([
          'passport_number' => 'required',
@@ -117,7 +117,7 @@ class EnrollmentController extends Controller
          'declaration_confirm'=>'required',
         ]);
 
-       
+
         try {
             //code...
             DB::beginTransaction();
@@ -131,27 +131,27 @@ class EnrollmentController extends Controller
 
             if (substr($request->phone, 0, 1) != '+') {
                 $phone = '+'.$request->phone;
-               
+
             }
             if (substr($request->rep_phone, 0, 1) != '+') {
                 $rep_phone = '+'.$request->rep_phone;
-               
+
             }
             if (substr($request->s_relative_1_phone, 0, 1) != '+') {
                 $s_relative_1_phone = '+'.$request->s_relative_1_phone;
-               
+
             }
             if (substr($request->s_relative_2_phone, 0, 1) != '+') {
                 $s_relative_2_phone = '+'.$request->s_relative_2_phone;
-               
+
             }
             if (substr($request->n_relative_1_phone, 0, 1) != '+') {
                 $n_relative_1_phone = '+'.$request->n_relative_1_phone;
-               
+
             }
             if (substr($request->n_relative_2_phone, 0, 1) != '+') {
                 $n_relative_2_phone = '+'.$request->n_relative_2_phone;
-               
+
             }
 
             $application = new Application();
@@ -249,7 +249,7 @@ class EnrollmentController extends Controller
 
             $comment->save();
 
-            
+
             $applicationRenewal = RenewApplication::create([
                 'application_id' => $application->id,
                 'annually_fund_amount' =>$request->annually_fund_amount,
@@ -263,16 +263,16 @@ class EnrollmentController extends Controller
 
             $applicant_message = 'Dear ' . $application->full_name . ', Your Application has been submitted successfully with Application ID  ' . $application->application_id . '. You will be notified once your application is approved.';
             $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.';
-            
-            
+
+
             SendMessage($application->phone,$applicant_message);
             SendMessage($application->rep_phone,$rep_messsage);
-            
+
             alert()->success('Application Submitted Successfully');
             return redirect()->route('enrollment.show', $application->application_id);
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th->getMessage());
+            // dd($th->getMessage());
             alert()->error('Error', $th->getMessage());
             return redirect()->back();
             //throw $th;
@@ -327,7 +327,7 @@ class EnrollmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
+
 
         $request->validate([
             'passport_number' => 'required',
@@ -398,29 +398,29 @@ class EnrollmentController extends Controller
 
             if (substr($request->phone, 0, 1) != '+') {
                 $phone = '+'.$request->phone;
-               
+
             }
             if (substr($request->rep_phone, 0, 1) != '+') {
                 $rep_phone = '+'.$request->rep_phone;
-               
+
             }
             if (substr($request->s_relative_1_phone, 0, 1) != '+') {
                 $s_relative_1_phone = '+'.$request->s_relative_1_phone;
-               
+
             }
             if (substr($request->s_relative_2_phone, 0, 1) != '+') {
                 $s_relative_2_phone = '+'.$request->s_relative_2_phone;
-               
+
             }
             if (substr($request->n_relative_1_phone, 0, 1) != '+') {
                 $n_relative_1_phone = '+'.$request->n_relative_1_phone;
-               
+
             }
             if (substr($request->n_relative_2_phone, 0, 1) != '+') {
                 $n_relative_2_phone = '+'.$request->n_relative_2_phone;
-               
+
             }
-            
+
             $application = Application::where('application_id', $id)->firstOrfail();
 
             if ($application->user_id != Auth::user()->id) {
@@ -534,12 +534,12 @@ class EnrollmentController extends Controller
             if($application->rep_phone != $old_rep_phone and $old_rep_name != $application->rep_name){
                 SendMessage($application->rep_phone,$rep_messsage);
             }
-            
+
             alert()->success('Application Submitted Successfully');
             return redirect()->route('enrollment.index');
         } catch (\Throwable $th) {
             DB::rollback();
-            
+
             alert()->error('Error', $th->getMessage());
             return redirect()->back();
             //throw $th;
@@ -574,7 +574,7 @@ class EnrollmentController extends Controller
             return redirect()->back();
         }
 
-       
+
         if($application->status!='RENEWABLE'){
             alert()->error('Error', 'This application is not in EDITABLE state');
             return redirect()->back();
@@ -655,27 +655,27 @@ class EnrollmentController extends Controller
 
             if (substr($request->phone, 0, 1) != '+') {
                 $phone = '+'.$request->phone;
-               
+
             }
             if (substr($request->rep_phone, 0, 1) != '+') {
                 $rep_phone = '+'.$request->rep_phone;
-               
+
             }
             if (substr($request->s_relative_1_phone, 0, 1) != '+') {
                 $s_relative_1_phone = '+'.$request->s_relative_1_phone;
-               
+
             }
             if (substr($request->s_relative_2_phone, 0, 1) != '+') {
                 $s_relative_2_phone = '+'.$request->s_relative_2_phone;
-               
+
             }
             if (substr($request->n_relative_1_phone, 0, 1) != '+') {
                 $n_relative_1_phone = '+'.$request->n_relative_1_phone;
-               
+
             }
             if (substr($request->n_relative_2_phone, 0, 1) != '+') {
                 $n_relative_2_phone = '+'.$request->n_relative_2_phone;
-               
+
             }
 
             $application = Application::where('application_id', $id)->firstOrfail();
@@ -784,7 +784,7 @@ class EnrollmentController extends Controller
             $rep_messsage = 'Dear ' . $application->rep_name . ' ' . $application->rep_surname . ', Your Relative  ' . $application->full_name. ' has choosen you as his representative at '.env('APP_NAME').' with  Application ID  ' . $application->application_id . '.Now he applied for Renewal of his membership. You will be notified once his application is approved.';
             SendMessage($application->phone,$applicant_message);
             SendMessage($application->rep_phone,$rep_messsage);
-            
+
             alert()->success('Application Submitted Successfully for Renewal');
             return redirect()->route('enrollment.index');
         } catch (\Throwable $th) {

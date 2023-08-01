@@ -287,7 +287,7 @@
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" name="nie" id="nie"
                                                     placeholder="Enter Your European Residence Card No."
-                                                    value="{{ old('nie') }}">
+                                                    value="{{ old('nie') }}" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -1100,7 +1100,7 @@
                                     </div>
 
                                     <div class="col-12">
-                                       
+
                                         <div class="form-group row mb-4">
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="detail">Enter Other Details</label>

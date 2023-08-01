@@ -144,7 +144,7 @@ class ApplicationController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email',
             'passport_number' => 'required',
-            'nie' => 'nullable',
+            'nie' => 'required',
             'email' => 'required|email',
             'native_id' => 'nullable',
             'full_name' => 'required',
@@ -340,7 +340,7 @@ class ApplicationController extends Controller
                     $application->save();
                 }
             }
-           
+
             if ($request->signmode == 'canvas') {
 
                 if ($request->user_signature) {
@@ -377,7 +377,7 @@ class ApplicationController extends Controller
             // return response()->json(['success'=>'Application Created Successfully']);
         } catch (\Throwable$th) {
             DB::rollback();
-            dd($th);
+            // dd($th);
             alert()->error($th->getMessage(), 'Something went wrong');
             return redirect()->back();
             //
@@ -461,7 +461,7 @@ class ApplicationController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email,' . $user->id,
             'passport_number' => 'required',
-            'nie' => 'nullable',
+            'nie' => 'required',
             'native_id' => 'nullable',
             'full_name' => 'required',
             'father_name' => 'nullable',
@@ -477,7 +477,7 @@ class ApplicationController extends Controller
             'city' => 'required',
             'area' => 'required',
 
-           
+
             's_relative_1_name' => 'nullable',
             's_relative_1_relation' => 'nullable',
             's_relative_1_phone' => 'nullable',
@@ -919,7 +919,7 @@ class ApplicationController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email',
             'passport_number' => 'required',
-            'nie' => 'nullable',
+            'nie' => 'required',
             'email' => 'required|email',
             'native_id' => 'nullable',
             'full_name' => 'required',
@@ -1110,7 +1110,9 @@ class ApplicationController extends Controller
             // return response()->json(['success'=>'Application Created Successfully']);
         } catch (\Throwable$th) {
             DB::rollback();
-            dd($th);
+            alert()->error('Error', 'Something Went Wrong');
+
+           return response()->back();
         }
     }
 
@@ -1133,7 +1135,7 @@ class ApplicationController extends Controller
             DB::beginTransaction();
             $request->validate([
                 'passport_number' => 'required',
-                'nie' => 'nullable',
+                'nie' => 'requried',
                 'email' => 'required',
                 'native_id' => 'nullable',
                 'full_name' => 'required',

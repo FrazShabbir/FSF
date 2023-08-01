@@ -112,7 +112,7 @@
                                         <input type="text" name="comment" id="" class="form-control"
                                             placeholder="Application Comment" required>
                                     </div>
-                                    	
+
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="status">Status:</label>
@@ -332,7 +332,7 @@
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="nie">European Residence Card No.</label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" name="nie" id="nie"
+                                                <input type="text" readonly class="form-control" name="nie" id="nie"
                                                     placeholder="Enter Your European Residence Card No."
                                                     value="{{ $application->nie ?? old('nie') }}">
                                                 <div class="valid-feedback">
@@ -562,7 +562,7 @@
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" id="s_relative_1_name"
                                                     name="s_relative_1_name" placeholder="Enter Relative Full Name"
-                                                    
+
                                                     value="{{ $application->s_relative_1_name ?? old('s_relative_1_name') }}">
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -1041,13 +1041,13 @@
                                     </div>
                                     <div class="col-12 mb-4">
                                         <p>How much will you pay annually into this fund?</p>
-                                      
-                                      
-                                     
+
+
+
                                         <div id="other_amount" class="">
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group row mb-4">
-                                              
+
                                                     <div class="col-sm-12">
                                                         <input type="number" class="form-control" step="0.01"
                                                             id="other_annually_fund_amount" name="annually_fund_amount"
@@ -1073,7 +1073,7 @@
                                     </div>
                                 </div>
                                 <div class="row setup-content px-3" id="confirm-data" style="display: none;">
-                                   
+
                                     {{-- <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                         <div class="form-group row mb-4">
                                             <label class="control-label col-sm-12 align-self-center mb-0"
@@ -1108,7 +1108,7 @@
                                     </div>
 
                                     <div class="col-12">
-                                       
+
                                         <div class="form-group row mb-4">
                                             <label class="control-label col-sm-12 align-self-center mb-0"
                                                 for="detail">Enter Other Details</label>
@@ -1133,7 +1133,7 @@
 
 
                                     </div>
-                                  
+
 
                                     <div class="col-12">
                                         <div class="text-right">
@@ -1156,36 +1156,36 @@
                         </div>
                         <div class="iq-card-body">
                             <div class="table-responsive">
-                               
+
                                 <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
                                     aria-describedby="user-list-page-info">
                                     <thead>
                                         <tr>
-                                            
+
                                             <th>Comments</th>
                                             <th>Status</th>
                                             <th>Done By</th>
                                             <th>Date</th>
-                                            
-                                          
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                   
+
                                         @foreach($application->comments as $comment)
                                         <tr>
                                             <td>{{$comment->comment}}</td>
                                             <td><span class="badge badge-{{$comment->status}}">{{$comment->status}}</span></td>
                                             <td>{{$comment->user->full_name ?? $application->user->full_name}}</td>
                                             <td>{{date('d-M-Y',strtotime($comment->created_at))}}</td>
-                                            
+
                                         </tr>
                                         @endforeach
-                                      
+
                                     </tbody>
                                 </table>
                             </div>
-                   
+
                         </div>
                     </div>
                 </div>
