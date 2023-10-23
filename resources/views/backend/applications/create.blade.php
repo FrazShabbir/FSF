@@ -1,6 +1,7 @@
 @extends('backend.main')
 @section('title', 'Page')
 
+
 @section('styles')
 @endsection
 
